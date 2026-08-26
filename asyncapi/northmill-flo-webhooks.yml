@@ -1,0 +1,70 @@
+generated: '2026-08-26'
+method: derived
+source: >-
+  openapi/northmill-flo-api-swagger.json - the /v2/webhooks and /v2/webhookcategories
+  operations and the WebHook / WebHookCategory definitions (live document at
+  https://api.moreflo.com/swagger/docs/v2, read 2026-08-26).
+type: Webhooks
+asyncapi_published: false
+description: >-
+  Northmill Flo ships a real, first-class webhook surface: subscriptions are created,
+  read, updated and deleted through the same REST API, grouped by a server-defined
+  category. No AsyncAPI document is published, and no channel or message schema is
+  published beyond the single ReceiptCreated payload example embedded in the
+  WebHookCategory description - so the event catalog below is exactly what the
+  provider documents and nothing more.
+management_api:
+  list_categories:
+    - {method: GET, path: /v2/webhookcategories, operationId: WebHookCategories_Get}
+    - {method: GET, path: '/v2/stores/{externalStoreId}/webhookcategories', operationId: WebHookCategories_Get}
+  subscriptions:
+    - {method: GET, path: /v2/webhooks, operationId: WebHooks_Get}
+    - {method: POST, path: /v2/webhooks, operationId: WebHooks_Create}
+    - {method: PUT, path: /v2/webhooks, operationId: WebHooks_Update}
+    - {method: GET, path: '/v2/webhooks/{Id}', operationId: WebHooks_Get}
+    - {method: DELETE, path: '/v2/webhooks/{Id}', operationId: WebHooks_Delete}
+  store_scoped_twins: true
+subscription_model:
+  fields:
+    Id: system-generated, read-only
+    WebHookCategoryId: required - the category this subscription listens to
+    IsEnabled: boolean - subscription on/off without deleting it
+    RemoteUrl: 'the destination URL (max 2048 chars)'
+    HttpMethod: 'required - one of Get, Post, Put'
+    CreatedTime: date-time
+    ModifiedTime: date-time
+  create_extras:
+    UpdateOnExisting: 'boolean - upsert instead of creating a duplicate subscription'
+events:
+  - name: ArticleStockChanged
+    description: 'A WebHook will be called when there are any stock changes.'
+    payload_schema: not published
+    evidence: WebHookCategory.Name description in the Swagger document
+  - name: ReceiptCreated
+    description: 'A WebHook will be called when a receipt is created.'
+    payload_schema: >-
+      Documented inline as a JSON body with receiptId (GUID), receiptType (e.g.
+      "CashierReceipt") and isRefund (boolean). Follow up with
+      GET /v2/receipts/{id} (Receipts_Get) to fetch the full receipt.
+    payload_example:
+      receiptId: 6c30a0c6-44fd-473a-b7a7-ed164ba9083d
+      receiptType: CashierReceipt
+      isRefund: false
+    evidence: WebHookCategory.Name description in the Swagger document
+    note: >-
+      This example is the provider's own, copied verbatim from the contract. It is a
+      thin-payload/fat-fetch pattern - the hook tells you what happened and you read
+      the detail back through the REST API.
+delivery:
+  transport: HTTP callback to RemoteUrl
+  methods: [Get, Post, Put]
+  signing: not documented
+  verification: not documented
+  retries: not documented
+  ordering: not documented
+  replay: not documented
+gaps:
+  - No signature header or shared secret is documented, so a receiver cannot verify a callback came from Northmill.
+  - No retry, backoff or dead-letter behaviour is documented.
+  - The full set of category names is server-side; only ArticleStockChanged and ReceiptCreated are named in the contract. Call GET /v2/webhookcategories with credentials to enumerate the live set.
+  - No AsyncAPI or JSON Schema is published for event payloads.

@@ -1,0 +1,93 @@
+generated: '2026-08-26'
+method: searched
+source: https://www.northmill.com/se/foretag/vara-priser/
+description: >-
+  Northmill publishes a full, itemised price list for its business services
+  ("Prislista for foretagstjanster"). There is NO separate plan or price for API
+  access: the Flo API is bundled with a Flo point-of-sale subscription and the bank
+  products are priced per product, per transaction or individually. The tiers below
+  are the published product prices, captured verbatim from the pricing page, not API
+  plan tiers - api_plan_count is therefore 0 and plan_count counts the published
+  commercial tiers.
+currency: SEK
+api_plans_published: false
+api_plan_count: 0
+plan_count: 16
+docs:
+  - https://www.northmill.com/se/foretag/vara-priser/
+  - https://www.northmill.com/se/foretag/betallosningar/kassasystem/
+plans:
+  - name: Grundpaket (business account base package)
+    section: grundpaket
+    price_monthly: '139 SEK'
+    price_annual: '1 188 SEK (99 SEK/month)'
+  - name: Extra foretagskonto (additional business account)
+    section: extra-foretagskonto
+    price_monthly: '19 SEK'
+    price_annual: '199 SEK'
+  - name: Foretagskort (business card)
+    section: foretagskort
+    extra_card: '29 SEK'
+    fx_markup: '2 %'
+    instalment_interest: '21,9 %'
+    admin_fee: '29 SEK/month (only when credit is drawn)'
+    replacement_card: '200 SEK'
+    late_fee: '450 SEK'
+    default_interest: '36 %'
+  - name: Likvidintyg (liquidity certificate)
+    section: likvidintyg
+    price: '1 995 SEK one-off'
+  - name: Swish Foretag
+    section: swish-foretag
+    price_monthly: '49 SEK + 1,99 SEK per transaction'
+    price_annual: '529 SEK (44 SEK/month) + 1,99 SEK per transaction'
+  - name: Swish Handel
+    section: swish-handel
+    price_monthly: '59 SEK + 2,49 SEK per transaction'
+    price_annual: '639 SEK (53 SEK/month) + 2,49 SEK per transaction'
+  - name: Swish Utbetalningar
+    section: swish-utbetalningar
+    price_monthly: '59 SEK + 2,49 SEK per transaction'
+    price_annual: '639 SEK (53 SEK/month) + 2,49 SEK per transaction'
+  - name: Extra anvandare internetbanken (extra online-banking user)
+    section: extra-anvandare-internetbanken
+    price_monthly: '29 SEK'
+    price_annual: '299 SEK'
+  - name: Autogiro (direct debit)
+    section: autogiro
+    price: '49 SEK per month per service'
+  - name: Bankgiro inbetalningar
+    section: bankgiro-inbetalningar
+    price: '49 SEK per month per service'
+  - name: Realtidsbetalning genom RIX-INST (instant payment)
+    section: realtidsbetalning-genom-rix-inst
+    price: '99 SEK per transaction'
+  - name: Foretagslan (business loan)
+    section: foretagslan
+    setup_fee: '995 SEK'
+    withdrawal_fee: '495 SEK'
+    monthly_fee_when_drawn: '99 SEK'
+    interest: individual
+    default_interest: '3 % per month'
+  - name: Apple kassasystem (iOS POS)
+    section: apple-kassasystem
+    price_monthly: '1 199 SEK'
+  - name: Windows kassasystem (Windows POS)
+    section: windows-kassasystem
+    price_monthly: '1 199 SEK'
+  - name: POS Flex
+    section: pos-flex
+    price_monthly: '549 SEK'
+  - name: Betala senare (buy now pay later)
+    section: betala-senare
+    price: '0,99 % of purchase amount'
+entry_price_claim: 'Fran 149 kr/manad (from 149 SEK/month), stated on the integrations page'
+notes:
+  - >-
+    The Flo API itself carries no published price, quota, overage or metered tier.
+    The archived MoreFlo API page (web.archive.org 2020-11-26) invited prospects to
+    "request a quote", which is consistent with API access being bundled with a POS
+    subscription rather than sold separately.
+  - >-
+    Prices are Swedish-market list prices in SEK, read from the live pricing page on
+    2026-08-26. They change; re-read the source before quoting.

@@ -1,0 +1,57 @@
+generated: '2026-08-26'
+method: searched
+source: >-
+  https://developer.token.io/northmill_rest_api_doc/content/e-rest/ais/ais_integration.htm
+  and .../confirmation_of_funds.htm (Northmill Bank TPP documentation); plus a full
+  read of the Flo API Swagger at https://api.moreflo.com/swagger/docs/v2 and a live
+  unauthenticated probe of https://api.moreflo.com/health (HTTP 401).
+description: >-
+  Two API surfaces, two very different rate-limit postures. The PSD2 TPP interface
+  publishes an explicit ceiling. The Flo commerce API publishes nothing: its Swagger
+  document contains no rate-limit header, no 429 response and no throttling
+  extension, and an unauthenticated probe returns 401 before any limit headers are
+  emitted.
+limit_count: 2
+surfaces:
+  - api: Northmill Bank Open Banking API for TPPs
+    limits:
+      - scope: per TPP member
+        window: 1 minute
+        limit: 1000
+        applies_to: All AIS requests
+        evidence: >-
+          "For each TPP member, Northmill Bank imposes a maximum API request limit of
+          1,000 requests per minute."
+        docs: https://developer.token.io/northmill_rest_api_doc/content/e-rest/ais/ais_integration.htm
+      - scope: per TPP member
+        window: 1 minute
+        limit: 1000
+        applies_to: All confirmation-of-funds (CBPII/CAF) requests
+        evidence: >-
+          Same sentence repeated in the Confirmation of Funds chapter.
+        docs: https://developer.token.io/northmill_rest_api_doc/content/e-rest/confirmation_of_funds.htm
+    regulatory_access_limit:
+      scope: per AISP, per PSU, TPP-initiated (no PSU present)
+      window: 24 hours
+      limit: 4
+      note: >-
+        The PSD2 RTS four-times-a-day cap on TPP-initiated account access. The docs
+        state a PSU-present call is signalled with the `customer-initiated: true`
+        header and/or `token-customer-ip-address`, which exempts it from the cap.
+      docs: https://developer.token.io/northmill_rest_api_doc/content/0_-_common/request-headers.htm
+    response_headers: not documented
+    exhaustion_status: not documented
+  - api: Northmill Flo API
+    limits: []
+    response_headers: []
+    exhaustion_status: null
+    note: >-
+      No published limit. Searched the Swagger document for X-RateLimit-*,
+      RateLimit-*, Retry-After, 429 and "rate" - zero matches; every one of the 199
+      operations documents only a 200 response. No throttling is described on the
+      merchant help pages either.
+notes:
+  - >-
+    request-timeout is a documented REQUEST header on the TPP interface (integer
+    seconds until the call aborts with DEADLINE_EXCEEDED) - a client-side deadline,
+    not a server rate-limit signal.

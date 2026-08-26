@@ -1,0 +1,44 @@
+generated: '2026-08-26'
+method: generated
+source: >-
+  Authored by API Evangelist from openapi/northmill-flo-api-swagger.json (the verbatim
+  Swagger 2.0 document fetched from https://api.moreflo.com/swagger/docs/v2 on
+  2026-08-26) plus the repo's conventions, errors and webhook artifacts. SEARCHED
+  first for provider-published skills or an AGENTS.md on www.northmill.com,
+  api.moreflo.com and github.com/northmill|moreflo - none exists.
+author: API Evangelist (not the provider)
+description: >-
+  Packaged Agent Skills for the marquee flows of the Northmill Flo commerce API. Every
+  operationId, parameter and enum member referenced in these skills is verified against
+  the published Swagger document; nothing is invented. Each skill carries the two
+  warnings that matter most on this API - a 200 response can still be a failure, and
+  DELETE is terminal.
+skills:
+  - name: northmill-sync-catalog-and-stock
+    file: northmill-sync-catalog-and-stock.md
+    api: Northmill Flo API
+    summary: >-
+      Incrementally pull the article catalogue, upsert articles with UpdateOnExisting
+      keyed on ArticleNumber, and move stock with the mirror-image increase/decrease
+      operations.
+    operations: [Articles_Get, Articles_Create, Articles_Update, Articles_IncreaseStock, Articles_DecreaseStock, Stores_Get]
+  - name: northmill-subscribe-to-receipts
+    file: northmill-subscribe-to-receipts.md
+    api: Northmill Flo API
+    summary: >-
+      Create a webhook subscription against a Flo category (ReceiptCreated,
+      ArticleStockChanged), handle the thin callback payload, and fetch the full
+      receipt back over REST. Includes the undocumented-signature caveat.
+    operations: [WebHookCategories_Get, WebHooks_Create, WebHooks_Get, WebHooks_Update, WebHooks_Delete, Receipts_Get]
+  - name: northmill-order-lifecycle
+    file: northmill-order-lifecycle.md
+    api: Northmill Flo API
+    summary: >-
+      Create, look up by external reference, poll, update and cancel v3 orders, with the
+      honest position on cancellation windows.
+    operations: [OrdersV3_Create, OrdersV3_List, OrdersV3_Get, OrdersV3_GetByExternalReference, OrdersV3_Update, Customers_Find, Customers_Get, Customers_GetNextAvailableCustomerNumber]
+not_covered:
+  - >-
+    The Northmill Bank Open Banking API for TPPs is deliberately not skilled. Its
+    Swagger reference sits behind the Northmill Bank Dashboard sign-in, so no verified
+    operationIds are available to ground a skill in.

@@ -1,0 +1,62 @@
+generated: '2026-08-26'
+method: derived
+source: >-
+  openapi/northmill-flo-api-swagger.json (every response object in all 199
+  operations), plus live unauthenticated probes of https://api.moreflo.com/health,
+  /v2/stores and /v2/webhookcategories on 2026-08-26.
+description: >-
+  There is no error catalog to derive. Not one of the 199 operations in the Flo API
+  Swagger document declares a 4xx or 5xx response - every operation declares exactly
+  one response, "200 OK". This is recorded here as a measured absence, not as an
+  omission on our side; the only error behaviour that can be stated is what a live
+  probe actually returned and what the response envelope carries in-band.
+format: none
+rfc9457: false
+problem_json: false
+documented_error_responses: 0
+operations_examined: 199
+operations_with_any_4xx_or_5xx: 0
+problems: []
+observed:
+  - status: 401
+    probe: 'GET https://api.moreflo.com/health'
+    fetched: '2026-08-26'
+    note: >-
+      Unauthenticated. Returns HTTP/2 401 with a WWW-Authenticate Basic challenge.
+      Even the health endpoint is credentialed.
+  - status: 401
+    probe: 'GET https://api.moreflo.com/v2/stores'
+    fetched: '2026-08-26'
+  - status: 401
+    probe: 'GET https://api.moreflo.com/v2/webhookcategories'
+    fetched: '2026-08-26'
+  - status: 404
+    probe: 'GET https://api.moreflo.com/openapi.json'
+    fetched: '2026-08-26'
+    note: 1,245-byte HTML error body - a real 404, not a catch-all 200.
+in_band_error_signalling:
+  description: >-
+    Failures are also reported inside a successful-looking envelope. Every *Result
+    model carries these two fields, so a 200 does not mean the operation succeeded.
+  fields:
+    Success: 'boolean - "Indicates whether the API operation was successful."'
+    ExtraInformation: >-
+      'array of strings - "A list of extra information or messages related to the API
+      operation result. This can include error messages, warnings, or informational
+      notes."'
+  consequence: >-
+    A client MUST inspect Success and ExtraInformation on every 200 response. An agent
+    that treats HTTP 200 as success will silently swallow business-rule failures.
+gap_summary: >-
+  No error type registry, no error codes, no problem+json, no documented status codes
+  beyond 200, and no documented meaning for the free-text strings in ExtraInformation.
+  This is the single largest contract-quality gap in the Northmill Flo API.
+decline_codes:
+  applicable: false
+  note: >-
+    Northmill Bank does issue cards and acquire card payments, and the Flo receipt
+    model carries acquirer-level fields (AcquirerId, ApprovalCode, AuthorizationMethod,
+    AuthorizationResponder, ReversalReference on BankCardTransaction). But the Flo API
+    is a record-keeping surface for transactions already authorised at the terminal -
+    it exposes no authorisation endpoint and Northmill publishes no decline-code
+    reference. errors/northmill-decline-codes.yml is therefore not written.

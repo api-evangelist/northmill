@@ -1,23 +1,163 @@
 aid: northmill
 name: Northmill
-description: 'Northmill is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: Northmill Bank AB is a Swedish technology-driven bank, founded in Stockholm in 2006 and licensed
+  by Finansinspektionen in 2019, that serves roughly 600,000 private customers and 2,500 businesses across
+  Sweden, Norway and Finland with savings accounts, cards, personal and business lending, business accounts,
+  Swish and card acquiring. Through its Northmill Flo business unit (formerly MoreFlo, acquired and rebranded)
+  it also ships point-of-sale, booking, checkout and e-commerce products for retail and hospitality merchants.
+  Its public developer surface is the Flo API - a Swagger 2.0 REST contract published at api.moreflo.com
+  with 199 operations over articles, stock, orders, receipts, customers, bookings, campaigns, vouchers,
+  SMS and webhooks - alongside a PSD2 open-banking interface for third-party providers documented under
+  the Northmill Bank brand and delivered on Token.io infrastructure.
+image: https://www.northmill.com/icon.png
 url: https://raw.githubusercontent.com/api-evangelist/northmill/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
 specificationVersion: '0.20'
 created: '2026-08-26'
 modified: '2026-08-26'
 tags:
-- Company
-apis: []
+- Banking
+- Payments
+- Point of Sale
+- Retail
+- Open Banking
+- Sweden
+- Fintech
+- Webhooks
+- E-commerce
+- Lending
+- Nordics
+apis:
+- name: Northmill Flo API
+  description: The public REST API for Northmill Flo (formerly MoreFlo), Northmill Bank's point-of-sale
+    and commerce platform for merchants. Swagger 2.0, 125 paths / 199 operations over articles and pricing,
+    stock movements, article sets, campaigns, brands, groups, suppliers, locations, customers, cashier
+    users, orders (v2 and v3), booking orders, ticket orders, service orders, vouchers, receipts, cash
+    cards, SMS, accounting settings, online/webshop/self-scan/catering settings and webhook subscriptions.
+    Every collection is available both merchant-wide and scoped to a single store via /v2/stores/{externalStoreId}/...
+    HTTP Basic authentication; JSON, XML and form-encoded requests.
+  humanURL: https://api.moreflo.com/swagger/ui/index
+  baseURL: https://api.moreflo.com
+  tags:
+  - Point of Sale
+  - Retail
+  - Commerce
+  - Orders
+  - Inventory
+  - Webhooks
+  - Payments
+  properties:
+  - type: OpenAPI
+    url: openapi/northmill-flo-api-swagger.json
+  - type: APIReference
+    url: https://api.moreflo.com/swagger/docs/v2
+  - type: Documentation
+    url: https://api.moreflo.com/swagger/ui/index
+  - type: Webhooks
+    url: asyncapi/northmill-flo-webhooks.yml
+  - type: Overlay
+    url: overlays/northmill-flo-api-overlay.yaml
+  - type: DataModel
+    url: data-model/northmill-data-model.yml
+  - type: ErrorCatalog
+    url: errors/northmill-problem-types.yml
+  - type: Sandbox
+    url: sandbox/northmill-sandbox.yml
+  - type: Login
+    url: https://apps.moreflo.com/
+- name: Northmill Bank Open Banking API for TPPs
+  description: 'Northmill Bank''s PSD2 third-party-provider interface, covering Account Information Services
+    (AIS) and Confirmation of Available Funds (CBPII/CAF), with request signing via ES256/RS256 key pairs
+    registered in the Northmill Bank Dashboard. OWNERSHIP NOTE: the interface is delivered by Token.io
+    as Northmill Bank''s technical service provider - the developer documentation is Northmill-branded
+    and Northmill-specific (Northmill Bank Dashboard at northmill.dashboard.token.io, a Northmill-imposed
+    limit of 1,000 API requests per minute per TPP member) but the documented BASE_URL is Token.io''s
+    shared platform host https://api.token.io, and the Swagger reference sits behind the dashboard sign-in.
+    No machine-readable contract was captured for this API for that reason.'
+  humanURL: https://developer.token.io/northmill_rest_api_doc/content/e-rest/dashboard-intro.htm
+  baseURL: https://api.token.io
+  tags:
+  - Open Banking
+  - PSD2
+  - Banking
+  - AIS
+  - Confirmation of Funds
+  properties:
+  - type: DeveloperPortal
+    url: https://developer.token.io/northmill_rest_api_doc/content/e-rest/dashboard-intro.htm
+  - type: Documentation
+    url: https://developer.token.io/northmill_rest_api_doc/content/e-rest/ais/ais_integration.htm
+  - type: Login
+    url: https://northmill.dashboard.token.io/
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: VulnerabilityDisclosure
+  url: security/northmill-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/northmill-domain-security.yml
 - type: Website
-  url: https://www.nasdaqprivatemarket.com/
+  url: https://www.northmill.com/
+- type: Documentation
+  url: https://api.moreflo.com/swagger/ui/index
+- type: APIReference
+  url: https://api.moreflo.com/swagger/docs/v2
+- type: Support
+  url: https://www.northmill.com/se/foretag/support/
+- type: HelpCenter
+  url: https://www.northmill.com/se/foretag/hjalp/
+- type: Blog
+  url: https://www.northmill.com/se/blogg/
+- type: Pricing
+  url: https://www.northmill.com/se/foretag/vara-priser/
+- type: TermsOfService
+  url: https://www.northmill.com/se/foretag/villkor/
+- type: PrivacyPolicy
+  url: https://www.northmill.com/se/integritetspolicy/
+- type: SignUp
+  url: https://www.northmill.com/se/foretag/app/portal/login
+- type: StatusPage
+  url: https://www.northmill.com/se/foretag/hjalp/uppdateringar/driftstatus/
+- type: Compliance
+  url: https://www.northmill.com/se-en/about-us/corporate-governance/
+- type: Security
+  url: https://www.northmill.com/.well-known/security.txt
+- type: SecurityTxt
+  url: well-known/northmill-security.txt
+- type: WellKnown
+  url: well-known/northmill-well-known.yml
+- type: Authentication
+  url: authentication/northmill-authentication.yml
+- type: Conventions
+  url: conventions/northmill-conventions.yml
+- type: Idempotency
+  url: conventions/northmill-conventions.yml
+- type: Conformance
+  url: conformance/northmill-conformance.yml
+- type: Lifecycle
+  url: lifecycle/northmill-lifecycle.yml
+- type: ChangeLog
+  url: changelog/northmill-changelog.yml
+- type: Plans
+  url: plans/northmill-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/northmill-rate-limits.yml
+- type: Packages
+  url: packages/northmill-packages.yml
+- type: Sandbox
+  url: sandbox/northmill-sandbox.yml
+- type: MCPServer
+  url: mcp/northmill-mcp.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: LLMsTxt
+  url: llms/northmill-llms.txt
+x-enrichment:
+  date: '2026-08-26'
+  status: enriched
+  artifacts_added: 24
+  pass: local-v1

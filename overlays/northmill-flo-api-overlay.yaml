@@ -1,0 +1,69 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Northmill Flo API
+  version: 1.0.0
+extends: openapi/northmill-flo-api-swagger.json
+x-provenance:
+  generated: '2026-08-26'
+  method: generated
+  source: >-
+    Enhancements derived by API Evangelist from the verbatim Swagger 2.0 document
+    fetched at https://api.moreflo.com/swagger/docs/v2 on 2026-08-26. The harvested
+    document is never mutated; every addition below is ours, not Northmill's.
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-slug: northmill
+      x-apievangelist-api: Northmill Flo API
+      x-provider: Northmill Bank AB
+      x-provider-note: >-
+        Served from api.moreflo.com. MoreFlo was acquired and rebranded as Northmill
+        Flo; moreflo.com and api.moreflo.com both 30x to www.northmill.com, and the
+        Swagger UI at api.moreflo.com/swagger/ui/index is titled "Flo API".
+      x-documentation: https://api.moreflo.com/swagger/ui/index
+      x-sandbox: https://test.api.moreflo.com
+      x-legal-entity: Northmill Bank AB (org.nr 556709-4866)
+      x-market: Sweden, Norway, Finland
+  - target: $
+    update:
+      x-apievangelist-conventions:
+        store_scoping: >-
+          Every collection is published twice - /v2/<resource> and
+          /v2/stores/{externalStoreId}/<resource>. externalStoreId is also accepted as a
+          query parameter on the unscoped form.
+        pagination:
+          params: [page, pageSize]
+          response_fields: [list, Page, Total, PageSize, ExtraInformation]
+          caveat: Total is the number of PAGES, not the number of items.
+        idempotency:
+          mechanism: UpdateOnExisting body flag keyed on a client-supplied natural key
+          keys: [ExternalReference, ArticleNumber, CustomerNumber]
+          header: none
+        incremental_sync:
+          params: [updatedSince, modifiedSince, createdSince, createdAfterUTC, startTimeSince, ArticleInfoUpdatedSince, QuantityUpdatedSince]
+        in_band_errors:
+          fields: [Success, ExtraInformation]
+          warning: >-
+            HTTP 200 does not mean success. Every *Result envelope carries Success and
+            ExtraInformation; check both.
+      x-apievangelist-gaps:
+        - No 4xx or 5xx response is documented on any of the 199 operations.
+        - No rate-limit headers, no 429, no Retry-After.
+        - No request-id / correlation-id header.
+        - No deprecation or sunset policy; v2 and v3 orders coexist with no stated migration path.
+        - Contract is Swagger 2.0, not OpenAPI 3.x.
+      x-apievangelist-artifacts:
+        conventions: conventions/northmill-conventions.yml
+        data_model: data-model/northmill-data-model.yml
+        errors: errors/northmill-problem-types.yml
+        webhooks: asyncapi/northmill-flo-webhooks.yml
+        sandbox: sandbox/northmill-sandbox.yml
+        skills: skills/_index.yml
+  - target: $.securityDefinitions.basic
+    update:
+      x-credential-source: https://apps.moreflo.com/
+      x-self-service: false
+      x-note: >-
+        Credentials are issued from the Flo back office; there is no self-service key
+        creation and no separate test-key prefix. Environments are separated by host
+        (api.moreflo.com vs test.api.moreflo.com).

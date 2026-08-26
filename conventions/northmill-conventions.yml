@@ -1,0 +1,231 @@
+generated: '2026-08-26'
+method: derived
+source: >-
+  Derived from openapi/northmill-flo-api-swagger.json (the live Swagger 2.0 document
+  at https://api.moreflo.com/swagger/docs/v2, read 2026-08-26) and SEARCHED against
+  the Northmill Bank TPP documentation at developer.token.io for the cross-cutting
+  request headers. Northmill publishes no narrative developer guide for the Flo API -
+  the Swagger document IS the documentation - so most of this profile is read out of
+  the contract rather than out of prose.
+description: >-
+  How the Northmill Flo API behaves across every operation: authentication style,
+  store scoping, deduplication on create, pagination, incremental sync, error
+  envelope, versioning and reversibility. These are the runtime semantics an
+  integrator or an agent needs and that the Swagger document does not state in one
+  place.
+
+base_url: https://api.moreflo.com
+sandbox_base_url: https://test.api.moreflo.com
+api_style: REST over HTTPS; JSON, XML and form-encoded requests accepted; JSON responses
+
+authentication:
+  scheme: HTTP Basic
+  evidence: securityDefinitions.basic = {type basic, "Basic HTTP Authentication"}
+  detail: authentication/northmill-authentication.yml
+  note: >-
+    Credentials are issued from the Flo back office (https://apps.moreflo.com/). No
+    OAuth 2.0, no API-key header and no OpenID Connect scheme is declared.
+
+store_scoping:
+  description: >-
+    The single strongest convention in this API. Every collection is published TWICE -
+    once merchant-wide and once scoped to a store - and the two forms are the same
+    operationId with the same parameters.
+  forms:
+    - /v2/<resource>
+    - /v2/stores/{externalStoreId}/<resource>
+  counts:
+    store_scoped_paths: 49
+    externalStoreId_as_path_param: 99
+    externalStoreId_as_query_param: 97
+  note: >-
+    externalStoreId is also accepted as a QUERY parameter on the unscoped form, so
+    there are effectively three ways to target one store. Pick one and be consistent.
+
+idempotency:
+  supported: partial
+  mechanism: >-
+    Body-level upsert flag, not a request header. Create payloads carry
+    `UpdateOnExisting` (boolean); when true, a create whose natural key already exists
+    updates the existing record instead of creating a duplicate.
+  natural_keys:
+    orders: ExternalReference (required on create - "the external reference or order number from another system")
+    booking_orders: ExternalReference
+    ticket_orders: ExternalReference
+    articles: ArticleNumber
+    article_sets: ArticleNumber
+    customers: CustomerNumber
+  applies_to: POST create operations that accept a *Create model (18 models carry UpdateOnExisting)
+  header: none
+  retention: not documented
+  conflict_behavior: not documented
+  evidence: >-
+    definitions.MoreFlo.Models.InterfaceModels.v3.OrderCreate.UpdateOnExisting -
+    "Indicates whether an existing order with the same number should be updated
+    instead of creating a new one."
+  honest_caveat: >-
+    This is NOT an Idempotency-Key header. It gives a client a way to make repeated
+    creates safe by choosing a stable ExternalReference, but the provider documents no
+    replay window, no stored response and no conflict error. Treat it as
+    at-least-once-safe upsert, not as full request idempotency.
+
+pagination:
+  style: page-number
+  request_params:
+    page: query, integer - the page to return
+    pageSize: query, integer - items per page
+  response_fields:
+    list: array of results for the current page
+    Page: the current page number
+    Total: the total number of pages available
+    PageSize: the number of items per page
+    ExtraInformation: array of strings - messages, warnings or errors attached to the result
+  coverage: 49 of 125 paths accept page/pageSize
+  note: >-
+    `Total` is documented as the total number of PAGES, not the total number of items.
+    That is unusual and is the field most likely to be misread.
+
+incremental_sync:
+  supported: true
+  mechanism: >-
+    Timestamp filters on the collection GETs, so a client can poll for deltas rather
+    than re-reading the whole catalogue.
+  params:
+    updatedSince: 12 operations
+    UpdatedSince: 2 operations
+    modifiedSince: customers
+    createdSince: vouchers
+    createdAfterUTC: receipts
+    ArticleInfoUpdatedSince: articles v3
+    QuantityUpdatedSince: articles v3
+    startTimeSince: bookable resource event instances
+  complements: The webhook surface (asyncapi/northmill-flo-webhooks.yml) for push instead of poll.
+
+field_expansion:
+  supported: false
+
+metadata:
+  supported: partial
+  mechanism: Free-text fields on domain objects (Note, InternalNote, ExtraAccountingInfo, YourReference, OurReference)
+  note: No generic key/value metadata bag.
+
+request_tracing:
+  request_id_header: not documented
+  note: >-
+    No correlation-id or request-id header is declared anywhere in the contract. An
+    integrator has no provider-side handle to quote to support.
+
+versioning:
+  scheme: URI path version
+  versions_live: [v2, v3]
+  current: v3 for orders, articles/article and articles-availabilities; v2 for everything else
+  document_version: 'info.version = v2 (the Swagger document itself is labelled v2 while it also serves v3 paths)'
+  discovery: https://api.moreflo.com/swagger/docs/v2
+  breaking_change_policy: not published for the Flo API
+  detail: lifecycle/northmill-lifecycle.yml
+  changelog: changelog/northmill-changelog.yml
+
+error_envelope:
+  media_type: application/json
+  documented: false
+  shape: >-
+    Result models carry `Success` (boolean) and `ExtraInformation` (array of strings -
+    "This can include error messages, warnings, or informational notes"), so failures
+    are signalled in-band on a 200-shaped envelope as well as by status code.
+  observed:
+    - status: 401
+      probe: 'GET https://api.moreflo.com/health (unauthenticated), 2026-08-26'
+      note: WWW-Authenticate challenge; no body schema documented
+  rfc9457: false
+  detail: errors/northmill-problem-types.yml
+  gap: >-
+    Not one of the 199 operations documents a 4xx or 5xx response. Every operation
+    declares exactly one response - 200 OK. This is the largest contract-quality gap
+    in the API.
+
+rate_limit_signaling:
+  headers: none documented
+  exhaustion_status: not documented
+  detail: rate-limits/northmill-rate-limits.yml
+
+dry_run_mode:
+  supported: false
+  note: >-
+    No preview, simulate or validate-only flag exists. The substitute is the separate
+    sandbox environment at https://test.api.moreflo.com - see sandbox/northmill-sandbox.yml.
+
+reversibility:
+  grade: documented
+  summary: >-
+    This is a write-heavy commerce API with real reversal paths on its two most
+    consequential surfaces - bookings and stock - and hard-delete with no restore on
+    its reference data. No operation-level reversal WINDOW is stated in fixed terms;
+    where a window exists it is carried as a per-object field the merchant sets, so a
+    caller must read the object to learn its own deadline.
+  write_surfaces:
+    - surface: Booking orders
+      write_operations: [BookingOrders_Create, BookingOrders_Update]
+      reversal: >-
+        PUT /v2/bookingorders (BookingOrders_Update) setting State to "Cancelled".
+        Cancelled is a declared member of the BookingOrderCreate.State enum
+        [Created, Saved, Started, WaitingCustomerResp, ReadyForHandOut, Waiting, Cancelled, Delivered].
+      window: per-object, not fixed
+      window_fields:
+        CancellationLatestTime: 'The latest time for cancellation of the booking order.'
+        CancellationMinimumTimeInAdvance: 'Minimum time in seconds required to make a cancellation, if allowed (see ClientCancellationPossible) - on ArticleBookingSettings.'
+        ClientCancellationPossible: 'Determines if a cancellation option should be presented for the customer or if only the store can cancel.'
+      audit: CancellationSource - 'The source that cancelled the booking order (e.g. "Staff", "ExternalApi"). Set automatically if not provided when state changes to Cancelled.'
+      grade: documented
+      note: >-
+        The reversal path and the window MECHANISM are both in the contract, but the
+        window VALUE is merchant-configured per article/booking. No fixed provider
+        window is stated anywhere, so this is graded documented rather than verified.
+    - surface: Stock levels
+      write_operations: [Articles_IncreaseStock, Articles_DecreaseStock]
+      reversal: >-
+        Exactly reversible by the mirror operation - PUT /v2/articles/increasestock
+        undoes PUT /v2/articles/decreasestock and vice versa.
+      window: none - no time limit applies
+      grade: documented
+    - surface: Receipts / sales
+      write_operations: [Receipts_Create]
+      reversal: >-
+        A refund is expressed as a receipt, not as a reversal operation. Receipts.Article
+        documents "UnitPrice ... must be negative in the case of a refund purchase" and
+        "Quantity is always positive, even in the case of a refund purchase";
+        ArticleType carries a CashRefundSlip member and Order/BookingOrder PaymentStatus
+        carries Refunded. BankCardTransaction carries a ReversalReference field.
+      window: not stated
+      grade: documented
+      caveat: >-
+        There is no refund OPERATION and no stated refund window. Do not assume one.
+        A merchant-side refund window may exist in the acquiring contract; the API does
+        not state it.
+    - surface: Orders
+      write_operations: [Orders_Create, Orders_Update, OrdersV3_Create, OrdersV3_Update]
+      reversal: >-
+        PUT the order with State "Cancelled" (a declared member of the Order.State enum).
+      window: not stated
+      grade: documented
+    - surface: Reference data (account codes, brands, campaigns, groups, locations, suppliers, webhooks)
+      write_operations: [AccountCodes_Create, Brands_Create, Campaigns_Create, Groups_Create, Locations_Create, Suppliers_Create, WebHooks_Create]
+      reversal: >-
+        DELETE exists on all seven resources (14 delete operations counting the
+        store-scoped twins), but there is NO restore, undelete or soft-delete flag
+        anywhere in the contract.
+      window: none - deletion is not reversible through the API
+      grade: documented
+      warning: >-
+        An agent that deletes a brand, group, campaign or location cannot put it back
+        through this API. Treat these DELETEs as terminal.
+  not_reversible:
+    - Sms_SendSingle (POST /v2/sms/single) - an SMS is sent; nothing recalls it.
+  docs: https://api.moreflo.com/swagger/ui/index
+
+cross_links:
+  errors: errors/northmill-problem-types.yml
+  lifecycle: lifecycle/northmill-lifecycle.yml
+  authentication: authentication/northmill-authentication.yml
+  rate_limits: rate-limits/northmill-rate-limits.yml
+  webhooks: asyncapi/northmill-flo-webhooks.yml
+  data_model: data-model/northmill-data-model.yml

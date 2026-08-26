@@ -1,0 +1,64 @@
+generated: '2026-08-26'
+method: probed
+source: >-
+  Live probe of https://test.api.moreflo.com/swagger/docs/v2 (HTTP 200, 630,472
+  bytes, host declared as test.api.moreflo.com) and
+  https://test.api.moreflo.com/swagger/ui/index (HTTP 200) on 2026-08-26; corroborated
+  by the archived MoreFlo API product page
+  (https://web.archive.org/web/20201126012138/https://www.moreflo.com/onlinelosningar/moreflo-api/)
+  which states: "Sandbox - Testa din integration i var Sandbox-miljo ... kan du testa
+  att utveckla din integration helt kostnadsfritt mot var Sandbox-miljo."
+description: >-
+  Northmill Flo runs a separate, publicly reachable test environment that serves the
+  same 125-path contract as production under its own host. It is a full parallel
+  environment, not a mock: the Swagger document returned by the test host declares
+  `host: test.api.moreflo.com` and is byte-for-byte the production document apart from
+  that field.
+environments:
+  - name: production
+    base_url: https://api.moreflo.com
+    swagger: https://api.moreflo.com/swagger/docs/v2
+    console: https://api.moreflo.com/swagger/ui/index
+    probe: '200'
+  - name: sandbox / test
+    base_url: https://test.api.moreflo.com
+    swagger: https://test.api.moreflo.com/swagger/docs/v2
+    console: https://test.api.moreflo.com/swagger/ui/index
+    probe: '200'
+    parity:
+      paths: 125
+      operations: 199
+      identical_to_production: >-
+        Yes, apart from the `host` field. Confirmed by diffing both documents on
+        2026-08-26 (production md5 622942ed6ac114f805a05751106dcaad, test md5
+        6855ba68a82289e4c74871cab75f4952 - the two-byte difference is the host string).
+    cost: free, per the provider's own archived product page
+credentials:
+  model: >-
+    Separate sandbox credentials, issued by Northmill on request. HTTP Basic, same
+    scheme as production. There is no self-service key issuance and no key-prefix
+    convention distinguishing test from live - the environment is separated by HOST,
+    not by key.
+  self_service: false
+  request_path: >-
+    Contact Northmill; the archived API page routed prospects through a
+    "Jag vill veta mer" / quote form rather than a signup.
+test_values:
+  cards: not published
+  accounts: not published
+  tokens: not published
+  note: >-
+    Northmill publishes no test cards, test bank accounts, magic values, test clocks
+    or fixture triggers. NOTHING was invented here - the absence is the finding.
+time_simulation:
+  supported: false
+fixtures_and_triggers:
+  supported: false
+  note: >-
+    Webhooks can be pointed at an arbitrary RemoteUrl in the sandbox
+    (POST /v2/webhooks), which is the closest thing to a trigger tool: create a
+    subscription against a request-capture endpoint and drive events from the POS.
+console:
+  type: Swagger UI (Swashbuckle), "Try it out" enabled
+  supported_methods: [get, put, post, delete, options, head, patch]
+  url: https://test.api.moreflo.com/swagger/ui/index

@@ -1,0 +1,754 @@
+generated: '2026-08-26'
+method: derived
+status: candidate
+source: 'Derived from openapi/northmill-flo-api-swagger.json. SEARCHED first: npm (registry.npmjs.org,
+  queries "northmill", "moreflo"), the MCP path on both API hosts (POST https://api.moreflo.com/mcp ->
+  HTTP 404), the Northmill and Flo help pages, and a GitHub org probe (github.com/northmill, /moreflo
+  -> 404). Northmill publishes no MCP server.'
+description: Northmill ships NO Model Context Protocol server, hosted or local. The tool list below is
+  a CANDIDATE derived one-to-one from the merchant-wide operations of the Flo API Swagger document; each
+  tool inherits the parameters and request body of its backing operation. It is a design input, not something
+  an agent can call today.
+deployment:
+  mode: none
+  auth: api-key
+  verified: searched
+  note: 'mode: none because nobody ships a server. If one existed it would authenticate with the same
+    HTTP Basic credentials as the REST API - recorded as api-key because the credential is a static merchant
+    secret, not an interactive OAuth flow.'
+server:
+  name: northmill-flo
+  transport: null
+  url: null
+tool_count: 103
+derivation_note: Only the merchant-wide path forms are listed. Every tool has an exact store-scoped twin
+  at /v2/stores/{externalStoreId}/... which would be modelled as an optional external_store_id argument
+  rather than as a second tool.
+tools:
+- name: get_v2_accountcodes
+  description: Get all account codes.
+  source_operation: openapi/northmill-flo-api-swagger.json#AccountCodes_Get
+  method: GET
+  path: /v2/accountcodes
+  tags:
+  - AccountCodes
+- name: put_v2_accountcodes
+  description: Update account codes.
+  source_operation: openapi/northmill-flo-api-swagger.json#AccountCodes_Update
+  method: PUT
+  path: /v2/accountcodes
+  tags:
+  - AccountCodes
+- name: post_v2_accountcodes
+  description: Create account codes.
+  source_operation: openapi/northmill-flo-api-swagger.json#AccountCodes_Create
+  method: POST
+  path: /v2/accountcodes
+  tags:
+  - AccountCodes
+- name: get_v2_accountcodes_id
+  description: Get a specific account code
+  source_operation: openapi/northmill-flo-api-swagger.json#AccountCodes_Get
+  method: GET
+  path: /v2/accountcodes/{Id}
+  tags:
+  - AccountCodes
+- name: delete_v2_accountcodes_id
+  description: Delete an account code.
+  source_operation: openapi/northmill-flo-api-swagger.json#AccountCodes_Delete
+  method: DELETE
+  path: /v2/accountcodes/{Id}
+  tags:
+  - AccountCodes
+- name: get_v2_settings_accounting_vat
+  description: Get all vat account settings.
+  source_operation: openapi/northmill-flo-api-swagger.json#AccountingSettings_Get
+  method: GET
+  path: /v2/settings/accounting/vat
+  tags:
+  - AccountingSettings
+- name: get_v2_settings_accounting_income
+  description: Get income account settings.
+  source_operation: openapi/northmill-flo-api-swagger.json#AccountingSettings_GetIncomeAccounts
+  method: GET
+  path: /v2/settings/accounting/income
+  tags:
+  - AccountingSettings
+- name: get_v2_settings_accounting_other
+  description: Get other account settings.
+  source_operation: openapi/northmill-flo-api-swagger.json#AccountingSettings_GetOtherAccounts
+  method: GET
+  path: /v2/settings/accounting/other
+  tags:
+  - AccountingSettings
+- name: get_v2_articles
+  description: Get all articles.
+  source_operation: openapi/northmill-flo-api-swagger.json#Articles_Get
+  method: GET
+  path: /v2/articles
+  tags:
+  - Articles
+- name: put_v2_articles
+  description: Update articles.
+  source_operation: openapi/northmill-flo-api-swagger.json#Articles_Update
+  method: PUT
+  path: /v2/articles
+  tags:
+  - Articles
+- name: post_v2_articles
+  description: Create articles.
+  source_operation: openapi/northmill-flo-api-swagger.json#Articles_Create
+  method: POST
+  path: /v2/articles
+  tags:
+  - Articles
+- name: put_v2_articles_increasestock
+  description: Update stock - increase stock.
+  source_operation: openapi/northmill-flo-api-swagger.json#Articles_IncreaseStock
+  method: PUT
+  path: /v2/articles/increasestock
+  tags:
+  - Articles
+- name: put_v2_articles_decreasestock
+  description: Update stock - decrease stock.
+  source_operation: openapi/northmill-flo-api-swagger.json#Articles_DecreaseStock
+  method: PUT
+  path: /v2/articles/decreasestock
+  tags:
+  - Articles
+- name: get_v2_articles_articlenumber
+  description: Hämta en artikel - se flagga.
+  source_operation: openapi/northmill-flo-api-swagger.json#Articles_Get
+  method: GET
+  path: /v2/articles/{ArticleNumber}
+  tags:
+  - Articles
+- name: get_v3_articles_article
+  description: Hämta en artikel - se flagga.
+  source_operation: openapi/northmill-flo-api-swagger.json#Articles_Get
+  method: GET
+  path: /v3/articles/article
+  tags:
+  - Articles
+- name: get_v3_articles_availabilities
+  description: ''
+  source_operation: openapi/northmill-flo-api-swagger.json#ArticlesAvailability_Get
+  method: GET
+  path: /v3/articles-availabilities
+  tags:
+  - ArticlesAvailability
+- name: get_v2_articlesets
+  description: Get all artcile sets.
+  source_operation: openapi/northmill-flo-api-swagger.json#ArticleSets_Get
+  method: GET
+  path: /v2/articlesets
+  tags:
+  - ArticleSets
+- name: put_v2_articlesets
+  description: Update article sets.
+  source_operation: openapi/northmill-flo-api-swagger.json#ArticleSets_Update
+  method: PUT
+  path: /v2/articlesets
+  tags:
+  - ArticleSets
+- name: post_v2_articlesets
+  description: Create article sets.
+  source_operation: openapi/northmill-flo-api-swagger.json#ArticleSets_Create
+  method: POST
+  path: /v2/articlesets
+  tags:
+  - ArticleSets
+- name: get_v2_articlesets_articlenumber
+  description: Get an artcile set.
+  source_operation: openapi/northmill-flo-api-swagger.json#ArticleSets_Get
+  method: GET
+  path: /v2/articlesets/{ArticleNumber}
+  tags:
+  - ArticleSets
+- name: get_v2_bookings_resourceeventinsances
+  description: Get all bookable resource event instances.
+  source_operation: openapi/northmill-flo-api-swagger.json#BookableResourceEventInstances_Get
+  method: GET
+  path: /v2/bookings/resourceeventinsances
+  tags:
+  - BookableResourceEventInstances
+- name: get_v2_bookings_resources
+  description: Get all bookable resources.
+  source_operation: openapi/northmill-flo-api-swagger.json#BookableResources_Get
+  method: GET
+  path: /v2/bookings/resources
+  tags:
+  - BookableResources
+- name: get_v2_bookingorders
+  description: Get all bookinging orders.
+  source_operation: openapi/northmill-flo-api-swagger.json#BookingOrders_Get
+  method: GET
+  path: /v2/bookingorders
+  tags:
+  - BookingOrders
+- name: put_v2_bookingorders
+  description: Update list of bookingorders.
+  source_operation: openapi/northmill-flo-api-swagger.json#BookingOrders_Update
+  method: PUT
+  path: /v2/bookingorders
+  tags:
+  - BookingOrders
+- name: post_v2_bookingorders
+  description: Create bookingorders.
+  source_operation: openapi/northmill-flo-api-swagger.json#BookingOrders_Create
+  method: POST
+  path: /v2/bookingorders
+  tags:
+  - BookingOrders
+- name: get_v2_bookingorders_byexternalreference_externalreference
+  description: Get a order.
+  source_operation: openapi/northmill-flo-api-swagger.json#BookingOrders_GetByExternalReference
+  method: GET
+  path: /v2/bookingorders/byExternalReference/{externalReference}
+  tags:
+  - BookingOrders
+- name: get_v2_bookingorders_byid_id
+  description: Get a order.
+  source_operation: openapi/northmill-flo-api-swagger.json#BookingOrders_Get
+  method: GET
+  path: /v2/bookingorders/byId/{Id}
+  tags:
+  - BookingOrders
+- name: get_v2_brands
+  description: Get all brands.
+  source_operation: openapi/northmill-flo-api-swagger.json#Brands_Get
+  method: GET
+  path: /v2/brands
+  tags:
+  - Brands
+- name: put_v2_brands
+  description: Update list of brands.
+  source_operation: openapi/northmill-flo-api-swagger.json#Brands_Update
+  method: PUT
+  path: /v2/brands
+  tags:
+  - Brands
+- name: post_v2_brands
+  description: Create brands.
+  source_operation: openapi/northmill-flo-api-swagger.json#Brands_Create
+  method: POST
+  path: /v2/brands
+  tags:
+  - Brands
+- name: delete_v2_brands_id
+  description: Delete a brand.
+  source_operation: openapi/northmill-flo-api-swagger.json#Brands_Delete
+  method: DELETE
+  path: /v2/brands/{Id}
+  tags:
+  - Brands
+- name: get_v2_campaigns
+  description: Get all campaigns.
+  source_operation: openapi/northmill-flo-api-swagger.json#Campaigns_Get
+  method: GET
+  path: /v2/campaigns
+  tags:
+  - Campaigns
+- name: put_v2_campaigns
+  description: Update article sets.
+  source_operation: openapi/northmill-flo-api-swagger.json#Campaigns_Update
+  method: PUT
+  path: /v2/campaigns
+  tags:
+  - Campaigns
+- name: post_v2_campaigns
+  description: Create campaigns.
+  source_operation: openapi/northmill-flo-api-swagger.json#Campaigns_Create
+  method: POST
+  path: /v2/campaigns
+  tags:
+  - Campaigns
+- name: get_v2_campaigns_id
+  description: Get a campaign.
+  source_operation: openapi/northmill-flo-api-swagger.json#Campaigns_Get
+  method: GET
+  path: /v2/campaigns/{Id}
+  tags:
+  - Campaigns
+- name: delete_v2_campaigns_id
+  description: Delete a campaign.
+  source_operation: openapi/northmill-flo-api-swagger.json#Campaigns_Delete
+  method: DELETE
+  path: /v2/campaigns/{Id}
+  tags:
+  - Campaigns
+- name: get_v2_cashcards_balance
+  description: Fetech balance on cash cards.
+  source_operation: openapi/northmill-flo-api-swagger.json#CashCards_Get
+  method: GET
+  path: /v2/cashcards/balance
+  tags:
+  - CashCards
+- name: get_v2_cashierusers
+  description: Get all cashier users.
+  source_operation: openapi/northmill-flo-api-swagger.json#CashierUsers_Get
+  method: GET
+  path: /v2/cashierusers
+  tags:
+  - CashierUsers
+- name: put_v2_cashierusers
+  description: Update cashier users.
+  source_operation: openapi/northmill-flo-api-swagger.json#CashierUsers_Update
+  method: PUT
+  path: /v2/cashierusers
+  tags:
+  - CashierUsers
+- name: post_v2_cashierusers
+  description: Create cashier users.
+  source_operation: openapi/northmill-flo-api-swagger.json#CashierUsers_Create
+  method: POST
+  path: /v2/cashierusers
+  tags:
+  - CashierUsers
+- name: put_v2_customers
+  description: Update customers.
+  source_operation: openapi/northmill-flo-api-swagger.json#Customers_Update
+  method: PUT
+  path: /v2/customers
+  tags:
+  - Customers
+- name: post_v2_customers
+  description: Create customers.
+  source_operation: openapi/northmill-flo-api-swagger.json#Customers_Create
+  method: POST
+  path: /v2/customers
+  tags:
+  - Customers
+- name: post_v2_customers_find
+  description: Find customer
+  source_operation: openapi/northmill-flo-api-swagger.json#Customers_Find
+  method: POST
+  path: /v2/customers/find
+  tags:
+  - Customers
+- name: get_v2_customers_get_customernumber
+  description: Get customer
+  source_operation: openapi/northmill-flo-api-swagger.json#Customers_Get
+  method: GET
+  path: /v2/customers/get/{customerNumber}
+  tags:
+  - Customers
+- name: get_v2_customers_nextcustomernumber
+  description: "Get Next Available Customer Number\r\n<param name=\"externalStoreId\"> Id to update if\
+    \ multistore admin.</param>"
+  source_operation: openapi/northmill-flo-api-swagger.json#Customers_GetNextAvailableCustomerNumber
+  method: GET
+  path: /v2/customers/nextcustomernumber
+  tags:
+  - Customers
+- name: get_v2_groups
+  description: Get all groups.
+  source_operation: openapi/northmill-flo-api-swagger.json#Groups_Get
+  method: GET
+  path: /v2/groups
+  tags:
+  - Groups
+- name: put_v2_groups
+  description: Update list of groups.
+  source_operation: openapi/northmill-flo-api-swagger.json#Groups_Update
+  method: PUT
+  path: /v2/groups
+  tags:
+  - Groups
+- name: post_v2_groups
+  description: "Create groups.\r\n<param name=\"externalStoreId\"> Id to update if multistore admin.</param><param\
+    \ name=\"groups\"> List of groups.</param>"
+  source_operation: openapi/northmill-flo-api-swagger.json#Groups_Create
+  method: POST
+  path: /v2/groups
+  tags:
+  - Groups
+- name: get_v2_groups_id
+  description: Get a specific group
+  source_operation: openapi/northmill-flo-api-swagger.json#Groups_Get
+  method: GET
+  path: /v2/groups/{Id}
+  tags:
+  - Groups
+- name: delete_v2_groups_id
+  description: Delete a group.
+  source_operation: openapi/northmill-flo-api-swagger.json#Groups_Delete
+  method: DELETE
+  path: /v2/groups/{Id}
+  tags:
+  - Groups
+- name: get_health
+  description: ''
+  source_operation: openapi/northmill-flo-api-swagger.json#Health_Health
+  method: GET
+  path: /health
+  tags:
+  - Health
+- name: get_v2_locations
+  description: Get all locations.
+  source_operation: openapi/northmill-flo-api-swagger.json#Locations_Get
+  method: GET
+  path: /v2/locations
+  tags:
+  - Locations
+- name: put_v2_locations
+  description: Update list of locations.
+  source_operation: openapi/northmill-flo-api-swagger.json#Locations_Update
+  method: PUT
+  path: /v2/locations
+  tags:
+  - Locations
+- name: post_v2_locations
+  description: Create locations.
+  source_operation: openapi/northmill-flo-api-swagger.json#Locations_Create
+  method: POST
+  path: /v2/locations
+  tags:
+  - Locations
+- name: delete_v2_locations_id
+  description: Delete a location.
+  source_operation: openapi/northmill-flo-api-swagger.json#Locations_Delete
+  method: DELETE
+  path: /v2/locations/{Id}
+  tags:
+  - Locations
+- name: get_v2_online_paymentmethods
+  description: Get all online payment methods.
+  source_operation: openapi/northmill-flo-api-swagger.json#OnlineSolutions_GetOnlinePaymentMethods
+  method: GET
+  path: /v2/online/paymentmethods
+  tags:
+  - OnlineSolutions
+- name: get_v2_online_catering_settings
+  description: Get catering settings.
+  source_operation: openapi/northmill-flo-api-swagger.json#OnlineSolutions_GetCateringSettings
+  method: GET
+  path: /v2/online/catering/settings
+  tags:
+  - OnlineSolutions
+- name: get_v2_online_expressorder_settings
+  description: Get express order settings.
+  source_operation: openapi/northmill-flo-api-swagger.json#OnlineSolutions_GetExpressOrderSettings
+  method: GET
+  path: /v2/online/expressorder/settings
+  tags:
+  - OnlineSolutions
+- name: get_v2_online_selfscan_settings
+  description: Get selfscan settings.
+  source_operation: openapi/northmill-flo-api-swagger.json#OnlineSolutions_GetSelfscanSettings
+  method: GET
+  path: /v2/online/selfscan/settings
+  tags:
+  - OnlineSolutions
+- name: get_v2_online_webshop_settings
+  description: Get webshop settings.
+  source_operation: openapi/northmill-flo-api-swagger.json#OnlineSolutions_GetWebshopSettings
+  method: GET
+  path: /v2/online/webshop/settings
+  tags:
+  - OnlineSolutions
+- name: put_v2_orders
+  description: Update list of orders.
+  source_operation: openapi/northmill-flo-api-swagger.json#Orders_Update
+  method: PUT
+  path: /v2/orders
+  tags:
+  - Orders
+- name: post_v2_orders
+  description: Create orders.
+  source_operation: openapi/northmill-flo-api-swagger.json#Orders_Create
+  method: POST
+  path: /v2/orders
+  tags:
+  - Orders
+- name: get_v2_orders_byexternalreference_externalreference
+  description: Get a order.
+  source_operation: openapi/northmill-flo-api-swagger.json#Orders_GetByExternalReference
+  method: GET
+  path: /v2/orders/byExternalReference/{externalReference}
+  tags:
+  - Orders
+- name: get_v2_orders_byid_id
+  description: Get a order.
+  source_operation: openapi/northmill-flo-api-swagger.json#Orders_Get
+  method: GET
+  path: /v2/orders/byId/{Id}
+  tags:
+  - Orders
+- name: get_v3_orders
+  description: Get list of orders.
+  source_operation: openapi/northmill-flo-api-swagger.json#OrdersV3_List
+  method: GET
+  path: /v3/orders
+  tags:
+  - OrdersV3
+- name: put_v3_orders
+  description: Update list of orders.
+  source_operation: openapi/northmill-flo-api-swagger.json#OrdersV3_Update
+  method: PUT
+  path: /v3/orders
+  tags:
+  - OrdersV3
+- name: post_v3_orders
+  description: Create orders.
+  source_operation: openapi/northmill-flo-api-swagger.json#OrdersV3_Create
+  method: POST
+  path: /v3/orders
+  tags:
+  - OrdersV3
+- name: get_v3_orders_byexternalreference_externalreference
+  description: Get a order.
+  source_operation: openapi/northmill-flo-api-swagger.json#OrdersV3_GetByExternalReference
+  method: GET
+  path: /v3/orders/byExternalReference/{externalReference}
+  tags:
+  - OrdersV3
+- name: get_v3_orders_byid_id
+  description: Get a order.
+  source_operation: openapi/northmill-flo-api-swagger.json#OrdersV3_Get
+  method: GET
+  path: /v3/orders/byId/{Id}
+  tags:
+  - OrdersV3
+- name: get_v2_receipts_id
+  description: Get a receipt
+  source_operation: openapi/northmill-flo-api-swagger.json#Receipts_Get
+  method: GET
+  path: /v2/receipts/{id}
+  tags:
+  - Receipts
+- name: get_v2_receipts
+  description: Get a list of receipts
+  source_operation: openapi/northmill-flo-api-swagger.json#Receipts_Get
+  method: GET
+  path: /v2/receipts
+  tags:
+  - Receipts
+- name: post_v2_receipts
+  description: Create a receipt
+  source_operation: openapi/northmill-flo-api-swagger.json#Receipts_CreateReceipt
+  method: POST
+  path: /v2/receipts
+  tags:
+  - Receipts
+- name: get_v2_sales_articles
+  description: Get all article sale events.
+  source_operation: openapi/northmill-flo-api-swagger.json#Sales_Get
+  method: GET
+  path: /v2/sales/articles
+  tags:
+  - Sales
+- name: get_v2_serviceorders
+  description: Get all service orders.
+  source_operation: openapi/northmill-flo-api-swagger.json#ServiceOrders_Get
+  method: GET
+  path: /v2/serviceorders
+  tags:
+  - ServiceOrders
+- name: put_v2_serviceorders
+  description: Update list of serviceOrders.
+  source_operation: openapi/northmill-flo-api-swagger.json#ServiceOrders_Update
+  method: PUT
+  path: /v2/serviceorders
+  tags:
+  - ServiceOrders
+- name: post_v2_serviceorders
+  description: Create service orders.
+  source_operation: openapi/northmill-flo-api-swagger.json#ServiceOrders_Create
+  method: POST
+  path: /v2/serviceorders
+  tags:
+  - ServiceOrders
+- name: get_v2_serviceorders_id
+  description: Get a service order.
+  source_operation: openapi/northmill-flo-api-swagger.json#ServiceOrders_Get
+  method: GET
+  path: /v2/serviceorders/{Id}
+  tags:
+  - ServiceOrders
+- name: get_v2_settings
+  description: Fetch settings.
+  source_operation: openapi/northmill-flo-api-swagger.json#Settings_Get
+  method: GET
+  path: /v2/settings
+  tags:
+  - Settings
+- name: get_v2_bookings_settings
+  description: Fetch booking settings.
+  source_operation: openapi/northmill-flo-api-swagger.json#Settings_GetBookingSettings
+  method: GET
+  path: /v2/bookings/settings
+  tags:
+  - Settings
+- name: post_v2_sms_single
+  description: Send a single SMS, if format errors response will be 400, if sending was started but failed
+    the response will be 409.
+  source_operation: openapi/northmill-flo-api-swagger.json#Sms_SendSms
+  method: POST
+  path: /v2/sms/single
+  tags:
+  - Sms
+- name: post_v2_sms_externalstoreid_single
+  description: Send a single SMS, if format errors response will be 400, if sending was started but failed
+    the response will be 409.
+  source_operation: openapi/northmill-flo-api-swagger.json#Sms_SendSms
+  method: POST
+  path: /v2/sms/{externalStoreId}/single
+  tags:
+  - Sms
+- name: get_v2_stores
+  description: Hämta en butik - se flagga.
+  source_operation: openapi/northmill-flo-api-swagger.json#Stores_Get
+  method: GET
+  path: /v2/stores
+  tags:
+  - Stores
+- name: post_v2_stores
+  description: Create a store.
+  source_operation: openapi/northmill-flo-api-swagger.json#Stores_Create
+  method: POST
+  path: /v2/stores
+  tags:
+  - Stores
+- name: get_v2_stores_externalstoreid
+  description: Hämta en butik - se flagga.
+  source_operation: openapi/northmill-flo-api-swagger.json#Stores_Get
+  method: GET
+  path: /v2/stores/{externalStoreId}
+  tags:
+  - Stores
+- name: put_v2_stores_externalstoreid
+  description: Uppdatera en butik.
+  source_operation: openapi/northmill-flo-api-swagger.json#Stores_Update
+  method: PUT
+  path: /v2/stores/{externalStoreId}
+  tags:
+  - Stores
+- name: get_v2_suppliers
+  description: Get all suppliers.
+  source_operation: openapi/northmill-flo-api-swagger.json#Suppliers_Get
+  method: GET
+  path: /v2/suppliers
+  tags:
+  - Suppliers
+- name: put_v2_suppliers
+  description: Update list of suppliers.
+  source_operation: openapi/northmill-flo-api-swagger.json#Suppliers_Update
+  method: PUT
+  path: /v2/suppliers
+  tags:
+  - Suppliers
+- name: post_v2_suppliers
+  description: Create suppliers.
+  source_operation: openapi/northmill-flo-api-swagger.json#Suppliers_Create
+  method: POST
+  path: /v2/suppliers
+  tags:
+  - Suppliers
+- name: delete_v2_suppliers_id
+  description: Delete a supplier.
+  source_operation: openapi/northmill-flo-api-swagger.json#Suppliers_Delete
+  method: DELETE
+  path: /v2/suppliers/{Id}
+  tags:
+  - Suppliers
+- name: put_v2_ticketorders
+  description: Update list of ticketorders.
+  source_operation: openapi/northmill-flo-api-swagger.json#TicketOrders_Update
+  method: PUT
+  path: /v2/ticketorders
+  tags:
+  - TicketOrders
+- name: post_v2_ticketorders
+  description: Create ticketorders.
+  source_operation: openapi/northmill-flo-api-swagger.json#TicketOrders_Create
+  method: POST
+  path: /v2/ticketorders
+  tags:
+  - TicketOrders
+- name: get_v2_ticketorders_byexternalreference_externalreference
+  description: Get a order.
+  source_operation: openapi/northmill-flo-api-swagger.json#TicketOrders_GetByExternalReference
+  method: GET
+  path: /v2/ticketorders/byExternalReference/{externalReference}
+  tags:
+  - TicketOrders
+- name: get_v2_ticketorders_byid_id
+  description: Get a order.
+  source_operation: openapi/northmill-flo-api-swagger.json#TicketOrders_Get
+  method: GET
+  path: /v2/ticketorders/byId/{Id}
+  tags:
+  - TicketOrders
+- name: get_v2_vouchers
+  description: Get list of vouchers.
+  source_operation: openapi/northmill-flo-api-swagger.json#Vouchers_Get
+  method: GET
+  path: /v2/vouchers
+  tags:
+  - Vouchers
+- name: put_v2_vouchers
+  description: Update vouchers.
+  source_operation: openapi/northmill-flo-api-swagger.json#Vouchers_Update
+  method: PUT
+  path: /v2/vouchers
+  tags:
+  - Vouchers
+- name: post_v2_vouchers
+  description: Create vouchers.
+  source_operation: openapi/northmill-flo-api-swagger.json#Vouchers_Create
+  method: POST
+  path: /v2/vouchers
+  tags:
+  - Vouchers
+- name: get_v2_vouchers_byid_id
+  description: Get a voucher.
+  source_operation: openapi/northmill-flo-api-swagger.json#Vouchers_Get
+  method: GET
+  path: /v2/vouchers/byId/{Id}
+  tags:
+  - Vouchers
+- name: get_v2_webhookcategories
+  description: Get all web hook categories.
+  source_operation: openapi/northmill-flo-api-swagger.json#WebHookCategories_Get
+  method: GET
+  path: /v2/webhookcategories
+  tags:
+  - WebHookCategories
+- name: get_v2_webhooks
+  description: Get all web hooks.
+  source_operation: openapi/northmill-flo-api-swagger.json#WebHooks_Get
+  method: GET
+  path: /v2/webhooks
+  tags:
+  - WebHooks
+- name: put_v2_webhooks
+  description: Update webhooks. User remote ip address must be in list of IPs resolved from host part
+    in URL of webhook.
+  source_operation: openapi/northmill-flo-api-swagger.json#WebHooks_Update
+  method: PUT
+  path: /v2/webhooks
+  tags:
+  - WebHooks
+- name: post_v2_webhooks
+  description: Create webhooks. User remote ip address must be in list of IPs resolved from host part
+    in URL of webhook.
+  source_operation: openapi/northmill-flo-api-swagger.json#WebHooks_Create
+  method: POST
+  path: /v2/webhooks
+  tags:
+  - WebHooks
+- name: get_v2_webhooks_id
+  description: Get a web hook.
+  source_operation: openapi/northmill-flo-api-swagger.json#WebHooks_Get
+  method: GET
+  path: /v2/webhooks/{Id}
+  tags:
+  - WebHooks
+- name: delete_v2_webhooks_id
+  description: Delete a web hook.
+  source_operation: openapi/northmill-flo-api-swagger.json#WebHooks_Delete
+  method: DELETE
+  path: /v2/webhooks/{Id}
+  tags:
+  - WebHooks

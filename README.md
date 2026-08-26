@@ -64,5 +64,8 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Northmill is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://www.nasdaqprivatemarket.com/
+Northmill Bank AB is a Swedish technology-driven bank (Stockholm, founded 2006, banking licence from Finansinspektionen in 2019) serving private and business customers in Sweden, Norway and Finland. Its public developer surface is the Northmill Flo API - a Swagger 2.0 REST contract with 199 operations for point-of-sale and commerce - plus a PSD2 open-banking interface for third-party providers.
+
+- https://www.northmill.com/
+- Flo API reference: https://api.moreflo.com/swagger/ui/index
+- TPP documentation: https://developer.token.io/northmill_rest_api_doc/content/e-rest/dashboard-intro.htm

@@ -1,0 +1,26 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Canonical: https://northmill.com/.well-known/security.txt
+Contact: mailto:security@northmill.com
+Encryption: https://northmill.com/.well-known/pgp-publickey.txt
+Policy: https://northmill.com/se-en/about-us/security/
+Preferred-Languages: en
+Hiring: https://careers.northmill.com
+Expires: 2027-07-15T09:57:12Z
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEEPenoCaaiPrBRyAeFBlyWd3D/C7MFAmpXWX8ACgkQBlyWd3D/
+C7MEvA/9Gphg8vo7CK6tQvVA41M47xWWuTItkI8QJ/i3BXG35ogfC1AmrXXrtiMl
+EzK/1Bl0riHLfUFpd2gMWRnMPhQglPyHigh2snRAI7rTAn7MknRkfJ9JDsGqXyEH
+L2iBA8GS/KQlg/hc2iz49P/D9a8qFT/U3hKzIJWZ9kEsm/UqjzS8X7s8i/rxgyOc
+Lyh2oADF/JMNMRv5AHpOydicswOpxbZ3GV4g+P36DSim/zM/BYqt8TLV4OVRF7ei
+6l26NILaVUZp3Sx1k/diSqPUYRYrFrWiRbnc5w1WzyERkNE82LTqqtfCrgBrFYeP
+dLePuLsbfHBzprM37+5p3w0gr7doHphjw2s6BZFKQtdGODsHmyVr7iY2G8SC+FZA
+0xCql9gRE9l9gs7aeUMoPhfDV3w77sOgBDajiGdFSLTprnRh/bLMardxEw+H8BGq
+h2CC4miDyG0I5pBnfd6qQDYZD0CmWD69dPe2tAViRxmTwOTR8JNqSm2UTpX8/Cm8
+gF2Wq1k8fzuTJiT5fesk7MKL8wi8uCxZmWTGwZcIK0w2LEOHFgQ/r5pDdwMm1c6K
+AtKjCbyFHkoCplRdd42iUbA5jv8Z17CeWre3nCLXtRFF/483Tsey0g52GVznH8yP
+Y2NyWP33MU/EfsyRzZG+zxd7MTang9p7KyTtHI8OhlMwl3/IMqs=
+=TvMd
+-----END PGP SIGNATURE-----

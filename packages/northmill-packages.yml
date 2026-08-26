@@ -1,0 +1,43 @@
+generated: '2026-08-26'
+method: searched
+source: >-
+  Registry searches on 2026-08-26 against registry.npmjs.org, pypi.org, NuGet
+  (azuresearch-usnc.nuget.org), rubygems.org, packagist.org and crates.io for
+  "northmill", "moreflo" and "flo-api"; plus a GitHub organization probe of
+  github.com/northmill, /moreflo, /northmill-bank and /NorthmillAB (all HTTP 404
+  from api.github.com/orgs/<name>), and a read of the Flo API reference at
+  https://api.moreflo.com/swagger/ui/index.
+description: >-
+  Northmill publishes no first-party client libraries. The Flo API is consumed
+  directly over HTTP with Basic authentication; the Swagger UI is the only client
+  tooling the provider ships. No public GitHub organization exists under any of the
+  Northmill or MoreFlo names, so there is no source-code distribution channel either.
+package_count: 0
+official_package_count: 0
+packages: []
+registries_probed:
+  - registry: npm
+    query: ['northmill', 'moreflo', 'flo-api']
+    result: no first-party package
+  - registry: pypi
+    query: ['northmill', 'moreflo']
+    result: HTTP 404 on pypi.org/pypi/<name>/json for both
+  - registry: nuget
+    query: ['moreflo']
+    result: totalHits 0
+  - registry: rubygems
+    query: ['moreflo']
+    result: empty result set
+  - registry: packagist
+    query: ['moreflo']
+    result: no matching package
+  - registry: crates.io
+    query: ['moreflo']
+    result: no matching package
+notes:
+  - >-
+    The API is an ASP.NET (Swashbuckle) service, so a NuGet client would be the
+    natural first-party package; NuGet returned zero hits for "moreflo".
+  - >-
+    Version and published dates are recorded as null-by-absence here because no
+    package exists to read metadata from, not because the registries were unchecked.

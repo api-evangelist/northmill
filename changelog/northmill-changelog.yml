@@ -1,0 +1,104 @@
+generated: '2026-08-26'
+method: searched
+source: https://www.northmill.com/se/foretag/hjalp/uppdateringar/
+description: >-
+  Northmill publishes dated, versioned release notes for each Flo product client -
+  Windows POS, iOS POS, Northmill Hub, Northmill Sync, Checkout, Booking, Event and
+  Express Order - grouped by year on the merchant help site. There is NO changelog for
+  the Flo API itself; the entries below are the client-software streams, which are the
+  only dated release record Northmill publishes and the best available proxy for
+  platform change.
+scope: product release notes (POS client software), not API change log
+scheme: semantic-ish dotted versions per product, dated (YYYY-MM-DD), sectioned by year
+language: Swedish
+streams:
+  - product: Northmill kassa (Windows POS)
+    url: https://www.northmill.com/se/foretag/hjalp/uppdateringar/windows/
+    current_version: '3.3.6'
+    current_date: '2026-04-10'
+    history_from: '2020-12-15'
+  - product: Northmill POS (iOS)
+    url: https://www.northmill.com/se/foretag/hjalp/uppdateringar/ios/
+    current_version: 12.39.13 (build 2558)
+    current_date: '2026-04-29'
+  - product: Northmill Hub
+    url: https://www.northmill.com/se/foretag/hjalp/uppdateringar/hub/
+    current_version: 3.6.5.1
+    current_date: '2025-05-20'
+  - product: Northmill Sync
+    url: https://www.northmill.com/se/foretag/hjalp/uppdateringar/northmillsync/
+    current_version: 4.1.1
+    current_date: '2025-05-07'
+entries:
+  - product: Northmill POS (iOS)
+    version: 12.39.13 (2558)
+    date: '2026-04-29'
+    breaking: false
+  - product: Northmill POS (iOS)
+    version: 12.39.12 (2490)
+    date: '2026-04-09'
+    breaking: false
+  - product: Northmill kassa (Windows)
+    version: '3.3.6'
+    date: '2026-04-10'
+    breaking: false
+  - product: Northmill POS (iOS)
+    version: 12.39.10 (2335)
+    date: '2026-02-25'
+    breaking: false
+  - product: Northmill POS (iOS)
+    version: 12.39.9 (2188)
+    date: '2026-02-13'
+    breaking: false
+  - product: Northmill kassa (Windows)
+    version: '3.3.4'
+    date: '2026-02-06'
+    breaking: false
+  - product: Northmill POS (iOS)
+    version: 12.39.8 (2103)
+    date: '2025-12-16'
+    breaking: false
+  - product: Northmill kassa (Windows)
+    version: '3.3.2'
+    date: '2025-10-20'
+    breaking: false
+    highlights: ['Fel- och stabilitetsforbattringar (bug and stability fixes)']
+  - product: Northmill kassa (Windows)
+    version: 3.3.1.2
+    date: '2025-06-16'
+    breaking: false
+    highlights:
+      - 'Stod for Lane 3600 (support for the Lane 3600 terminal)'
+      - 'Forbattrad hantering av vardekort i sjalvbetjaning (improved gift-card handling in self-service)'
+  - product: Northmill Hub
+    version: 3.6.5.1
+    date: '2025-05-20'
+    breaking: false
+  - product: Northmill Sync
+    version: 4.1.1
+    date: '2025-05-07'
+    breaking: false
+  - product: Northmill kassa (Windows)
+    version: v3.3.0.8
+    date: '2025-04-04'
+    breaking: false
+    highlights: ['Forbattrad hantering av betalningar med Resurs Bank']
+  - product: Northmill Sync
+    version: 4.0.0
+    date: '2025-04-10'
+    breaking: unknown
+    note: major version bump; the note does not describe the change as breaking
+  - product: Northmill kassa (Windows)
+    version: v3.3.0.6
+    date: '2025-03-17'
+    breaking: false
+    highlights:
+      - 'Betalningsintegration med Resurs Bank (Resurs Bank payment integration)'
+      - 'Forbattrad hantering av kvittoskrivare gentemot start av kassa'
+notes:
+  - >-
+    Entries are captured verbatim in Swedish with a short English gloss where the
+    meaning is load-bearing. The full history runs back to 2020 on the Windows stream.
+  - >-
+    No breaking-change flag exists in the source; `breaking: false` here means the
+    published note describes no breaking change, not that Northmill asserts none.

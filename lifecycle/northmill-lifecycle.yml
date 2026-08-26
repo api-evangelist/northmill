@@ -1,0 +1,93 @@
+generated: '2026-08-26'
+method: searched
+source: >-
+  https://api.moreflo.com/swagger/docs/v2 (contract),
+  https://www.northmill.com/se/foretag/hjalp/uppdateringar/ (product release notes),
+  https://www.northmill.com/se/foretag/hjalp/uppdateringar/driftstatus/ (operational status),
+  https://developer.token.io/northmill_rest_api_doc/content/0_-_common/backward_compatibility.htm
+  (the published backward-compatibility contract on the TPP interface).
+description: >-
+  Northmill runs two API surfaces with opposite lifecycle postures. The PSD2 TPP
+  interface publishes an explicit backward-compatibility contract listing which
+  changes a client must absorb. The Flo commerce API publishes no versioning policy,
+  no deprecation policy and no sunset commitment - it simply carries v2 and v3 paths
+  side by side in one Swagger document.
+
+versioning:
+  scheme: URI path version
+  live_versions: [v2, v3]
+  document_version: v2
+  v3_scope:
+    - /v3/orders (+ store-scoped twin)
+    - /v3/orders/byId/{Id}
+    - /v3/orders/byExternalReference/{externalReference}
+    - /v3/articles/article
+    - /v3/articles-availabilities
+  note: >-
+    v3 is additive and partial - it supersedes orders and adds article availability,
+    while the other 20 resource families remain v2-only. v2 orders remain published
+    and are NOT marked deprecated.
+
+deprecation:
+  policy_published: false
+  sunset_header: not supported / not documented
+  deprecation_header: not documented
+  rfc8594: false
+  deprecated_operations: 0
+  deprecated_fields:
+    - path: definitions.MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberOnlineExpressOrderSetting.properties.ColorGeneralIcon
+      note: 'This property is deprecated and should not be used.'
+  note: >-
+    Exactly one deprecation marker exists in the whole 630 KB contract, on a colour
+    field. No operation carries `deprecated: true`. There is no published deprecation
+    or sunset policy for the Flo API - so a consumer of /v2/orders has no stated
+    notice period.
+
+backward_compatibility:
+  published_for: Northmill Bank Open Banking API for TPPs
+  docs: https://developer.token.io/northmill_rest_api_doc/content/0_-_common/backward_compatibility.htm
+  contract: >-
+    The following changes are declared backward compatible and must be handled by the
+    client: adding new API endpoints; adding new properties to existing responses;
+    reordering response properties; adding optional request parameters; altering the
+    format or length of IDs; altering validation-failure/error message attributes;
+    sending webhooks for new event types.
+  client_guidance: 'we recommend all clients utilise a lenient json parser'
+  applies_to_flo_api: false
+
+status_page:
+  url: https://www.northmill.com/se/foretag/hjalp/uppdateringar/driftstatus/
+  title: 'Driftstatus for Flo kassasystem'
+  probe: '200'
+  scope: >-
+    Operational status for the Flo POS platform (merchant-facing). It is not an
+    API-specific status page and publishes no component-level uptime history or
+    incident feed in machine-readable form.
+
+release_notes:
+  url: https://www.northmill.com/se/foretag/hjalp/uppdateringar/
+  per_product:
+    - https://www.northmill.com/se/foretag/hjalp/uppdateringar/windows/
+    - https://www.northmill.com/se/foretag/hjalp/uppdateringar/ios/
+    - https://www.northmill.com/se/foretag/hjalp/uppdateringar/hub/
+    - https://www.northmill.com/se/foretag/hjalp/uppdateringar/northmillsync/
+    - https://www.northmill.com/se/foretag/hjalp/uppdateringar/northmillcheckout/
+    - https://www.northmill.com/se/foretag/hjalp/uppdateringar/northmillbooking/
+    - https://www.northmill.com/se/foretag/hjalp/uppdateringar/northmillevent/
+    - https://www.northmill.com/se/foretag/hjalp/uppdateringar/expressorder/
+  detail: changelog/northmill-changelog.yml
+  caveat: >-
+    These are release notes for the POS CLIENT SOFTWARE (Windows, iOS, Hub, Sync),
+    not for the Flo API. The API has no changelog of its own.
+
+sla:
+  published: false
+  note: No public SLA, uptime target or credit schedule was found for either API.
+
+lifecycle_round_trip:
+  note: >-
+    Of the resources the Flo API lets you CREATE, seven (account codes, brands,
+    campaigns, groups, locations, suppliers, webhooks) also document read, update and
+    delete. Orders, booking orders, ticket orders, article sets, customers, cashier
+    users, service orders, vouchers, receipts and stores document create/read/update
+    but no delete.

@@ -29,52 +29,16 @@ tags:
 - Lending
 - Nordics
 apis:
-- name: Northmill Flo API
-  description: The public REST API for Northmill Flo (formerly MoreFlo), Northmill Bank's point-of-sale
-    and commerce platform for merchants. Swagger 2.0, 125 paths / 199 operations over articles and pricing,
-    stock movements, article sets, campaigns, brands, groups, suppliers, locations, customers, cashier
-    users, orders (v2 and v3), booking orders, ticket orders, service orders, vouchers, receipts, cash
-    cards, SMS, accounting settings, online/webshop/self-scan/catering settings and webhook subscriptions.
-    Every collection is available both merchant-wide and scoped to a single store via /v2/stores/{externalStoreId}/...
-    HTTP Basic authentication; JSON, XML and form-encoded requests.
-  humanURL: https://api.moreflo.com/swagger/ui/index
-  baseURL: https://api.moreflo.com
-  tags:
-  - Point of Sale
-  - Retail
-  - Commerce
-  - Orders
-  - Inventory
-  - Webhooks
-  - Payments
-  properties:
-  - type: OpenAPI
-    url: openapi/northmill-flo-api-swagger.json
-  - type: APIReference
-    url: https://api.moreflo.com/swagger/docs/v2
-  - type: Documentation
-    url: https://api.moreflo.com/swagger/ui/index
-  - type: Webhooks
-    url: asyncapi/northmill-flo-webhooks.yml
-  - type: Overlay
-    url: overlays/northmill-flo-api-overlay.yaml
-  - type: DataModel
-    url: data-model/northmill-data-model.yml
-  - type: ErrorCatalog
-    url: errors/northmill-problem-types.yml
-  - type: Sandbox
-    url: sandbox/northmill-sandbox.yml
-  - type: Login
-    url: https://apps.moreflo.com/
 - name: Northmill Bank Open Banking API for TPPs
-  description: 'Northmill Bank''s PSD2 third-party-provider interface, covering Account Information Services
-    (AIS) and Confirmation of Available Funds (CBPII/CAF), with request signing via ES256/RS256 key pairs
-    registered in the Northmill Bank Dashboard. OWNERSHIP NOTE: the interface is delivered by Token.io
-    as Northmill Bank''s technical service provider - the developer documentation is Northmill-branded
-    and Northmill-specific (Northmill Bank Dashboard at northmill.dashboard.token.io, a Northmill-imposed
-    limit of 1,000 API requests per minute per TPP member) but the documented BASE_URL is Token.io''s
-    shared platform host https://api.token.io, and the Swagger reference sits behind the dashboard sign-in.
-    No machine-readable contract was captured for this API for that reason.'
+  description: >-
+    Northmill Bank's PSD2 third-party-provider interface, covering Account Information Services (AIS)
+    and Confirmation of Available Funds (CBPII/CAF), with request signing via ES256/RS256 key pairs registered
+    in the Northmill Bank Dashboard. OWNERSHIP NOTE: the interface is delivered by Token.io as Northmill
+    Bank's technical service provider - the developer documentation is Northmill-branded and Northmill-specific
+    (Northmill Bank Dashboard at northmill.dashboard.token.io, a Northmill-imposed limit of 1,000 API
+    requests per minute per TPP member) but the documented BASE_URL is Token.io's shared platform host
+    https://api.token.io, and the Swagger reference sits behind the dashboard sign-in. No machine-readable
+    contract was captured for this API for that reason.
   humanURL: https://developer.token.io/northmill_rest_api_doc/content/e-rest/dashboard-intro.htm
   baseURL: https://api.token.io
   tags:
@@ -90,12 +54,735 @@ apis:
     url: https://developer.token.io/northmill_rest_api_doc/content/e-rest/ais/ais_integration.htm
   - type: Login
     url: https://northmill.dashboard.token.io/
+- aid: northmill:northmill-accountcodes-api
+  name: Northmill Account Codes API
+  description: The AccountCodes API from Northmill — 4 operation(s) for accountcodes.
+  humanURL: https://api.moreflo.com/swagger/ui/index
+  baseURL: https://api.moreflo.com
+  tags:
+  - AccountCodes
+  properties:
+  - type: OpenAPI
+    url: openapi/northmill-accountcodes-api-openapi.yml
+  - type: APIReference
+    url: https://api.moreflo.com/swagger/docs/v2
+  - type: Documentation
+    url: https://api.moreflo.com/swagger/ui/index
+  - type: Webhooks
+    url: asyncapi/northmill-flo-webhooks.yml
+  - type: DataModel
+    url: data-model/northmill-data-model.yml
+  - type: ErrorCatalog
+    url: errors/northmill-problem-types.yml
+  - type: Sandbox
+    url: sandbox/northmill-sandbox.yml
+  - type: Login
+    url: https://apps.moreflo.com/
+- aid: northmill:northmill-accountingsettings-api
+  name: Northmill Accounting Settings API
+  description: The AccountingSettings API from Northmill — 6 operation(s) for accountingsettings.
+  humanURL: https://api.moreflo.com/swagger/ui/index
+  baseURL: https://api.moreflo.com
+  tags:
+  - AccountingSettings
+  properties:
+  - type: OpenAPI
+    url: openapi/northmill-accountingsettings-api-openapi.yml
+  - type: APIReference
+    url: https://api.moreflo.com/swagger/docs/v2
+  - type: Documentation
+    url: https://api.moreflo.com/swagger/ui/index
+  - type: Webhooks
+    url: asyncapi/northmill-flo-webhooks.yml
+  - type: DataModel
+    url: data-model/northmill-data-model.yml
+  - type: ErrorCatalog
+    url: errors/northmill-problem-types.yml
+  - type: Sandbox
+    url: sandbox/northmill-sandbox.yml
+  - type: Login
+    url: https://apps.moreflo.com/
+- aid: northmill:northmill-articles-api
+  name: Northmill Articles API
+  description: The Articles API from Northmill — 10 operation(s) for articles.
+  humanURL: https://api.moreflo.com/swagger/ui/index
+  baseURL: https://api.moreflo.com
+  tags:
+  - Articles
+  properties:
+  - type: OpenAPI
+    url: openapi/northmill-articles-api-openapi.yml
+  - type: APIReference
+    url: https://api.moreflo.com/swagger/docs/v2
+  - type: Documentation
+    url: https://api.moreflo.com/swagger/ui/index
+  - type: Webhooks
+    url: asyncapi/northmill-flo-webhooks.yml
+  - type: DataModel
+    url: data-model/northmill-data-model.yml
+  - type: ErrorCatalog
+    url: errors/northmill-problem-types.yml
+  - type: Sandbox
+    url: sandbox/northmill-sandbox.yml
+  - type: Login
+    url: https://apps.moreflo.com/
+- aid: northmill:northmill-articlesavailability-api
+  name: Northmill Articles Availability API
+  description: The ArticlesAvailability API from Northmill — 2 operation(s) for articlesavailability.
+  humanURL: https://api.moreflo.com/swagger/ui/index
+  baseURL: https://api.moreflo.com
+  tags:
+  - ArticlesAvailability
+  properties:
+  - type: OpenAPI
+    url: openapi/northmill-articlesavailability-api-openapi.yml
+  - type: APIReference
+    url: https://api.moreflo.com/swagger/docs/v2
+  - type: Documentation
+    url: https://api.moreflo.com/swagger/ui/index
+  - type: Webhooks
+    url: asyncapi/northmill-flo-webhooks.yml
+  - type: DataModel
+    url: data-model/northmill-data-model.yml
+  - type: ErrorCatalog
+    url: errors/northmill-problem-types.yml
+  - type: Sandbox
+    url: sandbox/northmill-sandbox.yml
+  - type: Login
+    url: https://apps.moreflo.com/
+- aid: northmill:northmill-articlesets-api
+  name: Northmill Article Sets API
+  description: The ArticleSets API from Northmill — 4 operation(s) for articlesets.
+  humanURL: https://api.moreflo.com/swagger/ui/index
+  baseURL: https://api.moreflo.com
+  tags:
+  - ArticleSets
+  properties:
+  - type: OpenAPI
+    url: openapi/northmill-articlesets-api-openapi.yml
+  - type: APIReference
+    url: https://api.moreflo.com/swagger/docs/v2
+  - type: Documentation
+    url: https://api.moreflo.com/swagger/ui/index
+  - type: Webhooks
+    url: asyncapi/northmill-flo-webhooks.yml
+  - type: DataModel
+    url: data-model/northmill-data-model.yml
+  - type: ErrorCatalog
+    url: errors/northmill-problem-types.yml
+  - type: Sandbox
+    url: sandbox/northmill-sandbox.yml
+  - type: Login
+    url: https://apps.moreflo.com/
+- aid: northmill:northmill-bookableresourceeventinstances-api
+  name: Northmill Bookable Resource Event Instances API
+  description: >-
+    The BookableResourceEventInstances API from Northmill — 2 operation(s) for bookableresourceeventinstances.
+  humanURL: https://api.moreflo.com/swagger/ui/index
+  baseURL: https://api.moreflo.com
+  tags:
+  - BookableResourceEventInstances
+  properties:
+  - type: OpenAPI
+    url: openapi/northmill-bookableresourceeventinstances-api-openapi.yml
+  - type: APIReference
+    url: https://api.moreflo.com/swagger/docs/v2
+  - type: Documentation
+    url: https://api.moreflo.com/swagger/ui/index
+  - type: Webhooks
+    url: asyncapi/northmill-flo-webhooks.yml
+  - type: DataModel
+    url: data-model/northmill-data-model.yml
+  - type: ErrorCatalog
+    url: errors/northmill-problem-types.yml
+  - type: Sandbox
+    url: sandbox/northmill-sandbox.yml
+  - type: Login
+    url: https://apps.moreflo.com/
+- aid: northmill:northmill-bookableresources-api
+  name: Northmill Bookable Resources API
+  description: The BookableResources API from Northmill — 2 operation(s) for bookableresources.
+  humanURL: https://api.moreflo.com/swagger/ui/index
+  baseURL: https://api.moreflo.com
+  tags:
+  - BookableResources
+  properties:
+  - type: OpenAPI
+    url: openapi/northmill-bookableresources-api-openapi.yml
+  - type: APIReference
+    url: https://api.moreflo.com/swagger/docs/v2
+  - type: Documentation
+    url: https://api.moreflo.com/swagger/ui/index
+  - type: Webhooks
+    url: asyncapi/northmill-flo-webhooks.yml
+  - type: DataModel
+    url: data-model/northmill-data-model.yml
+  - type: ErrorCatalog
+    url: errors/northmill-problem-types.yml
+  - type: Sandbox
+    url: sandbox/northmill-sandbox.yml
+  - type: Login
+    url: https://apps.moreflo.com/
+- aid: northmill:northmill-bookingorders-api
+  name: Northmill Booking Orders API
+  description: The BookingOrders API from Northmill — 6 operation(s) for bookingorders.
+  humanURL: https://api.moreflo.com/swagger/ui/index
+  baseURL: https://api.moreflo.com
+  tags:
+  - BookingOrders
+  properties:
+  - type: OpenAPI
+    url: openapi/northmill-bookingorders-api-openapi.yml
+  - type: APIReference
+    url: https://api.moreflo.com/swagger/docs/v2
+  - type: Documentation
+    url: https://api.moreflo.com/swagger/ui/index
+  - type: Webhooks
+    url: asyncapi/northmill-flo-webhooks.yml
+  - type: DataModel
+    url: data-model/northmill-data-model.yml
+  - type: ErrorCatalog
+    url: errors/northmill-problem-types.yml
+  - type: Sandbox
+    url: sandbox/northmill-sandbox.yml
+  - type: Login
+    url: https://apps.moreflo.com/
+- aid: northmill:northmill-brands-api
+  name: Northmill Brands API
+  description: The Brands API from Northmill — 4 operation(s) for brands.
+  humanURL: https://api.moreflo.com/swagger/ui/index
+  baseURL: https://api.moreflo.com
+  tags:
+  - Brands
+  properties:
+  - type: OpenAPI
+    url: openapi/northmill-brands-api-openapi.yml
+  - type: APIReference
+    url: https://api.moreflo.com/swagger/docs/v2
+  - type: Documentation
+    url: https://api.moreflo.com/swagger/ui/index
+  - type: Webhooks
+    url: asyncapi/northmill-flo-webhooks.yml
+  - type: DataModel
+    url: data-model/northmill-data-model.yml
+  - type: ErrorCatalog
+    url: errors/northmill-problem-types.yml
+  - type: Sandbox
+    url: sandbox/northmill-sandbox.yml
+  - type: Login
+    url: https://apps.moreflo.com/
+- aid: northmill:northmill-campaigns-api
+  name: Northmill Campaigns API
+  description: The Campaigns API from Northmill — 4 operation(s) for campaigns.
+  humanURL: https://api.moreflo.com/swagger/ui/index
+  baseURL: https://api.moreflo.com
+  tags:
+  - Campaigns
+  properties:
+  - type: OpenAPI
+    url: openapi/northmill-campaigns-api-openapi.yml
+  - type: APIReference
+    url: https://api.moreflo.com/swagger/docs/v2
+  - type: Documentation
+    url: https://api.moreflo.com/swagger/ui/index
+  - type: Webhooks
+    url: asyncapi/northmill-flo-webhooks.yml
+  - type: DataModel
+    url: data-model/northmill-data-model.yml
+  - type: ErrorCatalog
+    url: errors/northmill-problem-types.yml
+  - type: Sandbox
+    url: sandbox/northmill-sandbox.yml
+  - type: Login
+    url: https://apps.moreflo.com/
+- aid: northmill:northmill-cashcards-api
+  name: Northmill Cash Cards API
+  description: The CashCards API from Northmill — 2 operation(s) for cashcards.
+  humanURL: https://api.moreflo.com/swagger/ui/index
+  baseURL: https://api.moreflo.com
+  tags:
+  - CashCards
+  properties:
+  - type: OpenAPI
+    url: openapi/northmill-cashcards-api-openapi.yml
+  - type: APIReference
+    url: https://api.moreflo.com/swagger/docs/v2
+  - type: Documentation
+    url: https://api.moreflo.com/swagger/ui/index
+  - type: Webhooks
+    url: asyncapi/northmill-flo-webhooks.yml
+  - type: DataModel
+    url: data-model/northmill-data-model.yml
+  - type: ErrorCatalog
+    url: errors/northmill-problem-types.yml
+  - type: Sandbox
+    url: sandbox/northmill-sandbox.yml
+  - type: Login
+    url: https://apps.moreflo.com/
+- aid: northmill:northmill-cashierusers-api
+  name: Northmill Cashier Users API
+  description: The CashierUsers API from Northmill — 2 operation(s) for cashierusers.
+  humanURL: https://api.moreflo.com/swagger/ui/index
+  baseURL: https://api.moreflo.com
+  tags:
+  - CashierUsers
+  properties:
+  - type: OpenAPI
+    url: openapi/northmill-cashierusers-api-openapi.yml
+  - type: APIReference
+    url: https://api.moreflo.com/swagger/docs/v2
+  - type: Documentation
+    url: https://api.moreflo.com/swagger/ui/index
+  - type: Webhooks
+    url: asyncapi/northmill-flo-webhooks.yml
+  - type: DataModel
+    url: data-model/northmill-data-model.yml
+  - type: ErrorCatalog
+    url: errors/northmill-problem-types.yml
+  - type: Sandbox
+    url: sandbox/northmill-sandbox.yml
+  - type: Login
+    url: https://apps.moreflo.com/
+- aid: northmill:northmill-customers-api
+  name: Northmill Customers API
+  description: The Customers API from Northmill — 8 operation(s) for customers.
+  humanURL: https://api.moreflo.com/swagger/ui/index
+  baseURL: https://api.moreflo.com
+  tags:
+  - Customers
+  properties:
+  - type: OpenAPI
+    url: openapi/northmill-customers-api-openapi.yml
+  - type: APIReference
+    url: https://api.moreflo.com/swagger/docs/v2
+  - type: Documentation
+    url: https://api.moreflo.com/swagger/ui/index
+  - type: Webhooks
+    url: asyncapi/northmill-flo-webhooks.yml
+  - type: DataModel
+    url: data-model/northmill-data-model.yml
+  - type: ErrorCatalog
+    url: errors/northmill-problem-types.yml
+  - type: Sandbox
+    url: sandbox/northmill-sandbox.yml
+  - type: Login
+    url: https://apps.moreflo.com/
+- aid: northmill:northmill-groups-api
+  name: Northmill Groups API
+  description: The Groups API from Northmill — 4 operation(s) for groups.
+  humanURL: https://api.moreflo.com/swagger/ui/index
+  baseURL: https://api.moreflo.com
+  tags:
+  - Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/northmill-groups-api-openapi.yml
+  - type: APIReference
+    url: https://api.moreflo.com/swagger/docs/v2
+  - type: Documentation
+    url: https://api.moreflo.com/swagger/ui/index
+  - type: Webhooks
+    url: asyncapi/northmill-flo-webhooks.yml
+  - type: DataModel
+    url: data-model/northmill-data-model.yml
+  - type: ErrorCatalog
+    url: errors/northmill-problem-types.yml
+  - type: Sandbox
+    url: sandbox/northmill-sandbox.yml
+  - type: Login
+    url: https://apps.moreflo.com/
+- aid: northmill:northmill-health-api
+  name: Northmill Health API
+  description: The Health API from Northmill — 1 operation(s) for health.
+  humanURL: https://api.moreflo.com/swagger/ui/index
+  baseURL: https://api.moreflo.com
+  tags:
+  - Health
+  properties:
+  - type: OpenAPI
+    url: openapi/northmill-health-api-openapi.yml
+  - type: APIReference
+    url: https://api.moreflo.com/swagger/docs/v2
+  - type: Documentation
+    url: https://api.moreflo.com/swagger/ui/index
+  - type: Webhooks
+    url: asyncapi/northmill-flo-webhooks.yml
+  - type: DataModel
+    url: data-model/northmill-data-model.yml
+  - type: ErrorCatalog
+    url: errors/northmill-problem-types.yml
+  - type: Sandbox
+    url: sandbox/northmill-sandbox.yml
+  - type: Login
+    url: https://apps.moreflo.com/
+- aid: northmill:northmill-locations-api
+  name: Northmill Locations API
+  description: The Locations API from Northmill — 4 operation(s) for locations.
+  humanURL: https://api.moreflo.com/swagger/ui/index
+  baseURL: https://api.moreflo.com
+  tags:
+  - Locations
+  properties:
+  - type: OpenAPI
+    url: openapi/northmill-locations-api-openapi.yml
+  - type: APIReference
+    url: https://api.moreflo.com/swagger/docs/v2
+  - type: Documentation
+    url: https://api.moreflo.com/swagger/ui/index
+  - type: Webhooks
+    url: asyncapi/northmill-flo-webhooks.yml
+  - type: DataModel
+    url: data-model/northmill-data-model.yml
+  - type: ErrorCatalog
+    url: errors/northmill-problem-types.yml
+  - type: Sandbox
+    url: sandbox/northmill-sandbox.yml
+  - type: Login
+    url: https://apps.moreflo.com/
+- aid: northmill:northmill-onlinesolutions-api
+  name: Northmill Online Solutions API
+  description: The OnlineSolutions API from Northmill — 10 operation(s) for onlinesolutions.
+  humanURL: https://api.moreflo.com/swagger/ui/index
+  baseURL: https://api.moreflo.com
+  tags:
+  - OnlineSolutions
+  properties:
+  - type: OpenAPI
+    url: openapi/northmill-onlinesolutions-api-openapi.yml
+  - type: APIReference
+    url: https://api.moreflo.com/swagger/docs/v2
+  - type: Documentation
+    url: https://api.moreflo.com/swagger/ui/index
+  - type: Webhooks
+    url: asyncapi/northmill-flo-webhooks.yml
+  - type: DataModel
+    url: data-model/northmill-data-model.yml
+  - type: ErrorCatalog
+    url: errors/northmill-problem-types.yml
+  - type: Sandbox
+    url: sandbox/northmill-sandbox.yml
+  - type: Login
+    url: https://apps.moreflo.com/
+- aid: northmill:northmill-orders-api
+  name: Northmill Orders API
+  description: The Orders API from Northmill — 6 operation(s) for orders.
+  humanURL: https://api.moreflo.com/swagger/ui/index
+  baseURL: https://api.moreflo.com
+  tags:
+  - Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/northmill-orders-api-openapi.yml
+  - type: APIReference
+    url: https://api.moreflo.com/swagger/docs/v2
+  - type: Documentation
+    url: https://api.moreflo.com/swagger/ui/index
+  - type: Webhooks
+    url: asyncapi/northmill-flo-webhooks.yml
+  - type: DataModel
+    url: data-model/northmill-data-model.yml
+  - type: ErrorCatalog
+    url: errors/northmill-problem-types.yml
+  - type: Sandbox
+    url: sandbox/northmill-sandbox.yml
+  - type: Login
+    url: https://apps.moreflo.com/
+- aid: northmill:northmill-ordersv3-api
+  name: Northmill Orders V3 API
+  description: The OrdersV3 API from Northmill — 6 operation(s) for ordersv3.
+  humanURL: https://api.moreflo.com/swagger/ui/index
+  baseURL: https://api.moreflo.com
+  tags:
+  - OrdersV3
+  properties:
+  - type: OpenAPI
+    url: openapi/northmill-ordersv3-api-openapi.yml
+  - type: APIReference
+    url: https://api.moreflo.com/swagger/docs/v2
+  - type: Documentation
+    url: https://api.moreflo.com/swagger/ui/index
+  - type: Webhooks
+    url: asyncapi/northmill-flo-webhooks.yml
+  - type: DataModel
+    url: data-model/northmill-data-model.yml
+  - type: ErrorCatalog
+    url: errors/northmill-problem-types.yml
+  - type: Sandbox
+    url: sandbox/northmill-sandbox.yml
+  - type: Login
+    url: https://apps.moreflo.com/
+- aid: northmill:northmill-receipts-api
+  name: Northmill Receipts API
+  description: The Receipts API from Northmill — 4 operation(s) for receipts.
+  humanURL: https://api.moreflo.com/swagger/ui/index
+  baseURL: https://api.moreflo.com
+  tags:
+  - Receipts
+  properties:
+  - type: OpenAPI
+    url: openapi/northmill-receipts-api-openapi.yml
+  - type: APIReference
+    url: https://api.moreflo.com/swagger/docs/v2
+  - type: Documentation
+    url: https://api.moreflo.com/swagger/ui/index
+  - type: Webhooks
+    url: asyncapi/northmill-flo-webhooks.yml
+  - type: DataModel
+    url: data-model/northmill-data-model.yml
+  - type: ErrorCatalog
+    url: errors/northmill-problem-types.yml
+  - type: Sandbox
+    url: sandbox/northmill-sandbox.yml
+  - type: Login
+    url: https://apps.moreflo.com/
+- aid: northmill:northmill-sales-api
+  name: Northmill Sales API
+  description: The Sales API from Northmill — 2 operation(s) for sales.
+  humanURL: https://api.moreflo.com/swagger/ui/index
+  baseURL: https://api.moreflo.com
+  tags:
+  - Sales
+  properties:
+  - type: OpenAPI
+    url: openapi/northmill-sales-api-openapi.yml
+  - type: APIReference
+    url: https://api.moreflo.com/swagger/docs/v2
+  - type: Documentation
+    url: https://api.moreflo.com/swagger/ui/index
+  - type: Webhooks
+    url: asyncapi/northmill-flo-webhooks.yml
+  - type: DataModel
+    url: data-model/northmill-data-model.yml
+  - type: ErrorCatalog
+    url: errors/northmill-problem-types.yml
+  - type: Sandbox
+    url: sandbox/northmill-sandbox.yml
+  - type: Login
+    url: https://apps.moreflo.com/
+- aid: northmill:northmill-serviceorders-api
+  name: Northmill Service Orders API
+  description: The ServiceOrders API from Northmill — 4 operation(s) for serviceorders.
+  humanURL: https://api.moreflo.com/swagger/ui/index
+  baseURL: https://api.moreflo.com
+  tags:
+  - ServiceOrders
+  properties:
+  - type: OpenAPI
+    url: openapi/northmill-serviceorders-api-openapi.yml
+  - type: APIReference
+    url: https://api.moreflo.com/swagger/docs/v2
+  - type: Documentation
+    url: https://api.moreflo.com/swagger/ui/index
+  - type: Webhooks
+    url: asyncapi/northmill-flo-webhooks.yml
+  - type: DataModel
+    url: data-model/northmill-data-model.yml
+  - type: ErrorCatalog
+    url: errors/northmill-problem-types.yml
+  - type: Sandbox
+    url: sandbox/northmill-sandbox.yml
+  - type: Login
+    url: https://apps.moreflo.com/
+- aid: northmill:northmill-settings-api
+  name: Northmill Settings API
+  description: The Settings API from Northmill — 4 operation(s) for settings.
+  humanURL: https://api.moreflo.com/swagger/ui/index
+  baseURL: https://api.moreflo.com
+  tags:
+  - Settings
+  properties:
+  - type: OpenAPI
+    url: openapi/northmill-settings-api-openapi.yml
+  - type: APIReference
+    url: https://api.moreflo.com/swagger/docs/v2
+  - type: Documentation
+    url: https://api.moreflo.com/swagger/ui/index
+  - type: Webhooks
+    url: asyncapi/northmill-flo-webhooks.yml
+  - type: DataModel
+    url: data-model/northmill-data-model.yml
+  - type: ErrorCatalog
+    url: errors/northmill-problem-types.yml
+  - type: Sandbox
+    url: sandbox/northmill-sandbox.yml
+  - type: Login
+    url: https://apps.moreflo.com/
+- aid: northmill:northmill-sms-api
+  name: Northmill Sms API
+  description: The Sms API from Northmill — 2 operation(s) for sms.
+  humanURL: https://api.moreflo.com/swagger/ui/index
+  baseURL: https://api.moreflo.com
+  tags:
+  - Sms
+  properties:
+  - type: OpenAPI
+    url: openapi/northmill-sms-api-openapi.yml
+  - type: APIReference
+    url: https://api.moreflo.com/swagger/docs/v2
+  - type: Documentation
+    url: https://api.moreflo.com/swagger/ui/index
+  - type: Webhooks
+    url: asyncapi/northmill-flo-webhooks.yml
+  - type: DataModel
+    url: data-model/northmill-data-model.yml
+  - type: ErrorCatalog
+    url: errors/northmill-problem-types.yml
+  - type: Sandbox
+    url: sandbox/northmill-sandbox.yml
+  - type: Login
+    url: https://apps.moreflo.com/
+- aid: northmill:northmill-stores-api
+  name: Northmill Stores API
+  description: The Stores API from Northmill — 2 operation(s) for stores.
+  humanURL: https://api.moreflo.com/swagger/ui/index
+  baseURL: https://api.moreflo.com
+  tags:
+  - Stores
+  properties:
+  - type: OpenAPI
+    url: openapi/northmill-stores-api-openapi.yml
+  - type: APIReference
+    url: https://api.moreflo.com/swagger/docs/v2
+  - type: Documentation
+    url: https://api.moreflo.com/swagger/ui/index
+  - type: Webhooks
+    url: asyncapi/northmill-flo-webhooks.yml
+  - type: DataModel
+    url: data-model/northmill-data-model.yml
+  - type: ErrorCatalog
+    url: errors/northmill-problem-types.yml
+  - type: Sandbox
+    url: sandbox/northmill-sandbox.yml
+  - type: Login
+    url: https://apps.moreflo.com/
+- aid: northmill:northmill-suppliers-api
+  name: Northmill Suppliers API
+  description: The Suppliers API from Northmill — 4 operation(s) for suppliers.
+  humanURL: https://api.moreflo.com/swagger/ui/index
+  baseURL: https://api.moreflo.com
+  tags:
+  - Suppliers
+  properties:
+  - type: OpenAPI
+    url: openapi/northmill-suppliers-api-openapi.yml
+  - type: APIReference
+    url: https://api.moreflo.com/swagger/docs/v2
+  - type: Documentation
+    url: https://api.moreflo.com/swagger/ui/index
+  - type: Webhooks
+    url: asyncapi/northmill-flo-webhooks.yml
+  - type: DataModel
+    url: data-model/northmill-data-model.yml
+  - type: ErrorCatalog
+    url: errors/northmill-problem-types.yml
+  - type: Sandbox
+    url: sandbox/northmill-sandbox.yml
+  - type: Login
+    url: https://apps.moreflo.com/
+- aid: northmill:northmill-ticketorders-api
+  name: Northmill Ticket Orders API
+  description: The TicketOrders API from Northmill — 6 operation(s) for ticketorders.
+  humanURL: https://api.moreflo.com/swagger/ui/index
+  baseURL: https://api.moreflo.com
+  tags:
+  - TicketOrders
+  properties:
+  - type: OpenAPI
+    url: openapi/northmill-ticketorders-api-openapi.yml
+  - type: APIReference
+    url: https://api.moreflo.com/swagger/docs/v2
+  - type: Documentation
+    url: https://api.moreflo.com/swagger/ui/index
+  - type: Webhooks
+    url: asyncapi/northmill-flo-webhooks.yml
+  - type: DataModel
+    url: data-model/northmill-data-model.yml
+  - type: ErrorCatalog
+    url: errors/northmill-problem-types.yml
+  - type: Sandbox
+    url: sandbox/northmill-sandbox.yml
+  - type: Login
+    url: https://apps.moreflo.com/
+- aid: northmill:northmill-vouchers-api
+  name: Northmill Vouchers API
+  description: The Vouchers API from Northmill — 4 operation(s) for vouchers.
+  humanURL: https://api.moreflo.com/swagger/ui/index
+  baseURL: https://api.moreflo.com
+  tags:
+  - Vouchers
+  properties:
+  - type: OpenAPI
+    url: openapi/northmill-vouchers-api-openapi.yml
+  - type: APIReference
+    url: https://api.moreflo.com/swagger/docs/v2
+  - type: Documentation
+    url: https://api.moreflo.com/swagger/ui/index
+  - type: Webhooks
+    url: asyncapi/northmill-flo-webhooks.yml
+  - type: DataModel
+    url: data-model/northmill-data-model.yml
+  - type: ErrorCatalog
+    url: errors/northmill-problem-types.yml
+  - type: Sandbox
+    url: sandbox/northmill-sandbox.yml
+  - type: Login
+    url: https://apps.moreflo.com/
+- aid: northmill:northmill-webhookcategories-api
+  name: Northmill Web Hook Categories API
+  description: The WebHookCategories API from Northmill — 2 operation(s) for webhookcategories.
+  humanURL: https://api.moreflo.com/swagger/ui/index
+  baseURL: https://api.moreflo.com
+  tags:
+  - WebHookCategories
+  properties:
+  - type: OpenAPI
+    url: openapi/northmill-webhookcategories-api-openapi.yml
+  - type: APIReference
+    url: https://api.moreflo.com/swagger/docs/v2
+  - type: Documentation
+    url: https://api.moreflo.com/swagger/ui/index
+  - type: Webhooks
+    url: asyncapi/northmill-flo-webhooks.yml
+  - type: DataModel
+    url: data-model/northmill-data-model.yml
+  - type: ErrorCatalog
+    url: errors/northmill-problem-types.yml
+  - type: Sandbox
+    url: sandbox/northmill-sandbox.yml
+  - type: Login
+    url: https://apps.moreflo.com/
+- aid: northmill:northmill-webhooks-api
+  name: Northmill Web Hooks API
+  description: The WebHooks API from Northmill — 4 operation(s) for webhooks.
+  humanURL: https://api.moreflo.com/swagger/ui/index
+  baseURL: https://api.moreflo.com
+  tags:
+  - WebHooks
+  properties:
+  - type: OpenAPI
+    url: openapi/northmill-webhooks-api-openapi.yml
+  - type: APIReference
+    url: https://api.moreflo.com/swagger/docs/v2
+  - type: Documentation
+    url: https://api.moreflo.com/swagger/ui/index
+  - type: Webhooks
+    url: asyncapi/northmill-flo-webhooks.yml
+  - type: DataModel
+    url: data-model/northmill-data-model.yml
+  - type: ErrorCatalog
+    url: errors/northmill-problem-types.yml
+  - type: Sandbox
+    url: sandbox/northmill-sandbox.yml
+  - type: Login
+    url: https://apps.moreflo.com/
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Overlay
+  url: overlays/northmill-flo-api-overlay.yaml
 - type: VulnerabilityDisclosure
   url: security/northmill-vulnerability-disclosure.yml
 - type: DomainSecurity

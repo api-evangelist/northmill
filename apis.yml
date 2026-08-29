@@ -9,6 +9,18 @@ description: Northmill Bank AB is a Swedish technology-driven bank, founded in S
   with 199 operations over articles, stock, orders, receipts, customers, bookings, campaigns, vouchers,
   SMS and webhooks - alongside a PSD2 open-banking interface for third-party providers documented under
   the Northmill Bank brand and delivered on Token.io infrastructure.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://www.northmill.com/icon.png
 url: https://raw.githubusercontent.com/api-evangelist/northmill/refs/heads/main/apis.yml
 x-type: company

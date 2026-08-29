@@ -793,6 +793,9 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: CapabilityMap
+  url: capabilities/northmill-capability-edges.yml
+  name: Northmill Business Capability Map
 - type: Overlay
   url: overlays/northmill-flo-api-overlay.yaml
 - type: VulnerabilityDisclosure

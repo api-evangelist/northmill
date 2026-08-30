@@ -1,0 +1,14 @@
+{
+  "repo": "northmill",
+  "feeds": [
+    {
+      "source": "https://www.northmill.com/se/foretag/hjalp/",
+      "feed_url": "https://www.northmill.com/se/foretag/hjalp/",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-08-30T22:33:40Z"
+}

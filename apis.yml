@@ -31,6 +31,18 @@ modified: '2026-08-26'
 tags:
 - Banking
 - Payments
+- Point-of-Sale
+- Retail
+- Open Banking
+- Sweden
+- Fintech
+- Webhook
+- E-Commerce
+- Lending
+- Nordics
+tags_raw:
+- Banking
+- Payments
 - Point of Sale
 - Retail
 - Open Banking
@@ -385,6 +397,8 @@ apis:
   humanURL: https://api.moreflo.com/swagger/ui/index
   baseURL: https://api.moreflo.com
   tags:
+  - Group
+  tags_raw:
   - Groups
   properties:
   - type: OpenAPI
@@ -481,6 +495,8 @@ apis:
   humanURL: https://api.moreflo.com/swagger/ui/index
   baseURL: https://api.moreflo.com
   tags:
+  - Order
+  tags_raw:
   - Orders
   properties:
   - type: OpenAPI
@@ -577,6 +593,8 @@ apis:
   humanURL: https://api.moreflo.com/swagger/ui/index
   baseURL: https://api.moreflo.com
   tags:
+  - Service Orders
+  tags_raw:
   - ServiceOrders
   properties:
   - type: OpenAPI
@@ -625,6 +643,8 @@ apis:
   humanURL: https://api.moreflo.com/swagger/ui/index
   baseURL: https://api.moreflo.com
   tags:
+  - SMS
+  tags_raw:
   - Sms
   properties:
   - type: OpenAPI
@@ -769,6 +789,8 @@ apis:
   humanURL: https://api.moreflo.com/swagger/ui/index
   baseURL: https://api.moreflo.com
   tags:
+  - Webhook
+  tags_raw:
   - WebHooks
   properties:
   - type: OpenAPI

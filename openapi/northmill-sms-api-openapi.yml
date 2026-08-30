@@ -1,0 +1,155 @@
+openapi: 3.2.0
+info:
+  version: v2
+  title: MoreFlo.Public.Api Sms API
+servers:
+- url: https://api.moreflo.com
+tags:
+- name: Sms
+paths:
+  /v2/sms/single:
+    post:
+      tags:
+      - Sms
+      summary: Send a single SMS, if format errors response will be 400, if sending was started but failed the response will be 409.
+      operationId: Sms_SendSms
+      parameters:
+      - name: externalStoreId
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SmsSendResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SmsSendResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SmsSendResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SmsSendResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SmsMessage'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SmsMessage'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SmsMessage'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SmsMessage'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SmsMessage'
+        description: Sms content and receiver, receiver must be in internationalized fomat starting with '+'.
+        required: true
+  /v2/sms/{externalStoreId}/single:
+    post:
+      tags:
+      - Sms
+      summary: Send a single SMS, if format errors response will be 400, if sending was started but failed the response will be 409.
+      operationId: Sms_SendSms
+      parameters:
+      - name: externalStoreId
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SmsSendResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SmsSendResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SmsSendResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SmsSendResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SmsMessage'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SmsMessage'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SmsMessage'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SmsMessage'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SmsMessage'
+        description: Sms content and receiver, receiver must be in internationalized fomat starting with '+'.
+        required: true
+components:
+  schemas:
+    MoreFlo.Models.InterfaceModels.SmsMessage:
+      description: 'Represents an SMS message to be sent, including the recipient''s phone number and the message content.
+
+        This class encapsulates the data required to send an SMS message through an API.'
+      required:
+      - TelephoneNumber
+      - Message
+      type: object
+      properties:
+        TelephoneNumber:
+          description: 'The telephone number of the recipient.
+
+            Must be an international phone number with only digits, starting with a plus sign (+).'
+          pattern: ^\+\d{5,}
+          type: string
+        Message:
+          description: 'The text content of the SMS message.
+
+            Maximum length is 35000 characters.'
+          maxLength: 35000
+          minLength: 0
+          type: string
+    MoreFlo.Models.InterfaceModels.SmsSendResult:
+      description: 'Represents the result of sending an SMS message.
+
+        This class encapsulates the phone number to which the SMS was sent, along with the base result status.'
+      type: object
+      properties:
+        TelephoneNumber:
+          description: The telephone number to which the SMS message was sent.
+          type: string
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
+  securitySchemes:
+    basic:
+      type: http
+      scheme: basic
+      description: Basic HTTP Authentication

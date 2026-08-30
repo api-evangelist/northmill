@@ -1,0 +1,506 @@
+openapi: 3.2.0
+info:
+  version: v2
+  title: MoreFlo.Public.Api Brands API
+servers:
+- url: https://api.moreflo.com
+tags:
+- name: Brands
+paths:
+  /v2/brands:
+    get:
+      tags:
+      - Brands
+      summary: Get all brands.
+      operationId: Brands_Get
+      parameters:
+      - name: page
+        in: query
+        description: Page starts from 0 , default 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        description: PageSize, default 100.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: externalStoreId
+        in: query
+        description: externalStoreId of the store, if multistore admin.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BrandsResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BrandsResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BrandsResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BrandsResult'
+    put:
+      tags:
+      - Brands
+      summary: Update list of brands.
+      operationId: Brands_Update
+      parameters:
+      - name: externalStoreId
+        in: query
+        description: externalStoreId of the store, if multistore admin.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BrandsResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BrandsResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BrandsResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BrandsResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Brand'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Brand'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Brand'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Brand'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Brand'
+        description: List of brands to update data.
+        required: true
+    post:
+      tags:
+      - Brands
+      summary: Create brands.
+      operationId: Brands_Create
+      parameters:
+      - name: externalStoreId
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BrandsResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BrandsResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BrandsResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BrandsResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BrandCreate'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BrandCreate'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BrandCreate'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BrandCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BrandCreate'
+        description: List of articles to create.
+        required: true
+  /v2/stores/{externalStoreId}/brands:
+    get:
+      tags:
+      - Brands
+      summary: Get all brands.
+      operationId: Brands_Get
+      parameters:
+      - name: page
+        in: query
+        description: Page starts from 0 , default 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        description: PageSize, default 100.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: externalStoreId
+        in: path
+        description: externalStoreId of the store, if multistore admin.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BrandsResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BrandsResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BrandsResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BrandsResult'
+    put:
+      tags:
+      - Brands
+      summary: Update list of brands.
+      operationId: Brands_Update
+      parameters:
+      - name: externalStoreId
+        in: path
+        description: externalStoreId of the store, if multistore admin.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BrandsResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BrandsResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BrandsResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BrandsResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Brand'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Brand'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Brand'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Brand'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Brand'
+        description: List of brands to update data.
+        required: true
+    post:
+      tags:
+      - Brands
+      summary: Create brands.
+      operationId: Brands_Create
+      parameters:
+      - name: externalStoreId
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BrandsResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BrandsResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BrandsResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BrandsResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BrandCreate'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BrandCreate'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BrandCreate'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BrandCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BrandCreate'
+        description: List of articles to create.
+        required: true
+  /v2/brands/{Id}:
+    delete:
+      tags:
+      - Brands
+      summary: Delete a brand.
+      operationId: Brands_Delete
+      parameters:
+      - name: Id
+        in: path
+        description: Id of brand to be deleted.
+        required: true
+        schema:
+          type: string
+      - name: externalStoreId
+        in: query
+        description: externalStoreId of the store, if multistore admin.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BrandResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BrandResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BrandResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BrandResult'
+  /v2/stores/{externalStoreId}/brands/{Id}:
+    delete:
+      tags:
+      - Brands
+      summary: Delete a brand.
+      operationId: Brands_Delete
+      parameters:
+      - name: Id
+        in: path
+        description: Id of brand to be deleted.
+        required: true
+        schema:
+          type: string
+      - name: externalStoreId
+        in: path
+        description: externalStoreId of the store, if multistore admin.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BrandResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BrandResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BrandResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BrandResult'
+components:
+  schemas:
+    MoreFlo.Models.InterfaceModels.BrandsResult:
+      description: Represents a paged result containing a list of BrandResult objects.
+      type: object
+      properties:
+        ExtraInformation:
+          description: A list of extra information or messages related to the paginated result.
+          type: array
+          items:
+            type: string
+        list:
+          description: The list of data items for the current page.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BrandResult'
+        Page:
+          format: int32
+          description: The current page number.
+          type: integer
+        Total:
+          format: int32
+          description: The total number of pages available.
+          type: integer
+        PageSize:
+          format: int32
+          description: The number of data items per page.
+          type: integer
+    MoreFlo.Models.InterfaceModels.BrandResult:
+      description: Represents the result of an operation involving a Brand entity.
+      type: object
+      properties:
+        Brand:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Brand'
+          description: The Brand entity resulting from the operation.
+        Id:
+          description: The unique identifier of the Brand.
+          type: string
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
+    MoreFlo.Models.InterfaceModels.Brand:
+      description: Represents a brand with an identifier and a name.
+      required:
+      - Id
+      type: object
+      properties:
+        Id:
+          description: The unique identifier of the brand.
+          maxLength: 64
+          minLength: 0
+          type: string
+        Name:
+          description: The name of the brand.
+          maxLength: 100
+          minLength: 0
+          type: string
+        CreatedUtc:
+          format: date-time
+          description: The UTC timestamp when the brand was created.
+          type: string
+        ModifiedUtc:
+          format: date-time
+          description: The UTC timestamp when the brand was last modified.
+          type: string
+    MoreFlo.Models.InterfaceModels.BrandCreate:
+      description: Represents the data required to create a new brand.
+      required:
+      - Name
+      - Id
+      type: object
+      properties:
+        Name:
+          description: The name of the brand. Required for creation.
+          maxLength: 100
+          minLength: 0
+          type: string
+        UpdateOnExisting:
+          description: Indicates whether to update an existing brand if one with the same ID already exists.
+          type: boolean
+        Id:
+          description: The unique identifier of the brand.
+          maxLength: 64
+          minLength: 0
+          type: string
+        CreatedUtc:
+          format: date-time
+          description: The UTC timestamp when the brand was created.
+          type: string
+        ModifiedUtc:
+          format: date-time
+          description: The UTC timestamp when the brand was last modified.
+          type: string
+  securitySchemes:
+    basic:
+      type: http
+      scheme: basic
+      description: Basic HTTP Authentication

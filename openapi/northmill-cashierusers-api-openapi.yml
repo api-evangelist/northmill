@@ -1,0 +1,465 @@
+openapi: 3.2.0
+info:
+  version: v2
+  title: MoreFlo.Public.Api Cashier Users API
+servers:
+- url: https://api.moreflo.com
+tags:
+- name: CashierUsers
+paths:
+  /v2/cashierusers:
+    get:
+      tags:
+      - CashierUsers
+      summary: Get all cashier users.
+      operationId: CashierUsers_Get
+      parameters:
+      - name: page
+        in: query
+        description: Page starts from 0 , default 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        description: PageSize, default 100.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: externalStoreId
+        in: query
+        description: externalStoreId of the store, if multistore admin.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashierUsersResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashierUsersResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashierUsersResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashierUsersResult'
+    put:
+      tags:
+      - CashierUsers
+      summary: Update cashier users.
+      operationId: CashierUsers_Update
+      parameters:
+      - name: externalStoreId
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashierUsersResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashierUsersResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashierUsersResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashierUsersResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashierUser'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashierUser'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashierUser'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashierUser'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashierUser'
+        description: List of cashier users to update.
+        required: true
+    post:
+      tags:
+      - CashierUsers
+      summary: Create cashier users.
+      operationId: CashierUsers_Create
+      parameters:
+      - name: externalStoreId
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashierUsersResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashierUsersResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashierUsersResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashierUsersResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashierUserCreate'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashierUserCreate'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashierUserCreate'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashierUserCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashierUserCreate'
+        description: List of cashier users to create.
+        required: true
+  /v2/stores/{externalStoreId}/cashierusers:
+    get:
+      tags:
+      - CashierUsers
+      summary: Get all cashier users.
+      operationId: CashierUsers_Get
+      parameters:
+      - name: page
+        in: query
+        description: Page starts from 0 , default 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        description: PageSize, default 100.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: externalStoreId
+        in: path
+        description: externalStoreId of the store, if multistore admin.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashierUsersResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashierUsersResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashierUsersResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashierUsersResult'
+    put:
+      tags:
+      - CashierUsers
+      summary: Update cashier users.
+      operationId: CashierUsers_Update
+      parameters:
+      - name: externalStoreId
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashierUsersResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashierUsersResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashierUsersResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashierUsersResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashierUser'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashierUser'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashierUser'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashierUser'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashierUser'
+        description: List of cashier users to update.
+        required: true
+    post:
+      tags:
+      - CashierUsers
+      summary: Create cashier users.
+      operationId: CashierUsers_Create
+      parameters:
+      - name: externalStoreId
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashierUsersResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashierUsersResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashierUsersResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashierUsersResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashierUserCreate'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashierUserCreate'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashierUserCreate'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashierUserCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashierUserCreate'
+        description: List of cashier users to create.
+        required: true
+components:
+  schemas:
+    MoreFlo.Models.InterfaceModels.CashierUser:
+      description: Represents a cashier user with their credentials, personal information, access rights, and settings.
+      required:
+      - Id
+      type: object
+      properties:
+        Id:
+          description: The unique identifier of the cashier user.
+          maxLength: 64
+          minLength: 0
+          type: string
+        UserName:
+          description: The username of the cashier user.
+          type: string
+        Password:
+          description: The password of the cashier user.
+          type: string
+        FirstName:
+          description: The first name of the cashier user.
+          type: string
+        LastName:
+          description: The last name of the cashier user.
+          type: string
+        AccessRight:
+          description: The access rights of the cashier user.
+          enum:
+          - User
+          - Administrator
+          - SelfService
+          type: string
+        IsActive:
+          description: Indicates whether the cashier user is active.
+          type: boolean
+        LogoutOnCloseReceipt:
+          description: Indicates whether the cashier user should be logged out when a receipt is closed.
+          type: boolean
+        HideOnAutomaticLogout:
+          description: Indicates whether the cashier user should be hidden on automatic logout.
+          type: boolean
+    MoreFlo.Models.InterfaceModels.CashierUserCreate:
+      description: Represents the data required to create a new cashier user.
+      required:
+      - Id
+      type: object
+      properties:
+        UpdateOnExisting:
+          description: Indicates whether to update an existing cashier user if one with the same ID already exists.
+          type: boolean
+        Id:
+          description: The unique identifier of the cashier user.
+          maxLength: 64
+          minLength: 0
+          type: string
+        UserName:
+          description: The username of the cashier user.
+          type: string
+        Password:
+          description: The password of the cashier user.
+          type: string
+        FirstName:
+          description: The first name of the cashier user.
+          type: string
+        LastName:
+          description: The last name of the cashier user.
+          type: string
+        AccessRight:
+          description: The access rights of the cashier user.
+          enum:
+          - User
+          - Administrator
+          - SelfService
+          type: string
+        IsActive:
+          description: Indicates whether the cashier user is active.
+          type: boolean
+        LogoutOnCloseReceipt:
+          description: Indicates whether the cashier user should be logged out when a receipt is closed.
+          type: boolean
+        HideOnAutomaticLogout:
+          description: Indicates whether the cashier user should be hidden on automatic logout.
+          type: boolean
+    MoreFlo.Models.InterfaceModels.CashierUsersResult:
+      description: 'Represents a paginated result containing a list of cashier user results.
+
+        This class is used to return a collection of cashier user data, along with pagination information, in API responses.'
+      type: object
+      properties:
+        ExtraInformation:
+          description: A list of extra information or messages related to the paginated result.
+          type: array
+          items:
+            type: string
+        list:
+          description: The list of data items for the current page.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashierUserResult'
+        Page:
+          format: int32
+          description: The current page number.
+          type: integer
+        Total:
+          format: int32
+          description: The total number of pages available.
+          type: integer
+        PageSize:
+          format: int32
+          description: The number of data items per page.
+          type: integer
+    MoreFlo.Models.InterfaceModels.CashierUserResult:
+      description: Represents the result of an operation involving a CashierUser entity.
+      type: object
+      properties:
+        CashierUser:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashierUser'
+          description: The CashierUser entity resulting from the operation.
+        Id:
+          description: The unique identifier of the CashierUser.
+          type: string
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
+  securitySchemes:
+    basic:
+      type: http
+      scheme: basic
+      description: Basic HTTP Authentication

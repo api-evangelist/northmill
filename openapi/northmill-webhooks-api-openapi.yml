@@ -1,0 +1,609 @@
+openapi: 3.2.0
+info:
+  version: v2
+  title: MoreFlo.Public.Api Web Hooks API
+servers:
+- url: https://api.moreflo.com
+tags:
+- name: WebHooks
+paths:
+  /v2/webhooks:
+    get:
+      tags:
+      - WebHooks
+      summary: Get all web hooks.
+      operationId: WebHooks_Get
+      parameters:
+      - name: page
+        in: query
+        description: Page starts from 0 , default 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        description: PageSize, default 100.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: externalStoreId
+        in: query
+        description: externalStoreId of the store, if multistore admin.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHooksResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHooksResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHooksResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHooksResult'
+    put:
+      tags:
+      - WebHooks
+      summary: Update webhooks. User remote ip address must be in list of IPs resolved from host part in URL of webhook.
+      operationId: WebHooks_Update
+      parameters:
+      - name: externalStoreId
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHooksResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHooksResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHooksResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHooksResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHook'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHook'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHook'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHook'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHook'
+        description: List of webhooks to create.
+        required: true
+    post:
+      tags:
+      - WebHooks
+      summary: Create webhooks. User remote ip address must be in list of IPs resolved from host part in URL of webhook.
+      operationId: WebHooks_Create
+      parameters:
+      - name: externalStoreId
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHooksResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHooksResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHooksResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHooksResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHookCreate'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHookCreate'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHookCreate'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHookCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHookCreate'
+        description: List of webhooks to create.
+        required: true
+  /v2/stores/{externalStoreId}/webhooks:
+    get:
+      tags:
+      - WebHooks
+      summary: Get all web hooks.
+      operationId: WebHooks_Get
+      parameters:
+      - name: page
+        in: query
+        description: Page starts from 0 , default 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        description: PageSize, default 100.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: externalStoreId
+        in: path
+        description: externalStoreId of the store, if multistore admin.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHooksResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHooksResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHooksResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHooksResult'
+    put:
+      tags:
+      - WebHooks
+      summary: Update webhooks. User remote ip address must be in list of IPs resolved from host part in URL of webhook.
+      operationId: WebHooks_Update
+      parameters:
+      - name: externalStoreId
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHooksResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHooksResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHooksResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHooksResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHook'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHook'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHook'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHook'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHook'
+        description: List of webhooks to create.
+        required: true
+    post:
+      tags:
+      - WebHooks
+      summary: Create webhooks. User remote ip address must be in list of IPs resolved from host part in URL of webhook.
+      operationId: WebHooks_Create
+      parameters:
+      - name: externalStoreId
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHooksResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHooksResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHooksResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHooksResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHookCreate'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHookCreate'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHookCreate'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHookCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHookCreate'
+        description: List of webhooks to create.
+        required: true
+  /v2/webhooks/{Id}:
+    get:
+      tags:
+      - WebHooks
+      summary: Get a web hook.
+      operationId: WebHooks_Get
+      parameters:
+      - name: Id
+        in: path
+        description: Id of webhook
+        required: true
+        schema:
+          type: string
+      - name: externalStoreId
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHookResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHookResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHookResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHookResult'
+    delete:
+      tags:
+      - WebHooks
+      summary: Delete a web hook.
+      operationId: WebHooks_Delete
+      parameters:
+      - name: Id
+        in: path
+        description: Id of webhook
+        required: true
+        schema:
+          type: string
+      - name: externalStoreId
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHookResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHookResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHookResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHookResult'
+  /v2/stores/{externalStoreId}/webhooks/{Id}:
+    get:
+      tags:
+      - WebHooks
+      summary: Get a web hook.
+      operationId: WebHooks_Get
+      parameters:
+      - name: Id
+        in: path
+        description: Id of webhook
+        required: true
+        schema:
+          type: string
+      - name: externalStoreId
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHookResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHookResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHookResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHookResult'
+    delete:
+      tags:
+      - WebHooks
+      summary: Delete a web hook.
+      operationId: WebHooks_Delete
+      parameters:
+      - name: Id
+        in: path
+        description: Id of webhook
+        required: true
+        schema:
+          type: string
+      - name: externalStoreId
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHookResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHookResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHookResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHookResult'
+components:
+  schemas:
+    MoreFlo.Models.InterfaceModels.WebHook:
+      description: Represents a WebHook, which is a mechanism for one application to provide real-time information to another.
+      required:
+      - WebHookCategoryId
+      - HttpMethod
+      type: object
+      properties:
+        Id:
+          description: 'The unique identifier of the WebHook, automatically generated by the system.
+
+            This cannot be set externally.'
+          type: string
+        WebHookCategoryId:
+          description: The identifier of the WebHook category, used to group WebHooks.
+          type: string
+        IsEnabled:
+          description: Indicates whether the WebHook is enabled.
+          type: boolean
+        RemoteUrl:
+          description: The remote URL to which the WebHook will send data.
+          maxLength: 2048
+          minLength: 0
+          type: string
+        HttpMethod:
+          description: The HTTP method used to send the WebHook data (e.g., GET, POST).
+          enum:
+          - Get
+          - Post
+          - Put
+          type: string
+        CreatedTime:
+          format: date-time
+          description: The timestamp of when the WebHook was created.
+          type: string
+        ModifiedTime:
+          format: date-time
+          description: The timestamp of when the WebHook was last modified.
+          type: string
+    MoreFlo.Models.InterfaceModels.WebHookResult:
+      description: 'Represents the result of an operation that returns a single WebHook.
+
+        This class encapsulates a WebHook object and its unique identifier, typically used in API responses for single WebHook operations.'
+      type: object
+      properties:
+        WebHook:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHook'
+          description: The WebHook object containing the WebHook data.
+        Id:
+          description: The unique identifier of the WebHook.
+          type: string
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
+    MoreFlo.Models.InterfaceModels.WebHooksResult:
+      description: 'Represents a paginated result containing a list of WebHook results.
+
+        This class is used to return a collection of WebHooks, along with pagination information, in API responses.'
+      type: object
+      properties:
+        ExtraInformation:
+          description: A list of extra information or messages related to the paginated result.
+          type: array
+          items:
+            type: string
+        list:
+          description: The list of data items for the current page.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHookResult'
+        Page:
+          format: int32
+          description: The current page number.
+          type: integer
+        Total:
+          format: int32
+          description: The total number of pages available.
+          type: integer
+        PageSize:
+          format: int32
+          description: The number of data items per page.
+          type: integer
+    MoreFlo.Models.InterfaceModels.WebHookCreate:
+      description: 'Represents the data used to create a new WebHook.
+
+        This class extends the WebHook class and adds properties specific to the creation of a WebHook.'
+      required:
+      - WebHookCategoryId
+      - HttpMethod
+      type: object
+      properties:
+        UpdateOnExisting:
+          description: Indicates whether an existing WebHook with the same identifier should be updated instead of creating a new one.
+          type: boolean
+        Id:
+          description: 'The unique identifier of the WebHook, automatically generated by the system.
+
+            This cannot be set externally.'
+          type: string
+        WebHookCategoryId:
+          description: The identifier of the WebHook category, used to group WebHooks.
+          type: string
+        IsEnabled:
+          description: Indicates whether the WebHook is enabled.
+          type: boolean
+        RemoteUrl:
+          description: The remote URL to which the WebHook will send data.
+          maxLength: 2048
+          minLength: 0
+          type: string
+        HttpMethod:
+          description: The HTTP method used to send the WebHook data (e.g., GET, POST).
+          enum:
+          - Get
+          - Post
+          - Put
+          type: string
+        CreatedTime:
+          format: date-time
+          description: The timestamp of when the WebHook was created.
+          type: string
+        ModifiedTime:
+          format: date-time
+          description: The timestamp of when the WebHook was last modified.
+          type: string
+  securitySchemes:
+    basic:
+      type: http
+      scheme: basic
+      description: Basic HTTP Authentication

@@ -1,0 +1,204 @@
+openapi: 3.2.0
+info:
+  version: v2
+  title: MoreFlo.Public.Api Bookable Resource Event Instances API
+servers:
+- url: https://api.moreflo.com
+tags:
+- name: BookableResourceEventInstances
+paths:
+  /v2/bookings/resourceeventinsances:
+    get:
+      tags:
+      - BookableResourceEventInstances
+      summary: Get all bookable resource event instances.
+      operationId: BookableResourceEventInstances_Get
+      parameters:
+      - name: page
+        in: query
+        description: Page starts from 0 , default 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        description: PageSize, default 100.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: updatedSince
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: externalStoreId
+        in: query
+        description: externalStoreId of the store, if multistore admin.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BookableResourceEventInstancesResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BookableResourceEventInstancesResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BookableResourceEventInstancesResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BookableResourceEventInstancesResult'
+  /v2/stores/{externalStoreId}/bookings/resourceeventinsances:
+    get:
+      tags:
+      - BookableResourceEventInstances
+      summary: Get all bookable resource event instances.
+      operationId: BookableResourceEventInstances_Get
+      parameters:
+      - name: page
+        in: query
+        description: Page starts from 0 , default 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        description: PageSize, default 100.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: updatedSince
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: externalStoreId
+        in: path
+        description: externalStoreId of the store, if multistore admin.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BookableResourceEventInstancesResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BookableResourceEventInstancesResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BookableResourceEventInstancesResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BookableResourceEventInstancesResult'
+components:
+  schemas:
+    MoreFlo.Models.InterfaceModels.BookableResourceEventInstanceResult:
+      description: Represents the result of an operation involving a BookableResourceEventInstance entity.
+      type: object
+      properties:
+        Entity:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BookableResourceEventInstance'
+          description: The BookableResourceEventInstance entity resulting from the operation.
+        Id:
+          description: The unique identifier of the BookableResourceEventInstance.
+          type: string
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
+    MoreFlo.Models.InterfaceModels.BookableResourceEventInstance:
+      description: Represents an instance of a bookable resource event.
+      type: object
+      properties:
+        Id:
+          description: The unique identifier of the event instance.
+          type: string
+        BookableResourceId:
+          description: The identifier of the bookable resource associated with the event.
+          type: string
+        StartDateAndTime:
+          format: date-time
+          description: The start date and time of the event.
+          type: string
+        StopDateAndTime:
+          format: date-time
+          description: The end date and time of the event.
+          type: string
+        Description:
+          description: A description of the event.
+          maxLength: 512
+          minLength: 0
+          type: string
+        IsDeleted:
+          description: Indicates whether the event instance has been deleted.
+          type: boolean
+        BookableResourceEventType:
+          description: The type of the bookable resource event (e.g., bookable time, non-bookable time).
+          enum:
+          - BookableTime
+          - NonBookableTime
+          type: string
+        LastUpdatedTime:
+          format: date-time
+          description: The time when the event instance was last updated.
+          type: string
+        CreatedTime:
+          format: date-time
+          description: The time when the event instance was created.
+          type: string
+    MoreFlo.Models.InterfaceModels.BookableResourceEventInstancesResult:
+      description: Represents a paged result containing a list of BookableResourceEventInstanceResult objects.
+      type: object
+      properties:
+        ExtraInformation:
+          description: A list of extra information or messages related to the paginated result.
+          type: array
+          items:
+            type: string
+        list:
+          description: The list of data items for the current page.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BookableResourceEventInstanceResult'
+        Page:
+          format: int32
+          description: The current page number.
+          type: integer
+        Total:
+          format: int32
+          description: The total number of pages available.
+          type: integer
+        PageSize:
+          format: int32
+          description: The number of data items per page.
+          type: integer
+  securitySchemes:
+    basic:
+      type: http
+      scheme: basic
+      description: Basic HTTP Authentication

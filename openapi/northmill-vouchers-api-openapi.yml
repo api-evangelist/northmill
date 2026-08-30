@@ -1,0 +1,986 @@
+openapi: 3.2.0
+info:
+  version: v2
+  title: MoreFlo.Public.Api Vouchers API
+servers:
+- url: https://api.moreflo.com
+tags:
+- name: Vouchers
+paths:
+  /v2/vouchers:
+    get:
+      tags:
+      - Vouchers
+      summary: Get list of vouchers.
+      operationId: Vouchers_Get
+      parameters:
+      - name: page
+        in: query
+        description: Page starts from 0 , default 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        description: PageSize, default 100.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: createdSince
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: voucherDateFrom
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: voucherDateTo
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: stateFilter
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: string
+          enum:
+          - Pending
+          - ActionRequried
+          - Locked
+          - Done
+      - name: externalStoreId
+        in: query
+        description: externalStoreId of the store, if multistore admin.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.VouchersResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.VouchersResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.VouchersResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.VouchersResult'
+    put:
+      tags:
+      - Vouchers
+      summary: Update vouchers.
+      operationId: Vouchers_Update
+      parameters:
+      - name: externalStoreId
+        in: query
+        description: externalStoreId of the store, if multistore admin.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OrdersResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OrdersResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OrdersResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OrdersResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Voucher'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Voucher'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Voucher'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Voucher'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Voucher'
+        description: List of vouchers to update.
+        required: true
+    post:
+      tags:
+      - Vouchers
+      summary: Create vouchers.
+      operationId: Vouchers_Create
+      parameters:
+      - name: externalStoreId
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.VouchersResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.VouchersResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.VouchersResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.VouchersResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Voucher'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Voucher'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Voucher'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Voucher'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Voucher'
+        description: List of supporting vouchers to create.
+        required: true
+  /v2/stores/{externalStoreId}/vouchers:
+    get:
+      tags:
+      - Vouchers
+      summary: Get list of vouchers.
+      operationId: Vouchers_Get
+      parameters:
+      - name: page
+        in: query
+        description: Page starts from 0 , default 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        description: PageSize, default 100.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: createdSince
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: voucherDateFrom
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: voucherDateTo
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: stateFilter
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: string
+          enum:
+          - Pending
+          - ActionRequried
+          - Locked
+          - Done
+      - name: externalStoreId
+        in: path
+        description: externalStoreId of the store, if multistore admin.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.VouchersResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.VouchersResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.VouchersResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.VouchersResult'
+    put:
+      tags:
+      - Vouchers
+      summary: Update vouchers.
+      operationId: Vouchers_Update
+      parameters:
+      - name: externalStoreId
+        in: path
+        description: externalStoreId of the store, if multistore admin.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OrdersResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OrdersResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OrdersResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OrdersResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Voucher'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Voucher'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Voucher'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Voucher'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Voucher'
+        description: List of vouchers to update.
+        required: true
+    post:
+      tags:
+      - Vouchers
+      summary: Create vouchers.
+      operationId: Vouchers_Create
+      parameters:
+      - name: externalStoreId
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.VouchersResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.VouchersResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.VouchersResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.VouchersResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Voucher'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Voucher'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Voucher'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Voucher'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Voucher'
+        description: List of supporting vouchers to create.
+        required: true
+  /v2/vouchers/byId/{Id}:
+    get:
+      tags:
+      - Vouchers
+      summary: Get a voucher.
+      operationId: Vouchers_Get
+      parameters:
+      - name: Id
+        in: path
+        description: Id of voucher
+        required: true
+        schema:
+          type: string
+      - name: externalStoreId
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.VoucherResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.VoucherResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.VoucherResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.VoucherResult'
+  /v2/stores/{externalStoreId}/vouchers/byId/{Id}:
+    get:
+      tags:
+      - Vouchers
+      summary: Get a voucher.
+      operationId: Vouchers_Get
+      parameters:
+      - name: Id
+        in: path
+        description: Id of voucher
+        required: true
+        schema:
+          type: string
+      - name: externalStoreId
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.VoucherResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.VoucherResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.VoucherResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.VoucherResult'
+components:
+  schemas:
+    MoreFlo.Models.InterfaceModels.OrderRow:
+      description: Represents a row within an order, detailing information about a specific item included in the order.
+      type: object
+      properties:
+        ArticleNumber:
+          description: The article number of the item.
+          type: string
+        ArticleName:
+          description: The name of the item.
+          type: string
+        UnitAmountInclVatExclDiscount:
+          format: double
+          description: The unit amount of the item, including VAT but excluding discount.
+          type: number
+        Discount:
+          format: double
+          description: The discount applied to the item.
+          type: number
+        VatRate:
+          format: double
+          description: The VAT rate applied to the item.
+          type: number
+        Quantity:
+          format: double
+          description: The quantity of the item.
+          type: number
+        SerialNumber:
+          description: The serial number of the item.
+          type: string
+        RowSum:
+          format: double
+          description: The sum of the row.
+          type: number
+        ReceiptNote:
+          description: A note or text associated with the item, typically a text row.
+          type: string
+    MoreFlo.Models.InterfaceModels.OrderResult:
+      description: 'Represents the result of an operation that returns a single order.
+
+        This class encapsulates an Order object and its unique identifier, typically used in API responses for single order operations.'
+      type: object
+      properties:
+        Order:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Order'
+          description: The Order object containing the order data.
+        Id:
+          description: The unique identifier of the order.
+          type: string
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
+    MoreFlo.Models.InterfaceModels.VouchersResult:
+      description: 'Represents a paginated result containing a list of voucher results.
+
+        This class is used to return a collection of vouchers, along with pagination information, in API responses.'
+      type: object
+      properties:
+        ExtraInformation:
+          description: A list of extra information or messages related to the paginated result.
+          type: array
+          items:
+            type: string
+        list:
+          description: The list of data items for the current page.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.VoucherResult'
+        Page:
+          format: int32
+          description: The current page number.
+          type: integer
+        Total:
+          format: int32
+          description: The total number of pages available.
+          type: integer
+        PageSize:
+          format: int32
+          description: The number of data items per page.
+          type: integer
+    MoreFlo.Models.InterfaceModels.Address:
+      type: object
+      properties:
+        Name:
+          type: string
+        Address1:
+          type: string
+        Address2:
+          type: string
+        PostCode:
+          type: string
+        City:
+          type: string
+        Country:
+          type: string
+        Email:
+          type: string
+        Telephone1:
+          type: string
+        Telephone2:
+          type: string
+        Mobile:
+          type: string
+        Fax:
+          type: string
+    MoreFlo.Models.InterfaceModels.OrdersResult:
+      description: 'Represents a paginated result containing a list of order results.
+
+        This class is used to return a collection of orders, along with pagination information, in API responses.'
+      type: object
+      properties:
+        ExtraInformation:
+          description: A list of extra information or messages related to the paginated result.
+          type: array
+          items:
+            type: string
+        list:
+          description: The list of data items for the current page.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OrderResult'
+        Page:
+          format: int32
+          description: The current page number.
+          type: integer
+        Total:
+          format: int32
+          description: The total number of pages available.
+          type: integer
+        PageSize:
+          format: int32
+          description: The number of data items per page.
+          type: integer
+    MoreFlo.Models.InterfaceModels.Voucher:
+      description: 'Represents a voucher, which is a document used for accounting purposes.
+
+        This class encapsulates information about a voucher, including its identification, state, accounting details, and related rows.'
+      type: object
+      properties:
+        Id:
+          description: The unique identifier of the voucher.
+          type: string
+        UpdateOnExisting:
+          description: 'Indicates whether an update should be performed during creation if a voucher with the same Id already exists.
+
+            This is only applicable to voucher update API calls.'
+          type: boolean
+        SupportingNumber:
+          format: int32
+          description: A supporting number for the voucher, set by the system.
+          type: integer
+        VoucherNumber:
+          description: 'The verification number assigned by the external accounting system.
+
+            Set by the system if the voucher is synchronized with an external accounting system.'
+          type: string
+        VoucherSeries:
+          description: 'The verification series assigned by the external accounting system.
+
+            Set by the system if the voucher is synchronized with an external accounting system.'
+          type: string
+        IsDeleted:
+          description: 'A flag indicating if this supporting voucher is marked as deleted.
+
+            This is only relevant for voucher updates.'
+          type: boolean
+        State:
+          description: The current state of the voucher.
+          enum:
+          - Pending
+          - ActionRequried
+          - Locked
+          - Done
+          type: string
+        ErrorReason:
+          description: The reason for an error if synchronization with an external system failed.
+          maxLength: 4096
+          minLength: 0
+          type: string
+        IsBookkept:
+          description: 'A flag indicating if this supporting voucher has been recorded in an external accounting system.
+
+            If true, the voucher will not be synchronized again.'
+          type: boolean
+        VoucherSyncReference:
+          description: A name or other reference to the external accounting system.
+          maxLength: 128
+          minLength: 0
+          type: string
+        VoucherSyncTime:
+          format: date-time
+          description: The timestamp of when this supporting voucher was recorded in the external accounting system.
+          type: string
+        CashierSerialNumber:
+          description: The serial number of the cashier that sent this voucher, if the voucher originates from an end-of-day report.
+          maxLength: 128
+          minLength: 0
+          type: string
+        VoucherDate:
+          format: date-time
+          description: The accounting date of the voucher.
+          type: string
+        VoucherText:
+          description: The accounting text or description of the voucher.
+          maxLength: 1000
+          minLength: 0
+          type: string
+        Project:
+          description: A project reference associated with the voucher.
+          maxLength: 128
+          minLength: 0
+          type: string
+        CostCenter:
+          description: A cost center reference associated with the voucher.
+          maxLength: 128
+          minLength: 0
+          type: string
+        ReferenceNumber:
+          description: The identifier or number of a related reference, if any.
+          maxLength: 128
+          minLength: 0
+          type: string
+        ReferenceType:
+          description: The type of reference, if any.
+          enum:
+          - None
+          - Invoice
+          - WebOrder
+          - PayLink
+          - TicketOrder
+          - BookingOrder
+          - ServiceOrder
+          - Receipt
+          - EndOfDayReport
+          - Manual
+          - External
+          - NorthmillTransaction
+          - ValueCard
+          - GiftCard
+          type: string
+        Rows:
+          description: A list of rows containing details about the voucher's entries.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.VoucherRow'
+        CreatedTime:
+          format: date-time
+          description: The timestamp of when the voucher was created.
+          type: string
+        ModifiedTime:
+          format: date-time
+          description: The timestamp of when the voucher was last modified.
+          type: string
+    MoreFlo.Models.InterfaceModels.Customer:
+      required:
+      - Name
+      type: object
+      properties:
+        CustomerNumber:
+          description: MoreFlo customer number.
+          type: string
+        Reference:
+          type: string
+        Name:
+          type: string
+        Address1:
+          type: string
+        Address2:
+          type: string
+        PostCode:
+          type: string
+        City:
+          type: string
+        Country:
+          type: string
+        IdentityNo:
+          type: string
+        ReferenceNumber:
+          format: int64
+          description: The other systems customer number or id.
+          type: integer
+        Email:
+          type: string
+        Telephone1:
+          type: string
+        Telephone2:
+          type: string
+        VatNumber:
+          type: string
+        IsExportCustomer:
+          type: boolean
+        Mobile:
+          type: string
+        Fax:
+          type: string
+        Note:
+          type: string
+        DateAdded:
+          format: date-time
+          type: string
+        DateUpdated:
+          format: date-time
+          type: string
+        ModifiedTime:
+          format: date-time
+          type: string
+        MemberGroupId:
+          format: int32
+          type: integer
+        MemberGroup:
+          type: string
+        PermitsCommercial:
+          type: boolean
+        IsCompany:
+          type: boolean
+        IsInternalCustomer:
+          type: boolean
+        IsActive:
+          type: boolean
+        Blocked:
+          description: Blocked because of an issue with Credit or something else
+          type: boolean
+        Id:
+          format: int32
+          description: Member Id
+          type: integer
+    MoreFlo.Models.InterfaceModels.VoucherRow:
+      description: Represents a row within a voucher, detailing an individual accounting entry.
+      type: object
+      properties:
+        AccountDescription:
+          description: Description of the account, either from the accounting system or manually entered.
+          type: string
+        AccountNumber:
+          format: int32
+          description: The account number for this row.
+          type: integer
+        DebitAmount:
+          format: double
+          description: The amount debited, if any.
+          type: number
+        CreditAmount:
+          format: double
+          description: The amount credited, if any.
+          type: number
+        TransactionText:
+          description: Text from the external accounting system, if applicable (e.g., when synchronized).
+          type: string
+        Project:
+          description: A project reference associated with this row.
+          type: string
+        CostCenter:
+          description: A cost center reference associated with this row.
+          type: string
+        IsDeleted:
+          description: A flag indicating if this supporting voucher row is marked as deleted.
+          type: boolean
+        CreatedTime:
+          format: date-time
+          description: The timestamp of when this row was created.
+          type: string
+        ModifiedTime:
+          format: date-time
+          description: The timestamp of when this row was last modified.
+          type: string
+    MoreFlo.Models.InterfaceModels.Order:
+      description: Represents an order, containing customer details, dates, references, financial information, and order rows.
+      required:
+      - Customer
+      type: object
+      properties:
+        Id:
+          description: The unique identifier of the order, automatically generated by the system.
+          type: string
+        Customer:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Customer'
+          description: 'Information about the customer associated with the order.
+
+            Either a customer number within the system or an external customer reference. This is a required field.'
+        BillingAddress:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Address'
+          description: The billing address for the order, if different from the customer's default address.
+        ShippingAddress:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Address'
+          description: The shipping address for the order, if different from the customer's default address.
+        Number:
+          format: int32
+          description: The order number.
+          type: integer
+        IncomingDate:
+          format: date-time
+          description: The date when the order was received.
+          type: string
+        StartDate:
+          format: date-time
+          description: The start date for the order (e.g., for a service).
+          type: string
+        ReadyDate:
+          format: date-time
+          description: The date when the order is expected to be ready.
+          type: string
+        ExpireDate:
+          format: date-time
+          description: The date when the order expires (if applicable).
+          type: string
+        DeliveryDate:
+          format: date-time
+          description: The date when the order is scheduled for delivery.
+          type: string
+        OurReference:
+          description: The reference used by the ordering system.
+          type: string
+        YourReference:
+          description: The reference provided by the customer or the customer's system.
+          type: string
+        DeliveryTerm:
+          description: The delivery terms for the order.
+          type: string
+        YourOrderNo:
+          description: The customer's order number or other identifier.
+          type: string
+        ExternalReference:
+          description: 'An external identification for the order, which must be prefixed. For example: SYS-52351.'
+          type: string
+        Note:
+          description: A note or comment associated with the order.
+          type: string
+        Discount:
+          format: double
+          description: The discount applied to the order, expressed as a percentage.
+          type: number
+        TotalExclVat:
+          format: double
+          description: The total amount of the order, excluding VAT.
+          type: number
+        TotalInclVat:
+          format: double
+          description: The total amount of the order, including VAT.
+          type: number
+        TotalVat:
+          format: double
+          description: The total VAT amount for the order.
+          type: number
+        Rows:
+          description: A list of rows containing details about the items in the order.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OrderRow'
+        State:
+          description: The current state of the order.
+          enum:
+          - Created
+          - Saved
+          - Started
+          - WaitingCustomerResp
+          - ReadyForHandOut
+          - Closed
+          - Waiting
+          - Cancelled
+          - Delivered
+          - Invoiced
+          - PayedFromCashier
+          - PayedFromExternal
+          type: string
+        PaymentOption:
+          description: The payment option selected for the order.
+          enum:
+          - NotSet
+          - Web
+          - Invoice
+          - Cashier
+          type: string
+        PaymentReference:
+          description: A reference related to the payment for the order.
+          type: string
+        PaymentOrigin:
+          description: The origin of the payment.
+          type: string
+        PaymentStatus:
+          description: The status of the payment for the order.
+          enum:
+          - NotSet
+          - NotPaid
+          - FullyPaid
+          - Refunded
+          type: string
+    MoreFlo.Models.InterfaceModels.VoucherResult:
+      description: 'Represents the result of an operation that returns a single voucher.
+
+        This class encapsulates a Voucher object and its unique identifier, typically used in API responses for single voucher operations.'
+      type: object
+      properties:
+        Voucher:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Voucher'
+          description: The Voucher object containing the voucher data.
+        Id:
+          description: The unique identifier of the voucher.
+          type: string
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
+  securitySchemes:
+    basic:
+      type: http
+      scheme: basic
+      description: Basic HTTP Authentication

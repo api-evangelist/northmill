@@ -1,0 +1,302 @@
+openapi: 3.2.0
+info:
+  version: v2
+  title: MoreFlo.Public.Api Articles Availability API
+servers:
+- url: https://api.moreflo.com
+tags:
+- name: ArticlesAvailability
+paths:
+  /v3/articles-availabilities:
+    get:
+      tags:
+      - ArticlesAvailability
+      operationId: ArticlesAvailability_Get
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: updatedSince
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: externalStoreId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.ArticlesAvailabilities.ArticlesAvailabilitiesResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.ArticlesAvailabilities.ArticlesAvailabilitiesResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.ArticlesAvailabilities.ArticlesAvailabilitiesResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.ArticlesAvailabilities.ArticlesAvailabilitiesResult'
+  /v3/stores/{externalStoreId}/articles-availabilities:
+    get:
+      tags:
+      - ArticlesAvailability
+      operationId: ArticlesAvailability_Get
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: updatedSince
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: externalStoreId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.ArticlesAvailabilities.ArticlesAvailabilitiesResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.ArticlesAvailabilities.ArticlesAvailabilitiesResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.ArticlesAvailabilities.ArticlesAvailabilitiesResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.ArticlesAvailabilities.ArticlesAvailabilitiesResult'
+components:
+  schemas:
+    MoreFlo.Models.InterfaceModels.v3.ArticlesAvailabilities.ArticlesAvailabilityTime:
+      description: 'Represents time-based availability settings for articles.
+
+        This class enables the definition of complex availability schedules using month, day-of-week, and specific date rules.'
+      type: object
+      properties:
+        MonthAvailabilities:
+          description: 'Defines availability based on months and days within those months.
+
+            Example: January 1-3,5-8; June 15-18'
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.ArticlesAvailabilities.MonthAvailability'
+        DayOfWeekAvailabilities:
+          description: 'Defines availability based on days of the week and time ranges.
+
+            Example: Monday 08:00-15:00, 20:00-23:00; Friday 10:00-15:00, 19:00-20:00;'
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.ArticlesAvailabilities.DayOfWeekTimeAvailability'
+        SpecificDatesAvailabilities:
+          description: 'Defines availability based on specific dates and time ranges.
+
+            Example: 2024-01-01  08:00-15:00, 20:00-23:00; 2025-01-01 10:00-15:00;'
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.ArticlesAvailabilities.DateAvailability'
+    MoreFlo.Models.InterfaceModels.v3.ArticlesAvailabilities.ArticlesAvailabilitiesResult:
+      description: 'Represents a paginated result containing a list of article availability results.
+
+        This class is used to return a collection of article availability information, along with pagination and extra information, in API responses.'
+      type: object
+      properties:
+        ExtraInformation:
+          description: A list of extra information or messages related to the paginated result.
+          type: array
+          items:
+            type: string
+        list:
+          description: The list of data items for the current page.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.ArticlesAvailabilities.ArticlesAvailability'
+        Page:
+          format: int32
+          description: The current page number.
+          type: integer
+        Total:
+          format: int32
+          description: The total number of pages available.
+          type: integer
+        PageSize:
+          format: int32
+          description: The number of data items per page.
+          type: integer
+    MoreFlo.Models.InterfaceModels.v3.ArticlesAvailabilities.TimeOfDay:
+      description: Represents a time of day, specifying hours and minutes.
+      type: object
+      properties:
+        Hour:
+          format: int32
+          description: 'The hour, in 24-hour time format.
+
+            Allowed values: 0 - 23 (24 is not allowed).'
+          type: integer
+        Minute:
+          format: int32
+          description: 'The minute.
+
+            Allowed values: 0 - 59.'
+          type: integer
+    MoreFlo.Models.InterfaceModels.v3.ArticlesAvailabilities.AvailableArticlesItem:
+      description: Represents an available article item, which can be either a specific article or an article group.
+      type: object
+      properties:
+        AvailablePer:
+          description: 'Indicates whether the item is an "Article" or an "ArticleGroup".
+
+            If it is "Article", then the article is defined by the ArticleNumber property.
+
+            If it is "ArticleGroup", then the article group is defined by the ArticleGroupId property.'
+          enum:
+          - Article
+          - ArticleGroup
+          type: string
+        ArticleGroupId:
+          description: 'The unique identifier of the article group.
+
+            The group can be fetched using the v2/groups/{Id} endpoint.'
+          type: string
+        ArticleNumber:
+          description: 'The unique identifier of the article.
+
+            The article can be fetched using the v3/articles/article endpoint.'
+          type: string
+    MoreFlo.Models.InterfaceModels.v3.ArticlesAvailabilities.DayOfWeekTimeAvailability:
+      description: Represents availability settings for a specific day of the week, including the day and a list of available time periods.
+      type: object
+      properties:
+        Day:
+          description: 'The day of the week for which the availability is defined.
+
+            It can be one of the following values:
+
+            0-Sunday, 1-Monday, 2-Tuesday, 3-Wednesday, 4-Thursday, 5-Friday, 6-Saturday.'
+          enum:
+          - Sunday
+          - Monday
+          - Tuesday
+          - Wednesday
+          - Thursday
+          - Friday
+          - Saturday
+          type: string
+        AvailabilityTimes:
+          description: A list of time periods during which items are available on the specified day of the week.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.ArticlesAvailabilities.DayTimePeriod'
+    MoreFlo.Models.InterfaceModels.v3.ArticlesAvailabilities.MonthDayRange:
+      description: Represents a range of days within a month, defined by a start and end day.
+      type: object
+      properties:
+        StartDay:
+          format: int32
+          description: 'The starting day of the range.
+
+            Allowed values: 1-31.'
+          type: integer
+        EndDay:
+          format: int32
+          description: 'The ending day of the range.
+
+            Allowed values: 1-31.'
+          type: integer
+    MoreFlo.Models.InterfaceModels.v3.ArticlesAvailabilities.DayTimePeriod:
+      description: Represents a time period within a day, defined by a start and end time.
+      type: object
+      properties:
+        StartTime:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.ArticlesAvailabilities.TimeOfDay'
+          description: The start time of the period, in HH:mm format (e.g., 01:34).
+        EndTime:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.ArticlesAvailabilities.TimeOfDay'
+          description: The end time of the period, in HH:mm format (e.g., 13:43).
+    MoreFlo.Models.InterfaceModels.v3.ArticlesAvailabilities.ArticlesAvailability:
+      description: Represents the availability of articles, including details about when and which articles are available.
+      type: object
+      properties:
+        Id:
+          format: int64
+          description: The unique identifier for this availability setting.
+          type: integer
+        Name:
+          description: The name associated with this availability setting.
+          type: string
+        Enabled:
+          description: Indicates whether this availability setting is enabled.
+          type: boolean
+        AvailabilityTime:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.ArticlesAvailabilities.ArticlesAvailabilityTime'
+          description: Information about the time-related aspects of article availability.
+        AvailableArticles:
+          description: A list of articles that are available according to this setting.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.ArticlesAvailabilities.AvailableArticlesItem'
+    MoreFlo.Models.InterfaceModels.v3.ArticlesAvailabilities.DateAvailability:
+      description: Represents availability settings for a specific date, including a date and a list of available time periods.
+      type: object
+      properties:
+        Date:
+          description: The date for which the availability is defined, in YYYY-MM-DD format (e.g., 2024-12-30).
+          type: string
+        AvailabilityTimes:
+          description: A list of time periods during which items are available on the specified date.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.ArticlesAvailabilities.DayTimePeriod'
+    MoreFlo.Models.InterfaceModels.v3.ArticlesAvailabilities.MonthAvailability:
+      description: Represents availability settings for a specific month, including the month and ranges of available days.
+      type: object
+      properties:
+        Month:
+          format: int32
+          description: 'The month of the year.
+
+            Allowed values: 1-12 (1 for January, 2 for February, ..., 12 for December).'
+          type: integer
+        AvailabilityDays:
+          description: A list of ranges of days within the month when items are available.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.ArticlesAvailabilities.MonthDayRange'
+  securitySchemes:
+    basic:
+      type: http
+      scheme: basic
+      description: Basic HTTP Authentication

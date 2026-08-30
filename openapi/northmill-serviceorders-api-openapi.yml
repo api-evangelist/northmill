@@ -1,0 +1,856 @@
+openapi: 3.2.0
+info:
+  version: v2
+  title: MoreFlo.Public.Api Service Orders API
+servers:
+- url: https://api.moreflo.com
+tags:
+- name: ServiceOrders
+paths:
+  /v2/serviceorders:
+    get:
+      tags:
+      - ServiceOrders
+      summary: Get all service orders.
+      operationId: ServiceOrders_Get
+      parameters:
+      - name: page
+        in: query
+        description: Page starts from 0 , default 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        description: PageSize, default 100.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: updatedSince
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: externalStoreId
+        in: query
+        description: externalStoreId of the store, if multistore admin.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrdersResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrdersResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrdersResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrdersResult'
+    put:
+      tags:
+      - ServiceOrders
+      summary: Update list of serviceOrders.
+      operationId: ServiceOrders_Update
+      parameters:
+      - name: externalStoreId
+        in: query
+        description: externalStoreId of the store, if multistore admin.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrdersResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrdersResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrdersResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrdersResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrder'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrder'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrder'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrder'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrder'
+        description: List of serviceOrders to update data.
+        required: true
+    post:
+      tags:
+      - ServiceOrders
+      summary: Create service orders.
+      operationId: ServiceOrders_Create
+      parameters:
+      - name: externalStoreId
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrdersResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrdersResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrdersResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrdersResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrderCreate'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrderCreate'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrderCreate'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrderCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrderCreate'
+        description: List of service orders to create, e.g. bookings of haircut or service of bicycles or phones.
+        required: true
+  /v2/stores/{externalStoreId}/serviceorders:
+    get:
+      tags:
+      - ServiceOrders
+      summary: Get all service orders.
+      operationId: ServiceOrders_Get
+      parameters:
+      - name: page
+        in: query
+        description: Page starts from 0 , default 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        description: PageSize, default 100.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: updatedSince
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: externalStoreId
+        in: path
+        description: externalStoreId of the store, if multistore admin.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrdersResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrdersResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrdersResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrdersResult'
+    put:
+      tags:
+      - ServiceOrders
+      summary: Update list of serviceOrders.
+      operationId: ServiceOrders_Update
+      parameters:
+      - name: externalStoreId
+        in: path
+        description: externalStoreId of the store, if multistore admin.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrdersResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrdersResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrdersResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrdersResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrder'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrder'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrder'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrder'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrder'
+        description: List of serviceOrders to update data.
+        required: true
+    post:
+      tags:
+      - ServiceOrders
+      summary: Create service orders.
+      operationId: ServiceOrders_Create
+      parameters:
+      - name: externalStoreId
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrdersResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrdersResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrdersResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrdersResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrderCreate'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrderCreate'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrderCreate'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrderCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrderCreate'
+        description: List of service orders to create, e.g. bookings of haircut or service of bicycles or phones.
+        required: true
+  /v2/serviceorders/{Id}:
+    get:
+      tags:
+      - ServiceOrders
+      summary: Get a service order.
+      operationId: ServiceOrders_Get
+      parameters:
+      - name: Id
+        in: path
+        description: External reference of the service order.
+        required: true
+        schema:
+          type: string
+      - name: externalStoreId
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrderResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrderResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrderResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrderResult'
+  /v2/stores/{externalStoreId}/serviceorders/{Id}:
+    get:
+      tags:
+      - ServiceOrders
+      summary: Get a service order.
+      operationId: ServiceOrders_Get
+      parameters:
+      - name: Id
+        in: path
+        description: External reference of the service order.
+        required: true
+        schema:
+          type: string
+      - name: externalStoreId
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrderResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrderResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrderResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrderResult'
+components:
+  schemas:
+    MoreFlo.Models.InterfaceModels.ServiceOrder:
+      description: 'Represents a service order, containing details about a service request or job.
+
+        This class encapsulates information about a service order, including order details, dates, customer information, and financial data.'
+      type: object
+      properties:
+        Id:
+          description: The unique identifier of the service order.
+          type: string
+        Number:
+          format: int32
+          description: The order number.
+          type: integer
+        Color:
+          description: A color associated with the service order (e.g., for visual categorization).
+          type: string
+        Type:
+          description: The type of service order.
+          enum:
+          - Notset
+          - Express
+          - Normal
+          - Booking
+          type: string
+        State:
+          description: The current state of the service order.
+          enum:
+          - Created
+          - Saved
+          - Started
+          - WaitingCustomerResp
+          - ReadyForHandOut
+          - Closed
+          - WaitingParts
+          - Cancelled
+          - CostEstimate
+          - SentToSupplier
+          - WaitingConfirmation
+          type: string
+        DeliveryTerm:
+          description: The delivery terms for the service.
+          type: string
+        OrderNo:
+          description: The order number.
+          type: string
+        YouOrderNo:
+          description: The customer's order number or reference.
+          type: string
+        BookableResourceId:
+          description: The identifier of the bookable resource assigned to the service.
+          type: string
+        BookingStartTime:
+          format: date-time
+          description: The start time of the booking (if applicable).
+          type: string
+        BookingEndTime:
+          format: date-time
+          description: The end time of the booking (if applicable).
+          type: string
+        IncomingDate:
+          format: date-time
+          description: The date when the service order was received.
+          type: string
+        StartDate:
+          format: date-time
+          description: The date when the service is scheduled to start.
+          type: string
+        ReadyDate:
+          format: date-time
+          description: The date when the service is expected to be ready.
+          type: string
+        ExpireDate:
+          format: date-time
+          description: The date when the service order expires (if applicable).
+          type: string
+        DeliveryDate:
+          format: date-time
+          description: The date when the service is scheduled for delivery.
+          type: string
+        OurReference:
+          description: The reference used by the system.
+          type: string
+        PerformedBy:
+          description: The person or entity performing the service.
+          type: string
+        YourReference:
+          description: The customer's reference.
+          type: string
+        InternNote:
+          description: Internal notes about the service order.
+          type: string
+        IssueDescription:
+          description: A description of the issue or problem being addressed.
+          type: string
+        Discount:
+          format: double
+          description: The discount applied to the service order.
+          type: number
+        TotalExclVat:
+          format: double
+          description: The total amount of the service order, excluding VAT.
+          type: number
+        TotalInclVat:
+          format: double
+          description: The total amount of the service order, including VAT.
+          type: number
+        TotalVat:
+          format: double
+          description: The total VAT amount for the service order.
+          type: number
+        LastChanged:
+          format: date-time
+          description: The date and time when the service order was last changed.
+          type: string
+        Customer:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrderCustomer'
+          description: Information about the customer associated with the service order.
+        PaymentOption:
+          description: The payment option selected for the service order.
+          enum:
+          - NotSet
+          - Web
+          - Invoice
+          - Cashier
+          type: string
+        PaymentReference:
+          description: A reference related to the payment for the service order.
+          type: string
+        PaymentOrigin:
+          description: The origin of the payment.
+          type: string
+        PaymentStatus:
+          description: The payment status of the service order.
+          enum:
+          - NotSet
+          - NotPaid
+          - FullyPaid
+          - Refunded
+          type: string
+        Articles:
+          description: A list of articles or items related to the service order.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrderArticle'
+    MoreFlo.Models.InterfaceModels.ServiceOrderResult:
+      description: 'Represents the result of an operation that returns a service order.
+
+        This class encapsulates a ServiceOrder object and its unique identifier, typically used in API responses related to retrieving or managing service orders.'
+      type: object
+      properties:
+        ServiceOrder:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrder'
+          description: The ServiceOrder object containing the service order data.
+        Id:
+          description: The unique identifier of the service order.
+          type: string
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
+    MoreFlo.Models.InterfaceModels.ServiceOrderCreate:
+      description: 'Represents the data used to create a new service order.
+
+        This class extends the ServiceOrder class and specifies the required information for creating a service order within the system.'
+      required:
+      - Id
+      - Type
+      - State
+      type: object
+      properties:
+        Id:
+          description: 'The unique identifier of the service order to be created.
+
+            This is a required field.'
+          type: string
+        Type:
+          description: 'The type of service order to be created.
+
+            This is a required field.'
+          enum:
+          - Notset
+          - Express
+          - Normal
+          - Booking
+          type: string
+        State:
+          description: 'The initial state of the service order to be created.
+
+            This is a required field.'
+          enum:
+          - Created
+          - Saved
+          - Started
+          - WaitingCustomerResp
+          - ReadyForHandOut
+          - Closed
+          - WaitingParts
+          - Cancelled
+          - CostEstimate
+          - SentToSupplier
+          - WaitingConfirmation
+          type: string
+        UpdateOnExisting:
+          description: Indicates whether to update an existing service order if one with the same number already exists.
+          type: boolean
+        Number:
+          format: int32
+          description: The order number.
+          type: integer
+        Color:
+          description: A color associated with the service order (e.g., for visual categorization).
+          type: string
+        DeliveryTerm:
+          description: The delivery terms for the service.
+          type: string
+        OrderNo:
+          description: The order number.
+          type: string
+        YouOrderNo:
+          description: The customer's order number or reference.
+          type: string
+        BookableResourceId:
+          description: The identifier of the bookable resource assigned to the service.
+          type: string
+        BookingStartTime:
+          format: date-time
+          description: The start time of the booking (if applicable).
+          type: string
+        BookingEndTime:
+          format: date-time
+          description: The end time of the booking (if applicable).
+          type: string
+        IncomingDate:
+          format: date-time
+          description: The date when the service order was received.
+          type: string
+        StartDate:
+          format: date-time
+          description: The date when the service is scheduled to start.
+          type: string
+        ReadyDate:
+          format: date-time
+          description: The date when the service is expected to be ready.
+          type: string
+        ExpireDate:
+          format: date-time
+          description: The date when the service order expires (if applicable).
+          type: string
+        DeliveryDate:
+          format: date-time
+          description: The date when the service is scheduled for delivery.
+          type: string
+        OurReference:
+          description: The reference used by the system.
+          type: string
+        PerformedBy:
+          description: The person or entity performing the service.
+          type: string
+        YourReference:
+          description: The customer's reference.
+          type: string
+        InternNote:
+          description: Internal notes about the service order.
+          type: string
+        IssueDescription:
+          description: A description of the issue or problem being addressed.
+          type: string
+        Discount:
+          format: double
+          description: The discount applied to the service order.
+          type: number
+        TotalExclVat:
+          format: double
+          description: The total amount of the service order, excluding VAT.
+          type: number
+        TotalInclVat:
+          format: double
+          description: The total amount of the service order, including VAT.
+          type: number
+        TotalVat:
+          format: double
+          description: The total VAT amount for the service order.
+          type: number
+        LastChanged:
+          format: date-time
+          description: The date and time when the service order was last changed.
+          type: string
+        Customer:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrderCustomer'
+          description: Information about the customer associated with the service order.
+        PaymentOption:
+          description: The payment option selected for the service order.
+          enum:
+          - NotSet
+          - Web
+          - Invoice
+          - Cashier
+          type: string
+        PaymentReference:
+          description: A reference related to the payment for the service order.
+          type: string
+        PaymentOrigin:
+          description: The origin of the payment.
+          type: string
+        PaymentStatus:
+          description: The payment status of the service order.
+          enum:
+          - NotSet
+          - NotPaid
+          - FullyPaid
+          - Refunded
+          type: string
+        Articles:
+          description: A list of articles or items related to the service order.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrderArticle'
+    MoreFlo.Models.InterfaceModels.ServiceOrderArticle:
+      description: 'Represents an article or item associated with a service order.
+
+        This class encapsulates information about an article included in a service, such as its name, price, and quantity.'
+      type: object
+      properties:
+        ArticleNumber:
+          description: The article number of the item.
+          type: string
+        ArticleName:
+          description: The name of the article.
+          type: string
+        RetailPrice:
+          format: double
+          description: The retail price of the article.
+          type: number
+        Discount:
+          format: double
+          description: The discount applied to the article.
+          type: number
+        Vat:
+          format: double
+          description: The VAT (Value Added Tax) rate applied to the article.
+          type: number
+        Quantity:
+          format: double
+          description: The quantity of the article.
+          type: number
+        SerialNumber:
+          description: The serial number of the article.
+          type: string
+        RowSum:
+          format: double
+          description: The total sum or price of the row (quantity multiplied by unit price, after discount).
+          type: number
+    MoreFlo.Models.InterfaceModels.ServiceOrdersResult:
+      description: 'Represents a paginated result containing a list of service order results.
+
+        This class is used to return a collection of service orders, along with pagination information, in API responses.'
+      type: object
+      properties:
+        ExtraInformation:
+          description: A list of extra information or messages related to the paginated result.
+          type: array
+          items:
+            type: string
+        list:
+          description: The list of data items for the current page.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ServiceOrderResult'
+        Page:
+          format: int32
+          description: The current page number.
+          type: integer
+        Total:
+          format: int32
+          description: The total number of pages available.
+          type: integer
+        PageSize:
+          format: int32
+          description: The number of data items per page.
+          type: integer
+    MoreFlo.Models.InterfaceModels.ServiceOrderCustomer:
+      description: 'Represents customer information associated with a service order.
+
+        This class encapsulates data related to the customer who requested the service, including contact details and identification information.'
+      required:
+      - Name
+      type: object
+      properties:
+        CustomerNumber:
+          description: The customer number.
+          type: string
+        ReferenceNo:
+          format: int64
+          description: The reference number.
+          type: integer
+        Name:
+          description: The name of the customer.
+          type: string
+        Address1:
+          description: The first line of the customer's address.
+          type: string
+        Address2:
+          description: The second line of the customer's address (optional).
+          type: string
+        PostCode:
+          description: The postal code of the customer's address.
+          type: string
+        City:
+          description: The city of the customer's address.
+          type: string
+        Country:
+          description: The country of the customer's address.
+          type: string
+        IdentityNo:
+          description: The customer's identity number.
+          type: string
+        Email:
+          description: The customer's email address.
+          type: string
+        Telephone1:
+          description: The customer's primary telephone number.
+          type: string
+        Telephone2:
+          description: The customer's secondary telephone number (optional).
+          type: string
+        Mobile:
+          description: The customer's mobile phone number.
+          type: string
+  securitySchemes:
+    basic:
+      type: http
+      scheme: basic
+      description: Basic HTTP Authentication

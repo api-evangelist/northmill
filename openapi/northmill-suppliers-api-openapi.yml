@@ -1,0 +1,676 @@
+openapi: 3.2.0
+info:
+  version: v2
+  title: MoreFlo.Public.Api Suppliers API
+servers:
+- url: https://api.moreflo.com
+tags:
+- name: Suppliers
+paths:
+  /v2/suppliers:
+    get:
+      tags:
+      - Suppliers
+      summary: Get all suppliers.
+      operationId: Suppliers_Get
+      parameters:
+      - name: page
+        in: query
+        description: Page starts from 0 , default 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        description: PageSize, default 100.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: externalStoreId
+        in: query
+        description: externalStoreId of the store, if multistore admin.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SuppliersResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SuppliersResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SuppliersResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SuppliersResult'
+    put:
+      tags:
+      - Suppliers
+      summary: Update list of suppliers.
+      operationId: Suppliers_Update
+      parameters:
+      - name: externalStoreId
+        in: query
+        description: externalStoreId of the store, if multistore admin.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SuppliersResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SuppliersResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SuppliersResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SuppliersResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Supplier'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Supplier'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Supplier'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Supplier'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Supplier'
+        description: List of suppliers to update data.
+        required: true
+    post:
+      tags:
+      - Suppliers
+      summary: Create suppliers.
+      operationId: Suppliers_Create
+      parameters:
+      - name: externalStoreId
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SuppliersResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SuppliersResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SuppliersResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SuppliersResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SupplierCreate'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SupplierCreate'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SupplierCreate'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SupplierCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SupplierCreate'
+        description: List of articles to create.
+        required: true
+  /v2/stores/{externalStoreId}/suppliers:
+    get:
+      tags:
+      - Suppliers
+      summary: Get all suppliers.
+      operationId: Suppliers_Get
+      parameters:
+      - name: page
+        in: query
+        description: Page starts from 0 , default 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        description: PageSize, default 100.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: externalStoreId
+        in: path
+        description: externalStoreId of the store, if multistore admin.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SuppliersResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SuppliersResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SuppliersResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SuppliersResult'
+    put:
+      tags:
+      - Suppliers
+      summary: Update list of suppliers.
+      operationId: Suppliers_Update
+      parameters:
+      - name: externalStoreId
+        in: path
+        description: externalStoreId of the store, if multistore admin.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SuppliersResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SuppliersResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SuppliersResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SuppliersResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Supplier'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Supplier'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Supplier'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Supplier'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Supplier'
+        description: List of suppliers to update data.
+        required: true
+    post:
+      tags:
+      - Suppliers
+      summary: Create suppliers.
+      operationId: Suppliers_Create
+      parameters:
+      - name: externalStoreId
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SuppliersResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SuppliersResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SuppliersResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SuppliersResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SupplierCreate'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SupplierCreate'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SupplierCreate'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SupplierCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SupplierCreate'
+        description: List of articles to create.
+        required: true
+  /v2/suppliers/{Id}:
+    delete:
+      tags:
+      - Suppliers
+      summary: Delete a supplier.
+      operationId: Suppliers_Delete
+      parameters:
+      - name: Id
+        in: path
+        description: Id of supplier to be deleted.
+        required: true
+        schema:
+          type: string
+      - name: externalStoreId
+        in: query
+        description: externalStoreId of the store, if multistore admin.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SupplierResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SupplierResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SupplierResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SupplierResult'
+  /v2/stores/{externalStoreId}/suppliers/{Id}:
+    delete:
+      tags:
+      - Suppliers
+      summary: Delete a supplier.
+      operationId: Suppliers_Delete
+      parameters:
+      - name: Id
+        in: path
+        description: Id of supplier to be deleted.
+        required: true
+        schema:
+          type: string
+      - name: externalStoreId
+        in: path
+        description: externalStoreId of the store, if multistore admin.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SupplierResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SupplierResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SupplierResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SupplierResult'
+components:
+  schemas:
+    MoreFlo.Models.InterfaceModels.SupplierCreate:
+      description: 'Represents the data used to create a new supplier entry.
+
+        This class extends the Supplier class and specifies the required information for creating a new supplier within the system.'
+      required:
+      - Name
+      - SupplierNumber
+      - Id
+      type: object
+      properties:
+        Name:
+          description: 'The name of the supplier to be created.
+
+            This is a required field.'
+          maxLength: 100
+          minLength: 0
+          type: string
+        SupplierNumber:
+          description: 'The supplier number of the supplier to be created.
+
+            This is a required field.'
+          maxLength: 100
+          minLength: 0
+          type: string
+        UpdateOnExisting:
+          description: Indicates whether an existing supplier with the same identifier should be updated instead of creating a new one.
+          type: boolean
+        Id:
+          description: The unique identifier of the supplier.
+          maxLength: 64
+          minLength: 0
+          type: string
+        Address1:
+          description: The first line of the supplier's address.
+          maxLength: 128
+          minLength: 0
+          type: string
+        Address2:
+          description: The second line of the supplier's address (optional).
+          maxLength: 128
+          minLength: 0
+          type: string
+        PostalCode:
+          description: The postal code of the supplier's address.
+          maxLength: 10
+          minLength: 0
+          type: string
+        City:
+          description: The city of the supplier's address.
+          maxLength: 128
+          minLength: 0
+          type: string
+        Country:
+          description: The country of the supplier.
+          maxLength: 128
+          minLength: 0
+          type: string
+        CountryCode:
+          description: The country code of the supplier.
+          maxLength: 10
+          minLength: 0
+          type: string
+        BankgiroNumber:
+          description: The Bankgiro number of the supplier.
+          maxLength: 50
+          minLength: 0
+          pattern: ^[0-9-]*$
+          type: string
+        PlusgiroNumber:
+          description: The Plusgiro number of the supplier.
+          maxLength: 10
+          minLength: 0
+          pattern: ^[0-9-]*$
+          type: string
+        CreatedUtc:
+          format: date-time
+          description: The UTC timestamp when the supplier was created.
+          type: string
+        ModifiedUtc:
+          format: date-time
+          description: The UTC timestamp when the supplier was last modified.
+          type: string
+        Note:
+          description: A general note about the supplier.
+          maxLength: 2048
+          minLength: 0
+          type: string
+        Telephone:
+          description: The supplier's telephone number.
+          maxLength: 128
+          minLength: 0
+          type: string
+        WwwAddress:
+          description: The supplier's website address.
+          maxLength: 128
+          minLength: 0
+          type: string
+        Email:
+          description: The supplier's email address.
+          maxLength: 256
+          minLength: 0
+          type: string
+        IsActive:
+          description: Indicates whether the supplier is active.
+          type: boolean
+        ExternalSyncStatus:
+          description: The external synchronization status of the supplier.
+          enum:
+          - None
+          - ActionRequired
+          type: string
+        ExternalSyncMessage:
+          description: A message related to the external synchronization status.
+          type: string
+    MoreFlo.Models.InterfaceModels.SupplierResult:
+      description: 'Represents the result of an operation that returns a single supplier.
+
+        This class encapsulates a Supplier object and its unique identifier, typically used in API responses for single supplier operations.'
+      type: object
+      properties:
+        Supplier:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Supplier'
+          description: The Supplier object containing the supplier data.
+        Id:
+          description: The unique identifier of the supplier.
+          type: string
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
+    MoreFlo.Models.InterfaceModels.SuppliersResult:
+      description: 'Represents a paginated result containing a list of supplier results.
+
+        This class is used to return a collection of suppliers, along with pagination information, in API responses.'
+      type: object
+      properties:
+        ExtraInformation:
+          description: A list of extra information or messages related to the paginated result.
+          type: array
+          items:
+            type: string
+        list:
+          description: The list of data items for the current page.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SupplierResult'
+        Page:
+          format: int32
+          description: The current page number.
+          type: integer
+        Total:
+          format: int32
+          description: The total number of pages available.
+          type: integer
+        PageSize:
+          format: int32
+          description: The number of data items per page.
+          type: integer
+    MoreFlo.Models.InterfaceModels.Supplier:
+      description: Represents a supplier, containing information such as identification, contact details, and financial information.
+      required:
+      - Id
+      - Name
+      type: object
+      properties:
+        Id:
+          description: The unique identifier of the supplier.
+          maxLength: 64
+          minLength: 0
+          type: string
+        Name:
+          description: The name of the supplier.
+          maxLength: 100
+          minLength: 0
+          type: string
+        SupplierNumber:
+          description: The supplier number.
+          maxLength: 16
+          minLength: 0
+          type: string
+        Address1:
+          description: The first line of the supplier's address.
+          maxLength: 128
+          minLength: 0
+          type: string
+        Address2:
+          description: The second line of the supplier's address (optional).
+          maxLength: 128
+          minLength: 0
+          type: string
+        PostalCode:
+          description: The postal code of the supplier's address.
+          maxLength: 10
+          minLength: 0
+          type: string
+        City:
+          description: The city of the supplier's address.
+          maxLength: 128
+          minLength: 0
+          type: string
+        Country:
+          description: The country of the supplier.
+          maxLength: 128
+          minLength: 0
+          type: string
+        CountryCode:
+          description: The country code of the supplier.
+          maxLength: 10
+          minLength: 0
+          type: string
+        BankgiroNumber:
+          description: The Bankgiro number of the supplier.
+          maxLength: 50
+          minLength: 0
+          pattern: ^[0-9-]*$
+          type: string
+        PlusgiroNumber:
+          description: The Plusgiro number of the supplier.
+          maxLength: 10
+          minLength: 0
+          pattern: ^[0-9-]*$
+          type: string
+        CreatedUtc:
+          format: date-time
+          description: The UTC timestamp when the supplier was created.
+          type: string
+        ModifiedUtc:
+          format: date-time
+          description: The UTC timestamp when the supplier was last modified.
+          type: string
+        Note:
+          description: A general note about the supplier.
+          maxLength: 2048
+          minLength: 0
+          type: string
+        Telephone:
+          description: The supplier's telephone number.
+          maxLength: 128
+          minLength: 0
+          type: string
+        WwwAddress:
+          description: The supplier's website address.
+          maxLength: 128
+          minLength: 0
+          type: string
+        Email:
+          description: The supplier's email address.
+          maxLength: 256
+          minLength: 0
+          type: string
+        IsActive:
+          description: Indicates whether the supplier is active.
+          type: boolean
+        ExternalSyncStatus:
+          description: The external synchronization status of the supplier.
+          enum:
+          - None
+          - ActionRequired
+          type: string
+        ExternalSyncMessage:
+          description: A message related to the external synchronization status.
+          type: string
+  securitySchemes:
+    basic:
+      type: http
+      scheme: basic
+      description: Basic HTTP Authentication

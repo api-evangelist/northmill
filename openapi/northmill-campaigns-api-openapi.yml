@@ -1,0 +1,826 @@
+openapi: 3.2.0
+info:
+  version: v2
+  title: MoreFlo.Public.Api Campaigns API
+servers:
+- url: https://api.moreflo.com
+tags:
+- name: Campaigns
+paths:
+  /v2/campaigns:
+    get:
+      tags:
+      - Campaigns
+      summary: Get all campaigns.
+      operationId: Campaigns_Get
+      parameters:
+      - name: page
+        in: query
+        description: Page starts from 0 , default 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        description: PageSize, default 100.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: externalStoreId
+        in: query
+        description: externalStoreId of the store, if multistore admin.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetsResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetsResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetsResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetsResult'
+    put:
+      tags:
+      - Campaigns
+      summary: Update article sets.
+      operationId: Campaigns_Update
+      parameters:
+      - name: externalStoreId
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignsResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignsResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignsResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignsResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Campaign'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Campaign'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Campaign'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Campaign'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Campaign'
+        description: List of campaigns sets to update.
+        required: true
+    post:
+      tags:
+      - Campaigns
+      summary: Create campaigns.
+      operationId: Campaigns_Create
+      parameters:
+      - name: externalStoreId
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignsResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignsResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignsResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignsResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignCreate'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignCreate'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignCreate'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignCreate'
+        description: List of campaigns to create.
+        required: true
+  /v2/stores/{externalStoreId}/campaigns:
+    get:
+      tags:
+      - Campaigns
+      summary: Get all campaigns.
+      operationId: Campaigns_Get
+      parameters:
+      - name: page
+        in: query
+        description: Page starts from 0 , default 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        description: PageSize, default 100.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: externalStoreId
+        in: path
+        description: externalStoreId of the store, if multistore admin.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetsResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetsResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetsResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetsResult'
+    put:
+      tags:
+      - Campaigns
+      summary: Update article sets.
+      operationId: Campaigns_Update
+      parameters:
+      - name: externalStoreId
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignsResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignsResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignsResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignsResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Campaign'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Campaign'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Campaign'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Campaign'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Campaign'
+        description: List of campaigns sets to update.
+        required: true
+    post:
+      tags:
+      - Campaigns
+      summary: Create campaigns.
+      operationId: Campaigns_Create
+      parameters:
+      - name: externalStoreId
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignsResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignsResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignsResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignsResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignCreate'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignCreate'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignCreate'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignCreate'
+        description: List of campaigns to create.
+        required: true
+  /v2/campaigns/{Id}:
+    get:
+      tags:
+      - Campaigns
+      summary: Get a campaign.
+      operationId: Campaigns_Get
+      parameters:
+      - name: Id
+        in: path
+        description: Id of campaign.
+        required: true
+        schema:
+          type: string
+      - name: externalStoreId
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignResult'
+    delete:
+      tags:
+      - Campaigns
+      summary: Delete a campaign.
+      operationId: Campaigns_Delete
+      parameters:
+      - name: Id
+        in: path
+        description: Id of campaign to be deleted.
+        required: true
+        schema:
+          type: string
+      - name: externalStoreId
+        in: query
+        description: externalStoreId of the store, if multistore admin.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignResult'
+  /v2/stores/{externalStoreId}/campaigns/{Id}:
+    get:
+      tags:
+      - Campaigns
+      summary: Get a campaign.
+      operationId: Campaigns_Get
+      parameters:
+      - name: Id
+        in: path
+        description: Id of campaign.
+        required: true
+        schema:
+          type: string
+      - name: externalStoreId
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignResult'
+    delete:
+      tags:
+      - Campaigns
+      summary: Delete a campaign.
+      operationId: Campaigns_Delete
+      parameters:
+      - name: Id
+        in: path
+        description: Id of campaign to be deleted.
+        required: true
+        schema:
+          type: string
+      - name: externalStoreId
+        in: path
+        description: externalStoreId of the store, if multistore admin.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignResult'
+components:
+  schemas:
+    MoreFlo.Models.InterfaceModels.Campaign:
+      description: Represents a campaign with various properties and settings.
+      required:
+      - Id
+      - MemberOnly
+      type: object
+      properties:
+        Id:
+          description: The unique identifier of the campaign.
+          maxLength: 64
+          minLength: 0
+          type: string
+        Name:
+          description: The name of the campaign.
+          type: string
+        ReceiptText:
+          description: The text to be displayed on the receipt for this campaign.
+          type: string
+        Type:
+          description: The type of campaign.
+          enum:
+          - ByXgetYNumber
+          - ByXNumberGetYValueAmountDiscount
+          - ByXNumberPayYValue
+          - Percent
+          - SpecialPrice
+          - AmountWithDrawn
+          type: string
+        MemberOnly:
+          description: Indicates whether the campaign is only applicable to members.
+          type: boolean
+        MemberGroupName:
+          description: The name of the member group entitled to this campaign.
+          type: string
+        MemberNumbers:
+          description: A list of customer numbers that are entitled to this campaign, applicable if MemberOnly is true.
+          type: array
+          items:
+            type: string
+        StartTime:
+          format: date-time
+          description: The start time of the campaign.
+          type: string
+        EndTime:
+          format: date-time
+          description: The end time of the campaign.
+          type: string
+        ValueX:
+          format: double
+          description: The first value used in two-value campaigns (e.g., Buy X get Y).
+          type: number
+        ValueY:
+          format: double
+          description: The second value used in two-value campaigns (e.g., Buy X get Y).
+          type: number
+        Value:
+          format: double
+          description: The single global value used in the campaign.
+          type: number
+        ValueIsGlobal:
+          description: Indicates whether the Value is the same for all campaign content. Applies to Percent, SpecialPrice, and AmountWithDrawn campaigns.
+          type: boolean
+        Priority:
+          format: int32
+          description: Defines the priority of the campaign if multiple campaigns apply to a receipt item.
+          type: integer
+        ThresholdTotal:
+          format: double
+          description: The threshold amount required on the receipt for the campaign to apply.
+          type: number
+        ThresholdTotalIncludeThis:
+          description: Indicates whether the purchase of this campaign is included in the total threshold calculation.
+          type: boolean
+        Enabled:
+          description: Indicates whether the campaign is enabled.
+          type: boolean
+        parts:
+          description: A list of campaign items (parts) that are included in the campaign.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignPart'
+    MoreFlo.Models.InterfaceModels.CampaignsResult:
+      description: Represents a paged result containing a list of CampaignResult objects.
+      type: object
+      properties:
+        ExtraInformation:
+          description: A list of extra information or messages related to the paginated result.
+          type: array
+          items:
+            type: string
+        list:
+          description: The list of data items for the current page.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignResult'
+        Page:
+          format: int32
+          description: The current page number.
+          type: integer
+        Total:
+          format: int32
+          description: The total number of pages available.
+          type: integer
+        PageSize:
+          format: int32
+          description: The number of data items per page.
+          type: integer
+    MoreFlo.Models.InterfaceModels.ArticleSetResult:
+      description: Represents the result of an operation involving an ArticleSet entity.
+      type: object
+      properties:
+        ArticleSet:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSet'
+          description: The ArticleSet entity resulting from the operation.
+        ArticleNumber:
+          description: The unique article number of the article set.
+          type: string
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
+    MoreFlo.Models.InterfaceModels.CampaignResult:
+      description: Represents the result of an operation involving a Campaign entity.
+      type: object
+      properties:
+        Campaign:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Campaign'
+          description: The Campaign entity resulting from the operation.
+        Id:
+          description: The unique identifier of the Campaign.
+          type: string
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
+    MoreFlo.Models.InterfaceModels.CampaignCreate:
+      description: Represents the data required to create a new campaign.
+      required:
+      - Name
+      - ReceiptText
+      - Type
+      - StartTime
+      - EndTime
+      - ValueIsGlobal
+      - Priority
+      - Enabled
+      - Id
+      - MemberOnly
+      type: object
+      properties:
+        UpdateOnExisting:
+          description: Indicates whether to update an existing campaign if one with the same ID already exists.
+          type: boolean
+        Name:
+          description: The name of the campaign. Required for creation.
+          type: string
+        ReceiptText:
+          description: The text to be displayed on the receipt for this campaign. Required for creation.
+          type: string
+        Type:
+          description: The type of campaign. Required for creation.
+          enum:
+          - ByXgetYNumber
+          - ByXNumberGetYValueAmountDiscount
+          - ByXNumberPayYValue
+          - Percent
+          - SpecialPrice
+          - AmountWithDrawn
+          type: string
+        StartTime:
+          format: date-time
+          description: The start time of the campaign. Required for creation.
+          type: string
+        EndTime:
+          format: date-time
+          description: The end time of the campaign. Required for creation.
+          type: string
+        ValueIsGlobal:
+          description: Indicates whether the Value is the same for all campaign content. Required for creation.
+          type: boolean
+        Priority:
+          format: int32
+          description: Defines the priority of the campaign if multiple campaigns apply to a receipt item. Required for creation.
+          type: integer
+        Enabled:
+          description: Indicates whether the campaign is enabled. Required for creation.
+          type: boolean
+        Id:
+          description: The unique identifier of the campaign.
+          maxLength: 64
+          minLength: 0
+          type: string
+        MemberOnly:
+          description: Indicates whether the campaign is only applicable to members.
+          type: boolean
+        MemberGroupName:
+          description: The name of the member group entitled to this campaign.
+          type: string
+        MemberNumbers:
+          description: A list of customer numbers that are entitled to this campaign, applicable if MemberOnly is true.
+          type: array
+          items:
+            type: string
+        ValueX:
+          format: double
+          description: The first value used in two-value campaigns (e.g., Buy X get Y).
+          type: number
+        ValueY:
+          format: double
+          description: The second value used in two-value campaigns (e.g., Buy X get Y).
+          type: number
+        Value:
+          format: double
+          description: The single global value used in the campaign.
+          type: number
+        ThresholdTotal:
+          format: double
+          description: The threshold amount required on the receipt for the campaign to apply.
+          type: number
+        ThresholdTotalIncludeThis:
+          description: Indicates whether the purchase of this campaign is included in the total threshold calculation.
+          type: boolean
+        parts:
+          description: A list of campaign items (parts) that are included in the campaign.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignPart'
+    MoreFlo.Models.InterfaceModels.ArticleSet:
+      description: Represents a set of articles, often sold together as a bundle.
+      required:
+      - ArticleNumber
+      type: object
+      properties:
+        ArticleNumber:
+          description: The unique article number for the article set.
+          type: string
+        ArticleName:
+          description: The name of the article set.
+          type: string
+        Barcode:
+          description: The barcode for the article set.
+          maxLength: 20
+          minLength: 0
+          type: string
+        Group:
+          description: The group the article set belongs to.
+          maxLength: 200
+          minLength: 0
+          type: string
+        IsActive:
+          description: Indicates whether the article set is active.
+          type: boolean
+        PricePrintOption:
+          description: The option for how the price of the article set should be printed on a receipt.
+          enum:
+          - PrintSetPrice
+          - PrintWithDiscount
+          type: string
+        articleSetParts:
+          description: A list of parts (articles) that make up the article set.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetPart'
+    MoreFlo.Models.InterfaceModels.ArticleSetsResult:
+      description: Represents a paged result containing a list of ArticleSetResult objects.
+      type: object
+      properties:
+        ExtraInformation:
+          description: A list of extra information or messages related to the paginated result.
+          type: array
+          items:
+            type: string
+        list:
+          description: The list of data items for the current page.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetResult'
+        Page:
+          format: int32
+          description: The current page number.
+          type: integer
+        Total:
+          format: int32
+          description: The total number of pages available.
+          type: integer
+        PageSize:
+          format: int32
+          description: The number of data items per page.
+          type: integer
+    MoreFlo.Models.InterfaceModels.CampaignPart:
+      description: Represents a part of a campaign, specifying the reference, type, and value associated with it.
+      required:
+      - Reference
+      - PartType
+      type: object
+      properties:
+        Reference:
+          description: The reference to the campaign part, which can be an article number or a product model.
+          type: string
+        PartType:
+          description: The type of the campaign part, indicating whether it's an article, product model, or group.
+          enum:
+          - Article
+          - ProductModel
+          - Group
+          type: string
+        Value:
+          format: double
+          description: An optional value associated with the campaign part.
+          type: number
+    MoreFlo.Models.InterfaceModels.ArticleSetPart:
+      description: Represents a part of an article set.
+      required:
+      - Quantity
+      - ArticleReference
+      - PartType
+      - PartPricePerUnit
+      type: object
+      properties:
+        Quantity:
+          format: double
+          description: The quantity of the part in the set.
+          type: number
+        ArticleReference:
+          description: The article number or product model identifier of the part.
+          type: string
+        PartType:
+          description: The type of the part (article or product model).
+          enum:
+          - Article
+          - ArticleProductModel
+          type: string
+        PartPricePerUnit:
+          format: double
+          description: The price per unit of the part, including VAT.
+          type: number
+  securitySchemes:
+    basic:
+      type: http
+      scheme: basic
+      description: Basic HTTP Authentication

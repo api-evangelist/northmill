@@ -1,0 +1,575 @@
+openapi: 3.2.0
+info:
+  version: v2
+  title: MoreFlo.Public.Api Article Sets API
+servers:
+- url: https://api.moreflo.com
+tags:
+- name: ArticleSets
+paths:
+  /v2/articlesets:
+    get:
+      tags:
+      - ArticleSets
+      summary: Get all artcile sets.
+      operationId: ArticleSets_Get
+      parameters:
+      - name: page
+        in: query
+        description: Page starts from 0 , default 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        description: PageSize, default 100.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: UpdatedSince
+        in: query
+        description: Get sets updated since.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: externalStoreId
+        in: query
+        description: externalStoreId of the store, if multistore admin.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetsResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetsResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetsResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetsResult'
+    put:
+      tags:
+      - ArticleSets
+      summary: Update article sets.
+      operationId: ArticleSets_Update
+      parameters:
+      - name: externalStoreId
+        in: query
+        description: Id of store if multi store admin.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetsResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetsResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetsResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetsResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSet'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSet'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSet'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSet'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSet'
+        description: List of article sets to update.
+        required: true
+    post:
+      tags:
+      - ArticleSets
+      summary: Create article sets.
+      operationId: ArticleSets_Create
+      parameters:
+      - name: externalStoreId
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetsResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetsResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetsResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetsResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetCreate'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetCreate'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetCreate'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetCreate'
+        description: List of article sets to create.
+        required: true
+  /v2/stores/{externalStoreId}/articlesets:
+    get:
+      tags:
+      - ArticleSets
+      summary: Get all artcile sets.
+      operationId: ArticleSets_Get
+      parameters:
+      - name: page
+        in: query
+        description: Page starts from 0 , default 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        description: PageSize, default 100.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: UpdatedSince
+        in: query
+        description: Get sets updated since.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: externalStoreId
+        in: path
+        description: externalStoreId of the store, if multistore admin.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetsResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetsResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetsResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetsResult'
+    put:
+      tags:
+      - ArticleSets
+      summary: Update article sets.
+      operationId: ArticleSets_Update
+      parameters:
+      - name: externalStoreId
+        in: path
+        description: Id of store if multi store admin.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetsResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetsResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetsResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetsResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSet'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSet'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSet'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSet'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSet'
+        description: List of article sets to update.
+        required: true
+    post:
+      tags:
+      - ArticleSets
+      summary: Create article sets.
+      operationId: ArticleSets_Create
+      parameters:
+      - name: externalStoreId
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetsResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetsResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetsResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetsResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetCreate'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetCreate'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetCreate'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetCreate'
+        description: List of article sets to create.
+        required: true
+  /v2/articlesets/{ArticleNumber}:
+    get:
+      tags:
+      - ArticleSets
+      summary: Get an artcile set.
+      operationId: ArticleSets_Get
+      parameters:
+      - name: ArticleNumber
+        in: path
+        description: Article number
+        required: true
+        schema:
+          type: string
+      - name: externalStoreId
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetResult'
+  /v2/stores/{externalStoreId}/articlesets/{ArticleNumber}:
+    get:
+      tags:
+      - ArticleSets
+      summary: Get an artcile set.
+      operationId: ArticleSets_Get
+      parameters:
+      - name: ArticleNumber
+        in: path
+        description: Article number
+        required: true
+        schema:
+          type: string
+      - name: externalStoreId
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetResult'
+components:
+  schemas:
+    MoreFlo.Models.InterfaceModels.ArticleSetResult:
+      description: Represents the result of an operation involving an ArticleSet entity.
+      type: object
+      properties:
+        ArticleSet:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSet'
+          description: The ArticleSet entity resulting from the operation.
+        ArticleNumber:
+          description: The unique article number of the article set.
+          type: string
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
+    MoreFlo.Models.InterfaceModels.ArticleSet:
+      description: Represents a set of articles, often sold together as a bundle.
+      required:
+      - ArticleNumber
+      type: object
+      properties:
+        ArticleNumber:
+          description: The unique article number for the article set.
+          type: string
+        ArticleName:
+          description: The name of the article set.
+          type: string
+        Barcode:
+          description: The barcode for the article set.
+          maxLength: 20
+          minLength: 0
+          type: string
+        Group:
+          description: The group the article set belongs to.
+          maxLength: 200
+          minLength: 0
+          type: string
+        IsActive:
+          description: Indicates whether the article set is active.
+          type: boolean
+        PricePrintOption:
+          description: The option for how the price of the article set should be printed on a receipt.
+          enum:
+          - PrintSetPrice
+          - PrintWithDiscount
+          type: string
+        articleSetParts:
+          description: A list of parts (articles) that make up the article set.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetPart'
+    MoreFlo.Models.InterfaceModels.ArticleSetCreate:
+      description: 'Represents the data required to create a new article set.
+
+        Inherits from ArticleSet and adds specific creation-related properties.'
+      required:
+      - ArticleName
+      - IsActive
+      - PricePrintOption
+      - articleSetParts
+      - ArticleNumber
+      type: object
+      properties:
+        ArticleName:
+          description: The name of the article set. Required for creation.
+          type: string
+        IsActive:
+          description: Indicates whether the article set is active. Required for creation.
+          type: boolean
+        PricePrintOption:
+          description: The option for how the price of the article set should be printed on a receipt. Required for creation.
+          enum:
+          - PrintSetPrice
+          - PrintWithDiscount
+          type: string
+        articleSetParts:
+          description: A list of parts (articles) that make up the article set. Required for creation.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetPart'
+        UpdateOnExisting:
+          description: Indicates whether to update an existing article set if one with the same ID already exists.
+          type: boolean
+        ArticleNumber:
+          description: The unique article number for the article set.
+          type: string
+        Barcode:
+          description: The barcode for the article set.
+          maxLength: 20
+          minLength: 0
+          type: string
+        Group:
+          description: The group the article set belongs to.
+          maxLength: 200
+          minLength: 0
+          type: string
+    MoreFlo.Models.InterfaceModels.ArticleSetsResult:
+      description: Represents a paged result containing a list of ArticleSetResult objects.
+      type: object
+      properties:
+        ExtraInformation:
+          description: A list of extra information or messages related to the paginated result.
+          type: array
+          items:
+            type: string
+        list:
+          description: The list of data items for the current page.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetResult'
+        Page:
+          format: int32
+          description: The current page number.
+          type: integer
+        Total:
+          format: int32
+          description: The total number of pages available.
+          type: integer
+        PageSize:
+          format: int32
+          description: The number of data items per page.
+          type: integer
+    MoreFlo.Models.InterfaceModels.ArticleSetPart:
+      description: Represents a part of an article set.
+      required:
+      - Quantity
+      - ArticleReference
+      - PartType
+      - PartPricePerUnit
+      type: object
+      properties:
+        Quantity:
+          format: double
+          description: The quantity of the part in the set.
+          type: number
+        ArticleReference:
+          description: The article number or product model identifier of the part.
+          type: string
+        PartType:
+          description: The type of the part (article or product model).
+          enum:
+          - Article
+          - ArticleProductModel
+          type: string
+        PartPricePerUnit:
+          format: double
+          description: The price per unit of the part, including VAT.
+          type: number
+  securitySchemes:
+    basic:
+      type: http
+      scheme: basic
+      description: Basic HTTP Authentication

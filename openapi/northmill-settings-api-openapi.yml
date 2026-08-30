@@ -1,0 +1,305 @@
+openapi: 3.2.0
+info:
+  version: v2
+  title: MoreFlo.Public.Api Settings API
+servers:
+- url: https://api.moreflo.com
+tags:
+- name: Settings
+paths:
+  /v2/settings:
+    get:
+      tags:
+      - Settings
+      summary: Fetch settings.
+      operationId: Settings_Get
+      parameters:
+      - name: externalStoreId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SettingsResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SettingsResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SettingsResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SettingsResult'
+  /v2/stores/{externalStoreId}/settings:
+    get:
+      tags:
+      - Settings
+      summary: Fetch settings.
+      operationId: Settings_Get
+      parameters:
+      - name: externalStoreId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SettingsResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SettingsResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SettingsResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SettingsResult'
+  /v2/bookings/settings:
+    get:
+      tags:
+      - Settings
+      summary: Fetch booking settings.
+      operationId: Settings_GetBookingSettings
+      parameters:
+      - name: externalStoreId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BookingSettingsResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BookingSettingsResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BookingSettingsResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BookingSettingsResult'
+  /v2/stores/{externalStoreId}/bookings/settings:
+    get:
+      tags:
+      - Settings
+      summary: Fetch booking settings.
+      operationId: Settings_GetBookingSettings
+      parameters:
+      - name: externalStoreId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BookingSettingsResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BookingSettingsResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BookingSettingsResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BookingSettingsResult'
+components:
+  schemas:
+    MoreFlo.Models.InterfaceModels.Settings:
+      description: 'Represents general application or system settings.
+
+        This class encapsulates various configuration options, such as accounting integration, currency code, and company information.'
+      type: object
+      properties:
+        AccountingIntegrationEnabled:
+          description: Indicates whether accounting integration is enabled.
+          type: boolean
+        CurrencyCode:
+          description: The currency code used by the system.
+          type: string
+        PublicUrlOrHostPart:
+          description: The public URL or host part of the application.
+          type: string
+        CompanyName:
+          description: The name of the company.
+          type: string
+        OrganizationNumber:
+          description: The organization number of the company.
+          type: string
+        PartialRefundArticleNumber:
+          description: The article number used for partial refunds.
+          type: string
+        OrderExpireTimePartEnabled:
+          description: Indicates whether the order expiration time part is enabled.
+          type: boolean
+        ShippingArticleNumber:
+          description: The article number used for shipping costs.
+          type: string
+        IsTakeAwayEnabled:
+          description: Specifies whether the takeaway functionality is enabled.
+          type: boolean
+    MoreFlo.Models.InterfaceModels.SettingsResult:
+      description: 'Represents the result of an operation that returns application settings.
+
+        This class encapsulates a Settings object, typically used in API responses related to retrieving or managing application-wide settings.'
+      type: object
+      properties:
+        Settings:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Settings'
+          description: The Settings object containing the application settings data.
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
+    MoreFlo.Models.InterfaceModels.BookingSettingsResult:
+      description: 'Represents the result of an operation that returns booking settings.
+
+        This class encapsulates a SubscriberBookingSetting object, typically used in API responses related to retrieving or managing booking configuration.'
+      type: object
+      properties:
+        Settings:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SubscriberBookingSetting'
+          description: The SubscriberBookingSetting object containing the booking settings data.
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
+    MoreFlo.Models.InterfaceModels.SubscriberBookingSetting:
+      description: Represents booking settings for a subscriber, including customer booking options, visibility, appearance, content, and company information.
+      type: object
+      properties:
+        CustomerBookingEnabled:
+          description: Indicates whether booking is enabled for external customers.
+          type: boolean
+        CustomerBookingRequiresLogin:
+          description: Indicates whether customers are required to have an account to make a booking.
+          type: boolean
+        VisibibleInMoreFloBookingPortal:
+          description: Indicates whether the store should be visible in the MoreFlo booking portal.
+          type: boolean
+        SelectResourceStyleAuto:
+          description: Determines if the resource selection style is automatic.
+          type: boolean
+        FrontPageTextHtml:
+          description: HTML formatted text for the front page.
+          type: string
+        CreatedTime:
+          format: date-time
+          description: The time when the booking settings were created.
+          type: string
+        LastUpdatedTime:
+          format: date-time
+          description: The time when the booking settings were last updated.
+          type: string
+        CancellationInformationTextHtml:
+          description: HTML formatted text for cancellation information.
+          maxLength: 65535
+          minLength: 0
+          type: string
+        TermOfPurchaseTextHtml:
+          description: HTML formatted text for terms of purchase.
+          maxLength: 65535
+          minLength: 0
+          type: string
+        BookingThankYouInfoTextHtml:
+          description: HTML formatted text for booking thank you information.
+          maxLength: 65535
+          minLength: 0
+          type: string
+        BookingExtraInfo:
+          description: Extra information for booking.
+          maxLength: 2048
+          minLength: 0
+          type: string
+        OpeningHoursInformation:
+          description: Plain text multi-line information about opening hours.
+          type: string
+        CompanyName:
+          description: The name of the company.
+          type: string
+        Address1:
+          description: The first line of the company's address.
+          type: string
+        Address2:
+          description: The second line of the company's address (optional).
+          type: string
+        PostCode:
+          description: The postal code of the company's address.
+          type: string
+        City:
+          description: The city of the company's address.
+          type: string
+        Country:
+          description: The country of the company's address.
+          type: string
+        Telephone:
+          description: The telephone number of the company.
+          type: string
+        Email:
+          description: The email address of the company.
+          type: string
+        Gallery:
+          description: A list of files representing the gallery images.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AttachedFile'
+        Logotypes:
+          description: A list of files representing the company's logotypes.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AttachedFile'
+    MoreFlo.Models.InterfaceModels.AttachedFile:
+      type: object
+      properties:
+        Id:
+          type: string
+        Name:
+          type: string
+        Description:
+          type: string
+        CreatedTime:
+          format: date-time
+          type: string
+        ContentType:
+          type: string
+        IsMainFile:
+          type: boolean
+        URL:
+          type: string
+  securitySchemes:
+    basic:
+      type: http
+      scheme: basic
+      description: Basic HTTP Authentication

@@ -1,0 +1,623 @@
+openapi: 3.2.0
+info:
+  version: v2
+  title: MoreFlo.Public.Api Account Codes API
+servers:
+- url: https://api.moreflo.com
+tags:
+- name: AccountCodes
+paths:
+  /v2/accountcodes:
+    get:
+      tags:
+      - AccountCodes
+      summary: Get all account codes.
+      operationId: AccountCodes_Get
+      parameters:
+      - name: page
+        in: query
+        description: Page starts from 0 , default 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        description: PageSize, default 100.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: externalStoreId
+        in: query
+        description: externalStoreId of the store, if multistore admin.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodesResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodesResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodesResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodesResult'
+    put:
+      tags:
+      - AccountCodes
+      summary: Update account codes.
+      operationId: AccountCodes_Update
+      parameters:
+      - name: externalStoreId
+        in: query
+        description: externalStoreId of the store, if multistore admin.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodeResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodeResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodeResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodeResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCode'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCode'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCode'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCode'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCode'
+        description: List of account codes to update.
+        required: true
+    post:
+      tags:
+      - AccountCodes
+      summary: Create account codes.
+      operationId: AccountCodes_Create
+      parameters:
+      - name: externalStoreId
+        in: query
+        description: Id to update if multistore admin.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodesResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodesResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodesResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodesResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodeCreate'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodeCreate'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodeCreate'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodeCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodeCreate'
+        description: List of account codes.
+        required: true
+  /v2/stores/{externalStoreId}/accountcodes:
+    get:
+      tags:
+      - AccountCodes
+      summary: Get all account codes.
+      operationId: AccountCodes_Get
+      parameters:
+      - name: page
+        in: query
+        description: Page starts from 0 , default 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        description: PageSize, default 100.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: externalStoreId
+        in: path
+        description: externalStoreId of the store, if multistore admin.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodesResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodesResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodesResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodesResult'
+    put:
+      tags:
+      - AccountCodes
+      summary: Update account codes.
+      operationId: AccountCodes_Update
+      parameters:
+      - name: externalStoreId
+        in: path
+        description: externalStoreId of the store, if multistore admin.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodeResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodeResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodeResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodeResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCode'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCode'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCode'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCode'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCode'
+        description: List of account codes to update.
+        required: true
+    post:
+      tags:
+      - AccountCodes
+      summary: Create account codes.
+      operationId: AccountCodes_Create
+      parameters:
+      - name: externalStoreId
+        in: path
+        description: Id to update if multistore admin.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodesResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodesResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodesResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodesResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodeCreate'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodeCreate'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodeCreate'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodeCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodeCreate'
+        description: List of account codes.
+        required: true
+  /v2/accountcodes/{Id}:
+    get:
+      tags:
+      - AccountCodes
+      summary: Get a specific account code
+      operationId: AccountCodes_Get
+      parameters:
+      - name: Id
+        in: path
+        description: Id of account code.
+        required: true
+        schema:
+          type: string
+      - name: externalStoreId
+        in: query
+        description: externalStoreId of the store, if multistore admin.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodeResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodeResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodeResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodeResult'
+    delete:
+      tags:
+      - AccountCodes
+      summary: Delete an account code.
+      operationId: AccountCodes_Delete
+      parameters:
+      - name: Id
+        in: path
+        description: Name of account code to be deleted.
+        required: true
+        schema:
+          type: string
+      - name: externalStoreId
+        in: query
+        description: externalStoreId of the store, if multistore admin.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodeResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodeResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodeResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodeResult'
+  /v2/stores/{externalStoreId}/accountcodes/{Id}:
+    get:
+      tags:
+      - AccountCodes
+      summary: Get a specific account code
+      operationId: AccountCodes_Get
+      parameters:
+      - name: Id
+        in: path
+        description: Id of account code.
+        required: true
+        schema:
+          type: string
+      - name: externalStoreId
+        in: path
+        description: externalStoreId of the store, if multistore admin.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodeResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodeResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodeResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodeResult'
+    delete:
+      tags:
+      - AccountCodes
+      summary: Delete an account code.
+      operationId: AccountCodes_Delete
+      parameters:
+      - name: Id
+        in: path
+        description: Name of account code to be deleted.
+        required: true
+        schema:
+          type: string
+      - name: externalStoreId
+        in: path
+        description: externalStoreId of the store, if multistore admin.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodeResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodeResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodeResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodeResult'
+components:
+  schemas:
+    MoreFlo.Models.InterfaceModels.AccountCodeCreate:
+      description: Represents the data required to create a new account code.
+      required:
+      - Name
+      - VatRate
+      - Description
+      - Account
+      - Id
+      type: object
+      properties:
+        Name:
+          description: The name of the account code (unique). Required for creation.
+          maxLength: 100
+          minLength: 0
+          type: string
+        VatRate:
+          format: double
+          description: The VAT rate associated with the account code. Required for creation.
+          type: number
+        Description:
+          description: A description of the account code. Required for creation.
+          type: string
+        Account:
+          format: int32
+          description: The account number associated with the account code. Required for creation.
+          type: integer
+        UpdateOnExisting:
+          description: Indicates whether to update an existing account code if one with the same ID already exists.
+          type: boolean
+        Id:
+          description: The unique identifier of the account code.
+          maxLength: 64
+          minLength: 0
+          type: string
+        CostCenter:
+          description: The cost center associated with the account code.
+          type: string
+        Project:
+          description: The project associated with the account code.
+          type: string
+        TakeAwayAccount:
+          format: int32
+          description: Represents the account associated with takeaway-related transactions.
+          type: integer
+        TakeAwayVatRate:
+          format: double
+          description: 'The VAT rate applicable to takeaway accounts.
+
+            Represents the VAT rate specific to transactions involving takeaway items.'
+          type: number
+        KeepRetailPriceForTakeAway:
+          description: Indicates whether the retail price should be kept for takeaway transactions.
+          type: boolean
+    MoreFlo.Models.InterfaceModels.AccountCode:
+      description: Represents an account code with various properties.
+      required:
+      - Id
+      type: object
+      properties:
+        Id:
+          description: The unique identifier of the account code.
+          maxLength: 64
+          minLength: 0
+          type: string
+        Name:
+          description: The name of the account code (unique).
+          maxLength: 100
+          minLength: 0
+          type: string
+        VatRate:
+          format: double
+          description: The VAT rate associated with the account code.
+          type: number
+        Description:
+          description: A description of the account code.
+          type: string
+        Account:
+          format: int32
+          description: The account number associated with the account code.
+          type: integer
+        CostCenter:
+          description: The cost center associated with the account code.
+          type: string
+        Project:
+          description: The project associated with the account code.
+          type: string
+        TakeAwayAccount:
+          format: int32
+          description: Represents the account associated with takeaway-related transactions.
+          type: integer
+        TakeAwayVatRate:
+          format: double
+          description: 'The VAT rate applicable to takeaway accounts.
+
+            Represents the VAT rate specific to transactions involving takeaway items.'
+          type: number
+        KeepRetailPriceForTakeAway:
+          description: Indicates whether the retail price should be kept for takeaway transactions.
+          type: boolean
+    MoreFlo.Models.InterfaceModels.AccountCodeResult:
+      description: Represents the result of an operation involving an AccountCode entity.
+      type: object
+      properties:
+        AccountCode:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCode'
+          description: The AccountCode entity resulting from the operation.
+        Id:
+          description: The unique identifier of the AccountCode.
+          type: string
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
+    MoreFlo.Models.InterfaceModels.AccountCodesResult:
+      description: ''
+      type: object
+      properties:
+        ExtraInformation:
+          description: A list of extra information or messages related to the paginated result.
+          type: array
+          items:
+            type: string
+        list:
+          description: The list of data items for the current page.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodeResult'
+        Page:
+          format: int32
+          description: The current page number.
+          type: integer
+        Total:
+          format: int32
+          description: The total number of pages available.
+          type: integer
+        PageSize:
+          format: int32
+          description: The number of data items per page.
+          type: integer
+  securitySchemes:
+    basic:
+      type: http
+      scheme: basic
+      description: Basic HTTP Authentication

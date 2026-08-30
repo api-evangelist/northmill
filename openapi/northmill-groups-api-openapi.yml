@@ -1,0 +1,630 @@
+openapi: 3.2.0
+info:
+  version: v2
+  title: MoreFlo.Public.Api Groups API
+servers:
+- url: https://api.moreflo.com
+tags:
+- name: Groups
+paths:
+  /v2/groups:
+    get:
+      tags:
+      - Groups
+      summary: Get all groups.
+      operationId: Groups_Get
+      parameters:
+      - name: page
+        in: query
+        description: Page starts from 0 , default 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        description: PageSize, default 100.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: externalStoreId
+        in: query
+        description: externalStoreId of the store, if multistore admin.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupsResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupsResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupsResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupsResult'
+    put:
+      tags:
+      - Groups
+      summary: Update list of groups.
+      operationId: Groups_Update
+      parameters:
+      - name: externalStoreId
+        in: query
+        description: externalStoreId of the store, if multistore admin.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupsResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupsResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupsResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupsResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Group'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Group'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Group'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Group'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Group'
+        description: List of groups to update data.
+        required: true
+    post:
+      tags:
+      - Groups
+      summary: 'Create groups.
+
+        <param name="externalStoreId"> Id to update if multistore admin.</param><param name="groups"> List of groups.</param>'
+      operationId: Groups_Create
+      parameters:
+      - name: externalStoreId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupsResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupsResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupsResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupsResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupCreate'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupCreate'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupCreate'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupCreate'
+        required: true
+  /v2/stores/{externalStoreId}/groups:
+    get:
+      tags:
+      - Groups
+      summary: Get all groups.
+      operationId: Groups_Get
+      parameters:
+      - name: page
+        in: query
+        description: Page starts from 0 , default 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        description: PageSize, default 100.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: externalStoreId
+        in: path
+        description: externalStoreId of the store, if multistore admin.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupsResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupsResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupsResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupsResult'
+    put:
+      tags:
+      - Groups
+      summary: Update list of groups.
+      operationId: Groups_Update
+      parameters:
+      - name: externalStoreId
+        in: path
+        description: externalStoreId of the store, if multistore admin.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupsResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupsResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupsResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupsResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Group'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Group'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Group'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Group'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Group'
+        description: List of groups to update data.
+        required: true
+    post:
+      tags:
+      - Groups
+      summary: 'Create groups.
+
+        <param name="externalStoreId"> Id to update if multistore admin.</param><param name="groups"> List of groups.</param>'
+      operationId: Groups_Create
+      parameters:
+      - name: externalStoreId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupsResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupsResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupsResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupsResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupCreate'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupCreate'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupCreate'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupCreate'
+        required: true
+  /v2/groups/{Id}:
+    get:
+      tags:
+      - Groups
+      summary: Get a specific group
+      operationId: Groups_Get
+      parameters:
+      - name: Id
+        in: path
+        description: Id of group.
+        required: true
+        schema:
+          type: string
+      - name: externalStoreId
+        in: query
+        description: externalStoreId of the store, if multistore admin.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupResult'
+    delete:
+      tags:
+      - Groups
+      summary: Delete a group.
+      operationId: Groups_Delete
+      parameters:
+      - name: Id
+        in: path
+        description: Id of group to be deleted.
+        required: true
+        schema:
+          type: string
+      - name: externalStoreId
+        in: query
+        description: externalStoreId of the store, if multistore admin.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupResult'
+  /v2/stores/{externalStoreId}/groups/{Id}:
+    get:
+      tags:
+      - Groups
+      summary: Get a specific group
+      operationId: Groups_Get
+      parameters:
+      - name: Id
+        in: path
+        description: Id of group.
+        required: true
+        schema:
+          type: string
+      - name: externalStoreId
+        in: path
+        description: externalStoreId of the store, if multistore admin.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupResult'
+    delete:
+      tags:
+      - Groups
+      summary: Delete a group.
+      operationId: Groups_Delete
+      parameters:
+      - name: Id
+        in: path
+        description: Id of group to be deleted.
+        required: true
+        schema:
+          type: string
+      - name: externalStoreId
+        in: path
+        description: externalStoreId of the store, if multistore admin.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupResult'
+components:
+  schemas:
+    MoreFlo.Models.InterfaceModels.GroupResult:
+      description: 'Represents the result of an operation that returns a single group.
+
+        This class encapsulates a group and its unique identifier, typically used in API responses for single group operations.'
+      type: object
+      properties:
+        Group:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Group'
+          description: The Group object containing the group's data.
+        Id:
+          description: The unique identifier of the group.
+          type: string
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
+    MoreFlo.Models.InterfaceModels.Group:
+      description: Represents a group, which can be used to categorize or organize articles or other data within the system.
+      required:
+      - Id
+      type: object
+      properties:
+        Id:
+          description: The unique identifier of the group.
+          maxLength: 64
+          minLength: 0
+          type: string
+        ParentId:
+          description: The identifier of the parent group, if this group is a sub-group.
+          maxLength: 64
+          minLength: 0
+          type: string
+        Name:
+          description: The name of the group.
+          maxLength: 100
+          minLength: 0
+          type: string
+        ExternalReference:
+          description: An external reference identifier for the group, potentially used by other systems.
+          maxLength: 128
+          minLength: 0
+          type: string
+        ModifiedTime:
+          format: date-time
+          description: The time when the group was last modified.
+          type: string
+        DefaultAccountCodeId:
+          description: The identifier of the default account code associated with this group.
+          maxLength: 64
+          minLength: 0
+          type: string
+        DisplayOrder:
+          format: int32
+          description: The display order of the group, used for sorting or presentation purposes.
+          type: integer
+        ArticleGoodsType:
+          description: The default article goods type for articles within this group.
+          enum:
+          - NotSet
+          - Other
+          - Alcohol
+          - Tobacco
+          - Gambling
+          - Hazardous
+          type: string
+    MoreFlo.Models.InterfaceModels.GroupCreate:
+      description: "Represents the data structure used to create a new group. \nThis class specifies the required information for group creation within the system."
+      required:
+      - Name
+      - Id
+      type: object
+      properties:
+        Name:
+          description: The name of the group to be created. This is a required field.
+          maxLength: 100
+          minLength: 0
+          type: string
+        DefaultAccountCodeId:
+          description: The default account code identifier associated with the group to be created. This is a required field.
+          maxLength: 100
+          minLength: 0
+          type: string
+        UpdateOnExisting:
+          description: Indicates whether an existing group with the same identifier should be updated instead of creating a new one.
+          type: boolean
+        Id:
+          description: The unique identifier of the group.
+          maxLength: 64
+          minLength: 0
+          type: string
+        ParentId:
+          description: The identifier of the parent group, if this group is a sub-group.
+          maxLength: 64
+          minLength: 0
+          type: string
+        ExternalReference:
+          description: An external reference identifier for the group, potentially used by other systems.
+          maxLength: 128
+          minLength: 0
+          type: string
+        ModifiedTime:
+          format: date-time
+          description: The time when the group was last modified.
+          type: string
+        DisplayOrder:
+          format: int32
+          description: The display order of the group, used for sorting or presentation purposes.
+          type: integer
+        ArticleGoodsType:
+          description: The default article goods type for articles within this group.
+          enum:
+          - NotSet
+          - Other
+          - Alcohol
+          - Tobacco
+          - Gambling
+          - Hazardous
+          type: string
+    MoreFlo.Models.InterfaceModels.GroupsResult:
+      description: 'Represents a paginated result containing a list of group results.
+
+        This class is used to return a collection of groups, along with pagination information, in API responses.'
+      type: object
+      properties:
+        ExtraInformation:
+          description: A list of extra information or messages related to the paginated result.
+          type: array
+          items:
+            type: string
+        list:
+          description: The list of data items for the current page.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupResult'
+        Page:
+          format: int32
+          description: The current page number.
+          type: integer
+        Total:
+          format: int32
+          description: The total number of pages available.
+          type: integer
+        PageSize:
+          format: int32
+          description: The number of data items per page.
+          type: integer
+  securitySchemes:
+    basic:
+      type: http
+      scheme: basic
+      description: Basic HTTP Authentication

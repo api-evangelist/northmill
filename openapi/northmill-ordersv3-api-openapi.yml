@@ -1,0 +1,1070 @@
+openapi: 3.2.0
+info:
+  version: v2
+  title: MoreFlo.Public.Api Orders V3 API
+servers:
+- url: https://api.moreflo.com
+tags:
+- name: OrdersV3
+paths:
+  /v3/orders:
+    get:
+      tags:
+      - OrdersV3
+      summary: Get list of orders.
+      operationId: OrdersV3_List
+      parameters:
+      - name: modifiedSince
+        in: query
+        description: ''
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: externalStoreId
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrderResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrderResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrderResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrderResult'
+    put:
+      tags:
+      - OrdersV3
+      summary: Update list of orders.
+      operationId: OrdersV3_Update
+      parameters:
+      - name: externalStoreId
+        in: query
+        description: externalStoreId of the store, if multistore admin.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrdersResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrdersResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrdersResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrdersResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.Order'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.Order'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.Order'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.Order'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.Order'
+        description: List of orders to update data.
+        required: true
+    post:
+      tags:
+      - OrdersV3
+      summary: Create orders.
+      operationId: OrdersV3_Create
+      parameters:
+      - name: externalStoreId
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrdersResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrdersResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrdersResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrdersResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrderCreate'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrderCreate'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrderCreate'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrderCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrderCreate'
+        description: List of  orders to create.
+        required: true
+  /v3/stores/{externalStoreId}/orders:
+    get:
+      tags:
+      - OrdersV3
+      summary: Get list of orders.
+      operationId: OrdersV3_List
+      parameters:
+      - name: modifiedSince
+        in: query
+        description: ''
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: externalStoreId
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrderResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrderResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrderResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrderResult'
+    put:
+      tags:
+      - OrdersV3
+      summary: Update list of orders.
+      operationId: OrdersV3_Update
+      parameters:
+      - name: externalStoreId
+        in: path
+        description: externalStoreId of the store, if multistore admin.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrdersResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrdersResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrdersResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrdersResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.Order'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.Order'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.Order'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.Order'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.Order'
+        description: List of orders to update data.
+        required: true
+    post:
+      tags:
+      - OrdersV3
+      summary: Create orders.
+      operationId: OrdersV3_Create
+      parameters:
+      - name: externalStoreId
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrdersResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrdersResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrdersResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrdersResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrderCreate'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrderCreate'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrderCreate'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrderCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrderCreate'
+        description: List of  orders to create.
+        required: true
+  /v3/orders/byExternalReference/{externalReference}:
+    get:
+      tags:
+      - OrdersV3
+      summary: Get a order.
+      operationId: OrdersV3_GetByExternalReference
+      parameters:
+      - name: externalReference
+        in: path
+        description: External reference of the  order.
+        required: true
+        schema:
+          type: string
+      - name: externalStoreId
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrderResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrderResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrderResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrderResult'
+  /v3/stores/{externalStoreId}/orders/byExternalReference/{externalReference}:
+    get:
+      tags:
+      - OrdersV3
+      summary: Get a order.
+      operationId: OrdersV3_GetByExternalReference
+      parameters:
+      - name: externalReference
+        in: path
+        description: External reference of the  order.
+        required: true
+        schema:
+          type: string
+      - name: externalStoreId
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrderResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrderResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrderResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrderResult'
+  /v3/orders/byId/{Id}:
+    get:
+      tags:
+      - OrdersV3
+      summary: Get a order.
+      operationId: OrdersV3_Get
+      parameters:
+      - name: Id
+        in: path
+        description: External reference
+        required: true
+        schema:
+          type: string
+      - name: externalStoreId
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrderResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrderResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrderResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrderResult'
+  /v3/stores/{externalStoreId}/orders/byId/{Id}:
+    get:
+      tags:
+      - OrdersV3
+      summary: Get a order.
+      operationId: OrdersV3_Get
+      parameters:
+      - name: Id
+        in: path
+        description: External reference
+        required: true
+        schema:
+          type: string
+      - name: externalStoreId
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrderResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrderResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrderResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrderResult'
+components:
+  schemas:
+    MoreFlo.Models.InterfaceModels.v3.OrderRow:
+      description: Represents a row within an order, detailing information about a specific item.
+      type: object
+      properties:
+        ArticleNumber:
+          description: The article number of the item.
+          type: string
+        ArticleName:
+          description: The name of the item.
+          type: string
+        UnitAmountInclVatExclDiscount:
+          format: double
+          description: The unit amount of the item, including VAT but excluding any discounts.
+          type: number
+        Discount:
+          format: double
+          description: The discount applied to the item.
+          type: number
+        VatRate:
+          format: double
+          description: The VAT rate applied to the item.
+          type: number
+        Quantity:
+          format: double
+          description: The quantity of the item.
+          type: number
+        SerialNumber:
+          description: The serial number of the item.
+          type: string
+        RowSum:
+          format: double
+          description: The total sum or price of the row (quantity multiplied by unit price, after discount).
+          type: number
+        ReceiptNote:
+          description: A note or text associated with the row, typically used for text-only rows.
+          type: string
+    MoreFlo.Models.InterfaceModels.Address:
+      type: object
+      properties:
+        Name:
+          type: string
+        Address1:
+          type: string
+        Address2:
+          type: string
+        PostCode:
+          type: string
+        City:
+          type: string
+        Country:
+          type: string
+        Email:
+          type: string
+        Telephone1:
+          type: string
+        Telephone2:
+          type: string
+        Mobile:
+          type: string
+        Fax:
+          type: string
+    MoreFlo.Models.InterfaceModels.v3.OrderResult:
+      description: 'Represents the result of an operation that returns a single order.
+
+        This class encapsulates an Order object and its unique identifier, typically used in API responses for single order operations.'
+      type: object
+      properties:
+        Order:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.Order'
+          description: The Order object containing the order data.
+        Id:
+          description: The unique identifier of the order.
+          type: string
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
+    MoreFlo.Models.InterfaceModels.v3.OrderCreate:
+      description: 'Represents the data required to create a new order.
+
+        This class extends the Order class and specifies the required information for creating an order within the system.'
+      required:
+      - ExternalReference
+      - Customer
+      type: object
+      properties:
+        ExternalReference:
+          description: 'The external reference or order number from another system.
+
+            This is a required field for creating a new order.'
+          type: string
+        UpdateOnExisting:
+          description: Indicates whether an existing order with the same number should be updated instead of creating a new one.
+          type: boolean
+        Id:
+          description: 'The unique identifier of the order, automatically generated by the system.
+
+            This is a read-only property.'
+          type: string
+        Customer:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Customer'
+          description: 'Information about the customer associated with the order.
+
+            This can be either a customer number within the system or an external customer reference.'
+        AdjustStockIfOpenState:
+          description: 'Indicates whether stock levels should be adjusted directly when the order is in an open state.
+
+            If false, stock will be adjusted when the order is paid.'
+          type: boolean
+        BillingAddress:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Address'
+          description: The billing address for the order, if different from the customer's default address.
+        ShippingAddress:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Address'
+          description: The shipping address for the order, if different from the customer's default address.
+        Number:
+          format: int32
+          description: The order number.
+          type: integer
+        IncomingDate:
+          format: date-time
+          description: The date when the order was received.
+          type: string
+        StartDate:
+          format: date-time
+          description: The date when the order process is scheduled to start.
+          type: string
+        ReadyDate:
+          format: date-time
+          description: The date when the order is expected to be ready for pickup or delivery.
+          type: string
+        ExpireDate:
+          format: date-time
+          description: The date when the order expires (if applicable).
+          type: string
+        DeliveryDate:
+          format: date-time
+          description: The date when the order is scheduled for delivery.
+          type: string
+        OurReference:
+          description: The reference used by the system for the order.
+          type: string
+        YourReference:
+          description: The reference provided by the customer or an external system for the order.
+          type: string
+        DeliveryTerm:
+          description: The delivery terms for the order.
+          type: string
+        YourOrderNo:
+          description: The customer's order number or identifier.
+          type: string
+        Note:
+          description: A general note or comment associated with the order.
+          type: string
+        Discount:
+          format: double
+          description: The discount applied to the entire order, expressed as a percentage.
+          type: number
+        TotalExclVat:
+          format: double
+          description: The total amount of the order, excluding VAT.
+          type: number
+        TotalInclVat:
+          format: double
+          description: The total amount of the order, including VAT.
+          type: number
+        TotalVat:
+          format: double
+          description: The total VAT amount for the order.
+          type: number
+        Rows:
+          description: A list of rows containing details about the items included in the order.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrderRow'
+        State:
+          description: The current state of the order.
+          enum:
+          - Created
+          - Saved
+          - Started
+          - WaitingCustomerResp
+          - ReadyForHandOut
+          - Waiting
+          - Cancelled
+          - Delivered
+          type: string
+        PaymentOption:
+          description: The payment option selected for the order.
+          enum:
+          - NotSet
+          - Web
+          - Invoice
+          - Cashier
+          type: string
+        PaymentReference:
+          description: A reference related to the payment for the order.
+          type: string
+        PaymentOrigin:
+          description: The origin or source of the payment.
+          type: string
+        PaymentStatus:
+          description: The payment status of the order.
+          enum:
+          - NotSet
+          - NotPaid
+          - FullyPaid
+          - Refunded
+          type: string
+        DeliveryOption:
+          description: The delivery option selected for the order.
+          enum:
+          - NotSet
+          - Pickup
+          - Send
+          type: string
+        BookableResourceId:
+          description: The identifier of the bookable resource associated with the order.
+          type: string
+        ModifiedTime:
+          format: date-time
+          description: The last time the order was modified.
+          type: string
+        AttestantName:
+          description: The name of the person who attested or approved the order.
+          type: string
+        AttestantEmail:
+          description: The email address of the person who attested or approved the order.
+          type: string
+        AttestantState:
+          description: The attestation state of the order.
+          enum:
+          - NotSet
+          - WaitingAttest
+          - AttestOK
+          - ActionRequired
+          type: string
+        ExtraAccountingInfo:
+          description: Extra accounting information related to the order.
+          type: string
+        AttestantShortCode:
+          description: A short code or identifier for the attestant.
+          type: string
+        AttestantTemplate:
+          description: A template or format used for attestation (e.g., a circulation template).
+          type: string
+        AttachedFiles:
+          description: 'Files attached to the order.
+
+            These are typically uploaded via the static.moreflo.com/file/upload endpoint.'
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AttachedFile'
+        OriginType:
+          description: The type of origin of the order (e.g., web, phone, in-store).
+          enum:
+          - Unknown
+          - Apps
+          - CashRegister
+          - Fortnox
+          type: string
+        Origin:
+          description: 'The origin of the order, based on the OriginType.
+
+            For example, if OriginType is CashRegister, this value should contain the serial number of the cash register.'
+          type: string
+    MoreFlo.Models.InterfaceModels.Customer:
+      required:
+      - Name
+      type: object
+      properties:
+        CustomerNumber:
+          description: MoreFlo customer number.
+          type: string
+        Reference:
+          type: string
+        Name:
+          type: string
+        Address1:
+          type: string
+        Address2:
+          type: string
+        PostCode:
+          type: string
+        City:
+          type: string
+        Country:
+          type: string
+        IdentityNo:
+          type: string
+        ReferenceNumber:
+          format: int64
+          description: The other systems customer number or id.
+          type: integer
+        Email:
+          type: string
+        Telephone1:
+          type: string
+        Telephone2:
+          type: string
+        VatNumber:
+          type: string
+        IsExportCustomer:
+          type: boolean
+        Mobile:
+          type: string
+        Fax:
+          type: string
+        Note:
+          type: string
+        DateAdded:
+          format: date-time
+          type: string
+        DateUpdated:
+          format: date-time
+          type: string
+        ModifiedTime:
+          format: date-time
+          type: string
+        MemberGroupId:
+          format: int32
+          type: integer
+        MemberGroup:
+          type: string
+        PermitsCommercial:
+          type: boolean
+        IsCompany:
+          type: boolean
+        IsInternalCustomer:
+          type: boolean
+        IsActive:
+          type: boolean
+        Blocked:
+          description: Blocked because of an issue with Credit or something else
+          type: boolean
+        Id:
+          format: int32
+          description: Member Id
+          type: integer
+    MoreFlo.Models.InterfaceModels.AttachedFile:
+      type: object
+      properties:
+        Id:
+          type: string
+        Name:
+          type: string
+        Description:
+          type: string
+        CreatedTime:
+          format: date-time
+          type: string
+        ContentType:
+          type: string
+        IsMainFile:
+          type: boolean
+        URL:
+          type: string
+    MoreFlo.Models.InterfaceModels.v3.OrdersResult:
+      description: 'Represents a paginated result containing a list of order results.
+
+        This class is used to return a collection of orders, along with pagination information, in API responses.'
+      type: object
+      properties:
+        ExtraInformation:
+          description: A list of extra information or messages related to the paginated result.
+          type: array
+          items:
+            type: string
+        list:
+          description: The list of data items for the current page.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrderResult'
+        Page:
+          format: int32
+          description: The current page number.
+          type: integer
+        Total:
+          format: int32
+          description: The total number of pages available.
+          type: integer
+        PageSize:
+          format: int32
+          description: The number of data items per page.
+          type: integer
+    MoreFlo.Models.InterfaceModels.v3.Order:
+      description: 'Represents an order, encompassing details about a purchase or transaction.
+
+        This class encapsulates information about an order, including customer details, dates, addresses, financial information, and related data.'
+      required:
+      - Customer
+      type: object
+      properties:
+        Id:
+          description: 'The unique identifier of the order, automatically generated by the system.
+
+            This is a read-only property.'
+          type: string
+        Customer:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Customer'
+          description: 'Information about the customer associated with the order.
+
+            This can be either a customer number within the system or an external customer reference.'
+        AdjustStockIfOpenState:
+          description: 'Indicates whether stock levels should be adjusted directly when the order is in an open state.
+
+            If false, stock will be adjusted when the order is paid.'
+          type: boolean
+        BillingAddress:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Address'
+          description: The billing address for the order, if different from the customer's default address.
+        ShippingAddress:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Address'
+          description: The shipping address for the order, if different from the customer's default address.
+        Number:
+          format: int32
+          description: The order number.
+          type: integer
+        IncomingDate:
+          format: date-time
+          description: The date when the order was received.
+          type: string
+        StartDate:
+          format: date-time
+          description: The date when the order process is scheduled to start.
+          type: string
+        ReadyDate:
+          format: date-time
+          description: The date when the order is expected to be ready for pickup or delivery.
+          type: string
+        ExpireDate:
+          format: date-time
+          description: The date when the order expires (if applicable).
+          type: string
+        DeliveryDate:
+          format: date-time
+          description: The date when the order is scheduled for delivery.
+          type: string
+        OurReference:
+          description: The reference used by the system for the order.
+          type: string
+        YourReference:
+          description: The reference provided by the customer or an external system for the order.
+          type: string
+        DeliveryTerm:
+          description: The delivery terms for the order.
+          type: string
+        YourOrderNo:
+          description: The customer's order number or identifier.
+          type: string
+        ExternalReference:
+          description: 'An external identification for the order.
+
+            This must be prefixed (e.g., SYS-52351).'
+          type: string
+        Note:
+          description: A general note or comment associated with the order.
+          type: string
+        Discount:
+          format: double
+          description: The discount applied to the entire order, expressed as a percentage.
+          type: number
+        TotalExclVat:
+          format: double
+          description: The total amount of the order, excluding VAT.
+          type: number
+        TotalInclVat:
+          format: double
+          description: The total amount of the order, including VAT.
+          type: number
+        TotalVat:
+          format: double
+          description: The total VAT amount for the order.
+          type: number
+        Rows:
+          description: A list of rows containing details about the items included in the order.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrderRow'
+        State:
+          description: The current state of the order.
+          enum:
+          - Created
+          - Saved
+          - Started
+          - WaitingCustomerResp
+          - ReadyForHandOut
+          - Waiting
+          - Cancelled
+          - Delivered
+          type: string
+        PaymentOption:
+          description: The payment option selected for the order.
+          enum:
+          - NotSet
+          - Web
+          - Invoice
+          - Cashier
+          type: string
+        PaymentReference:
+          description: A reference related to the payment for the order.
+          type: string
+        PaymentOrigin:
+          description: The origin or source of the payment.
+          type: string
+        PaymentStatus:
+          description: The payment status of the order.
+          enum:
+          - NotSet
+          - NotPaid
+          - FullyPaid
+          - Refunded
+          type: string
+        DeliveryOption:
+          description: The delivery option selected for the order.
+          enum:
+          - NotSet
+          - Pickup
+          - Send
+          type: string
+        BookableResourceId:
+          description: The identifier of the bookable resource associated with the order.
+          type: string
+        ModifiedTime:
+          format: date-time
+          description: The last time the order was modified.
+          type: string
+        AttestantName:
+          description: The name of the person who attested or approved the order.
+          type: string
+        AttestantEmail:
+          description: The email address of the person who attested or approved the order.
+          type: string
+        AttestantState:
+          description: The attestation state of the order.
+          enum:
+          - NotSet
+          - WaitingAttest
+          - AttestOK
+          - ActionRequired
+          type: string
+        ExtraAccountingInfo:
+          description: Extra accounting information related to the order.
+          type: string
+        AttestantShortCode:
+          description: A short code or identifier for the attestant.
+          type: string
+        AttestantTemplate:
+          description: A template or format used for attestation (e.g., a circulation template).
+          type: string
+        AttachedFiles:
+          description: 'Files attached to the order.
+
+            These are typically uploaded via the static.moreflo.com/file/upload endpoint.'
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AttachedFile'
+        OriginType:
+          description: The type of origin of the order (e.g., web, phone, in-store).
+          enum:
+          - Unknown
+          - Apps
+          - CashRegister
+          - Fortnox
+          type: string
+        Origin:
+          description: 'The origin of the order, based on the OriginType.
+
+            For example, if OriginType is CashRegister, this value should contain the serial number of the cash register.'
+          type: string
+  securitySchemes:
+    basic:
+      type: http
+      scheme: basic
+      description: Basic HTTP Authentication

@@ -1,0 +1,36 @@
+openapi: 3.2.0
+info:
+  version: v2
+  title: MoreFlo.Public.Api Health API
+servers:
+- url: https://api.moreflo.com
+tags:
+- name: Health
+paths:
+  /health:
+    get:
+      tags:
+      - Health
+      operationId: Health_Health
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            application/xml:
+              schema:
+                type: object
+            text/xml:
+              schema:
+                type: object
+components:
+  securitySchemes:
+    basic:
+      type: http
+      scheme: basic
+      description: Basic HTTP Authentication

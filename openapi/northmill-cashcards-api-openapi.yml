@@ -1,0 +1,104 @@
+openapi: 3.2.0
+info:
+  version: v2
+  title: MoreFlo.Public.Api Cash Cards API
+servers:
+- url: https://api.moreflo.com
+tags:
+- name: CashCards
+paths:
+  /v2/cashcards/balance:
+    get:
+      tags:
+      - CashCards
+      summary: Fetech balance on cash cards.
+      operationId: CashCards_Get
+      parameters:
+      - name: externalStoreId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashCardsBalanceResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashCardsBalanceResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashCardsBalanceResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashCardsBalanceResult'
+  /v2/stores/{externalStoreId}/cashcards/balance:
+    get:
+      tags:
+      - CashCards
+      summary: Fetech balance on cash cards.
+      operationId: CashCards_Get
+      parameters:
+      - name: externalStoreId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashCardsBalanceResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashCardsBalanceResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashCardsBalanceResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashCardsBalanceResult'
+components:
+  schemas:
+    MoreFlo.Models.InterfaceModels.CashCardsBalanceResult:
+      description: Represents the result of a cash card balance inquiry, providing balances for different card types.
+      type: object
+      properties:
+        PrepaidBalance:
+          format: double
+          description: The balance of prepaid cards.
+          type: number
+        ValueCardBalance:
+          format: double
+          description: The balance of value cards.
+          type: number
+        GiftCardBalance:
+          format: double
+          description: The balance of gift cards.
+          type: number
+        CashRefundSlipBalance:
+          format: double
+          description: The balance of cash refund slips.
+          type: number
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
+  securitySchemes:
+    basic:
+      type: http
+      scheme: basic
+      description: Basic HTTP Authentication

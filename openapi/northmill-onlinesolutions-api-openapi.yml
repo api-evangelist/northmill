@@ -1,0 +1,1235 @@
+openapi: 3.2.0
+info:
+  version: v2
+  title: MoreFlo.Public.Api Online Solutions API
+servers:
+- url: https://api.moreflo.com
+tags:
+- name: OnlineSolutions
+paths:
+  /v2/online/paymentmethods:
+    get:
+      tags:
+      - OnlineSolutions
+      summary: Get all online payment methods.
+      operationId: OnlineSolutions_GetOnlinePaymentMethods
+      parameters:
+      - name: page
+        in: query
+        description: Page starts from 0 , default 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        description: PageSize, default 100.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: updatedSince
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: externalStoreId
+        in: query
+        description: externalStoreId of the store, if multistore admin.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberOnlinePaymentMethodsResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberOnlinePaymentMethodsResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberOnlinePaymentMethodsResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberOnlinePaymentMethodsResult'
+  /v2/stores/{externalStoreId}/online/paymentmethods:
+    get:
+      tags:
+      - OnlineSolutions
+      summary: Get all online payment methods.
+      operationId: OnlineSolutions_GetOnlinePaymentMethods
+      parameters:
+      - name: page
+        in: query
+        description: Page starts from 0 , default 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        description: PageSize, default 100.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: updatedSince
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: externalStoreId
+        in: path
+        description: externalStoreId of the store, if multistore admin.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberOnlinePaymentMethodsResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberOnlinePaymentMethodsResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberOnlinePaymentMethodsResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberOnlinePaymentMethodsResult'
+  /v2/online/catering/settings:
+    get:
+      tags:
+      - OnlineSolutions
+      summary: Get catering settings.
+      operationId: OnlineSolutions_GetCateringSettings
+      parameters:
+      - name: externalStoreId
+        in: query
+        description: externalStoreId of the store, if multistore admin.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberCateringSettingResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberCateringSettingResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberCateringSettingResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberCateringSettingResult'
+  /v2/stores/{externalStoreId}/online/catering/settings:
+    get:
+      tags:
+      - OnlineSolutions
+      summary: Get catering settings.
+      operationId: OnlineSolutions_GetCateringSettings
+      parameters:
+      - name: externalStoreId
+        in: path
+        description: externalStoreId of the store, if multistore admin.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberCateringSettingResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberCateringSettingResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberCateringSettingResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberCateringSettingResult'
+  /v2/online/expressorder/settings:
+    get:
+      tags:
+      - OnlineSolutions
+      summary: Get express order settings.
+      operationId: OnlineSolutions_GetExpressOrderSettings
+      parameters:
+      - name: externalStoreId
+        in: query
+        description: externalStoreId of the store, if multistore admin.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberOnlineExpressOrderSettingResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberOnlineExpressOrderSettingResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberOnlineExpressOrderSettingResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberOnlineExpressOrderSettingResult'
+  /v2/stores/{externalStoreId}/online/expressorder/settings:
+    get:
+      tags:
+      - OnlineSolutions
+      summary: Get express order settings.
+      operationId: OnlineSolutions_GetExpressOrderSettings
+      parameters:
+      - name: externalStoreId
+        in: path
+        description: externalStoreId of the store, if multistore admin.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberOnlineExpressOrderSettingResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberOnlineExpressOrderSettingResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberOnlineExpressOrderSettingResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberOnlineExpressOrderSettingResult'
+  /v2/online/selfscan/settings:
+    get:
+      tags:
+      - OnlineSolutions
+      summary: Get selfscan settings.
+      operationId: OnlineSolutions_GetSelfscanSettings
+      parameters:
+      - name: externalStoreId
+        in: query
+        description: externalStoreId of the store, if multistore admin.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberSelfscanSettingResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberSelfscanSettingResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberSelfscanSettingResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberSelfscanSettingResult'
+  /v2/stores/{externalStoreId}/online/selfscan/settings:
+    get:
+      tags:
+      - OnlineSolutions
+      summary: Get selfscan settings.
+      operationId: OnlineSolutions_GetSelfscanSettings
+      parameters:
+      - name: externalStoreId
+        in: path
+        description: externalStoreId of the store, if multistore admin.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberSelfscanSettingResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberSelfscanSettingResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberSelfscanSettingResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberSelfscanSettingResult'
+  /v2/online/webshop/settings:
+    get:
+      tags:
+      - OnlineSolutions
+      summary: Get webshop settings.
+      operationId: OnlineSolutions_GetWebshopSettings
+      parameters:
+      - name: externalStoreId
+        in: query
+        description: externalStoreId of the store, if multistore admin.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberWebshopSettingResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberWebshopSettingResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberWebshopSettingResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberWebshopSettingResult'
+  /v2/stores/{externalStoreId}/online/webshop/settings:
+    get:
+      tags:
+      - OnlineSolutions
+      summary: Get webshop settings.
+      operationId: OnlineSolutions_GetWebshopSettings
+      parameters:
+      - name: externalStoreId
+        in: path
+        description: externalStoreId of the store, if multistore admin.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberWebshopSettingResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberWebshopSettingResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberWebshopSettingResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberWebshopSettingResult'
+components:
+  schemas:
+    MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberOnlinePaymentMethodResult:
+      description: 'Represents the result of an operation that returns an online payment method entry.
+
+        This class encapsulates a SubscriberOnlinePaymentMethodEntry object and its unique identifier, typically used in API responses related to retrieving or managing online payment methods.'
+      type: object
+      properties:
+        Entry:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberOnlinePaymentMethodEntry'
+          description: The SubscriberOnlinePaymentMethodEntry object containing the online payment method entry data.
+        Id:
+          description: The unique identifier of the payment method entry.
+          type: string
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
+    MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberOnlineFeaturedGroupEntry:
+      description: 'Represents an entry for a featured group displayed online.
+
+        This class defines the properties of a group featured on an online platform, including its identifier, group details, and associated images.'
+      type: object
+      properties:
+        Id:
+          description: The unique identifier of the featured group entry.
+          type: string
+        GroupId:
+          description: The identifier of the group being featured.
+          type: string
+        GroupName:
+          description: The name of the group being featured.
+          type: string
+        GroupImages:
+          description: A list of files representing images associated with the featured group.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AttachedFile'
+    MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberOnlineExpressOrderSetting:
+      description: Represents the settings for subscriber online express ordering, including company information, site settings, display options, content, payment methods, and table settings.
+      type: object
+      properties:
+        CompanyName:
+          description: The name of the company providing the express order service.
+          type: string
+        Address1:
+          description: The first line of the company's address.
+          type: string
+        Address2:
+          description: The second line of the company's address (optional).
+          type: string
+        PostCode:
+          description: The postal code of the company's address.
+          type: string
+        City:
+          description: The city of the company's address.
+          type: string
+        Country:
+          description: The country of the company's address.
+          type: string
+        Telephone:
+          description: The telephone number of the company.
+          type: string
+        Email:
+          description: The email address of the company.
+          type: string
+        CustomerPageEnabled:
+          description: Indicates whether the customer page is enabled.
+          type: boolean
+        TableEnabled:
+          description: Indicates whether table ordering is enabled.
+          type: boolean
+        SiteLogotypes:
+          description: A list of files representing the site's logotypes.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AttachedFile'
+        SiteFavicons:
+          description: A list of files representing the site's favicons.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AttachedFile'
+        ColorGeneralIcon:
+          description: This property is deprecated and should not be used.
+          type: string
+        ColorHomePageBackground:
+          description: This property is deprecated and should not be used.
+          type: string
+        ColorHomePageHeadline:
+          description: This property is deprecated and should not be used.
+          type: string
+        ColorHomePageText:
+          description: This property is deprecated and should not be used.
+          type: string
+        ColorContentsBackground:
+          description: This property is deprecated and should not be used.
+          type: string
+        ColorContentsHeadline:
+          description: This property is deprecated and should not be used.
+          type: string
+        ColorContentsText:
+          description: This property is deprecated and should not be used.
+          type: string
+        ColorHeaderBackground:
+          description: This property is deprecated and should not be used.
+          type: string
+        ColorFooterBackground:
+          description: This property is deprecated and should not be used.
+          type: string
+        ColorFooterText:
+          description: This property is deprecated and should not be used.
+          type: string
+        ColorButtonBackground:
+          description: This property is deprecated and should not be used.
+          type: string
+        ColorButtonText:
+          description: This property is deprecated and should not be used.
+          type: string
+        ContentHomePagePreamble:
+          description: This property is deprecated and should not be used.
+          type: string
+        FeaturedGroups:
+          description: A collection of featured groups.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberOnlineFeaturedGroupResult'
+        ContentHomePageTitle:
+          description: The title for the home page.
+          type: string
+        ContentHomePageTableText:
+          description: The text for the home page table.
+          type: string
+        ContentThankYouMessage:
+          description: The message displayed after a successful order.
+          type: string
+        ContentTermsOfPurchase:
+          description: The content for the terms of purchase page.
+          type: string
+        ContentPrivacyPolicy:
+          description: The content for the privacy policy page.
+          type: string
+        ContentCheckoutOtherInfo:
+          description: Indicates whether checkout for other information is enabled.
+          type: boolean
+        ContentCheckoutOtherInfoTitle:
+          description: The title for the checkout other information section.
+          type: string
+        LastUpdatedTime:
+          format: date-time
+          description: The last updated time.
+          type: string
+        PaymentMethods:
+          description: A collection of payment methods.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberOnlinePaymentMethodEntry'
+        Tables:
+          description: A collection of table entries.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberOnlineTableEntry'
+        PublicUrlOrHostPart:
+          description: The public URL or host part for the express order service.
+          type: string
+        BrandColor:
+          description: The brand color for the express order service.
+          type: string
+        BrandTextColor:
+          description: The brand text color for the express order service.
+          type: string
+        ButtonColor:
+          description: The button color for the express order service.
+          type: string
+        ButtonTextColor:
+          description: The button text color for the express order service.
+          type: string
+    MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberSelfscanSettingResult:
+      description: 'Represents the result of an operation that returns subscriber self-scan settings.
+
+        This class encapsulates the SubscriberSelfscanSetting object, typically used in API responses related to retrieving or managing self-scan settings.'
+      type: object
+      properties:
+        Settings:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberSelfscanSetting'
+          description: The SubscriberSelfscanSetting object containing the subscriber self-scan settings.
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
+    MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberOnlineTableEntry:
+      description: 'Represents an entry for a table used in online ordering systems.
+
+        This class defines the properties of a table, such as its name, used in online ordering processes.'
+      type: object
+      properties:
+        Id:
+          description: The unique identifier of the table entry.
+          type: string
+        Name:
+          description: The name of the table.
+          type: string
+    MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberSelfscanSetting:
+      description: Represents the settings for subscriber self-scanning systems, including company information, site settings, design customization, content, and payment methods.
+      type: object
+      properties:
+        CompanyName:
+          description: The name of the company providing the self-scanning service.
+          type: string
+        Address1:
+          description: The first line of the company's address.
+          type: string
+        Address2:
+          description: The second line of the company's address (optional).
+          type: string
+        PostCode:
+          description: The postal code of the company's address.
+          type: string
+        City:
+          description: The city of the company's address.
+          type: string
+        Country:
+          description: The country of the company's address.
+          type: string
+        Telephone:
+          description: The telephone number of the company.
+          type: string
+        Email:
+          description: The email address of the company.
+          type: string
+        CustomerPageEnabled:
+          description: Indicates whether the customer page is enabled.
+          type: boolean
+        SiteLogotypes:
+          description: A list of files representing the site's logotypes.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AttachedFile'
+        SiteFavicons:
+          description: A list of files representing the site's favicons.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AttachedFile'
+        EnableAccountCreation:
+          description: Indicates whether account creation is enabled on the site.
+          type: boolean
+        ForceLogin:
+          description: Indicates whether users are forced to log in to access the site.
+          type: boolean
+        ColorGeneralBackground:
+          description: The general background color for the self-scanning interface.
+          type: string
+        ColorGeneralText:
+          description: The general text color for the self-scanning interface.
+          type: string
+        ColorGeneralButtonBackground:
+          description: The general button background color for the self-scanning interface.
+          type: string
+        ColorGeneralButtonText:
+          description: The general button text color for the self-scanning interface.
+          type: string
+        ColorHeaderBackground:
+          description: The header background color for the self-scanning interface.
+          type: string
+        ColorHeaderText:
+          description: The header text color for the self-scanning interface.
+          type: string
+        ColorHomePageButtonBackground:
+          description: The button background color for the home page of the self-scanning interface.
+          type: string
+        ColorHomePageButtonText:
+          description: The button text color for the home page of the self-scanning interface.
+          type: string
+        ColorHomePageCartCount:
+          description: The color for the cart count display on the home page of the self-scanning interface.
+          type: string
+        ContentScanPageHeadline:
+          description: The headline text for the scan page of the self-scanning interface.
+          type: string
+        ContentSearchHeadline:
+          description: The headline text for the search functionality of the self-scanning interface.
+          type: string
+        ContentThankYouText:
+          description: The text displayed on the thank you page of the self-scanning interface.
+          type: string
+        ContentThankYouPaymentInStoreText:
+          description: The text displayed on the thank you page when payment is made in store for the self-scanning interface.
+          type: string
+        ContentTermsOfPurchase:
+          description: The content for the terms of purchase page of the self-scanning interface.
+          type: string
+        ContentPrivacyPolicy:
+          description: The content for the privacy policy page of the self-scanning interface.
+          type: string
+        LastUpdatedTime:
+          format: date-time
+          description: The last updated time for the self-scanning settings.
+          type: string
+        PaymentMethods:
+          description: A collection of payment methods available for the self-scanning system.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberOnlinePaymentMethodEntry'
+    MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberOnlineFeaturedGroupResult:
+      description: 'Represents the result of an operation that returns a featured group entry.
+
+        This class encapsulates a SubscriberOnlineFeaturedGroupEntry object and its unique identifier, typically used in API responses related to retrieving or managing featured groups.'
+      type: object
+      properties:
+        FeaturedGroup:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberOnlineFeaturedGroupEntry'
+          description: The SubscriberOnlineFeaturedGroupEntry object containing the featured group entry data.
+        Id:
+          description: The unique identifier of the featured group.
+          type: string
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
+    MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberCateringSettingResult:
+      description: 'Represents the result of an operation that returns subscriber catering settings.
+
+        This class encapsulates the SubscriberCateringSetting object, typically used in API responses related to retrieving or managing catering settings.'
+      type: object
+      properties:
+        Settings:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberCateringSetting'
+          description: The SubscriberCateringSetting object containing the subscriber catering settings.
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
+    MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberOnlineCateringCheckoutFieldEntry:
+      description: 'Represents an entry for a checkout field used in online catering.
+
+        This class defines the properties of a field displayed during the online catering checkout process.'
+      type: object
+      properties:
+        Id:
+          description: The unique identifier of the checkout field entry.
+          type: string
+        Title:
+          description: The title or label of the checkout field.
+          type: string
+        Type:
+          description: The type of input field (e.g., text, dropdown, etc.).
+          type: string
+        Required:
+          description: Indicates whether the field is required for checkout completion.
+          type: boolean
+        PostOrderEdit:
+          description: Indicates whether the field can be edited after the order is placed.
+          type: boolean
+        Priority:
+          format: int32
+          description: The priority of the field, used for display ordering.
+          type: integer
+        CreatedTime:
+          format: date-time
+          description: The time when the checkout field entry was created.
+          type: string
+        LastUpdatedTime:
+          format: date-time
+          description: The time when the checkout field entry was last updated.
+          type: string
+    MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberOnlineRoomEntry:
+      description: 'Represents an entry for a room used in online ordering systems.
+
+        This class defines the properties of a room, such as its name and whether it''s available for pickup or delivery, used in online ordering processes.'
+      type: object
+      properties:
+        Id:
+          description: The unique identifier of the room entry.
+          type: string
+        Name:
+          description: The name of the room.
+          type: string
+        AllowForPickup:
+          description: Indicates whether orders can be picked up from this room.
+          type: boolean
+        AllowForDelivery:
+          description: Indicates whether orders can be delivered to this room.
+          type: boolean
+    MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberOnlineExpressOrderSettingResult:
+      description: 'Represents the result of an operation that returns subscriber online express order settings.
+
+        This class encapsulates the SubscriberOnlineExpressOrderSetting object, typically used in API responses related to retrieving or managing express order settings.'
+      type: object
+      properties:
+        Settings:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberOnlineExpressOrderSetting'
+          description: The SubscriberOnlineExpressOrderSetting object containing the subscriber online express order settings.
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
+    MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberWebshopSettingResult:
+      description: 'Represents the result of an operation that returns subscriber webshop settings.
+
+        This class encapsulates the SubscriberWebshopSetting object, typically used in API responses related to retrieving or managing webshop settings.'
+      type: object
+      properties:
+        Settings:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberWebshopSetting'
+          description: The SubscriberWebshopSetting object containing the subscriber webshop settings.
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
+    MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberOnlinePaymentMethodsResult:
+      description: Paged Result for Subscriber Online Payment Methods
+      type: object
+      properties:
+        ExtraInformation:
+          description: A list of extra information or messages related to the paginated result.
+          type: array
+          items:
+            type: string
+        list:
+          description: The list of data items for the current page.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberOnlinePaymentMethodResult'
+        Page:
+          format: int32
+          description: The current page number.
+          type: integer
+        Total:
+          format: int32
+          description: The total number of pages available.
+          type: integer
+        PageSize:
+          format: int32
+          description: The number of data items per page.
+          type: integer
+    MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberOnlinePaymentMethodEntry:
+      description: 'Represents an entry for an online payment method.
+
+        This class defines the properties of a payment method used in online systems, including its enablement status, type, details, and settings.'
+      type: object
+      properties:
+        Id:
+          description: The unique identifier of the payment method entry.
+          type: string
+        IsEnabled:
+          description: Indicates whether the payment method is enabled.
+          type: boolean
+        Type:
+          description: The type of online payment method.
+          enum:
+          - None
+          - Nmi
+          - ResursBank
+          - Swish
+          - CashOnDelivery
+          - Invoice
+          - NBNPL
+          type: string
+        Name:
+          description: The name of the payment method.
+          type: string
+        Description:
+          description: A description of the payment method.
+          type: string
+        SettingsTitle:
+          description: The title for the settings related to this payment method.
+          type: string
+        SettingsDescription:
+          description: A description of the settings related to this payment method.
+          type: string
+        SettingsUsername:
+          description: The username for the settings related to this payment method (if applicable).
+          type: string
+        SettingsPassword:
+          description: The password for the settings related to this payment method (if applicable).
+          type: string
+        SettingsKey:
+          description: The key for the settings related to this payment method (if applicable).
+          type: string
+        CreatedTime:
+          format: date-time
+          description: The time when the payment method entry was created.
+          type: string
+        LastUpdatedTime:
+          format: date-time
+          description: The time when the payment method entry was last updated.
+          type: string
+    MoreFlo.Models.InterfaceModels.AttachedFile:
+      type: object
+      properties:
+        Id:
+          type: string
+        Name:
+          type: string
+        Description:
+          type: string
+        CreatedTime:
+          format: date-time
+          type: string
+        ContentType:
+          type: string
+        IsMainFile:
+          type: boolean
+        URL:
+          type: string
+    MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberWebshopSetting:
+      description: Represents the settings for a subscriber's webshop, including company information, shipping details, site settings, design customization, content, and payment methods.
+      type: object
+      properties:
+        CompanyName:
+          description: The name of the company operating the webshop.
+          type: string
+        Address1:
+          description: The first line of the company's address.
+          type: string
+        Address2:
+          description: The second line of the company's address (optional).
+          type: string
+        PostCode:
+          description: The postal code of the company's address.
+          type: string
+        City:
+          description: The city of the company's address.
+          type: string
+        Country:
+          description: The country of the company's address.
+          type: string
+        Telephone:
+          description: The telephone number of the company.
+          type: string
+        Email:
+          description: The email address of the company.
+          type: string
+        ShippingArticleNumber:
+          description: The article number for shipping costs.
+          type: string
+        ShippingArticleAccountCode:
+          description: The account code for shipping costs.
+          type: string
+        ShippingCost:
+          format: double
+          description: The cost of shipping.
+          type: number
+        ShippingStorePickup:
+          description: Indicates whether store pickup for shipping is available.
+          type: boolean
+        SitePublic:
+          description: Indicates whether the webshop site is public.
+          type: boolean
+        SiteLogotypes:
+          description: A list of files representing the site's logotypes.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AttachedFile'
+        SiteFavicons:
+          description: A list of files representing the site's favicons.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AttachedFile'
+        EnableAccountCreation:
+          description: Indicates whether account creation is enabled on the webshop.
+          type: boolean
+        ColorGeneralBackground:
+          description: The general background color for the webshop.
+          type: string
+        ColorHeaderBackground:
+          description: The header background color for the webshop.
+          type: string
+        ColorHeaderText:
+          description: The header text color for the webshop.
+          type: string
+        ColorHeaderLink:
+          description: The header link color for the webshop.
+          type: string
+        ColorFooterBackground:
+          description: The footer background color for the webshop.
+          type: string
+        ColorFooterHeading:
+          description: The footer heading color for the webshop.
+          type: string
+        ColorFooterText:
+          description: The footer text color for the webshop.
+          type: string
+        ColorFooterLink:
+          description: The footer link color for the webshop.
+          type: string
+        ColorTypographyHeading:
+          description: The typography heading color for the webshop.
+          type: string
+        ColorTypographyText:
+          description: The typography text color for the webshop.
+          type: string
+        ColorTypographyLink:
+          description: The typography link color for the webshop.
+          type: string
+        ColorButtonBackground:
+          description: The button background color for the webshop.
+          type: string
+        ColorButtonText:
+          description: The button text color for the webshop.
+          type: string
+        ColorButtonAltBackground:
+          description: The alternative button background color for the webshop.
+          type: string
+        ColorButtonAltText:
+          description: The alternative button text color for the webshop.
+          type: string
+        ContentHomePageHeaderTitle:
+          description: The header title for the webshop's home page.
+          type: string
+        ContentHomePageHeaderText:
+          description: The header text for the webshop's home page.
+          type: string
+        ContentHomePageHeaderImage:
+          description: A list of files representing header images for the webshop's home page.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AttachedFile'
+        FeaturedGroups:
+          description: A collection of featured groups displayed on the webshop.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberOnlineFeaturedGroupResult'
+        ContentHomePage:
+          description: The content for the webshop's home page.
+          type: string
+        ContentHomePageImage:
+          description: A list of files representing images displayed on the webshop's home page.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AttachedFile'
+        ContentHomePageSEOTitle:
+          description: The SEO title for the webshop's home page.
+          type: string
+        ContentHomePageSEODescription:
+          description: The SEO description for the webshop's home page.
+          type: string
+        ContentAboutUs:
+          description: The content for the webshop's about us page.
+          type: string
+        ContentContactUs:
+          description: The content for the webshop's contact us page.
+          type: string
+        ContentTermsOfPurchase:
+          description: The content for the webshop's terms of purchase page.
+          type: string
+        ContentPrivacyPolicy:
+          description: The content for the webshop's privacy policy page.
+          type: string
+        ContentFooterText:
+          description: The content for the webshop's footer text.
+          type: string
+        LastUpdatedTime:
+          format: date-time
+          description: The last updated time for the webshop settings.
+          type: string
+        PaymentMethods:
+          description: A collection of payment methods available for the webshop.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberOnlinePaymentMethodEntry'
+    MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberCateringSetting:
+      description: Represents the settings for subscriber catering, including company information, site settings, checkout options, design customization, content, and payment methods.
+      type: object
+      properties:
+        CompanyName:
+          description: The name of the company providing the catering service.
+          type: string
+        Address1:
+          description: The first line of the company's address.
+          type: string
+        Address2:
+          description: The second line of the company's address (optional).
+          type: string
+        PostCode:
+          description: The postal code of the company's address.
+          type: string
+        City:
+          description: The city of the company's address.
+          type: string
+        Country:
+          description: The country of the company's address.
+          type: string
+        Telephone:
+          description: The telephone number of the company.
+          type: string
+        Email:
+          description: The email address of the company.
+          type: string
+        SitePublic:
+          description: Indicates whether the site is public.
+          type: boolean
+        SiteLogotypes:
+          description: A list of files representing the site's logotypes.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AttachedFile'
+        SiteFavicons:
+          description: A list of files representing the site's favicons.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AttachedFile'
+        EnableAccountCreation:
+          description: Indicates whether account creation is enabled on the site.
+          type: boolean
+        ForceLogin:
+          description: Indicates whether users are forced to log in to access the site.
+          type: boolean
+        CanChangeBeforeDeadline:
+          description: Indicates whether changes can be made before the deadline.
+          type: boolean
+        CanCancelBeforeDeadline:
+          description: Indicates whether cancellations can be made before the deadline.
+          type: boolean
+        DeliveryTimeEditOption:
+          description: The option for editing delivery time.
+          type: string
+        DeadlineHours:
+          format: int32
+          description: The deadline in hours.
+          type: integer
+        ArticlePopupDescription:
+          description: Description for the article popup.
+          type: string
+        CheckoutRepresentation:
+          description: Indicates whether checkout representation is enabled.
+          type: boolean
+        CheckoutOtherContact:
+          description: Indicates whether checkout for other contacts is enabled.
+          type: boolean
+        CheckoutDeliveryOptions:
+          description: Indicates whether checkout delivery options are enabled.
+          type: boolean
+        CheckoutDeliveryOptionPickupName:
+          description: The name for the pickup delivery option.
+          type: string
+        CheckoutDeliveryOptionSendName:
+          description: The name for the send delivery option.
+          type: string
+        CheckoutRoom:
+          description: Indicates whether checkout for room selection is enabled.
+          type: boolean
+        CheckoutRoomName:
+          description: The name for the room selection checkout.
+          type: string
+        CheckoutDeliveryASAP:
+          description: Indicates whether checkout for delivery as soon as possible (ASAP) is enabled.
+          type: boolean
+        CheckoutSMS:
+          description: Indicates whether checkout using SMS is enabled.
+          type: boolean
+        CheckoutDateTitle:
+          description: The title for the checkout date field.
+          type: string
+        CheckoutTimeTitle:
+          description: The title for the checkout time field.
+          type: string
+        CheckoutMiscTitle:
+          description: The title for miscellaneous checkout fields.
+          type: string
+        CheckoutBillingTitle:
+          description: The title for the billing checkout fields.
+          type: string
+        CheckoutFields:
+          description: A collection of checkout field entries.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberOnlineCateringCheckoutFieldEntry'
+        Rooms:
+          description: A collection of room entries.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberOnlineRoomEntry'
+        ColorGeneralBackground:
+          description: The general background color.
+          type: string
+        ColorHeaderBackground:
+          description: The header background color.
+          type: string
+        ColorHeaderText:
+          description: The header text color.
+          type: string
+        ColorHeaderLink:
+          description: The header link color.
+          type: string
+        ColorFooterBackground:
+          description: The footer background color.
+          type: string
+        ColorFooterHeading:
+          description: The footer heading color.
+          type: string
+        ColorFooterText:
+          description: The footer text color.
+          type: string
+        ColorFooterLink:
+          description: The footer link color.
+          type: string
+        ColorTypographyHeading:
+          description: The typography heading color.
+          type: string
+        ColorTypographyText:
+          description: The typography text color.
+          type: string
+        ColorTypographyLink:
+          description: The typography link color.
+          type: string
+        ColorButtonBackground:
+          description: The button background color.
+          type: string
+        ColorButtonText:
+          description: The button text color.
+          type: string
+        FeaturedGroups:
+          description: A collection of featured groups.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberOnlineFeaturedGroupResult'
+        ContentHomePage:
+          description: The content for the home page.
+          type: string
+        ContentAboutUs:
+          description: The content for the about us page.
+          type: string
+        ContentContactUs:
+          description: The content for the contact us page.
+          type: string
+        ContentTermsOfPurchase:
+          description: The content for the terms of purchase page.
+          type: string
+        ContentPrivacyPolicy:
+          description: The content for the privacy policy page.
+          type: string
+        ContentFooterText:
+          description: The content for the footer text.
+          type: string
+        LastUpdatedTime:
+          format: date-time
+          description: The last updated time.
+          type: string
+        PaymentMethods:
+          description: A collection of payment methods.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OnlineSolutions.SubscriberOnlinePaymentMethodEntry'
+  securitySchemes:
+    basic:
+      type: http
+      scheme: basic
+      description: Basic HTTP Authentication

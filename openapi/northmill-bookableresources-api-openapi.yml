@@ -1,0 +1,264 @@
+openapi: 3.2.0
+info:
+  version: v2
+  title: MoreFlo.Public.Api Bookable Resources API
+servers:
+- url: https://api.moreflo.com
+tags:
+- name: BookableResources
+paths:
+  /v2/bookings/resources:
+    get:
+      tags:
+      - BookableResources
+      summary: Get all bookable resources.
+      operationId: BookableResources_Get
+      parameters:
+      - name: page
+        in: query
+        description: Page starts from 0 , default 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        description: PageSize, default 100.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: updatedSince
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: externalStoreId
+        in: query
+        description: externalStoreId of the store, if multistore admin.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BookableResourcesResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BookableResourcesResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BookableResourcesResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BookableResourcesResult'
+  /v2/stores/{externalStoreId}/bookings/resources:
+    get:
+      tags:
+      - BookableResources
+      summary: Get all bookable resources.
+      operationId: BookableResources_Get
+      parameters:
+      - name: page
+        in: query
+        description: Page starts from 0 , default 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        description: PageSize, default 100.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: updatedSince
+        in: query
+        description: ''
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: externalStoreId
+        in: path
+        description: externalStoreId of the store, if multistore admin.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BookableResourcesResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BookableResourcesResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BookableResourcesResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BookableResourcesResult'
+components:
+  schemas:
+    MoreFlo.Models.InterfaceModels.BookableResource:
+      description: Represents a resource that can be booked.
+      type: object
+      properties:
+        Id:
+          description: The unique identifier of the bookable resource.
+          type: string
+        Name:
+          description: The name of the bookable resource.
+          type: string
+        BookableResourceType:
+          description: The type of the bookable resource (e.g., personnel, other).
+          enum:
+          - Personnell
+          - Other
+          type: string
+        BookableArticleType:
+          description: The type of articles that can be booked with this resource (e.g., all, services, goods).
+          enum:
+          - All
+          - Services
+          - Goods
+          type: string
+        BookableResourceState:
+          description: The current state of the bookable resource (e.g., active, deleted, not bookable).
+          enum:
+          - Active
+          - Deleted
+          - NotBookable
+          type: string
+        ArticlesExempt:
+          description: Specifies how articles are exempted or included when booking this resource.
+          enum:
+          - None
+          - EcxludeArticles
+          - IncludeOnlyArticles
+          type: string
+        DisplayOrder:
+          format: int32
+          description: The display order of the bookable resource.
+          type: integer
+        BookableResourceExcludedArticles:
+          description: A collection of articles that are excluded when booking this resource.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BookableResourceExcludedArticle'
+        BookableResourceIncludeOnlyArticles:
+          description: A collection of articles that are exclusively included when booking this resource.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BookableResourceIncludeOnlyArticle'
+        Files:
+          description: A list of files attached to the bookable resource.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AttachedFile'
+        CreatedTime:
+          format: date-time
+          description: The time when the bookable resource was created.
+          type: string
+        LastUpdatedTime:
+          format: date-time
+          description: The time when the bookable resource was last updated.
+          type: string
+    MoreFlo.Models.InterfaceModels.BookableResourceExcludedArticle:
+      description: Represents an article that is excluded from being booked with a specific bookable resource.
+      type: object
+      properties:
+        ArticleNumber:
+          description: The article number of the excluded article.
+          type: string
+    MoreFlo.Models.InterfaceModels.BookableResourceResult:
+      description: Represents the result of an operation involving a BookableResource entity.
+      type: object
+      properties:
+        Entity:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BookableResource'
+          description: The BookableResource entity resulting from the operation.
+        Id:
+          description: The unique identifier of the BookableResource.
+          type: string
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
+    MoreFlo.Models.InterfaceModels.AttachedFile:
+      type: object
+      properties:
+        Id:
+          type: string
+        Name:
+          type: string
+        Description:
+          type: string
+        CreatedTime:
+          format: date-time
+          type: string
+        ContentType:
+          type: string
+        IsMainFile:
+          type: boolean
+        URL:
+          type: string
+    MoreFlo.Models.InterfaceModels.BookableResourceIncludeOnlyArticle:
+      description: Represents an article that is exclusively included for booking with a specific bookable resource, along with its maximum parallel booking limit.
+      type: object
+      properties:
+        ArticleNumber:
+          description: The article number of the included article.
+          type: string
+        MaxNumberOfBookingsInParallel:
+          format: int32
+          description: The maximum number of parallel bookings allowed for this article with the associated bookable resource.
+          type: integer
+    MoreFlo.Models.InterfaceModels.BookableResourcesResult:
+      description: Represents a paged result containing a list of BookableResourceResult objects.
+      type: object
+      properties:
+        ExtraInformation:
+          description: A list of extra information or messages related to the paginated result.
+          type: array
+          items:
+            type: string
+        list:
+          description: The list of data items for the current page.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BookableResourceResult'
+        Page:
+          format: int32
+          description: The current page number.
+          type: integer
+        Total:
+          format: int32
+          description: The total number of pages available.
+          type: integer
+        PageSize:
+          format: int32
+          description: The number of data items per page.
+          type: integer
+  securitySchemes:
+    basic:
+      type: http
+      scheme: basic
+      description: Basic HTTP Authentication

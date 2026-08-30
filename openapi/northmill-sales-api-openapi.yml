@@ -1,0 +1,197 @@
+openapi: 3.2.0
+info:
+  version: v2
+  title: MoreFlo.Public.Api Sales API
+servers:
+- url: https://api.moreflo.com
+tags:
+- name: Sales
+paths:
+  /v2/sales/articles:
+    get:
+      tags:
+      - Sales
+      summary: Get all article sale events.
+      operationId: Sales_Get
+      parameters:
+      - name: from
+        in: query
+        description: From time created, could differ from sales time if syncronization was delayed.
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: to
+        in: query
+        description: To time, defualt to today 23:59:59.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: page
+        in: query
+        description: Page starts from 0 , default 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        description: PageSize, default 100 and max 100.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: externalStoreId
+        in: query
+        description: externalStoreId of the store, if multistore admin.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSaleEventsResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSaleEventsResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSaleEventsResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSaleEventsResult'
+  /v2/stores/{externalStoreId}/sales/articles:
+    get:
+      tags:
+      - Sales
+      summary: Get all article sale events.
+      operationId: Sales_Get
+      parameters:
+      - name: from
+        in: query
+        description: From time created, could differ from sales time if syncronization was delayed.
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: to
+        in: query
+        description: To time, defualt to today 23:59:59.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: page
+        in: query
+        description: Page starts from 0 , default 0.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        description: PageSize, default 100 and max 100.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: externalStoreId
+        in: path
+        description: externalStoreId of the store, if multistore admin.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSaleEventsResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSaleEventsResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSaleEventsResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSaleEventsResult'
+components:
+  schemas:
+    MoreFlo.Models.InterfaceModels.ArticleSaleEventsResult:
+      description: Represents a paged result containing a list of ArticleSaleEvent objects.
+      type: object
+      properties:
+        ExtraInformation:
+          description: A list of extra information or messages related to the paginated result.
+          type: array
+          items:
+            type: string
+        list:
+          description: The list of data items for the current page.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSaleEvent'
+        Page:
+          format: int32
+          description: The current page number.
+          type: integer
+        Total:
+          format: int32
+          description: The total number of pages available.
+          type: integer
+        PageSize:
+          format: int32
+          description: The number of data items per page.
+          type: integer
+    MoreFlo.Models.InterfaceModels.ArticleSaleEvent:
+      description: Represents an event where an article is sold.
+      type: object
+      properties:
+        SalesReference:
+          description: The sales reference number (receipt number).
+          type: string
+        SalesTime:
+          format: date-time
+          description: The time when the sale occurred.
+          type: string
+        CreatedTime:
+          format: date-time
+          description: The time when the sale event was created.
+          type: string
+        ArticleNumber:
+          description: The article number of the sold item.
+          type: string
+        CustomerNumber:
+          description: The customer number associated with the sale.
+          type: string
+        ArticleName:
+          description: The name of the sold article.
+          type: string
+        ArticleGroupName:
+          description: The name of the article group the sold item belongs to.
+          type: string
+        Quantity:
+          format: double
+          description: The quantity of the sold article.
+          type: number
+        SalesPricePerItem:
+          format: double
+          description: The sales price per item.
+          type: number
+        VatRate:
+          format: double
+          description: The VAT rate applied to the sale.
+          type: number
+  securitySchemes:
+    basic:
+      type: http
+      scheme: basic
+      description: Basic HTTP Authentication

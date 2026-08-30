@@ -1,0 +1,857 @@
+openapi: 3.2.0
+info:
+  version: v2
+  title: MoreFlo.Public.Api Customers API
+servers:
+- url: https://api.moreflo.com
+tags:
+- name: Customers
+paths:
+  /v2/customers:
+    put:
+      tags:
+      - Customers
+      summary: Update customers.
+      operationId: Customers_Update
+      parameters:
+      - name: externalStoreId
+        in: query
+        description: Id to update if multistore admin.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomersResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomersResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomersResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomersResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomerUpdate'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomerUpdate'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomerUpdate'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomerUpdate'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomerUpdate'
+        description: List of cashier users to update.
+        required: true
+    post:
+      tags:
+      - Customers
+      summary: Create customers.
+      operationId: Customers_Create
+      parameters:
+      - name: externalStoreId
+        in: query
+        description: Id to update if multistore admin.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomersResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomersResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomersResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomersResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomerCreate'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomerCreate'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomerCreate'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomerCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomerCreate'
+        description: List of customers to create.
+        required: true
+  /v2/stores/{externalStoreId}/customers:
+    put:
+      tags:
+      - Customers
+      summary: Update customers.
+      operationId: Customers_Update
+      parameters:
+      - name: externalStoreId
+        in: path
+        description: Id to update if multistore admin.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomersResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomersResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomersResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomersResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomerUpdate'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomerUpdate'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomerUpdate'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomerUpdate'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomerUpdate'
+        description: List of cashier users to update.
+        required: true
+    post:
+      tags:
+      - Customers
+      summary: Create customers.
+      operationId: Customers_Create
+      parameters:
+      - name: externalStoreId
+        in: path
+        description: Id to update if multistore admin.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomersResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomersResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomersResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomersResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomerCreate'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomerCreate'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomerCreate'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomerCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomerCreate'
+        description: List of customers to create.
+        required: true
+  /v2/customers/find:
+    post:
+      tags:
+      - Customers
+      summary: Find customer
+      operationId: Customers_Find
+      parameters:
+      - name: externalStoreId
+        in: query
+        description: Id to update if multistore admin.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomersResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomersResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomersResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomersResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomerSearchQuery'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomerSearchQuery'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomerSearchQuery'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomerSearchQuery'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomerSearchQuery'
+        description: Search information.
+        required: true
+  /v2/stores/{externalStoreId}/customers/find:
+    post:
+      tags:
+      - Customers
+      summary: Find customer
+      operationId: Customers_Find
+      parameters:
+      - name: externalStoreId
+        in: path
+        description: Id to update if multistore admin.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomersResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomersResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomersResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomersResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomerSearchQuery'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomerSearchQuery'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomerSearchQuery'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomerSearchQuery'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomerSearchQuery'
+        description: Search information.
+        required: true
+  /v2/customers/get/{customerNumber}:
+    get:
+      tags:
+      - Customers
+      summary: Get customer
+      operationId: Customers_Get
+      parameters:
+      - name: customerNumber
+        in: path
+        description: Customer number.
+        required: true
+        schema:
+          type: string
+      - name: externalStoreId
+        in: query
+        description: Id to update if multistore admin.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomersResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomersResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomersResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomersResult'
+  /v2/stores/{externalStoreId}/customers/get/{customerNumber}:
+    get:
+      tags:
+      - Customers
+      summary: Get customer
+      operationId: Customers_Get
+      parameters:
+      - name: customerNumber
+        in: path
+        description: Customer number.
+        required: true
+        schema:
+          type: string
+      - name: externalStoreId
+        in: path
+        description: Id to update if multistore admin.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomersResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomersResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomersResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomersResult'
+  /v2/customers/nextcustomernumber:
+    get:
+      tags:
+      - Customers
+      summary: 'Get Next Available Customer Number
+
+        <param name="externalStoreId"> Id to update if multistore admin.</param>'
+      operationId: Customers_GetNextAvailableCustomerNumber
+      parameters:
+      - name: externalStoreId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+            text/xml:
+              schema:
+                type: string
+  /v2/stores/{externalStoreId}/customers/nextcustomernumber:
+    get:
+      tags:
+      - Customers
+      summary: 'Get Next Available Customer Number
+
+        <param name="externalStoreId"> Id to update if multistore admin.</param>'
+      operationId: Customers_GetNextAvailableCustomerNumber
+      parameters:
+      - name: externalStoreId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+            text/xml:
+              schema:
+                type: string
+components:
+  schemas:
+    MoreFlo.Models.InterfaceModels.CustomerResult:
+      description: Represents the result of an operation involving a Customer entity.
+      type: object
+      properties:
+        Customer:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Customer'
+          description: The Customer entity resulting from the operation.
+        CustomerNumber:
+          description: The unique customer number.
+          type: string
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
+    MoreFlo.Models.InterfaceModels.CustomerAddress:
+      type: object
+      properties:
+        Type:
+          enum:
+          - Billing
+          - Shipping
+          type: string
+        Name:
+          type: string
+        Address1:
+          type: string
+        Address2:
+          type: string
+        PostalCode:
+          type: string
+        City:
+          type: string
+        Country:
+          type: string
+        Email:
+          type: string
+        Phone1:
+          type: string
+        Phone2:
+          type: string
+        Mobile:
+          type: string
+        Fax:
+          type: string
+    MoreFlo.Models.InterfaceModels.CustomerUpdate:
+      required:
+      - Name
+      type: object
+      properties:
+        Website:
+          type: string
+        AdditionalData:
+          type: string
+        Contacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomerContact'
+        Addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomerAddress'
+        ParentId:
+          format: int32
+          type: integer
+        ResponsiblePersonnelId:
+          format: int32
+          type: integer
+        Origin:
+          type: string
+        CustomerNumber:
+          description: MoreFlo customer number.
+          type: string
+        Reference:
+          type: string
+        Name:
+          type: string
+        Address1:
+          type: string
+        Address2:
+          type: string
+        PostCode:
+          type: string
+        City:
+          type: string
+        Country:
+          type: string
+        IdentityNo:
+          type: string
+        ReferenceNumber:
+          format: int64
+          description: The other systems customer number or id.
+          type: integer
+        Email:
+          type: string
+        Telephone1:
+          type: string
+        Telephone2:
+          type: string
+        VatNumber:
+          type: string
+        IsExportCustomer:
+          type: boolean
+        Mobile:
+          type: string
+        Fax:
+          type: string
+        Note:
+          type: string
+        DateAdded:
+          format: date-time
+          type: string
+        DateUpdated:
+          format: date-time
+          type: string
+        ModifiedTime:
+          format: date-time
+          type: string
+        MemberGroupId:
+          format: int32
+          type: integer
+        MemberGroup:
+          type: string
+        PermitsCommercial:
+          type: boolean
+        IsCompany:
+          type: boolean
+        IsInternalCustomer:
+          type: boolean
+        IsActive:
+          type: boolean
+        Blocked:
+          description: Blocked because of an issue with Credit or something else
+          type: boolean
+        Id:
+          format: int32
+          description: Member Id
+          type: integer
+    MoreFlo.Models.InterfaceModels.CustomerSearchQuery:
+      type: object
+      properties:
+        SearchPhrase:
+          type: string
+        SearchType:
+          enum:
+          - AllFields
+          - CustomerNumber
+          - Name
+          - IdentityNumber
+          - Email
+          - Mobile
+          type: string
+        PageSize:
+          format: int32
+          type: integer
+        ExactMatch:
+          type: boolean
+        OnlyInternalCustomer:
+          type: boolean
+        OnlyExternalCustomer:
+          type: boolean
+    MoreFlo.Models.InterfaceModels.Customer:
+      required:
+      - Name
+      type: object
+      properties:
+        CustomerNumber:
+          description: MoreFlo customer number.
+          type: string
+        Reference:
+          type: string
+        Name:
+          type: string
+        Address1:
+          type: string
+        Address2:
+          type: string
+        PostCode:
+          type: string
+        City:
+          type: string
+        Country:
+          type: string
+        IdentityNo:
+          type: string
+        ReferenceNumber:
+          format: int64
+          description: The other systems customer number or id.
+          type: integer
+        Email:
+          type: string
+        Telephone1:
+          type: string
+        Telephone2:
+          type: string
+        VatNumber:
+          type: string
+        IsExportCustomer:
+          type: boolean
+        Mobile:
+          type: string
+        Fax:
+          type: string
+        Note:
+          type: string
+        DateAdded:
+          format: date-time
+          type: string
+        DateUpdated:
+          format: date-time
+          type: string
+        ModifiedTime:
+          format: date-time
+          type: string
+        MemberGroupId:
+          format: int32
+          type: integer
+        MemberGroup:
+          type: string
+        PermitsCommercial:
+          type: boolean
+        IsCompany:
+          type: boolean
+        IsInternalCustomer:
+          type: boolean
+        IsActive:
+          type: boolean
+        Blocked:
+          description: Blocked because of an issue with Credit or something else
+          type: boolean
+        Id:
+          format: int32
+          description: Member Id
+          type: integer
+    MoreFlo.Models.InterfaceModels.CustomersResult:
+      description: Represents a paged result containing a list of CustomerResult objects.
+      type: object
+      properties:
+        ExtraInformation:
+          description: A list of extra information or messages related to the paginated result.
+          type: array
+          items:
+            type: string
+        list:
+          description: The list of data items for the current page.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomerResult'
+        Page:
+          format: int32
+          description: The current page number.
+          type: integer
+        Total:
+          format: int32
+          description: The total number of pages available.
+          type: integer
+        PageSize:
+          format: int32
+          description: The number of data items per page.
+          type: integer
+    MoreFlo.Models.InterfaceModels.CustomerCreate:
+      required:
+      - Name
+      type: object
+      properties:
+        UpdateOnExisting:
+          type: boolean
+        Website:
+          type: string
+        AdditionalData:
+          type: string
+        Contacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomerContact'
+        Addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomerAddress'
+        ParentId:
+          format: int32
+          type: integer
+        ResponsiblePersonnelId:
+          format: int32
+          type: integer
+        Origin:
+          type: string
+        CustomerNumber:
+          description: MoreFlo customer number.
+          type: string
+        Reference:
+          type: string
+        Name:
+          type: string
+        Address1:
+          type: string
+        Address2:
+          type: string
+        PostCode:
+          type: string
+        City:
+          type: string
+        Country:
+          type: string
+        IdentityNo:
+          type: string
+        ReferenceNumber:
+          format: int64
+          description: The other systems customer number or id.
+          type: integer
+        Email:
+          type: string
+        Telephone1:
+          type: string
+        Telephone2:
+          type: string
+        VatNumber:
+          type: string
+        IsExportCustomer:
+          type: boolean
+        Mobile:
+          type: string
+        Fax:
+          type: string
+        Note:
+          type: string
+        DateAdded:
+          format: date-time
+          type: string
+        DateUpdated:
+          format: date-time
+          type: string
+        ModifiedTime:
+          format: date-time
+          type: string
+        MemberGroupId:
+          format: int32
+          type: integer
+        MemberGroup:
+          type: string
+        PermitsCommercial:
+          type: boolean
+        IsCompany:
+          type: boolean
+        IsInternalCustomer:
+          type: boolean
+        IsActive:
+          type: boolean
+        Blocked:
+          description: Blocked because of an issue with Credit or something else
+          type: boolean
+        Id:
+          format: int32
+          description: Member Id
+          type: integer
+    MoreFlo.Models.InterfaceModels.CustomerContact:
+      type: object
+      properties:
+        FirstName:
+          type: string
+        LastName:
+          type: string
+        Email:
+          type: string
+        Phone:
+          type: string
+        Id:
+          format: uuid
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+  securitySchemes:
+    basic:
+      type: http
+      scheme: basic
+      description: Basic HTTP Authentication

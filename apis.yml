@@ -21,6 +21,22 @@ deliveryModel:
   - pricing
   generated: '2026-08-28'
   method: derived
+accessModel:
+  pricing: paid
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Paid
+  confidence: high
+  source:
+  - plans
+  - authentication
+  - rate-limits
+  - security
+  - sandbox
+  generated: '2026-09-03'
+  method: derived
 image: https://www.northmill.com/icon.png
 url: https://raw.githubusercontent.com/api-evangelist/northmill/refs/heads/main/apis.yml
 x-type: company
@@ -874,8 +890,9 @@ common:
   url: packages/northmill-packages.yml
 - type: Sandbox
   url: sandbox/northmill-sandbox.yml
-- type: MCPServer
+- type: X-MCPServerCandidate
   url: mcp/northmill-mcp.yml
+  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type surfaces with a server that does not exist.'
 - type: AgentSkill
   url: skills/_index.yml
 - type: LLMsTxt

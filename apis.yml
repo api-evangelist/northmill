@@ -94,30 +94,6 @@ apis:
     url: https://developer.token.io/northmill_rest_api_doc/content/e-rest/ais/ais_integration.htm
   - type: Login
     url: https://northmill.dashboard.token.io/
-- aid: northmill:northmill-accountcodes-api
-  name: Northmill Account Codes API
-  description: The AccountCodes API from Northmill — 4 operation(s) for accountcodes.
-  humanURL: https://api.moreflo.com/swagger/ui/index
-  baseURL: https://api.moreflo.com
-  tags:
-  - AccountCodes
-  properties:
-  - type: OpenAPI
-    url: openapi/northmill-accountcodes-api-openapi.yml
-  - type: APIReference
-    url: https://api.moreflo.com/swagger/docs/v2
-  - type: Documentation
-    url: https://api.moreflo.com/swagger/ui/index
-  - type: Webhooks
-    url: asyncapi/northmill-flo-webhooks.yml
-  - type: DataModel
-    url: data-model/northmill-data-model.yml
-  - type: ErrorCatalog
-    url: errors/northmill-problem-types.yml
-  - type: Sandbox
-    url: sandbox/northmill-sandbox.yml
-  - type: Login
-    url: https://apps.moreflo.com/
 - aid: northmill:northmill-accountingsettings-api
   name: Northmill Accounting Settings API
   description: The AccountingSettings API from Northmill — 6 operation(s) for accountingsettings.
@@ -603,32 +579,6 @@ apis:
     url: sandbox/northmill-sandbox.yml
   - type: Login
     url: https://apps.moreflo.com/
-- aid: northmill:northmill-serviceorders-api
-  name: Northmill Service Orders API
-  description: The ServiceOrders API from Northmill — 4 operation(s) for serviceorders.
-  humanURL: https://api.moreflo.com/swagger/ui/index
-  baseURL: https://api.moreflo.com
-  tags:
-  - Service Orders
-  tags_raw:
-  - ServiceOrders
-  properties:
-  - type: OpenAPI
-    url: openapi/northmill-serviceorders-api-openapi.yml
-  - type: APIReference
-    url: https://api.moreflo.com/swagger/docs/v2
-  - type: Documentation
-    url: https://api.moreflo.com/swagger/ui/index
-  - type: Webhooks
-    url: asyncapi/northmill-flo-webhooks.yml
-  - type: DataModel
-    url: data-model/northmill-data-model.yml
-  - type: ErrorCatalog
-    url: errors/northmill-problem-types.yml
-  - type: Sandbox
-    url: sandbox/northmill-sandbox.yml
-  - type: Login
-    url: https://apps.moreflo.com/
 - aid: northmill:northmill-settings-api
   name: Northmill Settings API
   description: The Settings API from Northmill — 4 operation(s) for settings.
@@ -811,6 +761,54 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/northmill-webhooks-api-openapi.yml
+  - type: APIReference
+    url: https://api.moreflo.com/swagger/docs/v2
+  - type: Documentation
+    url: https://api.moreflo.com/swagger/ui/index
+  - type: Webhooks
+    url: asyncapi/northmill-flo-webhooks.yml
+  - type: DataModel
+    url: data-model/northmill-data-model.yml
+  - type: ErrorCatalog
+    url: errors/northmill-problem-types.yml
+  - type: Sandbox
+    url: sandbox/northmill-sandbox.yml
+  - type: Login
+    url: https://apps.moreflo.com/
+- aid: northmill:northmill-account-codes-api
+  name: Northmill Account Codes API
+  description: The Account Codes API from Northmill — 4 operation(s) for account codes.
+  humanURL: https://developer.token.io/northmill_rest_api_doc/content/e-rest/dashboard-intro.htm
+  baseURL: https://api.token.io
+  tags:
+  - Account Codes
+  properties:
+  - type: OpenAPI
+    url: openapi/northmill-account-codes-api-openapi.yml
+  - type: APIReference
+    url: https://api.moreflo.com/swagger/docs/v2
+  - type: Documentation
+    url: https://api.moreflo.com/swagger/ui/index
+  - type: Webhooks
+    url: asyncapi/northmill-flo-webhooks.yml
+  - type: DataModel
+    url: data-model/northmill-data-model.yml
+  - type: ErrorCatalog
+    url: errors/northmill-problem-types.yml
+  - type: Sandbox
+    url: sandbox/northmill-sandbox.yml
+  - type: Login
+    url: https://apps.moreflo.com/
+- aid: northmill:northmill-service-orders-api
+  name: Northmill Service Orders API
+  description: The Service Orders API from Northmill — 4 operation(s) for service orders.
+  humanURL: https://developer.token.io/northmill_rest_api_doc/content/e-rest/dashboard-intro.htm
+  baseURL: https://api.token.io
+  tags:
+  - Service Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/northmill-service-orders-api-openapi.yml
   - type: APIReference
     url: https://api.moreflo.com/swagger/docs/v2
   - type: Documentation

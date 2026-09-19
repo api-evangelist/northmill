@@ -55,7 +55,7 @@ tags:
 - Webhook
 - E-Commerce
 - Lending
-- Nordics
+- Nordic
 tags_raw:
 - Banking
 - Payments
@@ -439,6 +439,8 @@ apis:
   humanURL: https://api.moreflo.com/swagger/ui/index
   baseURL: https://api.moreflo.com
   tags:
+  - Location
+  tags_raw:
   - Locations
   properties:
   - type: OpenAPI
@@ -781,6 +783,8 @@ apis:
   humanURL: https://developer.token.io/northmill_rest_api_doc/content/e-rest/dashboard-intro.htm
   baseURL: https://api.token.io
   tags:
+  - AccountCodes
+  tags_raw:
   - Account Codes
   properties:
   - type: OpenAPI

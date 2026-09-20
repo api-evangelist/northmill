@@ -26,7 +26,8 @@ edges:
     the banking customer capabilities do not, since this is the Flo POS business unit, not the bank's
     account onboarding.
 - tag: AccountCodes
-  spec_file: northmill-accountcodes-api-openapi.yml
+  spec_file: northmill-account-codes-api-openapi.yml
+  reanchored_from: northmill-accountcodes-api-openapi.yml
   capability_id: BC-200.10
   capability_id_l1: BC-200
   capability_name: General Ledger Management

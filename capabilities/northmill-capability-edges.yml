@@ -11,8 +11,20 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 3
+edge_count: 5
 edges:
+- tag: Receipts
+  spec_file: northmill-receipts-api-openapi.yml
+  capability_id: BC-2320.10
+  capability_id_l1: BC-2320
+  capability_name: Sales Transaction Management
+  confidence: 0.85
+  evidence: POST /v2/receipts Receipts_CreateReceipt "Create a receipt"; schemas Receipt, Article, Payment,
+    Vat, BankCardTransaction, ControlUnit, Merchant
+  reason: Receipts with article rows, discounts, VAT, payments, bank card transactions and a fiscal control
+    unit are the record of a consumer sales transaction at the till — point-of-sale sales transaction
+    capture.
+  recovered_from: vertical-retail-consumer-goods-edges.json
 - tag: Customers
   spec_file: northmill-customers-api-openapi.yml
   capability_id: BC-420.10
@@ -45,3 +57,15 @@ edges:
     settings.
   reason: Retrieves VAT, income and other ledger account settings (VatAccountSetting, IncomeAccountSetting)
     used to map POS activity to accounts — chart of accounts / GL configuration.
+- tag: Campaigns
+  spec_file: northmill-campaigns-api-openapi.yml
+  capability_id: BC-440.30
+  capability_id_l1: BC-440
+  capability_name: Discount & Promotion Management
+  confidence: 0.7
+  evidence: 'PUT /v2/campaigns  Campaigns_Update  Update article sets. ... schemas: Campaign, CampaignPart,
+    ArticleSet, ArticleSetPart'
+  reason: Campaigns here are article-set based promotional/discount constructs in a POS system (update
+    operation literally says 'Update article sets'), i.e. promotional offer definition rather than marketing
+    communications campaigns.
+  recovered_from: vertical-retail-consumer-goods-edges.json

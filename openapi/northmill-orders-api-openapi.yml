@@ -11,7 +11,7 @@ paths:
     put:
       tags:
       - Orders
-      summary: Update list of orders.
+      summary: Update list of orders
       operationId: Orders_Update
       parameters:
       - name: externalStoreId
@@ -69,7 +69,7 @@ paths:
     post:
       tags:
       - Orders
-      summary: Create orders.
+      summary: Create orders
       operationId: Orders_Create
       parameters:
       - name: externalStoreId
@@ -128,7 +128,7 @@ paths:
     put:
       tags:
       - Orders
-      summary: Update list of orders.
+      summary: Update list of orders
       operationId: Orders_Update
       parameters:
       - name: externalStoreId
@@ -186,7 +186,7 @@ paths:
     post:
       tags:
       - Orders
-      summary: Create orders.
+      summary: Create orders
       operationId: Orders_Create
       parameters:
       - name: externalStoreId
@@ -245,7 +245,7 @@ paths:
     get:
       tags:
       - Orders
-      summary: Get a order.
+      summary: Get a order
       operationId: Orders_GetByExternalReference
       parameters:
       - name: externalReference
@@ -281,7 +281,7 @@ paths:
     get:
       tags:
       - Orders
-      summary: Get a order.
+      summary: Get a order
       operationId: Orders_GetByExternalReference
       parameters:
       - name: externalReference
@@ -317,7 +317,7 @@ paths:
     get:
       tags:
       - Orders
-      summary: Get a order.
+      summary: Get a order
       operationId: Orders_Get
       parameters:
       - name: Id
@@ -353,7 +353,7 @@ paths:
     get:
       tags:
       - Orders
-      summary: Get a order.
+      summary: Get a order
       operationId: Orders_Get
       parameters:
       - name: Id
@@ -516,6 +516,198 @@ components:
           - FullyPaid
           - Refunded
           type: string
+    MoreFlo.Models.InterfaceModels.OrderResult:
+      description: 'Represents the result of an operation that returns a single order.
+
+        This class encapsulates an Order object and its unique identifier, typically used in API responses for single order operations.'
+      type: object
+      properties:
+        Order:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Order'
+          description: The Order object containing the order data.
+        Id:
+          description: The unique identifier of the order.
+          type: string
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
+    MoreFlo.Models.InterfaceModels.ArticleResult:
+      description: Represents the result of an operation involving an Article entity.
+      type: object
+      properties:
+        Article:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Article'
+          description: The Article entity resulting from the operation.
+        ArticleNumber:
+          description: The unique article number.
+          type: string
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
+    MoreFlo.Models.InterfaceModels.ArticleBookingSettings:
+      description: Represents the booking settings for an article.
+      type: object
+      properties:
+        DefaultDuration:
+          format: int32
+          description: Default duration of the event in seconds, used in MoreFlo backoffice and customer booking.
+          type: integer
+        PaddingTime:
+          format: int32
+          description: Padding time in seconds, used in customer booking.
+          type: integer
+        LeadTime:
+          format: int32
+          description: Lead time in seconds, used in customer booking.
+          type: integer
+        IntervalTime:
+          format: int32
+          description: Interval time in seconds, used in customer booking.
+          type: integer
+        SchedulingWindow:
+          format: int32
+          description: Scheduling window in seconds, used in customer booking.
+          type: integer
+        RequiresStoreConfirmation:
+          description: Indicates whether store confirmation is required before the booking is confirmed.
+          type: boolean
+        CustomerBookingEnabled:
+          description: 'Indicates whether customer booking is enabled for this service.
+
+            Defaults to true.'
+          type: boolean
+        ArticleBookableType:
+          description: Determines if the booking should be a service order booking or a booking order booking.
+          enum:
+          - Booking
+          - ServiceRepair
+          type: string
+        DetailedDescriptionHtml:
+          description: 'Detailed description of the service for use in customer booking.
+
+            Leave empty if no customer booking should be done.'
+          maxLength: 65535
+          minLength: 0
+          type: string
+        ClientCancellationPossible:
+          description: Determines if a cancellation option should be presented for the customer or if only the store can cancel.
+          type: boolean
+        CancellationMinimumTimeInAdvance:
+          format: int32
+          description: Minimum time in seconds required to make a cancellation, if allowed (see ClientCancellationPossible).
+          type: integer
+    MoreFlo.Models.InterfaceModels.Address:
+      type: object
+      properties:
+        Name:
+          type: string
+        Address1:
+          type: string
+        Address2:
+          type: string
+        PostCode:
+          type: string
+        City:
+          type: string
+        Country:
+          type: string
+        Email:
+          type: string
+        Telephone1:
+          type: string
+        Telephone2:
+          type: string
+        Mobile:
+          type: string
+        Fax:
+          type: string
+    MoreFlo.Models.InterfaceModels.Customer:
+      required:
+      - Name
+      type: object
+      properties:
+        CustomerNumber:
+          description: MoreFlo customer number.
+          type: string
+        Reference:
+          type: string
+        Name:
+          type: string
+        Address1:
+          type: string
+        Address2:
+          type: string
+        PostCode:
+          type: string
+        City:
+          type: string
+        Country:
+          type: string
+        IdentityNo:
+          type: string
+        ReferenceNumber:
+          format: int64
+          description: The other systems customer number or id.
+          type: integer
+        Email:
+          type: string
+        Telephone1:
+          type: string
+        Telephone2:
+          type: string
+        VatNumber:
+          type: string
+        IsExportCustomer:
+          type: boolean
+        Mobile:
+          type: string
+        Fax:
+          type: string
+        Note:
+          type: string
+        DateAdded:
+          format: date-time
+          type: string
+        DateUpdated:
+          format: date-time
+          type: string
+        ModifiedTime:
+          format: date-time
+          type: string
+        MemberGroupId:
+          format: int32
+          type: integer
+        MemberGroup:
+          type: string
+        PermitsCommercial:
+          type: boolean
+        IsCompany:
+          type: boolean
+        IsInternalCustomer:
+          type: boolean
+        IsActive:
+          type: boolean
+        Blocked:
+          description: Blocked because of an issue with Credit or something else
+          type: boolean
+        Id:
+          format: int32
+          description: Member Id
+          type: integer
     MoreFlo.Models.InterfaceModels.OrderRow:
       description: Represents a row within an order, detailing information about a specific item included in the order.
       type: object
@@ -552,101 +744,6 @@ components:
         ReceiptNote:
           description: A note or text associated with the item, typically a text row.
           type: string
-    MoreFlo.Models.InterfaceModels.OrderResult:
-      description: 'Represents the result of an operation that returns a single order.
-
-        This class encapsulates an Order object and its unique identifier, typically used in API responses for single order operations.'
-      type: object
-      properties:
-        Order:
-          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Order'
-          description: The Order object containing the order data.
-        Id:
-          description: The unique identifier of the order.
-          type: string
-        Success:
-          description: Indicates whether the API operation was successful.
-          type: boolean
-        ExtraInformation:
-          description: 'A list of extra information or messages related to the API operation result.
-
-            This can include error messages, warnings, or informational notes.'
-          type: array
-          items:
-            type: string
-    MoreFlo.Models.InterfaceModels.Address:
-      type: object
-      properties:
-        Name:
-          type: string
-        Address1:
-          type: string
-        Address2:
-          type: string
-        PostCode:
-          type: string
-        City:
-          type: string
-        Country:
-          type: string
-        Email:
-          type: string
-        Telephone1:
-          type: string
-        Telephone2:
-          type: string
-        Mobile:
-          type: string
-        Fax:
-          type: string
-    MoreFlo.Models.InterfaceModels.ArticleResult:
-      description: Represents the result of an operation involving an Article entity.
-      type: object
-      properties:
-        Article:
-          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Article'
-          description: The Article entity resulting from the operation.
-        ArticleNumber:
-          description: The unique article number.
-          type: string
-        Success:
-          description: Indicates whether the API operation was successful.
-          type: boolean
-        ExtraInformation:
-          description: 'A list of extra information or messages related to the API operation result.
-
-            This can include error messages, warnings, or informational notes.'
-          type: array
-          items:
-            type: string
-    MoreFlo.Models.InterfaceModels.OrdersResult:
-      description: 'Represents a paginated result containing a list of order results.
-
-        This class is used to return a collection of orders, along with pagination information, in API responses.'
-      type: object
-      properties:
-        ExtraInformation:
-          description: A list of extra information or messages related to the paginated result.
-          type: array
-          items:
-            type: string
-        list:
-          description: The list of data items for the current page.
-          type: array
-          items:
-            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OrderResult'
-        Page:
-          format: int32
-          description: The current page number.
-          type: integer
-        Total:
-          format: int32
-          description: The total number of pages available.
-          type: integer
-        PageSize:
-          format: int32
-          description: The number of data items per page.
-          type: integer
     MoreFlo.Models.InterfaceModels.Article:
       description: Represents an article with various properties.
       required:
@@ -889,90 +986,6 @@ components:
 
             This is used to maintain inventory levels and prevent stockouts.'
           type: number
-    xFlo.Models.Common.Models.Article.ArticleBarcode:
-      description: Article barcode
-      required:
-      - Barcode
-      type: object
-      properties:
-        Barcode:
-          description: Article barcode
-          maxLength: 20
-          minLength: 0
-          type: string
-    MoreFlo.Models.InterfaceModels.Customer:
-      required:
-      - Name
-      type: object
-      properties:
-        CustomerNumber:
-          description: MoreFlo customer number.
-          type: string
-        Reference:
-          type: string
-        Name:
-          type: string
-        Address1:
-          type: string
-        Address2:
-          type: string
-        PostCode:
-          type: string
-        City:
-          type: string
-        Country:
-          type: string
-        IdentityNo:
-          type: string
-        ReferenceNumber:
-          format: int64
-          description: The other systems customer number or id.
-          type: integer
-        Email:
-          type: string
-        Telephone1:
-          type: string
-        Telephone2:
-          type: string
-        VatNumber:
-          type: string
-        IsExportCustomer:
-          type: boolean
-        Mobile:
-          type: string
-        Fax:
-          type: string
-        Note:
-          type: string
-        DateAdded:
-          format: date-time
-          type: string
-        DateUpdated:
-          format: date-time
-          type: string
-        ModifiedTime:
-          format: date-time
-          type: string
-        MemberGroupId:
-          format: int32
-          type: integer
-        MemberGroup:
-          type: string
-        PermitsCommercial:
-          type: boolean
-        IsCompany:
-          type: boolean
-        IsInternalCustomer:
-          type: boolean
-        IsActive:
-          type: boolean
-        Blocked:
-          description: Blocked because of an issue with Credit or something else
-          type: boolean
-        Id:
-          format: int32
-          description: Member Id
-          type: integer
     MoreFlo.Models.InterfaceModels.Order:
       description: Represents an order, containing customer details, dates, references, financial information, and order rows.
       required:
@@ -1094,58 +1107,45 @@ components:
           - FullyPaid
           - Refunded
           type: string
-    MoreFlo.Models.InterfaceModels.ArticleBookingSettings:
-      description: Represents the booking settings for an article.
+    MoreFlo.Models.InterfaceModels.OrdersResult:
+      description: 'Represents a paginated result containing a list of order results.
+
+        This class is used to return a collection of orders, along with pagination information, in API responses.'
       type: object
       properties:
-        DefaultDuration:
+        ExtraInformation:
+          description: A list of extra information or messages related to the paginated result.
+          type: array
+          items:
+            type: string
+        list:
+          description: The list of data items for the current page.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OrderResult'
+        Page:
           format: int32
-          description: Default duration of the event in seconds, used in MoreFlo backoffice and customer booking.
+          description: The current page number.
           type: integer
-        PaddingTime:
+        Total:
           format: int32
-          description: Padding time in seconds, used in customer booking.
+          description: The total number of pages available.
           type: integer
-        LeadTime:
+        PageSize:
           format: int32
-          description: Lead time in seconds, used in customer booking.
+          description: The number of data items per page.
           type: integer
-        IntervalTime:
-          format: int32
-          description: Interval time in seconds, used in customer booking.
-          type: integer
-        SchedulingWindow:
-          format: int32
-          description: Scheduling window in seconds, used in customer booking.
-          type: integer
-        RequiresStoreConfirmation:
-          description: Indicates whether store confirmation is required before the booking is confirmed.
-          type: boolean
-        CustomerBookingEnabled:
-          description: 'Indicates whether customer booking is enabled for this service.
-
-            Defaults to true.'
-          type: boolean
-        ArticleBookableType:
-          description: Determines if the booking should be a service order booking or a booking order booking.
-          enum:
-          - Booking
-          - ServiceRepair
-          type: string
-        DetailedDescriptionHtml:
-          description: 'Detailed description of the service for use in customer booking.
-
-            Leave empty if no customer booking should be done.'
-          maxLength: 65535
+    xFlo.Models.Common.Models.Article.ArticleBarcode:
+      description: Article barcode
+      required:
+      - Barcode
+      type: object
+      properties:
+        Barcode:
+          description: Article barcode
+          maxLength: 20
           minLength: 0
           type: string
-        ClientCancellationPossible:
-          description: Determines if a cancellation option should be presented for the customer or if only the store can cancel.
-          type: boolean
-        CancellationMinimumTimeInAdvance:
-          format: int32
-          description: Minimum time in seconds required to make a cancellation, if allowed (see ClientCancellationPossible).
-          type: integer
   securitySchemes:
     basic:
       type: http

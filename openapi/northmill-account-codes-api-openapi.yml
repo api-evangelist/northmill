@@ -5,13 +5,13 @@ info:
 servers:
 - url: https://api.moreflo.com
 tags:
-- name: AccountCodes
+- name: Account Codes
 paths:
   /v2/accountcodes:
     get:
       tags:
-      - AccountCodes
-      summary: Get all account codes.
+      - Account Codes
+      summary: Get all account codes
       operationId: AccountCodes_Get
       parameters:
       - name: page
@@ -53,8 +53,8 @@ paths:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodesResult'
     put:
       tags:
-      - AccountCodes
-      summary: Update account codes.
+      - Account Codes
+      summary: Update account codes
       operationId: AccountCodes_Update
       parameters:
       - name: externalStoreId
@@ -111,8 +111,8 @@ paths:
         required: true
     post:
       tags:
-      - AccountCodes
-      summary: Create account codes.
+      - Account Codes
+      summary: Create account codes
       operationId: AccountCodes_Create
       parameters:
       - name: externalStoreId
@@ -170,8 +170,8 @@ paths:
   /v2/stores/{externalStoreId}/accountcodes:
     get:
       tags:
-      - AccountCodes
-      summary: Get all account codes.
+      - Account Codes
+      summary: Get all account codes
       operationId: AccountCodes_Get
       parameters:
       - name: page
@@ -213,8 +213,8 @@ paths:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodesResult'
     put:
       tags:
-      - AccountCodes
-      summary: Update account codes.
+      - Account Codes
+      summary: Update account codes
       operationId: AccountCodes_Update
       parameters:
       - name: externalStoreId
@@ -271,8 +271,8 @@ paths:
         required: true
     post:
       tags:
-      - AccountCodes
-      summary: Create account codes.
+      - Account Codes
+      summary: Create account codes
       operationId: AccountCodes_Create
       parameters:
       - name: externalStoreId
@@ -330,7 +330,7 @@ paths:
   /v2/accountcodes/{Id}:
     get:
       tags:
-      - AccountCodes
+      - Account Codes
       summary: Get a specific account code
       operationId: AccountCodes_Get
       parameters:
@@ -365,8 +365,8 @@ paths:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodeResult'
     delete:
       tags:
-      - AccountCodes
-      summary: Delete an account code.
+      - Account Codes
+      summary: Delete an account code
       operationId: AccountCodes_Delete
       parameters:
       - name: Id
@@ -401,7 +401,7 @@ paths:
   /v2/stores/{externalStoreId}/accountcodes/{Id}:
     get:
       tags:
-      - AccountCodes
+      - Account Codes
       summary: Get a specific account code
       operationId: AccountCodes_Get
       parameters:
@@ -436,8 +436,8 @@ paths:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodeResult'
     delete:
       tags:
-      - AccountCodes
-      summary: Delete an account code.
+      - Account Codes
+      summary: Delete an account code
       operationId: AccountCodes_Delete
       parameters:
       - name: Id
@@ -471,6 +471,52 @@ paths:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodeResult'
 components:
   schemas:
+    MoreFlo.Models.InterfaceModels.AccountCodeResult:
+      description: Represents the result of an operation involving an AccountCode entity.
+      type: object
+      properties:
+        AccountCode:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCode'
+          description: The AccountCode entity resulting from the operation.
+        Id:
+          description: The unique identifier of the AccountCode.
+          type: string
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
+    MoreFlo.Models.InterfaceModels.AccountCodesResult:
+      description: ''
+      type: object
+      properties:
+        ExtraInformation:
+          description: A list of extra information or messages related to the paginated result.
+          type: array
+          items:
+            type: string
+        list:
+          description: The list of data items for the current page.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodeResult'
+        Page:
+          format: int32
+          description: The current page number.
+          type: integer
+        Total:
+          format: int32
+          description: The total number of pages available.
+          type: integer
+        PageSize:
+          format: int32
+          description: The number of data items per page.
+          type: integer
     MoreFlo.Models.InterfaceModels.AccountCodeCreate:
       description: Represents the data required to create a new account code.
       required:
@@ -570,52 +616,6 @@ components:
         KeepRetailPriceForTakeAway:
           description: Indicates whether the retail price should be kept for takeaway transactions.
           type: boolean
-    MoreFlo.Models.InterfaceModels.AccountCodeResult:
-      description: Represents the result of an operation involving an AccountCode entity.
-      type: object
-      properties:
-        AccountCode:
-          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCode'
-          description: The AccountCode entity resulting from the operation.
-        Id:
-          description: The unique identifier of the AccountCode.
-          type: string
-        Success:
-          description: Indicates whether the API operation was successful.
-          type: boolean
-        ExtraInformation:
-          description: 'A list of extra information or messages related to the API operation result.
-
-            This can include error messages, warnings, or informational notes.'
-          type: array
-          items:
-            type: string
-    MoreFlo.Models.InterfaceModels.AccountCodesResult:
-      description: ''
-      type: object
-      properties:
-        ExtraInformation:
-          description: A list of extra information or messages related to the paginated result.
-          type: array
-          items:
-            type: string
-        list:
-          description: The list of data items for the current page.
-          type: array
-          items:
-            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodeResult'
-        Page:
-          format: int32
-          description: The current page number.
-          type: integer
-        Total:
-          format: int32
-          description: The total number of pages available.
-          type: integer
-        PageSize:
-          format: int32
-          description: The number of data items per page.
-          type: integer
   securitySchemes:
     basic:
       type: http

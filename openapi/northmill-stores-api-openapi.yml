@@ -11,7 +11,7 @@ paths:
     get:
       tags:
       - Stores
-      summary: Hämta en butik - se flagga.
+      summary: Hämta en butik - se flagga
       operationId: Stores_Get
       parameters:
       - name: page
@@ -47,7 +47,7 @@ paths:
     post:
       tags:
       - Stores
-      summary: Create a store.
+      summary: Create a store
       operationId: Stores_Create
       responses:
         '200':
@@ -88,7 +88,7 @@ paths:
     get:
       tags:
       - Stores
-      summary: Hämta en butik - se flagga.
+      summary: Hämta en butik - se flagga
       operationId: Stores_Get
       parameters:
       - name: externalStoreId
@@ -117,7 +117,7 @@ paths:
     put:
       tags:
       - Stores
-      summary: Uppdatera en butik.
+      summary: Uppdatera en butik
       operationId: Stores_Update
       parameters:
       - name: externalStoreId
@@ -164,128 +164,6 @@ paths:
         required: true
 components:
   schemas:
-    MoreFlo.Models.InterfaceModels.StoresResult:
-      description: 'Represents a paginated result containing a list of store results.
-
-        This class is used to return a collection of stores, along with pagination information, in API responses.'
-      type: object
-      properties:
-        ExtraInformation:
-          description: A list of extra information or messages related to the paginated result.
-          type: array
-          items:
-            type: string
-        list:
-          description: The list of data items for the current page.
-          type: array
-          items:
-            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.StoreResult'
-        Page:
-          format: int32
-          description: The current page number.
-          type: integer
-        Total:
-          format: int32
-          description: The total number of pages available.
-          type: integer
-        PageSize:
-          format: int32
-          description: The number of data items per page.
-          type: integer
-    MoreFlo.Models.InterfaceModels.StoreResult:
-      description: 'Represents the result of an operation that returns a store.
-
-        This class encapsulates a Store object and additional information about the operation''s success or failure, typically used in API responses related to store retrieval or management.'
-      type: object
-      properties:
-        Success:
-          description: Indicates whether the API operation was successful.
-          type: boolean
-        ExtraInformation:
-          description: 'A list of extra information or messages related to the API operation result.
-
-            This can include error messages, warnings, or informational notes.'
-          type: array
-          items:
-            type: string
-        Store:
-          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Store'
-          description: The Store object containing the store data.
-    MoreFlo.Models.InterfaceModels.Store:
-      description: Represents a store or business location, containing information such as identification, contact details, and address.
-      type: object
-      properties:
-        ExternalStoreId:
-          format: int32
-          description: The external identifier for the store.
-          type: integer
-        CompanyName:
-          description: The official name of the company.
-          type: string
-        PublicCompanyName:
-          description: The public-facing name of the company (e.g., for invoices).
-          type: string
-        SMSSenderName:
-          description: The name used as the sender for SMS messages from this store.
-          type: string
-        OrganizationNumber:
-          description: The organization number of the company.
-          type: string
-        StartDate:
-          format: date-time
-          description: The start date of the store's validity or operation.
-          type: string
-        ValidTo:
-          format: date-time
-          description: The end date of the store's validity or operation.
-          type: string
-        UsernamePrefix:
-          description: A prefix used for usernames associated with this store.
-          maxLength: 10
-          minLength: 3
-          type: string
-        Address1:
-          description: The first line of the store's address.
-          type: string
-        Address2:
-          description: The second line of the store's address (optional).
-          type: string
-        PostCode:
-          description: The postal code of the store's address.
-          type: string
-        City:
-          description: The city of the store's address.
-          type: string
-        Country:
-          description: The country of the store's address.
-          type: string
-        PublicEmail:
-          description: The public email address of the store.
-          type: string
-        PublicPhone:
-          description: The public phone number of the store.
-          type: string
-        PublicFax:
-          description: The public fax number of the store.
-          type: string
-        IsActive:
-          description: Indicates whether the store is active.
-          type: boolean
-        CurrencyCode:
-          description: The currency code used by the store.
-          type: string
-        ContactPerson:
-          description: The name of a contact person at the store.
-          type: string
-        Phone:
-          description: The store's phone number.
-          type: string
-        CellPhone:
-          description: The store's cell phone number.
-          type: string
-        Email:
-          description: The store's email address.
-          type: string
     MoreFlo.Models.InterfaceModels.StoreCreate:
       description: 'Represents the data required to create a new store entry.
 
@@ -394,6 +272,128 @@ components:
         Email:
           description: The store's email address.
           type: string
+    MoreFlo.Models.InterfaceModels.StoresResult:
+      description: 'Represents a paginated result containing a list of store results.
+
+        This class is used to return a collection of stores, along with pagination information, in API responses.'
+      type: object
+      properties:
+        ExtraInformation:
+          description: A list of extra information or messages related to the paginated result.
+          type: array
+          items:
+            type: string
+        list:
+          description: The list of data items for the current page.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.StoreResult'
+        Page:
+          format: int32
+          description: The current page number.
+          type: integer
+        Total:
+          format: int32
+          description: The total number of pages available.
+          type: integer
+        PageSize:
+          format: int32
+          description: The number of data items per page.
+          type: integer
+    MoreFlo.Models.InterfaceModels.Store:
+      description: Represents a store or business location, containing information such as identification, contact details, and address.
+      type: object
+      properties:
+        ExternalStoreId:
+          format: int32
+          description: The external identifier for the store.
+          type: integer
+        CompanyName:
+          description: The official name of the company.
+          type: string
+        PublicCompanyName:
+          description: The public-facing name of the company (e.g., for invoices).
+          type: string
+        SMSSenderName:
+          description: The name used as the sender for SMS messages from this store.
+          type: string
+        OrganizationNumber:
+          description: The organization number of the company.
+          type: string
+        StartDate:
+          format: date-time
+          description: The start date of the store's validity or operation.
+          type: string
+        ValidTo:
+          format: date-time
+          description: The end date of the store's validity or operation.
+          type: string
+        UsernamePrefix:
+          description: A prefix used for usernames associated with this store.
+          maxLength: 10
+          minLength: 3
+          type: string
+        Address1:
+          description: The first line of the store's address.
+          type: string
+        Address2:
+          description: The second line of the store's address (optional).
+          type: string
+        PostCode:
+          description: The postal code of the store's address.
+          type: string
+        City:
+          description: The city of the store's address.
+          type: string
+        Country:
+          description: The country of the store's address.
+          type: string
+        PublicEmail:
+          description: The public email address of the store.
+          type: string
+        PublicPhone:
+          description: The public phone number of the store.
+          type: string
+        PublicFax:
+          description: The public fax number of the store.
+          type: string
+        IsActive:
+          description: Indicates whether the store is active.
+          type: boolean
+        CurrencyCode:
+          description: The currency code used by the store.
+          type: string
+        ContactPerson:
+          description: The name of a contact person at the store.
+          type: string
+        Phone:
+          description: The store's phone number.
+          type: string
+        CellPhone:
+          description: The store's cell phone number.
+          type: string
+        Email:
+          description: The store's email address.
+          type: string
+    MoreFlo.Models.InterfaceModels.StoreResult:
+      description: 'Represents the result of an operation that returns a store.
+
+        This class encapsulates a Store object and additional information about the operation''s success or failure, typically used in API responses related to store retrieval or management.'
+      type: object
+      properties:
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
+        Store:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Store'
+          description: The Store object containing the store data.
   securitySchemes:
     basic:
       type: http

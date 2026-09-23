@@ -11,7 +11,7 @@ paths:
     put:
       tags:
       - Customers
-      summary: Update customers.
+      summary: Update customers
       operationId: Customers_Update
       parameters:
       - name: externalStoreId
@@ -69,7 +69,7 @@ paths:
     post:
       tags:
       - Customers
-      summary: Create customers.
+      summary: Create customers
       operationId: Customers_Create
       parameters:
       - name: externalStoreId
@@ -128,7 +128,7 @@ paths:
     put:
       tags:
       - Customers
-      summary: Update customers.
+      summary: Update customers
       operationId: Customers_Update
       parameters:
       - name: externalStoreId
@@ -186,7 +186,7 @@ paths:
     post:
       tags:
       - Customers
-      summary: Create customers.
+      summary: Create customers
       operationId: Customers_Create
       parameters:
       - name: externalStoreId
@@ -415,9 +415,7 @@ paths:
     get:
       tags:
       - Customers
-      summary: 'Get Next Available Customer Number
-
-        <param name="externalStoreId"> Id to update if multistore admin.</param>'
+      summary: Get Next Available Customer Number Id to update if multistore admin
       operationId: Customers_GetNextAvailableCustomerNumber
       parameters:
       - name: externalStoreId
@@ -446,9 +444,7 @@ paths:
     get:
       tags:
       - Customers
-      summary: 'Get Next Available Customer Number
-
-        <param name="externalStoreId"> Id to update if multistore admin.</param>'
+      summary: Get Next Available Customer Number Id to update if multistore admin
       operationId: Customers_GetNextAvailableCustomerNumber
       parameters:
       - name: externalStoreId
@@ -475,61 +471,13 @@ paths:
                 type: string
 components:
   schemas:
-    MoreFlo.Models.InterfaceModels.CustomerResult:
-      description: Represents the result of an operation involving a Customer entity.
-      type: object
-      properties:
-        Customer:
-          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Customer'
-          description: The Customer entity resulting from the operation.
-        CustomerNumber:
-          description: The unique customer number.
-          type: string
-        Success:
-          description: Indicates whether the API operation was successful.
-          type: boolean
-        ExtraInformation:
-          description: 'A list of extra information or messages related to the API operation result.
-
-            This can include error messages, warnings, or informational notes.'
-          type: array
-          items:
-            type: string
-    MoreFlo.Models.InterfaceModels.CustomerAddress:
-      type: object
-      properties:
-        Type:
-          enum:
-          - Billing
-          - Shipping
-          type: string
-        Name:
-          type: string
-        Address1:
-          type: string
-        Address2:
-          type: string
-        PostalCode:
-          type: string
-        City:
-          type: string
-        Country:
-          type: string
-        Email:
-          type: string
-        Phone1:
-          type: string
-        Phone2:
-          type: string
-        Mobile:
-          type: string
-        Fax:
-          type: string
-    MoreFlo.Models.InterfaceModels.CustomerUpdate:
+    MoreFlo.Models.InterfaceModels.CustomerCreate:
       required:
       - Name
       type: object
       properties:
+        UpdateOnExisting:
+          type: boolean
         Website:
           type: string
         AdditionalData:
@@ -641,6 +589,26 @@ components:
           type: boolean
         OnlyExternalCustomer:
           type: boolean
+    MoreFlo.Models.InterfaceModels.CustomerResult:
+      description: Represents the result of an operation involving a Customer entity.
+      type: object
+      properties:
+        Customer:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Customer'
+          description: The Customer entity resulting from the operation.
+        CustomerNumber:
+          description: The unique customer number.
+          type: string
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
     MoreFlo.Models.InterfaceModels.Customer:
       required:
       - Name
@@ -740,13 +708,26 @@ components:
           format: int32
           description: The number of data items per page.
           type: integer
-    MoreFlo.Models.InterfaceModels.CustomerCreate:
+    MoreFlo.Models.InterfaceModels.CustomerContact:
+      type: object
+      properties:
+        FirstName:
+          type: string
+        LastName:
+          type: string
+        Email:
+          type: string
+        Phone:
+          type: string
+        Id:
+          format: uuid
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+    MoreFlo.Models.InterfaceModels.CustomerUpdate:
       required:
       - Name
       type: object
       properties:
-        UpdateOnExisting:
-          type: boolean
         Website:
           type: string
         AdditionalData:
@@ -835,21 +816,36 @@ components:
           format: int32
           description: Member Id
           type: integer
-    MoreFlo.Models.InterfaceModels.CustomerContact:
+    MoreFlo.Models.InterfaceModels.CustomerAddress:
       type: object
       properties:
-        FirstName:
+        Type:
+          enum:
+          - Billing
+          - Shipping
           type: string
-        LastName:
+        Name:
+          type: string
+        Address1:
+          type: string
+        Address2:
+          type: string
+        PostalCode:
+          type: string
+        City:
+          type: string
+        Country:
           type: string
         Email:
           type: string
-        Phone:
+        Phone1:
           type: string
-        Id:
-          format: uuid
+        Phone2:
           type: string
-          example: 00000000-0000-0000-0000-000000000000
+        Mobile:
+          type: string
+        Fax:
+          type: string
   securitySchemes:
     basic:
       type: http

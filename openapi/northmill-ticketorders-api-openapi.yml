@@ -11,7 +11,7 @@ paths:
     put:
       tags:
       - TicketOrders
-      summary: Update list of ticketorders.
+      summary: Update list of ticketorders
       operationId: TicketOrders_Update
       parameters:
       - name: externalStoreId
@@ -69,7 +69,7 @@ paths:
     post:
       tags:
       - TicketOrders
-      summary: Create ticketorders.
+      summary: Create ticketorders
       operationId: TicketOrders_Create
       parameters:
       - name: externalStoreId
@@ -128,7 +128,7 @@ paths:
     put:
       tags:
       - TicketOrders
-      summary: Update list of ticketorders.
+      summary: Update list of ticketorders
       operationId: TicketOrders_Update
       parameters:
       - name: externalStoreId
@@ -186,7 +186,7 @@ paths:
     post:
       tags:
       - TicketOrders
-      summary: Create ticketorders.
+      summary: Create ticketorders
       operationId: TicketOrders_Create
       parameters:
       - name: externalStoreId
@@ -245,7 +245,7 @@ paths:
     get:
       tags:
       - TicketOrders
-      summary: Get a order.
+      summary: Get a order
       operationId: TicketOrders_GetByExternalReference
       parameters:
       - name: externalReference
@@ -281,7 +281,7 @@ paths:
     get:
       tags:
       - TicketOrders
-      summary: Get a order.
+      summary: Get a order
       operationId: TicketOrders_GetByExternalReference
       parameters:
       - name: externalReference
@@ -317,7 +317,7 @@ paths:
     get:
       tags:
       - TicketOrders
-      summary: Get a order.
+      summary: Get a order
       operationId: TicketOrders_Get
       parameters:
       - name: Id
@@ -353,7 +353,7 @@ paths:
     get:
       tags:
       - TicketOrders
-      summary: Get a order.
+      summary: Get a order
       operationId: TicketOrders_Get
       parameters:
       - name: Id
@@ -387,6 +387,499 @@ paths:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OrderResult'
 components:
   schemas:
+    MoreFlo.Models.InterfaceModels.ArticleBookingSettings:
+      description: Represents the booking settings for an article.
+      type: object
+      properties:
+        DefaultDuration:
+          format: int32
+          description: Default duration of the event in seconds, used in MoreFlo backoffice and customer booking.
+          type: integer
+        PaddingTime:
+          format: int32
+          description: Padding time in seconds, used in customer booking.
+          type: integer
+        LeadTime:
+          format: int32
+          description: Lead time in seconds, used in customer booking.
+          type: integer
+        IntervalTime:
+          format: int32
+          description: Interval time in seconds, used in customer booking.
+          type: integer
+        SchedulingWindow:
+          format: int32
+          description: Scheduling window in seconds, used in customer booking.
+          type: integer
+        RequiresStoreConfirmation:
+          description: Indicates whether store confirmation is required before the booking is confirmed.
+          type: boolean
+        CustomerBookingEnabled:
+          description: 'Indicates whether customer booking is enabled for this service.
+
+            Defaults to true.'
+          type: boolean
+        ArticleBookableType:
+          description: Determines if the booking should be a service order booking or a booking order booking.
+          enum:
+          - Booking
+          - ServiceRepair
+          type: string
+        DetailedDescriptionHtml:
+          description: 'Detailed description of the service for use in customer booking.
+
+            Leave empty if no customer booking should be done.'
+          maxLength: 65535
+          minLength: 0
+          type: string
+        ClientCancellationPossible:
+          description: Determines if a cancellation option should be presented for the customer or if only the store can cancel.
+          type: boolean
+        CancellationMinimumTimeInAdvance:
+          format: int32
+          description: Minimum time in seconds required to make a cancellation, if allowed (see ClientCancellationPossible).
+          type: integer
+    MoreFlo.Models.InterfaceModels.TicketOrder:
+      description: 'Represents a ticket order, containing details about a ticket purchase or reservation.
+
+        This class encapsulates information about a ticket order, including order details, customer information, dates, and payment information.'
+      type: object
+      properties:
+        Id:
+          description: The unique identifier of the ticket order, set by the system.
+          type: string
+        ReferenceTag:
+          description: A reference tag for the order, issued by the system.
+          type: string
+        ExternalReference:
+          description: 'The order identifier from an external system.
+
+            Must be set when creating the order.'
+          type: string
+        Customer:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Customer'
+          description: 'Information about the customer who placed the order.
+
+            Can be either a CustomerNumber within the system or a ReferenceNumber from an external system.'
+        OrderNumber:
+          format: int32
+          description: The order number, set by the system.
+          type: integer
+        IncomingDate:
+          format: date-time
+          description: The date when the order was received.
+          type: string
+        CreatedTime:
+          format: date-time
+          description: The time when the order was created, set by the system.
+          type: string
+          readOnly: true
+        UpdatedTime:
+          format: date-time
+          description: The time when the order was last updated, set by the system.
+          type: string
+          readOnly: true
+        ReadyDate:
+          format: date-time
+          description: The date when the tickets are ready for pickup or use.
+          type: string
+        DeliveryTime:
+          format: date-time
+          description: The delivery time for the tickets.
+          type: string
+        ExpireTime:
+          format: date-time
+          description: The time when the order expires (if applicable).
+          type: string
+        OurReference:
+          description: The reference used by the system.
+          maxLength: 128
+          minLength: 0
+          type: string
+        YourReference:
+          description: The reference provided by the customer or an external system.
+          maxLength: 128
+          minLength: 0
+          type: string
+        Note:
+          description: A general note about the order.
+          maxLength: 4096
+          minLength: 0
+          type: string
+        OrderDiscountPercent:
+          format: double
+          description: The discount percentage applied to the order.
+          type: number
+        State:
+          description: The current state of the order.
+          enum:
+          - New
+          - Started
+          - ReadyForHandOut
+          - Cancelled
+          - Delivered
+          - Expired
+          type: string
+        Rows:
+          description: A list of rows containing details about the tickets in the order.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.TicketOrderRow'
+        BillingAddress:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BillingAddress'
+          description: The billing address for the order.
+        ShippingAddress:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ShippingAddress'
+          description: The shipping address for the order.
+        PaymentReference:
+          description: A reference related to the payment for the order.
+          maxLength: 512
+          minLength: 0
+          type: string
+        PaymentOption:
+          description: The payment option selected for the order.
+          enum:
+          - NotSet
+          - Web
+          - Invoice
+          - Cashier
+          type: string
+        PaymentOrigin:
+          description: Information about the origin of the payment.
+          maxLength: 512
+          minLength: 0
+          type: string
+        PaymentStatus:
+          description: The payment status of the order.
+          enum:
+          - NotSet
+          - NotPaid
+          - FullyPaid
+          - Refunded
+          type: string
+    MoreFlo.Models.InterfaceModels.TicketOrderRow:
+      description: Represents a row within a ticket order, detailing information about a specific ticket type and quantity.
+      type: object
+      properties:
+        ArticleNumber:
+          description: The article number of the ticket type.
+          type: string
+        ArticleName:
+          description: The name of the ticket type.
+          type: string
+        Quantity:
+          format: double
+          description: The quantity of tickets of this type.
+          type: number
+        UnitAmountInclVatInclDiscount:
+          format: double
+          description: The unit amount of the ticket, including VAT and discount.
+          type: number
+        UnitAmountInclVatExclDiscount:
+          format: double
+          description: The unit amount of the ticket, including VAT but excluding discount.
+          type: number
+        VatRate:
+          format: double
+          description: The VAT rate applied to the ticket.
+          type: number
+        TotalDiscountAmount:
+          format: double
+          description: The total discount amount applied to the tickets.
+          type: number
+        TotalAmountInclVatInclDiscount:
+          format: double
+          description: The total amount for the tickets, including VAT and discount.
+          type: number
+        ReceiptNote:
+          description: A note related to the receipt of the tickets.
+          type: string
+        Tickets:
+          description: A list of individual tickets associated with this row.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Ticket'
+    MoreFlo.Models.InterfaceModels.OrdersResult:
+      description: 'Represents a paginated result containing a list of order results.
+
+        This class is used to return a collection of orders, along with pagination information, in API responses.'
+      type: object
+      properties:
+        ExtraInformation:
+          description: A list of extra information or messages related to the paginated result.
+          type: array
+          items:
+            type: string
+        list:
+          description: The list of data items for the current page.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OrderResult'
+        Page:
+          format: int32
+          description: The current page number.
+          type: integer
+        Total:
+          format: int32
+          description: The total number of pages available.
+          type: integer
+        PageSize:
+          format: int32
+          description: The number of data items per page.
+          type: integer
+    xFlo.Models.Common.Models.Article.ArticleBarcode:
+      description: Article barcode
+      required:
+      - Barcode
+      type: object
+      properties:
+        Barcode:
+          description: Article barcode
+          maxLength: 20
+          minLength: 0
+          type: string
+    MoreFlo.Models.InterfaceModels.Ticket:
+      description: 'Represents a ticket for an event.
+
+        This class encapsulates information about a single ticket, including event details, seat information, pricing, and status.'
+      type: object
+      properties:
+        EventName:
+          description: The name of the event.
+          type: string
+        TicketName:
+          description: The name or type of ticket.
+          type: string
+        Barcode:
+          description: The barcode associated with the ticket.
+          type: string
+        SerialNumber:
+          description: The serial number of the ticket.
+          type: string
+        Section:
+          description: The section in the venue where the seat is located.
+          type: string
+        Row:
+          description: The row number of the seat.
+          type: string
+        Seat:
+          description: The seat number.
+          type: string
+        Information:
+          description: Any additional information about the ticket.
+          type: string
+        Price:
+          format: double
+          description: The price of the ticket.
+          type: number
+        EntranceTime:
+          format: date-time
+          description: The time allowed for entrance with this ticket.
+          type: string
+        PrintStatus:
+          description: The print status of the ticket.
+          enum:
+          - Pending
+          - Printed
+          type: string
+        Status:
+          description: The current status of the ticket.
+          enum:
+          - Reserved
+          - Confirmed
+          - Delivered
+          - Canceled
+          type: string
+        ShowInformation:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ShowInformation'
+          description: Information about the show or event associated with the ticket.
+    MoreFlo.Models.InterfaceModels.TicketOrderCreate:
+      description: 'Represents the data used to create a new ticket order.
+
+        This class extends the TicketOrder class and specifies the required information for creating a ticket order within the system.'
+      required:
+      - ExternalReference
+      type: object
+      properties:
+        ExternalReference:
+          description: 'The external reference or order number from another system.
+
+            This is a required field.'
+          type: string
+        UpdateOnExisting:
+          description: Indicates whether to update an existing ticket order if one with the same number already exists.
+          type: boolean
+        Id:
+          description: The unique identifier of the ticket order, set by the system.
+          type: string
+        ReferenceTag:
+          description: A reference tag for the order, issued by the system.
+          type: string
+        Customer:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Customer'
+          description: 'Information about the customer who placed the order.
+
+            Can be either a CustomerNumber within the system or a ReferenceNumber from an external system.'
+        OrderNumber:
+          format: int32
+          description: The order number, set by the system.
+          type: integer
+        IncomingDate:
+          format: date-time
+          description: The date when the order was received.
+          type: string
+        CreatedTime:
+          format: date-time
+          description: The time when the order was created, set by the system.
+          type: string
+          readOnly: true
+        UpdatedTime:
+          format: date-time
+          description: The time when the order was last updated, set by the system.
+          type: string
+          readOnly: true
+        ReadyDate:
+          format: date-time
+          description: The date when the tickets are ready for pickup or use.
+          type: string
+        DeliveryTime:
+          format: date-time
+          description: The delivery time for the tickets.
+          type: string
+        ExpireTime:
+          format: date-time
+          description: The time when the order expires (if applicable).
+          type: string
+        OurReference:
+          description: The reference used by the system.
+          maxLength: 128
+          minLength: 0
+          type: string
+        YourReference:
+          description: The reference provided by the customer or an external system.
+          maxLength: 128
+          minLength: 0
+          type: string
+        Note:
+          description: A general note about the order.
+          maxLength: 4096
+          minLength: 0
+          type: string
+        OrderDiscountPercent:
+          format: double
+          description: The discount percentage applied to the order.
+          type: number
+        State:
+          description: The current state of the order.
+          enum:
+          - New
+          - Started
+          - ReadyForHandOut
+          - Cancelled
+          - Delivered
+          - Expired
+          type: string
+        Rows:
+          description: A list of rows containing details about the tickets in the order.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.TicketOrderRow'
+        BillingAddress:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BillingAddress'
+          description: The billing address for the order.
+        ShippingAddress:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ShippingAddress'
+          description: The shipping address for the order.
+        PaymentReference:
+          description: A reference related to the payment for the order.
+          maxLength: 512
+          minLength: 0
+          type: string
+        PaymentOption:
+          description: The payment option selected for the order.
+          enum:
+          - NotSet
+          - Web
+          - Invoice
+          - Cashier
+          type: string
+        PaymentOrigin:
+          description: Information about the origin of the payment.
+          maxLength: 512
+          minLength: 0
+          type: string
+        PaymentStatus:
+          description: The payment status of the order.
+          enum:
+          - NotSet
+          - NotPaid
+          - FullyPaid
+          - Refunded
+          type: string
+    MoreFlo.Models.InterfaceModels.OrderRow:
+      description: Represents a row within an order, detailing information about a specific item included in the order.
+      type: object
+      properties:
+        ArticleNumber:
+          description: The article number of the item.
+          type: string
+        ArticleName:
+          description: The name of the item.
+          type: string
+        UnitAmountInclVatExclDiscount:
+          format: double
+          description: The unit amount of the item, including VAT but excluding discount.
+          type: number
+        Discount:
+          format: double
+          description: The discount applied to the item.
+          type: number
+        VatRate:
+          format: double
+          description: The VAT rate applied to the item.
+          type: number
+        Quantity:
+          format: double
+          description: The quantity of the item.
+          type: number
+        SerialNumber:
+          description: The serial number of the item.
+          type: string
+        RowSum:
+          format: double
+          description: The sum of the row.
+          type: number
+        ReceiptNote:
+          description: A note or text associated with the item, typically a text row.
+          type: string
+    MoreFlo.Models.InterfaceModels.TicketOrdersResult:
+      description: 'Represents a paginated result containing a list of ticket order results.
+
+        This class is used to return a collection of ticket orders, along with pagination information, in API responses.'
+      type: object
+      properties:
+        ExtraInformation:
+          description: A list of extra information or messages related to the paginated result.
+          type: array
+          items:
+            type: string
+        list:
+          description: The list of data items for the current page.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.TicketOrderResult'
+        Page:
+          format: int32
+          description: The current page number.
+          type: integer
+        Total:
+          format: int32
+          description: The total number of pages available.
+          type: integer
+        PageSize:
+          format: int32
+          description: The number of data items per page.
+          type: integer
     MoreFlo.Models.InterfaceModels.OrderResult:
       description: 'Represents the result of an operation that returns a single order.
 
@@ -398,6 +891,48 @@ components:
           description: The Order object containing the order data.
         Id:
           description: The unique identifier of the order.
+          type: string
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
+    MoreFlo.Models.InterfaceModels.TicketOrderResult:
+      description: 'Represents the result of an operation that returns a single ticket order.
+
+        This class encapsulates a TicketOrder object and its unique identifier, typically used in API responses for single ticket order operations.'
+      type: object
+      properties:
+        TicketOrder:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.TicketOrder'
+          description: The TicketOrder object containing the ticket order data.
+        Id:
+          description: The unique identifier of the ticket order.
+          type: string
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
+    MoreFlo.Models.InterfaceModels.ArticleResult:
+      description: Represents the result of an operation involving an Article entity.
+      type: object
+      properties:
+        Article:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Article'
+          description: The Article entity resulting from the operation.
+        ArticleNumber:
+          description: The unique article number.
           type: string
         Success:
           description: Indicates whether the API operation was successful.
@@ -651,571 +1186,6 @@ components:
 
             This is used to maintain inventory levels and prevent stockouts.'
           type: number
-    MoreFlo.Models.InterfaceModels.BillingAddress:
-      type: object
-      properties:
-        IsCompany:
-          type: boolean
-        IdentificationNumber:
-          maxLength: 24
-          minLength: 0
-          type: string
-        Name:
-          type: string
-        Address1:
-          type: string
-        Address2:
-          type: string
-        PostCode:
-          type: string
-        City:
-          type: string
-        Country:
-          type: string
-        Email:
-          type: string
-        Telephone1:
-          type: string
-        Telephone2:
-          type: string
-        Mobile:
-          type: string
-        Fax:
-          type: string
-    MoreFlo.Models.InterfaceModels.Customer:
-      required:
-      - Name
-      type: object
-      properties:
-        CustomerNumber:
-          description: MoreFlo customer number.
-          type: string
-        Reference:
-          type: string
-        Name:
-          type: string
-        Address1:
-          type: string
-        Address2:
-          type: string
-        PostCode:
-          type: string
-        City:
-          type: string
-        Country:
-          type: string
-        IdentityNo:
-          type: string
-        ReferenceNumber:
-          format: int64
-          description: The other systems customer number or id.
-          type: integer
-        Email:
-          type: string
-        Telephone1:
-          type: string
-        Telephone2:
-          type: string
-        VatNumber:
-          type: string
-        IsExportCustomer:
-          type: boolean
-        Mobile:
-          type: string
-        Fax:
-          type: string
-        Note:
-          type: string
-        DateAdded:
-          format: date-time
-          type: string
-        DateUpdated:
-          format: date-time
-          type: string
-        ModifiedTime:
-          format: date-time
-          type: string
-        MemberGroupId:
-          format: int32
-          type: integer
-        MemberGroup:
-          type: string
-        PermitsCommercial:
-          type: boolean
-        IsCompany:
-          type: boolean
-        IsInternalCustomer:
-          type: boolean
-        IsActive:
-          type: boolean
-        Blocked:
-          description: Blocked because of an issue with Credit or something else
-          type: boolean
-        Id:
-          format: int32
-          description: Member Id
-          type: integer
-    MoreFlo.Models.InterfaceModels.Ticket:
-      description: 'Represents a ticket for an event.
-
-        This class encapsulates information about a single ticket, including event details, seat information, pricing, and status.'
-      type: object
-      properties:
-        EventName:
-          description: The name of the event.
-          type: string
-        TicketName:
-          description: The name or type of ticket.
-          type: string
-        Barcode:
-          description: The barcode associated with the ticket.
-          type: string
-        SerialNumber:
-          description: The serial number of the ticket.
-          type: string
-        Section:
-          description: The section in the venue where the seat is located.
-          type: string
-        Row:
-          description: The row number of the seat.
-          type: string
-        Seat:
-          description: The seat number.
-          type: string
-        Information:
-          description: Any additional information about the ticket.
-          type: string
-        Price:
-          format: double
-          description: The price of the ticket.
-          type: number
-        EntranceTime:
-          format: date-time
-          description: The time allowed for entrance with this ticket.
-          type: string
-        PrintStatus:
-          description: The print status of the ticket.
-          enum:
-          - Pending
-          - Printed
-          type: string
-        Status:
-          description: The current status of the ticket.
-          enum:
-          - Reserved
-          - Confirmed
-          - Delivered
-          - Canceled
-          type: string
-        ShowInformation:
-          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ShowInformation'
-          description: Information about the show or event associated with the ticket.
-    MoreFlo.Models.InterfaceModels.ShowInformation:
-      description: 'Represents information about a show or event.
-
-        This class encapsulates details about a show, such as its name, location, and date/time.'
-      type: object
-      properties:
-        Name:
-          description: The name of the show or event.
-          type: string
-        Arena:
-          description: The name of the arena or venue where the show is held.
-          type: string
-        City:
-          description: The city where the show is held.
-          type: string
-        DateTime:
-          format: date-time
-          description: The date and time of the show.
-          type: string
-    MoreFlo.Models.InterfaceModels.OrdersResult:
-      description: 'Represents a paginated result containing a list of order results.
-
-        This class is used to return a collection of orders, along with pagination information, in API responses.'
-      type: object
-      properties:
-        ExtraInformation:
-          description: A list of extra information or messages related to the paginated result.
-          type: array
-          items:
-            type: string
-        list:
-          description: The list of data items for the current page.
-          type: array
-          items:
-            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OrderResult'
-        Page:
-          format: int32
-          description: The current page number.
-          type: integer
-        Total:
-          format: int32
-          description: The total number of pages available.
-          type: integer
-        PageSize:
-          format: int32
-          description: The number of data items per page.
-          type: integer
-    MoreFlo.Models.InterfaceModels.TicketOrdersResult:
-      description: 'Represents a paginated result containing a list of ticket order results.
-
-        This class is used to return a collection of ticket orders, along with pagination information, in API responses.'
-      type: object
-      properties:
-        ExtraInformation:
-          description: A list of extra information or messages related to the paginated result.
-          type: array
-          items:
-            type: string
-        list:
-          description: The list of data items for the current page.
-          type: array
-          items:
-            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.TicketOrderResult'
-        Page:
-          format: int32
-          description: The current page number.
-          type: integer
-        Total:
-          format: int32
-          description: The total number of pages available.
-          type: integer
-        PageSize:
-          format: int32
-          description: The number of data items per page.
-          type: integer
-    MoreFlo.Models.InterfaceModels.TicketOrderRow:
-      description: Represents a row within a ticket order, detailing information about a specific ticket type and quantity.
-      type: object
-      properties:
-        ArticleNumber:
-          description: The article number of the ticket type.
-          type: string
-        ArticleName:
-          description: The name of the ticket type.
-          type: string
-        Quantity:
-          format: double
-          description: The quantity of tickets of this type.
-          type: number
-        UnitAmountInclVatInclDiscount:
-          format: double
-          description: The unit amount of the ticket, including VAT and discount.
-          type: number
-        UnitAmountInclVatExclDiscount:
-          format: double
-          description: The unit amount of the ticket, including VAT but excluding discount.
-          type: number
-        VatRate:
-          format: double
-          description: The VAT rate applied to the ticket.
-          type: number
-        TotalDiscountAmount:
-          format: double
-          description: The total discount amount applied to the tickets.
-          type: number
-        TotalAmountInclVatInclDiscount:
-          format: double
-          description: The total amount for the tickets, including VAT and discount.
-          type: number
-        ReceiptNote:
-          description: A note related to the receipt of the tickets.
-          type: string
-        Tickets:
-          description: A list of individual tickets associated with this row.
-          type: array
-          items:
-            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Ticket'
-    MoreFlo.Models.InterfaceModels.OrderRow:
-      description: Represents a row within an order, detailing information about a specific item included in the order.
-      type: object
-      properties:
-        ArticleNumber:
-          description: The article number of the item.
-          type: string
-        ArticleName:
-          description: The name of the item.
-          type: string
-        UnitAmountInclVatExclDiscount:
-          format: double
-          description: The unit amount of the item, including VAT but excluding discount.
-          type: number
-        Discount:
-          format: double
-          description: The discount applied to the item.
-          type: number
-        VatRate:
-          format: double
-          description: The VAT rate applied to the item.
-          type: number
-        Quantity:
-          format: double
-          description: The quantity of the item.
-          type: number
-        SerialNumber:
-          description: The serial number of the item.
-          type: string
-        RowSum:
-          format: double
-          description: The sum of the row.
-          type: number
-        ReceiptNote:
-          description: A note or text associated with the item, typically a text row.
-          type: string
-    MoreFlo.Models.InterfaceModels.ArticleResult:
-      description: Represents the result of an operation involving an Article entity.
-      type: object
-      properties:
-        Article:
-          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Article'
-          description: The Article entity resulting from the operation.
-        ArticleNumber:
-          description: The unique article number.
-          type: string
-        Success:
-          description: Indicates whether the API operation was successful.
-          type: boolean
-        ExtraInformation:
-          description: 'A list of extra information or messages related to the API operation result.
-
-            This can include error messages, warnings, or informational notes.'
-          type: array
-          items:
-            type: string
-    xFlo.Models.Common.Models.Article.ArticleBarcode:
-      description: Article barcode
-      required:
-      - Barcode
-      type: object
-      properties:
-        Barcode:
-          description: Article barcode
-          maxLength: 20
-          minLength: 0
-          type: string
-    MoreFlo.Models.InterfaceModels.ArticleBookingSettings:
-      description: Represents the booking settings for an article.
-      type: object
-      properties:
-        DefaultDuration:
-          format: int32
-          description: Default duration of the event in seconds, used in MoreFlo backoffice and customer booking.
-          type: integer
-        PaddingTime:
-          format: int32
-          description: Padding time in seconds, used in customer booking.
-          type: integer
-        LeadTime:
-          format: int32
-          description: Lead time in seconds, used in customer booking.
-          type: integer
-        IntervalTime:
-          format: int32
-          description: Interval time in seconds, used in customer booking.
-          type: integer
-        SchedulingWindow:
-          format: int32
-          description: Scheduling window in seconds, used in customer booking.
-          type: integer
-        RequiresStoreConfirmation:
-          description: Indicates whether store confirmation is required before the booking is confirmed.
-          type: boolean
-        CustomerBookingEnabled:
-          description: 'Indicates whether customer booking is enabled for this service.
-
-            Defaults to true.'
-          type: boolean
-        ArticleBookableType:
-          description: Determines if the booking should be a service order booking or a booking order booking.
-          enum:
-          - Booking
-          - ServiceRepair
-          type: string
-        DetailedDescriptionHtml:
-          description: 'Detailed description of the service for use in customer booking.
-
-            Leave empty if no customer booking should be done.'
-          maxLength: 65535
-          minLength: 0
-          type: string
-        ClientCancellationPossible:
-          description: Determines if a cancellation option should be presented for the customer or if only the store can cancel.
-          type: boolean
-        CancellationMinimumTimeInAdvance:
-          format: int32
-          description: Minimum time in seconds required to make a cancellation, if allowed (see ClientCancellationPossible).
-          type: integer
-    MoreFlo.Models.InterfaceModels.TicketOrderCreate:
-      description: 'Represents the data used to create a new ticket order.
-
-        This class extends the TicketOrder class and specifies the required information for creating a ticket order within the system.'
-      required:
-      - ExternalReference
-      type: object
-      properties:
-        ExternalReference:
-          description: 'The external reference or order number from another system.
-
-            This is a required field.'
-          type: string
-        UpdateOnExisting:
-          description: Indicates whether to update an existing ticket order if one with the same number already exists.
-          type: boolean
-        Id:
-          description: The unique identifier of the ticket order, set by the system.
-          type: string
-        ReferenceTag:
-          description: A reference tag for the order, issued by the system.
-          type: string
-        Customer:
-          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Customer'
-          description: 'Information about the customer who placed the order.
-
-            Can be either a CustomerNumber within the system or a ReferenceNumber from an external system.'
-        OrderNumber:
-          format: int32
-          description: The order number, set by the system.
-          type: integer
-        IncomingDate:
-          format: date-time
-          description: The date when the order was received.
-          type: string
-        CreatedTime:
-          format: date-time
-          description: The time when the order was created, set by the system.
-          type: string
-          readOnly: true
-        UpdatedTime:
-          format: date-time
-          description: The time when the order was last updated, set by the system.
-          type: string
-          readOnly: true
-        ReadyDate:
-          format: date-time
-          description: The date when the tickets are ready for pickup or use.
-          type: string
-        DeliveryTime:
-          format: date-time
-          description: The delivery time for the tickets.
-          type: string
-        ExpireTime:
-          format: date-time
-          description: The time when the order expires (if applicable).
-          type: string
-        OurReference:
-          description: The reference used by the system.
-          maxLength: 128
-          minLength: 0
-          type: string
-        YourReference:
-          description: The reference provided by the customer or an external system.
-          maxLength: 128
-          minLength: 0
-          type: string
-        Note:
-          description: A general note about the order.
-          maxLength: 4096
-          minLength: 0
-          type: string
-        OrderDiscountPercent:
-          format: double
-          description: The discount percentage applied to the order.
-          type: number
-        State:
-          description: The current state of the order.
-          enum:
-          - New
-          - Started
-          - ReadyForHandOut
-          - Cancelled
-          - Delivered
-          - Expired
-          type: string
-        Rows:
-          description: A list of rows containing details about the tickets in the order.
-          type: array
-          items:
-            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.TicketOrderRow'
-        BillingAddress:
-          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BillingAddress'
-          description: The billing address for the order.
-        ShippingAddress:
-          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ShippingAddress'
-          description: The shipping address for the order.
-        PaymentReference:
-          description: A reference related to the payment for the order.
-          maxLength: 512
-          minLength: 0
-          type: string
-        PaymentOption:
-          description: The payment option selected for the order.
-          enum:
-          - NotSet
-          - Web
-          - Invoice
-          - Cashier
-          type: string
-        PaymentOrigin:
-          description: Information about the origin of the payment.
-          maxLength: 512
-          minLength: 0
-          type: string
-        PaymentStatus:
-          description: The payment status of the order.
-          enum:
-          - NotSet
-          - NotPaid
-          - FullyPaid
-          - Refunded
-          type: string
-    MoreFlo.Models.InterfaceModels.Address:
-      type: object
-      properties:
-        Name:
-          type: string
-        Address1:
-          type: string
-        Address2:
-          type: string
-        PostCode:
-          type: string
-        City:
-          type: string
-        Country:
-          type: string
-        Email:
-          type: string
-        Telephone1:
-          type: string
-        Telephone2:
-          type: string
-        Mobile:
-          type: string
-        Fax:
-          type: string
-    MoreFlo.Models.InterfaceModels.TicketOrderResult:
-      description: 'Represents the result of an operation that returns a single ticket order.
-
-        This class encapsulates a TicketOrder object and its unique identifier, typically used in API responses for single ticket order operations.'
-      type: object
-      properties:
-        TicketOrder:
-          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.TicketOrder'
-          description: The TicketOrder object containing the ticket order data.
-        Id:
-          description: The unique identifier of the ticket order.
-          type: string
-        Success:
-          description: Indicates whether the API operation was successful.
-          type: boolean
-        ExtraInformation:
-          description: 'A list of extra information or messages related to the API operation result.
-
-            This can include error messages, warnings, or informational notes.'
-          type: array
-          items:
-            type: string
     MoreFlo.Models.InterfaceModels.Order:
       description: Represents an order, containing customer details, dates, references, financial information, and order rows.
       required:
@@ -1337,6 +1307,25 @@ components:
           - FullyPaid
           - Refunded
           type: string
+    MoreFlo.Models.InterfaceModels.ShowInformation:
+      description: 'Represents information about a show or event.
+
+        This class encapsulates details about a show, such as its name, location, and date/time.'
+      type: object
+      properties:
+        Name:
+          description: The name of the show or event.
+          type: string
+        Arena:
+          description: The name of the arena or venue where the show is held.
+          type: string
+        City:
+          description: The city where the show is held.
+          type: string
+        DateTime:
+          format: date-time
+          description: The date and time of the show.
+          type: string
     MoreFlo.Models.InterfaceModels.ShippingAddress:
       type: object
       properties:
@@ -1362,123 +1351,134 @@ components:
           type: string
         Fax:
           type: string
-    MoreFlo.Models.InterfaceModels.TicketOrder:
-      description: 'Represents a ticket order, containing details about a ticket purchase or reservation.
-
-        This class encapsulates information about a ticket order, including order details, customer information, dates, and payment information.'
+    MoreFlo.Models.InterfaceModels.Customer:
+      required:
+      - Name
       type: object
       properties:
-        Id:
-          description: The unique identifier of the ticket order, set by the system.
+        CustomerNumber:
+          description: MoreFlo customer number.
           type: string
-        ReferenceTag:
-          description: A reference tag for the order, issued by the system.
+        Reference:
           type: string
-        ExternalReference:
-          description: 'The order identifier from an external system.
-
-            Must be set when creating the order.'
+        Name:
           type: string
-        Customer:
-          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Customer'
-          description: 'Information about the customer who placed the order.
-
-            Can be either a CustomerNumber within the system or a ReferenceNumber from an external system.'
-        OrderNumber:
-          format: int32
-          description: The order number, set by the system.
+        Address1:
+          type: string
+        Address2:
+          type: string
+        PostCode:
+          type: string
+        City:
+          type: string
+        Country:
+          type: string
+        IdentityNo:
+          type: string
+        ReferenceNumber:
+          format: int64
+          description: The other systems customer number or id.
           type: integer
-        IncomingDate:
-          format: date-time
-          description: The date when the order was received.
+        Email:
           type: string
-        CreatedTime:
-          format: date-time
-          description: The time when the order was created, set by the system.
+        Telephone1:
           type: string
-          readOnly: true
-        UpdatedTime:
-          format: date-time
-          description: The time when the order was last updated, set by the system.
+        Telephone2:
           type: string
-          readOnly: true
-        ReadyDate:
-          format: date-time
-          description: The date when the tickets are ready for pickup or use.
+        VatNumber:
           type: string
-        DeliveryTime:
-          format: date-time
-          description: The delivery time for the tickets.
+        IsExportCustomer:
+          type: boolean
+        Mobile:
           type: string
-        ExpireTime:
-          format: date-time
-          description: The time when the order expires (if applicable).
-          type: string
-        OurReference:
-          description: The reference used by the system.
-          maxLength: 128
-          minLength: 0
-          type: string
-        YourReference:
-          description: The reference provided by the customer or an external system.
-          maxLength: 128
-          minLength: 0
+        Fax:
           type: string
         Note:
-          description: A general note about the order.
-          maxLength: 4096
+          type: string
+        DateAdded:
+          format: date-time
+          type: string
+        DateUpdated:
+          format: date-time
+          type: string
+        ModifiedTime:
+          format: date-time
+          type: string
+        MemberGroupId:
+          format: int32
+          type: integer
+        MemberGroup:
+          type: string
+        PermitsCommercial:
+          type: boolean
+        IsCompany:
+          type: boolean
+        IsInternalCustomer:
+          type: boolean
+        IsActive:
+          type: boolean
+        Blocked:
+          description: Blocked because of an issue with Credit or something else
+          type: boolean
+        Id:
+          format: int32
+          description: Member Id
+          type: integer
+    MoreFlo.Models.InterfaceModels.Address:
+      type: object
+      properties:
+        Name:
+          type: string
+        Address1:
+          type: string
+        Address2:
+          type: string
+        PostCode:
+          type: string
+        City:
+          type: string
+        Country:
+          type: string
+        Email:
+          type: string
+        Telephone1:
+          type: string
+        Telephone2:
+          type: string
+        Mobile:
+          type: string
+        Fax:
+          type: string
+    MoreFlo.Models.InterfaceModels.BillingAddress:
+      type: object
+      properties:
+        IsCompany:
+          type: boolean
+        IdentificationNumber:
+          maxLength: 24
           minLength: 0
           type: string
-        OrderDiscountPercent:
-          format: double
-          description: The discount percentage applied to the order.
-          type: number
-        State:
-          description: The current state of the order.
-          enum:
-          - New
-          - Started
-          - ReadyForHandOut
-          - Cancelled
-          - Delivered
-          - Expired
+        Name:
           type: string
-        Rows:
-          description: A list of rows containing details about the tickets in the order.
-          type: array
-          items:
-            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.TicketOrderRow'
-        BillingAddress:
-          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BillingAddress'
-          description: The billing address for the order.
-        ShippingAddress:
-          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ShippingAddress'
-          description: The shipping address for the order.
-        PaymentReference:
-          description: A reference related to the payment for the order.
-          maxLength: 512
-          minLength: 0
+        Address1:
           type: string
-        PaymentOption:
-          description: The payment option selected for the order.
-          enum:
-          - NotSet
-          - Web
-          - Invoice
-          - Cashier
+        Address2:
           type: string
-        PaymentOrigin:
-          description: Information about the origin of the payment.
-          maxLength: 512
-          minLength: 0
+        PostCode:
           type: string
-        PaymentStatus:
-          description: The payment status of the order.
-          enum:
-          - NotSet
-          - NotPaid
-          - FullyPaid
-          - Refunded
+        City:
+          type: string
+        Country:
+          type: string
+        Email:
+          type: string
+        Telephone1:
+          type: string
+        Telephone2:
+          type: string
+        Mobile:
+          type: string
+        Fax:
           type: string
   securitySchemes:
     basic:

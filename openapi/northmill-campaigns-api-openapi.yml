@@ -11,7 +11,7 @@ paths:
     get:
       tags:
       - Campaigns
-      summary: Get all campaigns.
+      summary: Get all campaigns
       operationId: Campaigns_Get
       parameters:
       - name: page
@@ -54,7 +54,7 @@ paths:
     put:
       tags:
       - Campaigns
-      summary: Update article sets.
+      summary: Update article sets
       operationId: Campaigns_Update
       parameters:
       - name: externalStoreId
@@ -112,7 +112,7 @@ paths:
     post:
       tags:
       - Campaigns
-      summary: Create campaigns.
+      summary: Create campaigns
       operationId: Campaigns_Create
       parameters:
       - name: externalStoreId
@@ -171,7 +171,7 @@ paths:
     get:
       tags:
       - Campaigns
-      summary: Get all campaigns.
+      summary: Get all campaigns
       operationId: Campaigns_Get
       parameters:
       - name: page
@@ -214,7 +214,7 @@ paths:
     put:
       tags:
       - Campaigns
-      summary: Update article sets.
+      summary: Update article sets
       operationId: Campaigns_Update
       parameters:
       - name: externalStoreId
@@ -272,7 +272,7 @@ paths:
     post:
       tags:
       - Campaigns
-      summary: Create campaigns.
+      summary: Create campaigns
       operationId: Campaigns_Create
       parameters:
       - name: externalStoreId
@@ -331,7 +331,7 @@ paths:
     get:
       tags:
       - Campaigns
-      summary: Get a campaign.
+      summary: Get a campaign
       operationId: Campaigns_Get
       parameters:
       - name: Id
@@ -366,7 +366,7 @@ paths:
     delete:
       tags:
       - Campaigns
-      summary: Delete a campaign.
+      summary: Delete a campaign
       operationId: Campaigns_Delete
       parameters:
       - name: Id
@@ -402,7 +402,7 @@ paths:
     get:
       tags:
       - Campaigns
-      summary: Get a campaign.
+      summary: Get a campaign
       operationId: Campaigns_Get
       parameters:
       - name: Id
@@ -437,7 +437,7 @@ paths:
     delete:
       tags:
       - Campaigns
-      summary: Delete a campaign.
+      summary: Delete a campaign
       operationId: Campaigns_Delete
       parameters:
       - name: Id
@@ -471,6 +471,155 @@ paths:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignResult'
 components:
   schemas:
+    MoreFlo.Models.InterfaceModels.ArticleSetsResult:
+      description: Represents a paged result containing a list of ArticleSetResult objects.
+      type: object
+      properties:
+        ExtraInformation:
+          description: A list of extra information or messages related to the paginated result.
+          type: array
+          items:
+            type: string
+        list:
+          description: The list of data items for the current page.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetResult'
+        Page:
+          format: int32
+          description: The current page number.
+          type: integer
+        Total:
+          format: int32
+          description: The total number of pages available.
+          type: integer
+        PageSize:
+          format: int32
+          description: The number of data items per page.
+          type: integer
+    MoreFlo.Models.InterfaceModels.CampaignPart:
+      description: Represents a part of a campaign, specifying the reference, type, and value associated with it.
+      required:
+      - Reference
+      - PartType
+      type: object
+      properties:
+        Reference:
+          description: The reference to the campaign part, which can be an article number or a product model.
+          type: string
+        PartType:
+          description: The type of the campaign part, indicating whether it's an article, product model, or group.
+          enum:
+          - Article
+          - ProductModel
+          - Group
+          type: string
+        Value:
+          format: double
+          description: An optional value associated with the campaign part.
+          type: number
+    MoreFlo.Models.InterfaceModels.ArticleSet:
+      description: Represents a set of articles, often sold together as a bundle.
+      required:
+      - ArticleNumber
+      type: object
+      properties:
+        ArticleNumber:
+          description: The unique article number for the article set.
+          type: string
+        ArticleName:
+          description: The name of the article set.
+          type: string
+        Barcode:
+          description: The barcode for the article set.
+          maxLength: 20
+          minLength: 0
+          type: string
+        Group:
+          description: The group the article set belongs to.
+          maxLength: 200
+          minLength: 0
+          type: string
+        IsActive:
+          description: Indicates whether the article set is active.
+          type: boolean
+        PricePrintOption:
+          description: The option for how the price of the article set should be printed on a receipt.
+          enum:
+          - PrintSetPrice
+          - PrintWithDiscount
+          type: string
+        articleSetParts:
+          description: A list of parts (articles) that make up the article set.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetPart'
+    MoreFlo.Models.InterfaceModels.ArticleSetPart:
+      description: Represents a part of an article set.
+      required:
+      - Quantity
+      - ArticleReference
+      - PartType
+      - PartPricePerUnit
+      type: object
+      properties:
+        Quantity:
+          format: double
+          description: The quantity of the part in the set.
+          type: number
+        ArticleReference:
+          description: The article number or product model identifier of the part.
+          type: string
+        PartType:
+          description: The type of the part (article or product model).
+          enum:
+          - Article
+          - ArticleProductModel
+          type: string
+        PartPricePerUnit:
+          format: double
+          description: The price per unit of the part, including VAT.
+          type: number
+    MoreFlo.Models.InterfaceModels.CampaignResult:
+      description: Represents the result of an operation involving a Campaign entity.
+      type: object
+      properties:
+        Campaign:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Campaign'
+          description: The Campaign entity resulting from the operation.
+        Id:
+          description: The unique identifier of the Campaign.
+          type: string
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
+    MoreFlo.Models.InterfaceModels.ArticleSetResult:
+      description: Represents the result of an operation involving an ArticleSet entity.
+      type: object
+      properties:
+        ArticleSet:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSet'
+          description: The ArticleSet entity resulting from the operation.
+        ArticleNumber:
+          description: The unique article number of the article set.
+          type: string
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
     MoreFlo.Models.InterfaceModels.Campaign:
       description: Represents a campaign with various properties and settings.
       required:
@@ -578,46 +727,6 @@ components:
           format: int32
           description: The number of data items per page.
           type: integer
-    MoreFlo.Models.InterfaceModels.ArticleSetResult:
-      description: Represents the result of an operation involving an ArticleSet entity.
-      type: object
-      properties:
-        ArticleSet:
-          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSet'
-          description: The ArticleSet entity resulting from the operation.
-        ArticleNumber:
-          description: The unique article number of the article set.
-          type: string
-        Success:
-          description: Indicates whether the API operation was successful.
-          type: boolean
-        ExtraInformation:
-          description: 'A list of extra information or messages related to the API operation result.
-
-            This can include error messages, warnings, or informational notes.'
-          type: array
-          items:
-            type: string
-    MoreFlo.Models.InterfaceModels.CampaignResult:
-      description: Represents the result of an operation involving a Campaign entity.
-      type: object
-      properties:
-        Campaign:
-          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Campaign'
-          description: The Campaign entity resulting from the operation.
-        Id:
-          description: The unique identifier of the Campaign.
-          type: string
-        Success:
-          description: Indicates whether the API operation was successful.
-          type: boolean
-        ExtraInformation:
-          description: 'A list of extra information or messages related to the API operation result.
-
-            This can include error messages, warnings, or informational notes.'
-          type: array
-          items:
-            type: string
     MoreFlo.Models.InterfaceModels.CampaignCreate:
       description: Represents the data required to create a new campaign.
       required:
@@ -710,115 +819,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignPart'
-    MoreFlo.Models.InterfaceModels.ArticleSet:
-      description: Represents a set of articles, often sold together as a bundle.
-      required:
-      - ArticleNumber
-      type: object
-      properties:
-        ArticleNumber:
-          description: The unique article number for the article set.
-          type: string
-        ArticleName:
-          description: The name of the article set.
-          type: string
-        Barcode:
-          description: The barcode for the article set.
-          maxLength: 20
-          minLength: 0
-          type: string
-        Group:
-          description: The group the article set belongs to.
-          maxLength: 200
-          minLength: 0
-          type: string
-        IsActive:
-          description: Indicates whether the article set is active.
-          type: boolean
-        PricePrintOption:
-          description: The option for how the price of the article set should be printed on a receipt.
-          enum:
-          - PrintSetPrice
-          - PrintWithDiscount
-          type: string
-        articleSetParts:
-          description: A list of parts (articles) that make up the article set.
-          type: array
-          items:
-            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetPart'
-    MoreFlo.Models.InterfaceModels.ArticleSetsResult:
-      description: Represents a paged result containing a list of ArticleSetResult objects.
-      type: object
-      properties:
-        ExtraInformation:
-          description: A list of extra information or messages related to the paginated result.
-          type: array
-          items:
-            type: string
-        list:
-          description: The list of data items for the current page.
-          type: array
-          items:
-            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetResult'
-        Page:
-          format: int32
-          description: The current page number.
-          type: integer
-        Total:
-          format: int32
-          description: The total number of pages available.
-          type: integer
-        PageSize:
-          format: int32
-          description: The number of data items per page.
-          type: integer
-    MoreFlo.Models.InterfaceModels.CampaignPart:
-      description: Represents a part of a campaign, specifying the reference, type, and value associated with it.
-      required:
-      - Reference
-      - PartType
-      type: object
-      properties:
-        Reference:
-          description: The reference to the campaign part, which can be an article number or a product model.
-          type: string
-        PartType:
-          description: The type of the campaign part, indicating whether it's an article, product model, or group.
-          enum:
-          - Article
-          - ProductModel
-          - Group
-          type: string
-        Value:
-          format: double
-          description: An optional value associated with the campaign part.
-          type: number
-    MoreFlo.Models.InterfaceModels.ArticleSetPart:
-      description: Represents a part of an article set.
-      required:
-      - Quantity
-      - ArticleReference
-      - PartType
-      - PartPricePerUnit
-      type: object
-      properties:
-        Quantity:
-          format: double
-          description: The quantity of the part in the set.
-          type: number
-        ArticleReference:
-          description: The article number or product model identifier of the part.
-          type: string
-        PartType:
-          description: The type of the part (article or product model).
-          enum:
-          - Article
-          - ArticleProductModel
-          type: string
-        PartPricePerUnit:
-          format: double
-          description: The price per unit of the part, including VAT.
-          type: number
   securitySchemes:
     basic:
       type: http

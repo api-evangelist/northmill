@@ -11,7 +11,7 @@ paths:
     get:
       tags:
       - Suppliers
-      summary: Get all suppliers.
+      summary: Get all suppliers
       operationId: Suppliers_Get
       parameters:
       - name: page
@@ -54,7 +54,7 @@ paths:
     put:
       tags:
       - Suppliers
-      summary: Update list of suppliers.
+      summary: Update list of suppliers
       operationId: Suppliers_Update
       parameters:
       - name: externalStoreId
@@ -112,7 +112,7 @@ paths:
     post:
       tags:
       - Suppliers
-      summary: Create suppliers.
+      summary: Create suppliers
       operationId: Suppliers_Create
       parameters:
       - name: externalStoreId
@@ -171,7 +171,7 @@ paths:
     get:
       tags:
       - Suppliers
-      summary: Get all suppliers.
+      summary: Get all suppliers
       operationId: Suppliers_Get
       parameters:
       - name: page
@@ -214,7 +214,7 @@ paths:
     put:
       tags:
       - Suppliers
-      summary: Update list of suppliers.
+      summary: Update list of suppliers
       operationId: Suppliers_Update
       parameters:
       - name: externalStoreId
@@ -272,7 +272,7 @@ paths:
     post:
       tags:
       - Suppliers
-      summary: Create suppliers.
+      summary: Create suppliers
       operationId: Suppliers_Create
       parameters:
       - name: externalStoreId
@@ -331,7 +331,7 @@ paths:
     delete:
       tags:
       - Suppliers
-      summary: Delete a supplier.
+      summary: Delete a supplier
       operationId: Suppliers_Delete
       parameters:
       - name: Id
@@ -367,7 +367,7 @@ paths:
     delete:
       tags:
       - Suppliers
-      summary: Delete a supplier.
+      summary: Delete a supplier
       operationId: Suppliers_Delete
       parameters:
       - name: Id
@@ -401,36 +401,26 @@ paths:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SupplierResult'
 components:
   schemas:
-    MoreFlo.Models.InterfaceModels.SupplierCreate:
-      description: 'Represents the data used to create a new supplier entry.
-
-        This class extends the Supplier class and specifies the required information for creating a new supplier within the system.'
+    MoreFlo.Models.InterfaceModels.Supplier:
+      description: Represents a supplier, containing information such as identification, contact details, and financial information.
       required:
-      - Name
-      - SupplierNumber
       - Id
+      - Name
       type: object
       properties:
+        Id:
+          description: The unique identifier of the supplier.
+          maxLength: 64
+          minLength: 0
+          type: string
         Name:
-          description: 'The name of the supplier to be created.
-
-            This is a required field.'
+          description: The name of the supplier.
           maxLength: 100
           minLength: 0
           type: string
         SupplierNumber:
-          description: 'The supplier number of the supplier to be created.
-
-            This is a required field.'
-          maxLength: 100
-          minLength: 0
-          type: string
-        UpdateOnExisting:
-          description: Indicates whether an existing supplier with the same identifier should be updated instead of creating a new one.
-          type: boolean
-        Id:
-          description: The unique identifier of the supplier.
-          maxLength: 64
+          description: The supplier number.
+          maxLength: 16
           minLength: 0
           type: string
         Address1:
@@ -565,26 +555,36 @@ components:
           format: int32
           description: The number of data items per page.
           type: integer
-    MoreFlo.Models.InterfaceModels.Supplier:
-      description: Represents a supplier, containing information such as identification, contact details, and financial information.
+    MoreFlo.Models.InterfaceModels.SupplierCreate:
+      description: 'Represents the data used to create a new supplier entry.
+
+        This class extends the Supplier class and specifies the required information for creating a new supplier within the system.'
       required:
-      - Id
       - Name
+      - SupplierNumber
+      - Id
       type: object
       properties:
-        Id:
-          description: The unique identifier of the supplier.
-          maxLength: 64
-          minLength: 0
-          type: string
         Name:
-          description: The name of the supplier.
+          description: 'The name of the supplier to be created.
+
+            This is a required field.'
           maxLength: 100
           minLength: 0
           type: string
         SupplierNumber:
-          description: The supplier number.
-          maxLength: 16
+          description: 'The supplier number of the supplier to be created.
+
+            This is a required field.'
+          maxLength: 100
+          minLength: 0
+          type: string
+        UpdateOnExisting:
+          description: Indicates whether an existing supplier with the same identifier should be updated instead of creating a new one.
+          type: boolean
+        Id:
+          description: The unique identifier of the supplier.
+          maxLength: 64
           minLength: 0
           type: string
         Address1:

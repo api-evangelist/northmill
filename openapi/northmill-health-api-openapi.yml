@@ -28,6 +28,8 @@ paths:
             text/xml:
               schema:
                 type: object
+      summary: Health health
+      x-summary-source: derived
 components:
   securitySchemes:
     basic:

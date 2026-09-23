@@ -5,13 +5,13 @@ info:
 servers:
 - url: https://api.moreflo.com
 tags:
-- name: Sms
+- name: SMS
 paths:
   /v2/sms/single:
     post:
       tags:
-      - Sms
-      summary: Send a single SMS, if format errors response will be 400, if sending was started but failed the response will be 409.
+      - SMS
+      summary: Send a single SMS, if format errors response will be 400, if sending was…
       operationId: Sms_SendSms
       parameters:
       - name: externalStoreId
@@ -59,8 +59,8 @@ paths:
   /v2/sms/{externalStoreId}/single:
     post:
       tags:
-      - Sms
-      summary: Send a single SMS, if format errors response will be 400, if sending was started but failed the response will be 409.
+      - SMS
+      summary: Send a single SMS, if format errors response will be 400, if sending was…
       operationId: Sms_SendSms
       parameters:
       - name: externalStoreId

@@ -11,7 +11,7 @@ paths:
     get:
       tags:
       - Locations
-      summary: Get all locations.
+      summary: Get all locations
       operationId: Locations_Get
       parameters:
       - name: page
@@ -54,7 +54,7 @@ paths:
     put:
       tags:
       - Locations
-      summary: Update list of locations.
+      summary: Update list of locations
       operationId: Locations_Update
       parameters:
       - name: externalStoreId
@@ -112,7 +112,7 @@ paths:
     post:
       tags:
       - Locations
-      summary: Create locations.
+      summary: Create locations
       operationId: Locations_Create
       parameters:
       - name: externalStoreId
@@ -171,7 +171,7 @@ paths:
     get:
       tags:
       - Locations
-      summary: Get all locations.
+      summary: Get all locations
       operationId: Locations_Get
       parameters:
       - name: page
@@ -214,7 +214,7 @@ paths:
     put:
       tags:
       - Locations
-      summary: Update list of locations.
+      summary: Update list of locations
       operationId: Locations_Update
       parameters:
       - name: externalStoreId
@@ -272,7 +272,7 @@ paths:
     post:
       tags:
       - Locations
-      summary: Create locations.
+      summary: Create locations
       operationId: Locations_Create
       parameters:
       - name: externalStoreId
@@ -331,7 +331,7 @@ paths:
     delete:
       tags:
       - Locations
-      summary: Delete a location.
+      summary: Delete a location
       operationId: Locations_Delete
       parameters:
       - name: Id
@@ -367,7 +367,7 @@ paths:
     delete:
       tags:
       - Locations
-      summary: Delete a location.
+      summary: Delete a location
       operationId: Locations_Delete
       parameters:
       - name: Id
@@ -401,6 +401,28 @@ paths:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.LocationResult'
 components:
   schemas:
+    MoreFlo.Models.InterfaceModels.LocationResult:
+      description: 'Represents the result of an operation that returns a single location.
+
+        This class encapsulates a location and its unique identifier.'
+      type: object
+      properties:
+        Location:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Location'
+          description: The Location object containing the location's data.
+        Id:
+          description: The unique identifier of the location.
+          type: string
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
     MoreFlo.Models.InterfaceModels.Location:
       description: Represents a location, such as a store, warehouse, or other physical place.
       required:
@@ -455,28 +477,6 @@ components:
           format: date-time
           description: The UTC timestamp when the location was last modified.
           type: string
-    MoreFlo.Models.InterfaceModels.LocationResult:
-      description: 'Represents the result of an operation that returns a single location.
-
-        This class encapsulates a location and its unique identifier.'
-      type: object
-      properties:
-        Location:
-          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Location'
-          description: The Location object containing the location's data.
-        Id:
-          description: The unique identifier of the location.
-          type: string
-        Success:
-          description: Indicates whether the API operation was successful.
-          type: boolean
-        ExtraInformation:
-          description: 'A list of extra information or messages related to the API operation result.
-
-            This can include error messages, warnings, or informational notes.'
-          type: array
-          items:
-            type: string
     MoreFlo.Models.InterfaceModels.LocationsResult:
       description: 'Represents a paginated result containing a list of location results.
 

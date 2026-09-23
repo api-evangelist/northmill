@@ -11,7 +11,7 @@ paths:
     get:
       tags:
       - BookingOrders
-      summary: Get all bookinging orders.
+      summary: Get all bookinging orders
       operationId: BookingOrders_Get
       parameters:
       - name: page
@@ -68,7 +68,7 @@ paths:
     put:
       tags:
       - BookingOrders
-      summary: Update list of bookingorders.
+      summary: Update list of bookingorders
       operationId: BookingOrders_Update
       parameters:
       - name: externalStoreId
@@ -126,7 +126,7 @@ paths:
     post:
       tags:
       - BookingOrders
-      summary: Create bookingorders.
+      summary: Create bookingorders
       operationId: BookingOrders_Create
       parameters:
       - name: externalStoreId
@@ -185,7 +185,7 @@ paths:
     get:
       tags:
       - BookingOrders
-      summary: Get all bookinging orders.
+      summary: Get all bookinging orders
       operationId: BookingOrders_Get
       parameters:
       - name: page
@@ -242,7 +242,7 @@ paths:
     put:
       tags:
       - BookingOrders
-      summary: Update list of bookingorders.
+      summary: Update list of bookingorders
       operationId: BookingOrders_Update
       parameters:
       - name: externalStoreId
@@ -300,7 +300,7 @@ paths:
     post:
       tags:
       - BookingOrders
-      summary: Create bookingorders.
+      summary: Create bookingorders
       operationId: BookingOrders_Create
       parameters:
       - name: externalStoreId
@@ -359,7 +359,7 @@ paths:
     get:
       tags:
       - BookingOrders
-      summary: Get a order.
+      summary: Get a order
       operationId: BookingOrders_GetByExternalReference
       parameters:
       - name: externalReference
@@ -395,7 +395,7 @@ paths:
     get:
       tags:
       - BookingOrders
-      summary: Get a order.
+      summary: Get a order
       operationId: BookingOrders_GetByExternalReference
       parameters:
       - name: externalReference
@@ -431,7 +431,7 @@ paths:
     get:
       tags:
       - BookingOrders
-      summary: Get a order.
+      summary: Get a order
       operationId: BookingOrders_Get
       parameters:
       - name: Id
@@ -467,7 +467,7 @@ paths:
     get:
       tags:
       - BookingOrders
-      summary: Get a order.
+      summary: Get a order
       operationId: BookingOrders_Get
       parameters:
       - name: Id
@@ -501,42 +501,30 @@ paths:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OrderResult'
 components:
   schemas:
-    MoreFlo.Models.InterfaceModels.BookingOrderRow:
-      description: Represents a row in a booking order, detailing information about a specific article.
+    MoreFlo.Models.InterfaceModels.ShippingAddress:
       type: object
       properties:
-        ArticleNumber:
-          description: The article number.
+        Name:
           type: string
-        ArticleName:
-          description: The name of the article.
+        Address1:
           type: string
-        Quantity:
-          format: double
-          description: The quantity of the article.
-          type: number
-        UnitAmountInclVatInclDiscount:
-          format: double
-          description: The unit amount including VAT and discount.
-          type: number
-        UnitAmountInclVatExclDiscount:
-          format: double
-          description: The unit amount including VAT but excluding discount.
-          type: number
-        VatRate:
-          format: double
-          description: The VAT rate applied to the article.
-          type: number
-        TotalDiscountAmount:
-          format: double
-          description: The total discount amount applied to the article.
-          type: number
-        TotalAmountInclVatInclDiscount:
-          format: double
-          description: The total amount including VAT and discount for the specified quantity.
-          type: number
-        ReceiptNote:
-          description: A note related to the receipt of the article.
+        Address2:
+          type: string
+        PostCode:
+          type: string
+        City:
+          type: string
+        Country:
+          type: string
+        Email:
+          type: string
+        Telephone1:
+          type: string
+        Telephone2:
+          type: string
+        Mobile:
+          type: string
+        Fax:
           type: string
     MoreFlo.Models.InterfaceModels.BookingOrderResult:
       description: Represents the result of an operation involving a BookingOrder entity.
@@ -558,6 +546,224 @@ components:
           type: array
           items:
             type: string
+    MoreFlo.Models.InterfaceModels.OrderResult:
+      description: 'Represents the result of an operation that returns a single order.
+
+        This class encapsulates an Order object and its unique identifier, typically used in API responses for single order operations.'
+      type: object
+      properties:
+        Order:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Order'
+          description: The Order object containing the order data.
+        Id:
+          description: The unique identifier of the order.
+          type: string
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
+    MoreFlo.Models.InterfaceModels.ArticleResult:
+      description: Represents the result of an operation involving an Article entity.
+      type: object
+      properties:
+        Article:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Article'
+          description: The Article entity resulting from the operation.
+        ArticleNumber:
+          description: The unique article number.
+          type: string
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
+    MoreFlo.Models.InterfaceModels.BookingOrdersResult:
+      description: Represents a paged result containing a list of BookingOrderResult objects.
+      type: object
+      properties:
+        ExtraInformation:
+          description: A list of extra information or messages related to the paginated result.
+          type: array
+          items:
+            type: string
+        list:
+          description: The list of data items for the current page.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BookingOrderResult'
+        Page:
+          format: int32
+          description: The current page number.
+          type: integer
+        Total:
+          format: int32
+          description: The total number of pages available.
+          type: integer
+        PageSize:
+          format: int32
+          description: The number of data items per page.
+          type: integer
+    MoreFlo.Models.InterfaceModels.ArticleBookingSettings:
+      description: Represents the booking settings for an article.
+      type: object
+      properties:
+        DefaultDuration:
+          format: int32
+          description: Default duration of the event in seconds, used in MoreFlo backoffice and customer booking.
+          type: integer
+        PaddingTime:
+          format: int32
+          description: Padding time in seconds, used in customer booking.
+          type: integer
+        LeadTime:
+          format: int32
+          description: Lead time in seconds, used in customer booking.
+          type: integer
+        IntervalTime:
+          format: int32
+          description: Interval time in seconds, used in customer booking.
+          type: integer
+        SchedulingWindow:
+          format: int32
+          description: Scheduling window in seconds, used in customer booking.
+          type: integer
+        RequiresStoreConfirmation:
+          description: Indicates whether store confirmation is required before the booking is confirmed.
+          type: boolean
+        CustomerBookingEnabled:
+          description: 'Indicates whether customer booking is enabled for this service.
+
+            Defaults to true.'
+          type: boolean
+        ArticleBookableType:
+          description: Determines if the booking should be a service order booking or a booking order booking.
+          enum:
+          - Booking
+          - ServiceRepair
+          type: string
+        DetailedDescriptionHtml:
+          description: 'Detailed description of the service for use in customer booking.
+
+            Leave empty if no customer booking should be done.'
+          maxLength: 65535
+          minLength: 0
+          type: string
+        ClientCancellationPossible:
+          description: Determines if a cancellation option should be presented for the customer or if only the store can cancel.
+          type: boolean
+        CancellationMinimumTimeInAdvance:
+          format: int32
+          description: Minimum time in seconds required to make a cancellation, if allowed (see ClientCancellationPossible).
+          type: integer
+    MoreFlo.Models.InterfaceModels.Address:
+      type: object
+      properties:
+        Name:
+          type: string
+        Address1:
+          type: string
+        Address2:
+          type: string
+        PostCode:
+          type: string
+        City:
+          type: string
+        Country:
+          type: string
+        Email:
+          type: string
+        Telephone1:
+          type: string
+        Telephone2:
+          type: string
+        Mobile:
+          type: string
+        Fax:
+          type: string
+    MoreFlo.Models.InterfaceModels.Customer:
+      required:
+      - Name
+      type: object
+      properties:
+        CustomerNumber:
+          description: MoreFlo customer number.
+          type: string
+        Reference:
+          type: string
+        Name:
+          type: string
+        Address1:
+          type: string
+        Address2:
+          type: string
+        PostCode:
+          type: string
+        City:
+          type: string
+        Country:
+          type: string
+        IdentityNo:
+          type: string
+        ReferenceNumber:
+          format: int64
+          description: The other systems customer number or id.
+          type: integer
+        Email:
+          type: string
+        Telephone1:
+          type: string
+        Telephone2:
+          type: string
+        VatNumber:
+          type: string
+        IsExportCustomer:
+          type: boolean
+        Mobile:
+          type: string
+        Fax:
+          type: string
+        Note:
+          type: string
+        DateAdded:
+          format: date-time
+          type: string
+        DateUpdated:
+          format: date-time
+          type: string
+        ModifiedTime:
+          format: date-time
+          type: string
+        MemberGroupId:
+          format: int32
+          type: integer
+        MemberGroup:
+          type: string
+        PermitsCommercial:
+          type: boolean
+        IsCompany:
+          type: boolean
+        IsInternalCustomer:
+          type: boolean
+        IsActive:
+          type: boolean
+        Blocked:
+          description: Blocked because of an issue with Credit or something else
+          type: boolean
+        Id:
+          format: int32
+          description: Member Id
+          type: integer
     MoreFlo.Models.InterfaceModels.OrderRow:
       description: Represents a row within an order, detailing information about a specific item included in the order.
       type: object
@@ -593,406 +799,6 @@ components:
           type: number
         ReceiptNote:
           description: A note or text associated with the item, typically a text row.
-          type: string
-    MoreFlo.Models.InterfaceModels.OrderResult:
-      description: 'Represents the result of an operation that returns a single order.
-
-        This class encapsulates an Order object and its unique identifier, typically used in API responses for single order operations.'
-      type: object
-      properties:
-        Order:
-          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Order'
-          description: The Order object containing the order data.
-        Id:
-          description: The unique identifier of the order.
-          type: string
-        Success:
-          description: Indicates whether the API operation was successful.
-          type: boolean
-        ExtraInformation:
-          description: 'A list of extra information or messages related to the API operation result.
-
-            This can include error messages, warnings, or informational notes.'
-          type: array
-          items:
-            type: string
-    MoreFlo.Models.InterfaceModels.BookingOrder:
-      description: Represents a booking order, containing information about a customer's reservation.
-      required:
-      - Customer
-      type: object
-      properties:
-        Id:
-          description: The unique identifier of the booking order, set by MoreFlo.
-          type: string
-        ExternalReference:
-          description: 'The external reference or order identifier from the ordering system.
-
-            Must be set during creation.'
-          type: string
-        Customer:
-          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Customer'
-          description: The customer associated with the booking order, either by MoreFlo's CustomerNumber or the system's ReferenceNumber.
-        BookableResourceId:
-          description: The identifier of the bookable resource associated with the order.
-          type: string
-        OrderNumber:
-          format: int32
-          description: The order number, set by MoreFlo.
-          type: integer
-        CreatedTime:
-          format: date-time
-          description: The time when the booking order was created, set by MoreFlo.
-          type: string
-        UpdatedTime:
-          format: date-time
-          description: The time when the booking order was last updated, set by MoreFlo.
-          type: string
-        ReadyDate:
-          format: date-time
-          description: The date when the order is expected to be ready.
-          type: string
-        CancellationLatestTime:
-          format: date-time
-          description: The latest time for cancellation of the booking order.
-          type: string
-        ConfirmationExpireTime:
-          format: date-time
-          description: The time when the confirmation for the booking order expires.
-          type: string
-        StartTime:
-          format: date-time
-          description: The start time of the booking.
-          type: string
-        StopTime:
-          format: date-time
-          description: The end time of the booking.
-          type: string
-        CustomerNote:
-          description: A note from the customer regarding the booking order.
-          maxLength: 4096
-          minLength: 0
-          type: string
-        OurReference:
-          description: The reference used by the ordering system.
-          maxLength: 128
-          minLength: 0
-          type: string
-        YourReference:
-          description: The reference used by your system.
-          maxLength: 128
-          minLength: 0
-          type: string
-        Note:
-          description: A general note regarding the booking order.
-          maxLength: 4096
-          minLength: 0
-          type: string
-        OrderDiscountPercent:
-          format: double
-          description: The discount percentage applied to the entire order.
-          type: number
-        State:
-          description: The current state of the booking order.
-          enum:
-          - New
-          - WaitingConfirmation
-          - Confirmed
-          - Completed
-          - Cancelled
-          type: string
-        Rows:
-          description: A list of rows containing details about the articles in the booking order.
-          type: array
-          items:
-            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BookingOrderRow'
-        BillingAddress:
-          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BillingAddress'
-          description: The billing address for the booking order.
-        ShippingAddress:
-          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ShippingAddress'
-          description: The shipping address for the booking order.
-        PaymentReference:
-          description: A reference for the payment associated with the booking order.
-          maxLength: 512
-          minLength: 0
-          type: string
-        PaymentOption:
-          description: The payment option used for the booking order.
-          enum:
-          - NotSet
-          - Web
-          - Invoice
-          - Cashier
-          type: string
-        PaymentOrigin:
-          description: The origin of the payment.
-          maxLength: 512
-          minLength: 0
-          type: string
-        PaymentStatus:
-          description: The status of the payment.
-          enum:
-          - NotSet
-          - NotPaid
-          - FullyPaid
-          - Refunded
-          type: string
-        CancellationSource:
-          description: 'The source that cancelled the booking order (e.g. "Staff", "ExternalApi").
-
-            Set automatically if not provided when state changes to Cancelled.'
-          maxLength: 64
-          minLength: 0
-          type: string
-        CancellationLink:
-          description: A link for cancelling the booking order.
-          type: string
-        CancellationLinkBaseURL:
-          description: The base URL for the cancellation link.
-          type: string
-    MoreFlo.Models.InterfaceModels.Address:
-      type: object
-      properties:
-        Name:
-          type: string
-        Address1:
-          type: string
-        Address2:
-          type: string
-        PostCode:
-          type: string
-        City:
-          type: string
-        Country:
-          type: string
-        Email:
-          type: string
-        Telephone1:
-          type: string
-        Telephone2:
-          type: string
-        Mobile:
-          type: string
-        Fax:
-          type: string
-    MoreFlo.Models.InterfaceModels.BookingOrderCreate:
-      description: Represents the data required to create a new booking order.
-      required:
-      - ExternalReference
-      - Customer
-      type: object
-      properties:
-        ExternalReference:
-          description: 'The external reference or order number from another system.
-
-            This is a required field.'
-          type: string
-        UpdateOnExisting:
-          description: Indicates whether to update an existing booking order if one with the same number already exists.
-          type: boolean
-        Id:
-          description: The unique identifier of the booking order, set by MoreFlo.
-          type: string
-        Customer:
-          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Customer'
-          description: The customer associated with the booking order, either by MoreFlo's CustomerNumber or the system's ReferenceNumber.
-        BookableResourceId:
-          description: The identifier of the bookable resource associated with the order.
-          type: string
-        OrderNumber:
-          format: int32
-          description: The order number, set by MoreFlo.
-          type: integer
-        CreatedTime:
-          format: date-time
-          description: The time when the booking order was created, set by MoreFlo.
-          type: string
-        UpdatedTime:
-          format: date-time
-          description: The time when the booking order was last updated, set by MoreFlo.
-          type: string
-        ReadyDate:
-          format: date-time
-          description: The date when the order is expected to be ready.
-          type: string
-        CancellationLatestTime:
-          format: date-time
-          description: The latest time for cancellation of the booking order.
-          type: string
-        ConfirmationExpireTime:
-          format: date-time
-          description: The time when the confirmation for the booking order expires.
-          type: string
-        StartTime:
-          format: date-time
-          description: The start time of the booking.
-          type: string
-        StopTime:
-          format: date-time
-          description: The end time of the booking.
-          type: string
-        CustomerNote:
-          description: A note from the customer regarding the booking order.
-          maxLength: 4096
-          minLength: 0
-          type: string
-        OurReference:
-          description: The reference used by the ordering system.
-          maxLength: 128
-          minLength: 0
-          type: string
-        YourReference:
-          description: The reference used by your system.
-          maxLength: 128
-          minLength: 0
-          type: string
-        Note:
-          description: A general note regarding the booking order.
-          maxLength: 4096
-          minLength: 0
-          type: string
-        OrderDiscountPercent:
-          format: double
-          description: The discount percentage applied to the entire order.
-          type: number
-        State:
-          description: The current state of the booking order.
-          enum:
-          - New
-          - WaitingConfirmation
-          - Confirmed
-          - Completed
-          - Cancelled
-          type: string
-        Rows:
-          description: A list of rows containing details about the articles in the booking order.
-          type: array
-          items:
-            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BookingOrderRow'
-        BillingAddress:
-          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BillingAddress'
-          description: The billing address for the booking order.
-        ShippingAddress:
-          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ShippingAddress'
-          description: The shipping address for the booking order.
-        PaymentReference:
-          description: A reference for the payment associated with the booking order.
-          maxLength: 512
-          minLength: 0
-          type: string
-        PaymentOption:
-          description: The payment option used for the booking order.
-          enum:
-          - NotSet
-          - Web
-          - Invoice
-          - Cashier
-          type: string
-        PaymentOrigin:
-          description: The origin of the payment.
-          maxLength: 512
-          minLength: 0
-          type: string
-        PaymentStatus:
-          description: The status of the payment.
-          enum:
-          - NotSet
-          - NotPaid
-          - FullyPaid
-          - Refunded
-          type: string
-        CancellationSource:
-          description: 'The source that cancelled the booking order (e.g. "Staff", "ExternalApi").
-
-            Set automatically if not provided when state changes to Cancelled.'
-          maxLength: 64
-          minLength: 0
-          type: string
-        CancellationLink:
-          description: A link for cancelling the booking order.
-          type: string
-        CancellationLinkBaseURL:
-          description: The base URL for the cancellation link.
-          type: string
-    MoreFlo.Models.InterfaceModels.OrdersResult:
-      description: 'Represents a paginated result containing a list of order results.
-
-        This class is used to return a collection of orders, along with pagination information, in API responses.'
-      type: object
-      properties:
-        ExtraInformation:
-          description: A list of extra information or messages related to the paginated result.
-          type: array
-          items:
-            type: string
-        list:
-          description: The list of data items for the current page.
-          type: array
-          items:
-            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OrderResult'
-        Page:
-          format: int32
-          description: The current page number.
-          type: integer
-        Total:
-          format: int32
-          description: The total number of pages available.
-          type: integer
-        PageSize:
-          format: int32
-          description: The number of data items per page.
-          type: integer
-    MoreFlo.Models.InterfaceModels.ArticleResult:
-      description: Represents the result of an operation involving an Article entity.
-      type: object
-      properties:
-        Article:
-          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Article'
-          description: The Article entity resulting from the operation.
-        ArticleNumber:
-          description: The unique article number.
-          type: string
-        Success:
-          description: Indicates whether the API operation was successful.
-          type: boolean
-        ExtraInformation:
-          description: 'A list of extra information or messages related to the API operation result.
-
-            This can include error messages, warnings, or informational notes.'
-          type: array
-          items:
-            type: string
-    MoreFlo.Models.InterfaceModels.BillingAddress:
-      type: object
-      properties:
-        IsCompany:
-          type: boolean
-        IdentificationNumber:
-          maxLength: 24
-          minLength: 0
-          type: string
-        Name:
-          type: string
-        Address1:
-          type: string
-        Address2:
-          type: string
-        PostCode:
-          type: string
-        City:
-          type: string
-        Country:
-          type: string
-        Email:
-          type: string
-        Telephone1:
-          type: string
-        Telephone2:
-          type: string
-        Mobile:
-          type: string
-        Fax:
           type: string
     MoreFlo.Models.InterfaceModels.Article:
       description: Represents an article with various properties.
@@ -1236,26 +1042,14 @@ components:
 
             This is used to maintain inventory levels and prevent stockouts.'
           type: number
-    xFlo.Models.Common.Models.Article.ArticleBarcode:
-      description: Article barcode
-      required:
-      - Barcode
+    MoreFlo.Models.InterfaceModels.BillingAddress:
       type: object
       properties:
-        Barcode:
-          description: Article barcode
-          maxLength: 20
+        IsCompany:
+          type: boolean
+        IdentificationNumber:
+          maxLength: 24
           minLength: 0
-          type: string
-    MoreFlo.Models.InterfaceModels.Customer:
-      required:
-      - Name
-      type: object
-      properties:
-        CustomerNumber:
-          description: MoreFlo customer number.
-          type: string
-        Reference:
           type: string
         Name:
           type: string
@@ -1269,57 +1063,16 @@ components:
           type: string
         Country:
           type: string
-        IdentityNo:
-          type: string
-        ReferenceNumber:
-          format: int64
-          description: The other systems customer number or id.
-          type: integer
         Email:
           type: string
         Telephone1:
           type: string
         Telephone2:
           type: string
-        VatNumber:
-          type: string
-        IsExportCustomer:
-          type: boolean
         Mobile:
           type: string
         Fax:
           type: string
-        Note:
-          type: string
-        DateAdded:
-          format: date-time
-          type: string
-        DateUpdated:
-          format: date-time
-          type: string
-        ModifiedTime:
-          format: date-time
-          type: string
-        MemberGroupId:
-          format: int32
-          type: integer
-        MemberGroup:
-          type: string
-        PermitsCommercial:
-          type: boolean
-        IsCompany:
-          type: boolean
-        IsInternalCustomer:
-          type: boolean
-        IsActive:
-          type: boolean
-        Blocked:
-          description: Blocked because of an issue with Credit or something else
-          type: boolean
-        Id:
-          format: int32
-          description: Member Id
-          type: integer
     MoreFlo.Models.InterfaceModels.Order:
       description: Represents an order, containing customer details, dates, references, financial information, and order rows.
       required:
@@ -1441,33 +1194,10 @@ components:
           - FullyPaid
           - Refunded
           type: string
-    MoreFlo.Models.InterfaceModels.ShippingAddress:
-      type: object
-      properties:
-        Name:
-          type: string
-        Address1:
-          type: string
-        Address2:
-          type: string
-        PostCode:
-          type: string
-        City:
-          type: string
-        Country:
-          type: string
-        Email:
-          type: string
-        Telephone1:
-          type: string
-        Telephone2:
-          type: string
-        Mobile:
-          type: string
-        Fax:
-          type: string
-    MoreFlo.Models.InterfaceModels.BookingOrdersResult:
-      description: Represents a paged result containing a list of BookingOrderResult objects.
+    MoreFlo.Models.InterfaceModels.OrdersResult:
+      description: 'Represents a paginated result containing a list of order results.
+
+        This class is used to return a collection of orders, along with pagination information, in API responses.'
       type: object
       properties:
         ExtraInformation:
@@ -1479,7 +1209,7 @@ components:
           description: The list of data items for the current page.
           type: array
           items:
-            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BookingOrderResult'
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OrderResult'
         Page:
           format: int32
           description: The current page number.
@@ -1492,58 +1222,328 @@ components:
           format: int32
           description: The number of data items per page.
           type: integer
-    MoreFlo.Models.InterfaceModels.ArticleBookingSettings:
-      description: Represents the booking settings for an article.
+    MoreFlo.Models.InterfaceModels.BookingOrder:
+      description: Represents a booking order, containing information about a customer's reservation.
+      required:
+      - Customer
       type: object
       properties:
-        DefaultDuration:
-          format: int32
-          description: Default duration of the event in seconds, used in MoreFlo backoffice and customer booking.
-          type: integer
-        PaddingTime:
-          format: int32
-          description: Padding time in seconds, used in customer booking.
-          type: integer
-        LeadTime:
-          format: int32
-          description: Lead time in seconds, used in customer booking.
-          type: integer
-        IntervalTime:
-          format: int32
-          description: Interval time in seconds, used in customer booking.
-          type: integer
-        SchedulingWindow:
-          format: int32
-          description: Scheduling window in seconds, used in customer booking.
-          type: integer
-        RequiresStoreConfirmation:
-          description: Indicates whether store confirmation is required before the booking is confirmed.
-          type: boolean
-        CustomerBookingEnabled:
-          description: 'Indicates whether customer booking is enabled for this service.
-
-            Defaults to true.'
-          type: boolean
-        ArticleBookableType:
-          description: Determines if the booking should be a service order booking or a booking order booking.
-          enum:
-          - Booking
-          - ServiceRepair
+        Id:
+          description: The unique identifier of the booking order, set by MoreFlo.
           type: string
-        DetailedDescriptionHtml:
-          description: 'Detailed description of the service for use in customer booking.
+        ExternalReference:
+          description: 'The external reference or order identifier from the ordering system.
 
-            Leave empty if no customer booking should be done.'
-          maxLength: 65535
+            Must be set during creation.'
+          type: string
+        Customer:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Customer'
+          description: The customer associated with the booking order, either by MoreFlo's CustomerNumber or the system's ReferenceNumber.
+        BookableResourceId:
+          description: The identifier of the bookable resource associated with the order.
+          type: string
+        OrderNumber:
+          format: int32
+          description: The order number, set by MoreFlo.
+          type: integer
+        CreatedTime:
+          format: date-time
+          description: The time when the booking order was created, set by MoreFlo.
+          type: string
+        UpdatedTime:
+          format: date-time
+          description: The time when the booking order was last updated, set by MoreFlo.
+          type: string
+        ReadyDate:
+          format: date-time
+          description: The date when the order is expected to be ready.
+          type: string
+        CancellationLatestTime:
+          format: date-time
+          description: The latest time for cancellation of the booking order.
+          type: string
+        ConfirmationExpireTime:
+          format: date-time
+          description: The time when the confirmation for the booking order expires.
+          type: string
+        StartTime:
+          format: date-time
+          description: The start time of the booking.
+          type: string
+        StopTime:
+          format: date-time
+          description: The end time of the booking.
+          type: string
+        CustomerNote:
+          description: A note from the customer regarding the booking order.
+          maxLength: 4096
           minLength: 0
           type: string
-        ClientCancellationPossible:
-          description: Determines if a cancellation option should be presented for the customer or if only the store can cancel.
+        OurReference:
+          description: The reference used by the ordering system.
+          maxLength: 128
+          minLength: 0
+          type: string
+        YourReference:
+          description: The reference used by your system.
+          maxLength: 128
+          minLength: 0
+          type: string
+        Note:
+          description: A general note regarding the booking order.
+          maxLength: 4096
+          minLength: 0
+          type: string
+        OrderDiscountPercent:
+          format: double
+          description: The discount percentage applied to the entire order.
+          type: number
+        State:
+          description: The current state of the booking order.
+          enum:
+          - New
+          - WaitingConfirmation
+          - Confirmed
+          - Completed
+          - Cancelled
+          type: string
+        Rows:
+          description: A list of rows containing details about the articles in the booking order.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BookingOrderRow'
+        BillingAddress:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BillingAddress'
+          description: The billing address for the booking order.
+        ShippingAddress:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ShippingAddress'
+          description: The shipping address for the booking order.
+        PaymentReference:
+          description: A reference for the payment associated with the booking order.
+          maxLength: 512
+          minLength: 0
+          type: string
+        PaymentOption:
+          description: The payment option used for the booking order.
+          enum:
+          - NotSet
+          - Web
+          - Invoice
+          - Cashier
+          type: string
+        PaymentOrigin:
+          description: The origin of the payment.
+          maxLength: 512
+          minLength: 0
+          type: string
+        PaymentStatus:
+          description: The status of the payment.
+          enum:
+          - NotSet
+          - NotPaid
+          - FullyPaid
+          - Refunded
+          type: string
+        CancellationSource:
+          description: 'The source that cancelled the booking order (e.g. "Staff", "ExternalApi").
+
+            Set automatically if not provided when state changes to Cancelled.'
+          maxLength: 64
+          minLength: 0
+          type: string
+        CancellationLink:
+          description: A link for cancelling the booking order.
+          type: string
+        CancellationLinkBaseURL:
+          description: The base URL for the cancellation link.
+          type: string
+    MoreFlo.Models.InterfaceModels.BookingOrderRow:
+      description: Represents a row in a booking order, detailing information about a specific article.
+      type: object
+      properties:
+        ArticleNumber:
+          description: The article number.
+          type: string
+        ArticleName:
+          description: The name of the article.
+          type: string
+        Quantity:
+          format: double
+          description: The quantity of the article.
+          type: number
+        UnitAmountInclVatInclDiscount:
+          format: double
+          description: The unit amount including VAT and discount.
+          type: number
+        UnitAmountInclVatExclDiscount:
+          format: double
+          description: The unit amount including VAT but excluding discount.
+          type: number
+        VatRate:
+          format: double
+          description: The VAT rate applied to the article.
+          type: number
+        TotalDiscountAmount:
+          format: double
+          description: The total discount amount applied to the article.
+          type: number
+        TotalAmountInclVatInclDiscount:
+          format: double
+          description: The total amount including VAT and discount for the specified quantity.
+          type: number
+        ReceiptNote:
+          description: A note related to the receipt of the article.
+          type: string
+    MoreFlo.Models.InterfaceModels.BookingOrderCreate:
+      description: Represents the data required to create a new booking order.
+      required:
+      - ExternalReference
+      - Customer
+      type: object
+      properties:
+        ExternalReference:
+          description: 'The external reference or order number from another system.
+
+            This is a required field.'
+          type: string
+        UpdateOnExisting:
+          description: Indicates whether to update an existing booking order if one with the same number already exists.
           type: boolean
-        CancellationMinimumTimeInAdvance:
+        Id:
+          description: The unique identifier of the booking order, set by MoreFlo.
+          type: string
+        Customer:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Customer'
+          description: The customer associated with the booking order, either by MoreFlo's CustomerNumber or the system's ReferenceNumber.
+        BookableResourceId:
+          description: The identifier of the bookable resource associated with the order.
+          type: string
+        OrderNumber:
           format: int32
-          description: Minimum time in seconds required to make a cancellation, if allowed (see ClientCancellationPossible).
+          description: The order number, set by MoreFlo.
           type: integer
+        CreatedTime:
+          format: date-time
+          description: The time when the booking order was created, set by MoreFlo.
+          type: string
+        UpdatedTime:
+          format: date-time
+          description: The time when the booking order was last updated, set by MoreFlo.
+          type: string
+        ReadyDate:
+          format: date-time
+          description: The date when the order is expected to be ready.
+          type: string
+        CancellationLatestTime:
+          format: date-time
+          description: The latest time for cancellation of the booking order.
+          type: string
+        ConfirmationExpireTime:
+          format: date-time
+          description: The time when the confirmation for the booking order expires.
+          type: string
+        StartTime:
+          format: date-time
+          description: The start time of the booking.
+          type: string
+        StopTime:
+          format: date-time
+          description: The end time of the booking.
+          type: string
+        CustomerNote:
+          description: A note from the customer regarding the booking order.
+          maxLength: 4096
+          minLength: 0
+          type: string
+        OurReference:
+          description: The reference used by the ordering system.
+          maxLength: 128
+          minLength: 0
+          type: string
+        YourReference:
+          description: The reference used by your system.
+          maxLength: 128
+          minLength: 0
+          type: string
+        Note:
+          description: A general note regarding the booking order.
+          maxLength: 4096
+          minLength: 0
+          type: string
+        OrderDiscountPercent:
+          format: double
+          description: The discount percentage applied to the entire order.
+          type: number
+        State:
+          description: The current state of the booking order.
+          enum:
+          - New
+          - WaitingConfirmation
+          - Confirmed
+          - Completed
+          - Cancelled
+          type: string
+        Rows:
+          description: A list of rows containing details about the articles in the booking order.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BookingOrderRow'
+        BillingAddress:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BillingAddress'
+          description: The billing address for the booking order.
+        ShippingAddress:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ShippingAddress'
+          description: The shipping address for the booking order.
+        PaymentReference:
+          description: A reference for the payment associated with the booking order.
+          maxLength: 512
+          minLength: 0
+          type: string
+        PaymentOption:
+          description: The payment option used for the booking order.
+          enum:
+          - NotSet
+          - Web
+          - Invoice
+          - Cashier
+          type: string
+        PaymentOrigin:
+          description: The origin of the payment.
+          maxLength: 512
+          minLength: 0
+          type: string
+        PaymentStatus:
+          description: The status of the payment.
+          enum:
+          - NotSet
+          - NotPaid
+          - FullyPaid
+          - Refunded
+          type: string
+        CancellationSource:
+          description: 'The source that cancelled the booking order (e.g. "Staff", "ExternalApi").
+
+            Set automatically if not provided when state changes to Cancelled.'
+          maxLength: 64
+          minLength: 0
+          type: string
+        CancellationLink:
+          description: A link for cancelling the booking order.
+          type: string
+        CancellationLinkBaseURL:
+          description: The base URL for the cancellation link.
+          type: string
+    xFlo.Models.Common.Models.Article.ArticleBarcode:
+      description: Article barcode
+      required:
+      - Barcode
+      type: object
+      properties:
+        Barcode:
+          description: Article barcode
+          maxLength: 20
+          minLength: 0
+          type: string
   securitySchemes:
     basic:
       type: http

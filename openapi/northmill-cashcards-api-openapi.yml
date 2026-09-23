@@ -11,7 +11,7 @@ paths:
     get:
       tags:
       - CashCards
-      summary: Fetech balance on cash cards.
+      summary: Fetech balance on cash cards
       operationId: CashCards_Get
       parameters:
       - name: externalStoreId
@@ -40,7 +40,7 @@ paths:
     get:
       tags:
       - CashCards
-      summary: Fetech balance on cash cards.
+      summary: Fetech balance on cash cards
       operationId: CashCards_Get
       parameters:
       - name: externalStoreId

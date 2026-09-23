@@ -11,7 +11,7 @@ paths:
     get:
       tags:
       - Brands
-      summary: Get all brands.
+      summary: Get all brands
       operationId: Brands_Get
       parameters:
       - name: page
@@ -54,7 +54,7 @@ paths:
     put:
       tags:
       - Brands
-      summary: Update list of brands.
+      summary: Update list of brands
       operationId: Brands_Update
       parameters:
       - name: externalStoreId
@@ -112,7 +112,7 @@ paths:
     post:
       tags:
       - Brands
-      summary: Create brands.
+      summary: Create brands
       operationId: Brands_Create
       parameters:
       - name: externalStoreId
@@ -171,7 +171,7 @@ paths:
     get:
       tags:
       - Brands
-      summary: Get all brands.
+      summary: Get all brands
       operationId: Brands_Get
       parameters:
       - name: page
@@ -214,7 +214,7 @@ paths:
     put:
       tags:
       - Brands
-      summary: Update list of brands.
+      summary: Update list of brands
       operationId: Brands_Update
       parameters:
       - name: externalStoreId
@@ -272,7 +272,7 @@ paths:
     post:
       tags:
       - Brands
-      summary: Create brands.
+      summary: Create brands
       operationId: Brands_Create
       parameters:
       - name: externalStoreId
@@ -331,7 +331,7 @@ paths:
     delete:
       tags:
       - Brands
-      summary: Delete a brand.
+      summary: Delete a brand
       operationId: Brands_Delete
       parameters:
       - name: Id
@@ -367,7 +367,7 @@ paths:
     delete:
       tags:
       - Brands
-      summary: Delete a brand.
+      summary: Delete a brand
       operationId: Brands_Delete
       parameters:
       - name: Id
@@ -401,52 +401,6 @@ paths:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BrandResult'
 components:
   schemas:
-    MoreFlo.Models.InterfaceModels.BrandsResult:
-      description: Represents a paged result containing a list of BrandResult objects.
-      type: object
-      properties:
-        ExtraInformation:
-          description: A list of extra information or messages related to the paginated result.
-          type: array
-          items:
-            type: string
-        list:
-          description: The list of data items for the current page.
-          type: array
-          items:
-            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BrandResult'
-        Page:
-          format: int32
-          description: The current page number.
-          type: integer
-        Total:
-          format: int32
-          description: The total number of pages available.
-          type: integer
-        PageSize:
-          format: int32
-          description: The number of data items per page.
-          type: integer
-    MoreFlo.Models.InterfaceModels.BrandResult:
-      description: Represents the result of an operation involving a Brand entity.
-      type: object
-      properties:
-        Brand:
-          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Brand'
-          description: The Brand entity resulting from the operation.
-        Id:
-          description: The unique identifier of the Brand.
-          type: string
-        Success:
-          description: Indicates whether the API operation was successful.
-          type: boolean
-        ExtraInformation:
-          description: 'A list of extra information or messages related to the API operation result.
-
-            This can include error messages, warnings, or informational notes.'
-          type: array
-          items:
-            type: string
     MoreFlo.Models.InterfaceModels.Brand:
       description: Represents a brand with an identifier and a name.
       required:
@@ -499,6 +453,52 @@ components:
           format: date-time
           description: The UTC timestamp when the brand was last modified.
           type: string
+    MoreFlo.Models.InterfaceModels.BrandResult:
+      description: Represents the result of an operation involving a Brand entity.
+      type: object
+      properties:
+        Brand:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Brand'
+          description: The Brand entity resulting from the operation.
+        Id:
+          description: The unique identifier of the Brand.
+          type: string
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
+    MoreFlo.Models.InterfaceModels.BrandsResult:
+      description: Represents a paged result containing a list of BrandResult objects.
+      type: object
+      properties:
+        ExtraInformation:
+          description: A list of extra information or messages related to the paginated result.
+          type: array
+          items:
+            type: string
+        list:
+          description: The list of data items for the current page.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BrandResult'
+        Page:
+          format: int32
+          description: The current page number.
+          type: integer
+        Total:
+          format: int32
+          description: The total number of pages available.
+          type: integer
+        PageSize:
+          format: int32
+          description: The number of data items per page.
+          type: integer
   securitySchemes:
     basic:
       type: http

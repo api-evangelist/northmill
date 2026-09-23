@@ -11,7 +11,7 @@ paths:
     get:
       tags:
       - Sales
-      summary: Get all article sale events.
+      summary: Get all article sale events
       operationId: Sales_Get
       parameters:
       - name: from
@@ -69,7 +69,7 @@ paths:
     get:
       tags:
       - Sales
-      summary: Get all article sale events.
+      summary: Get all article sale events
       operationId: Sales_Get
       parameters:
       - name: from

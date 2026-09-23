@@ -11,7 +11,7 @@ paths:
     get:
       tags:
       - CashierUsers
-      summary: Get all cashier users.
+      summary: Get all cashier users
       operationId: CashierUsers_Get
       parameters:
       - name: page
@@ -54,7 +54,7 @@ paths:
     put:
       tags:
       - CashierUsers
-      summary: Update cashier users.
+      summary: Update cashier users
       operationId: CashierUsers_Update
       parameters:
       - name: externalStoreId
@@ -112,7 +112,7 @@ paths:
     post:
       tags:
       - CashierUsers
-      summary: Create cashier users.
+      summary: Create cashier users
       operationId: CashierUsers_Create
       parameters:
       - name: externalStoreId
@@ -171,7 +171,7 @@ paths:
     get:
       tags:
       - CashierUsers
-      summary: Get all cashier users.
+      summary: Get all cashier users
       operationId: CashierUsers_Get
       parameters:
       - name: page
@@ -214,7 +214,7 @@ paths:
     put:
       tags:
       - CashierUsers
-      summary: Update cashier users.
+      summary: Update cashier users
       operationId: CashierUsers_Update
       parameters:
       - name: externalStoreId
@@ -272,7 +272,7 @@ paths:
     post:
       tags:
       - CashierUsers
-      summary: Create cashier users.
+      summary: Create cashier users
       operationId: CashierUsers_Create
       parameters:
       - name: externalStoreId

@@ -129,7 +129,7 @@ paths:
       tags:
       - Customers
       summary: Update customers
-      operationId: Customers_Update
+      operationId: putV2StoresByExternalStoreIdCustomers
       parameters:
       - name: externalStoreId
         in: path
@@ -183,11 +183,13 @@ paths:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomerUpdate'
         description: List of cashier users to update.
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: Customers_Update
     post:
       tags:
       - Customers
       summary: Create customers
-      operationId: Customers_Create
+      operationId: postV2StoresByExternalStoreIdCustomers
       parameters:
       - name: externalStoreId
         in: path
@@ -241,6 +243,8 @@ paths:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomerCreate'
         description: List of customers to create.
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: Customers_Create
   /v2/customers/find:
     post:
       tags:
@@ -295,7 +299,7 @@ paths:
       tags:
       - Customers
       summary: Find customer
-      operationId: Customers_Find
+      operationId: postV2StoresByExternalStoreIdCustomersFind
       parameters:
       - name: externalStoreId
         in: path
@@ -339,6 +343,8 @@ paths:
               $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomerSearchQuery'
         description: Search information.
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: Customers_Find
   /v2/customers/get/{customerNumber}:
     get:
       tags:
@@ -380,7 +386,7 @@ paths:
       tags:
       - Customers
       summary: Get customer
-      operationId: Customers_Get
+      operationId: getV2StoresByExternalStoreIdCustomersGetByCustomerNumber
       parameters:
       - name: customerNumber
         in: path
@@ -411,6 +417,8 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomersResult'
+      x-operation-id-source: normalized
+      x-operation-id-original: Customers_Get
   /v2/customers/nextcustomernumber:
     get:
       tags:
@@ -445,7 +453,7 @@ paths:
       tags:
       - Customers
       summary: Get Next Available Customer Number Id to update if multistore admin
-      operationId: Customers_GetNextAvailableCustomerNumber
+      operationId: getV2StoresByExternalStoreIdCustomersNextcustomernumber
       parameters:
       - name: externalStoreId
         in: path
@@ -469,15 +477,38 @@ paths:
             text/xml:
               schema:
                 type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: Customers_GetNextAvailableCustomerNumber
 components:
   schemas:
-    MoreFlo.Models.InterfaceModels.CustomerCreate:
+    MoreFlo.Models.InterfaceModels.CustomerSearchQuery:
+      type: object
+      properties:
+        SearchPhrase:
+          type: string
+        SearchType:
+          enum:
+          - AllFields
+          - CustomerNumber
+          - Name
+          - IdentityNumber
+          - Email
+          - Mobile
+          type: string
+        PageSize:
+          format: int32
+          type: integer
+        ExactMatch:
+          type: boolean
+        OnlyInternalCustomer:
+          type: boolean
+        OnlyExternalCustomer:
+          type: boolean
+    MoreFlo.Models.InterfaceModels.CustomerUpdate:
       required:
       - Name
       type: object
       properties:
-        UpdateOnExisting:
-          type: boolean
         Website:
           type: string
         AdditionalData:
@@ -566,49 +597,6 @@ components:
           format: int32
           description: Member Id
           type: integer
-    MoreFlo.Models.InterfaceModels.CustomerSearchQuery:
-      type: object
-      properties:
-        SearchPhrase:
-          type: string
-        SearchType:
-          enum:
-          - AllFields
-          - CustomerNumber
-          - Name
-          - IdentityNumber
-          - Email
-          - Mobile
-          type: string
-        PageSize:
-          format: int32
-          type: integer
-        ExactMatch:
-          type: boolean
-        OnlyInternalCustomer:
-          type: boolean
-        OnlyExternalCustomer:
-          type: boolean
-    MoreFlo.Models.InterfaceModels.CustomerResult:
-      description: Represents the result of an operation involving a Customer entity.
-      type: object
-      properties:
-        Customer:
-          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Customer'
-          description: The Customer entity resulting from the operation.
-        CustomerNumber:
-          description: The unique customer number.
-          type: string
-        Success:
-          description: Indicates whether the API operation was successful.
-          type: boolean
-        ExtraInformation:
-          description: 'A list of extra information or messages related to the API operation result.
-
-            This can include error messages, warnings, or informational notes.'
-          type: array
-          items:
-            type: string
     MoreFlo.Models.InterfaceModels.Customer:
       required:
       - Name
@@ -708,26 +696,13 @@ components:
           format: int32
           description: The number of data items per page.
           type: integer
-    MoreFlo.Models.InterfaceModels.CustomerContact:
-      type: object
-      properties:
-        FirstName:
-          type: string
-        LastName:
-          type: string
-        Email:
-          type: string
-        Phone:
-          type: string
-        Id:
-          format: uuid
-          type: string
-          example: 00000000-0000-0000-0000-000000000000
-    MoreFlo.Models.InterfaceModels.CustomerUpdate:
+    MoreFlo.Models.InterfaceModels.CustomerCreate:
       required:
       - Name
       type: object
       properties:
+        UpdateOnExisting:
+          type: boolean
         Website:
           type: string
         AdditionalData:
@@ -816,6 +791,26 @@ components:
           format: int32
           description: Member Id
           type: integer
+    MoreFlo.Models.InterfaceModels.CustomerResult:
+      description: Represents the result of an operation involving a Customer entity.
+      type: object
+      properties:
+        Customer:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Customer'
+          description: The Customer entity resulting from the operation.
+        CustomerNumber:
+          description: The unique customer number.
+          type: string
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
     MoreFlo.Models.InterfaceModels.CustomerAddress:
       type: object
       properties:
@@ -846,6 +841,21 @@ components:
           type: string
         Fax:
           type: string
+    MoreFlo.Models.InterfaceModels.CustomerContact:
+      type: object
+      properties:
+        FirstName:
+          type: string
+        LastName:
+          type: string
+        Email:
+          type: string
+        Phone:
+          type: string
+        Id:
+          format: uuid
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
   securitySchemes:
     basic:
       type: http

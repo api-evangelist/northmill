@@ -55,7 +55,7 @@ paths:
       tags:
       - AccountingSettings
       summary: Get all vat account settings
-      operationId: AccountingSettings_Get
+      operationId: getV2StoresByExternalStoreIdSettingsAccountingVat
       parameters:
       - name: page
         in: query
@@ -93,6 +93,8 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountingSettings.VatAccountSettingsResult'
+      x-operation-id-source: normalized
+      x-operation-id-original: AccountingSettings_Get
   /v2/settings/accounting/income:
     get:
       tags:
@@ -141,7 +143,7 @@ paths:
       tags:
       - AccountingSettings
       summary: Get income account settings
-      operationId: AccountingSettings_GetIncomeAccounts
+      operationId: getV2StoresByExternalStoreIdSettingsAccountingIncome
       parameters:
       - name: page
         in: query
@@ -179,6 +181,8 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/xFlo.Models.External.Api.Models.AccountingSettings.IncomeAccountSettingsResult'
+      x-operation-id-source: normalized
+      x-operation-id-original: AccountingSettings_GetIncomeAccounts
   /v2/settings/accounting/other:
     get:
       tags:
@@ -227,7 +231,7 @@ paths:
       tags:
       - AccountingSettings
       summary: Get other account settings
-      operationId: AccountingSettings_GetOtherAccounts
+      operationId: getV2StoresByExternalStoreIdSettingsAccountingOther
       parameters:
       - name: page
         in: query
@@ -265,6 +269,8 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/xFlo.Models.External.Api.Models.AccountingSettings.OtherAccountSettingsResult'
+      x-operation-id-source: normalized
+      x-operation-id-original: AccountingSettings_GetOtherAccounts
 components:
   schemas:
     xFlo.Models.External.Api.Models.AccountingSettings.OtherAccountSetting:
@@ -310,6 +316,54 @@ components:
           format: int32
           description: The income account number associated with the payment type and source.
           type: integer
+    xFlo.Models.External.Api.Models.AccountingSettings.OtherAccountSettingsResult:
+      description: 'Represents a paginated result containing a list of other account setting results.
+
+        This class is used to return a collection of other account settings, along with pagination information and extra information, in API responses.'
+      type: object
+      properties:
+        ExtraInformation:
+          description: A list of extra information or messages related to the paginated result.
+          type: array
+          items:
+            type: string
+        list:
+          description: The list of data items for the current page.
+          type: array
+          items:
+            $ref: '#/components/schemas/xFlo.Models.External.Api.Models.AccountingSettings.OtherAccountSettingResult'
+        Page:
+          format: int32
+          description: The current page number.
+          type: integer
+        Total:
+          format: int32
+          description: The total number of pages available.
+          type: integer
+        PageSize:
+          format: int32
+          description: The number of data items per page.
+          type: integer
+    MoreFlo.Models.InterfaceModels.AccountingSettings.VatAccountSettingResult:
+      description: Represents the result of an operation involving a VatAccountSetting entity.
+      type: object
+      properties:
+        VatAccountSetting:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountingSettings.VatAccountSetting'
+          description: The VatAccountSetting entity resulting from the operation.
+        Id:
+          description: The unique identifier of the VatAccountSetting.
+          type: string
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
     MoreFlo.Models.InterfaceModels.AccountingSettings.VatAccountSetting:
       description: Represents a VAT account setting, associating a VAT rate with an account number.
       type: object
@@ -325,6 +379,82 @@ components:
           format: double
           description: The VAT rate associated with the account.
           type: number
+    xFlo.Models.External.Api.Models.AccountingSettings.IncomeAccountSettingResult:
+      description: 'Represents the result of an operation that returns an income account setting.
+
+        This class encapsulates an IncomeAccountSetting object and its unique identifier, typically used in API responses related to retrieving or managing income account settings.'
+      type: object
+      properties:
+        IncomeAccountSetting:
+          $ref: '#/components/schemas/xFlo.Models.External.Api.Models.AccountingSettings.IncomeAccountSetting'
+          description: The IncomeAccountSetting object containing the income account setting data.
+        Id:
+          description: The unique identifier of the income account setting.
+          type: string
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
+    MoreFlo.Models.InterfaceModels.AccountingSettings.VatAccountSettingsResult:
+      description: Represents a paged result containing a list of VatAccountSettingResult objects.
+      type: object
+      properties:
+        ExtraInformation:
+          description: A list of extra information or messages related to the paginated result.
+          type: array
+          items:
+            type: string
+        list:
+          description: The list of data items for the current page.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountingSettings.VatAccountSettingResult'
+        Page:
+          format: int32
+          description: The current page number.
+          type: integer
+        Total:
+          format: int32
+          description: The total number of pages available.
+          type: integer
+        PageSize:
+          format: int32
+          description: The number of data items per page.
+          type: integer
+    xFlo.Models.External.Api.Models.AccountingSettings.IncomeAccountSettingsResult:
+      description: 'Represents a paginated result containing a list of income account setting results.
+
+        This class is used to return a collection of income account settings, along with pagination information and extra information, in API responses.'
+      type: object
+      properties:
+        ExtraInformation:
+          description: A list of extra information or messages related to the paginated result.
+          type: array
+          items:
+            type: string
+        list:
+          description: The list of data items for the current page.
+          type: array
+          items:
+            $ref: '#/components/schemas/xFlo.Models.External.Api.Models.AccountingSettings.IncomeAccountSettingResult'
+        Page:
+          format: int32
+          description: The current page number.
+          type: integer
+        Total:
+          format: int32
+          description: The total number of pages available.
+          type: integer
+        PageSize:
+          format: int32
+          description: The number of data items per page.
+          type: integer
     xFlo.Models.External.Api.Models.AccountingSettings.OtherAccountSettingResult:
       description: 'Represents the result of an operation that returns an other account setting.
 
@@ -394,130 +524,6 @@ components:
         AccountNumber:
           format: int32
           description: Income account number for payment type and source
-          type: integer
-    MoreFlo.Models.InterfaceModels.AccountingSettings.VatAccountSettingResult:
-      description: Represents the result of an operation involving a VatAccountSetting entity.
-      type: object
-      properties:
-        VatAccountSetting:
-          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountingSettings.VatAccountSetting'
-          description: The VatAccountSetting entity resulting from the operation.
-        Id:
-          description: The unique identifier of the VatAccountSetting.
-          type: string
-        Success:
-          description: Indicates whether the API operation was successful.
-          type: boolean
-        ExtraInformation:
-          description: 'A list of extra information or messages related to the API operation result.
-
-            This can include error messages, warnings, or informational notes.'
-          type: array
-          items:
-            type: string
-    xFlo.Models.External.Api.Models.AccountingSettings.IncomeAccountSettingResult:
-      description: 'Represents the result of an operation that returns an income account setting.
-
-        This class encapsulates an IncomeAccountSetting object and its unique identifier, typically used in API responses related to retrieving or managing income account settings.'
-      type: object
-      properties:
-        IncomeAccountSetting:
-          $ref: '#/components/schemas/xFlo.Models.External.Api.Models.AccountingSettings.IncomeAccountSetting'
-          description: The IncomeAccountSetting object containing the income account setting data.
-        Id:
-          description: The unique identifier of the income account setting.
-          type: string
-        Success:
-          description: Indicates whether the API operation was successful.
-          type: boolean
-        ExtraInformation:
-          description: 'A list of extra information or messages related to the API operation result.
-
-            This can include error messages, warnings, or informational notes.'
-          type: array
-          items:
-            type: string
-    xFlo.Models.External.Api.Models.AccountingSettings.OtherAccountSettingsResult:
-      description: 'Represents a paginated result containing a list of other account setting results.
-
-        This class is used to return a collection of other account settings, along with pagination information and extra information, in API responses.'
-      type: object
-      properties:
-        ExtraInformation:
-          description: A list of extra information or messages related to the paginated result.
-          type: array
-          items:
-            type: string
-        list:
-          description: The list of data items for the current page.
-          type: array
-          items:
-            $ref: '#/components/schemas/xFlo.Models.External.Api.Models.AccountingSettings.OtherAccountSettingResult'
-        Page:
-          format: int32
-          description: The current page number.
-          type: integer
-        Total:
-          format: int32
-          description: The total number of pages available.
-          type: integer
-        PageSize:
-          format: int32
-          description: The number of data items per page.
-          type: integer
-    xFlo.Models.External.Api.Models.AccountingSettings.IncomeAccountSettingsResult:
-      description: 'Represents a paginated result containing a list of income account setting results.
-
-        This class is used to return a collection of income account settings, along with pagination information and extra information, in API responses.'
-      type: object
-      properties:
-        ExtraInformation:
-          description: A list of extra information or messages related to the paginated result.
-          type: array
-          items:
-            type: string
-        list:
-          description: The list of data items for the current page.
-          type: array
-          items:
-            $ref: '#/components/schemas/xFlo.Models.External.Api.Models.AccountingSettings.IncomeAccountSettingResult'
-        Page:
-          format: int32
-          description: The current page number.
-          type: integer
-        Total:
-          format: int32
-          description: The total number of pages available.
-          type: integer
-        PageSize:
-          format: int32
-          description: The number of data items per page.
-          type: integer
-    MoreFlo.Models.InterfaceModels.AccountingSettings.VatAccountSettingsResult:
-      description: Represents a paged result containing a list of VatAccountSettingResult objects.
-      type: object
-      properties:
-        ExtraInformation:
-          description: A list of extra information or messages related to the paginated result.
-          type: array
-          items:
-            type: string
-        list:
-          description: The list of data items for the current page.
-          type: array
-          items:
-            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountingSettings.VatAccountSettingResult'
-        Page:
-          format: int32
-          description: The current page number.
-          type: integer
-        Total:
-          format: int32
-          description: The total number of pages available.
-          type: integer
-        PageSize:
-          format: int32
-          description: The number of data items per page.
           type: integer
   securitySchemes:
     basic:

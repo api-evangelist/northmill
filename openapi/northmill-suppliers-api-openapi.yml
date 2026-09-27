@@ -172,7 +172,7 @@ paths:
       tags:
       - Suppliers
       summary: Get all suppliers
-      operationId: Suppliers_Get
+      operationId: getV2StoresByExternalStoreIdSuppliers
       parameters:
       - name: page
         in: query
@@ -211,11 +211,13 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SuppliersResult'
+      x-operation-id-source: normalized
+      x-operation-id-original: Suppliers_Get
     put:
       tags:
       - Suppliers
       summary: Update list of suppliers
-      operationId: Suppliers_Update
+      operationId: putV2StoresByExternalStoreIdSuppliers
       parameters:
       - name: externalStoreId
         in: path
@@ -269,11 +271,13 @@ paths:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Supplier'
         description: List of suppliers to update data.
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: Suppliers_Update
     post:
       tags:
       - Suppliers
       summary: Create suppliers
-      operationId: Suppliers_Create
+      operationId: postV2StoresByExternalStoreIdSuppliers
       parameters:
       - name: externalStoreId
         in: path
@@ -327,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SupplierCreate'
         description: List of articles to create.
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: Suppliers_Create
   /v2/suppliers/{Id}:
     delete:
       tags:
@@ -368,7 +374,7 @@ paths:
       tags:
       - Suppliers
       summary: Delete a supplier
-      operationId: Suppliers_Delete
+      operationId: deleteV2StoresByExternalStoreIdSuppliersById
       parameters:
       - name: Id
         in: path
@@ -399,6 +405,8 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SupplierResult'
+      x-operation-id-source: normalized
+      x-operation-id-original: Suppliers_Delete
 components:
   schemas:
     MoreFlo.Models.InterfaceModels.Supplier:
@@ -527,34 +535,6 @@ components:
           type: array
           items:
             type: string
-    MoreFlo.Models.InterfaceModels.SuppliersResult:
-      description: 'Represents a paginated result containing a list of supplier results.
-
-        This class is used to return a collection of suppliers, along with pagination information, in API responses.'
-      type: object
-      properties:
-        ExtraInformation:
-          description: A list of extra information or messages related to the paginated result.
-          type: array
-          items:
-            type: string
-        list:
-          description: The list of data items for the current page.
-          type: array
-          items:
-            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SupplierResult'
-        Page:
-          format: int32
-          description: The current page number.
-          type: integer
-        Total:
-          format: int32
-          description: The total number of pages available.
-          type: integer
-        PageSize:
-          format: int32
-          description: The number of data items per page.
-          type: integer
     MoreFlo.Models.InterfaceModels.SupplierCreate:
       description: 'Represents the data used to create a new supplier entry.
 
@@ -669,6 +649,34 @@ components:
         ExternalSyncMessage:
           description: A message related to the external synchronization status.
           type: string
+    MoreFlo.Models.InterfaceModels.SuppliersResult:
+      description: 'Represents a paginated result containing a list of supplier results.
+
+        This class is used to return a collection of suppliers, along with pagination information, in API responses.'
+      type: object
+      properties:
+        ExtraInformation:
+          description: A list of extra information or messages related to the paginated result.
+          type: array
+          items:
+            type: string
+        list:
+          description: The list of data items for the current page.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SupplierResult'
+        Page:
+          format: int32
+          description: The current page number.
+          type: integer
+        Total:
+          format: int32
+          description: The total number of pages available.
+          type: integer
+        PageSize:
+          format: int32
+          description: The number of data items per page.
+          type: integer
   securitySchemes:
     basic:
       type: http

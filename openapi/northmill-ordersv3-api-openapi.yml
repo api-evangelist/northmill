@@ -179,7 +179,7 @@ paths:
       tags:
       - OrdersV3
       summary: Get list of orders
-      operationId: OrdersV3_List
+      operationId: getV3StoresByExternalStoreIdOrders
       parameters:
       - name: modifiedSince
         in: query
@@ -225,11 +225,13 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrderResult'
+      x-operation-id-source: normalized
+      x-operation-id-original: OrdersV3_List
     put:
       tags:
       - OrdersV3
       summary: Update list of orders
-      operationId: OrdersV3_Update
+      operationId: putV3StoresByExternalStoreIdOrders
       parameters:
       - name: externalStoreId
         in: path
@@ -283,11 +285,13 @@ paths:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.Order'
         description: List of orders to update data.
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: OrdersV3_Update
     post:
       tags:
       - OrdersV3
       summary: Create orders
-      operationId: OrdersV3_Create
+      operationId: postV3StoresByExternalStoreIdOrders
       parameters:
       - name: externalStoreId
         in: path
@@ -341,6 +345,8 @@ paths:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrderCreate'
         description: List of  orders to create.
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: OrdersV3_Create
   /v3/orders/byExternalReference/{externalReference}:
     get:
       tags:
@@ -382,7 +388,7 @@ paths:
       tags:
       - OrdersV3
       summary: Get a order
-      operationId: OrdersV3_GetByExternalReference
+      operationId: getV3StoresByExternalStoreIdOrdersByExternalReferenceByExternalReference
       parameters:
       - name: externalReference
         in: path
@@ -413,6 +419,8 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrderResult'
+      x-operation-id-source: normalized
+      x-operation-id-original: OrdersV3_GetByExternalReference
   /v3/orders/byId/{Id}:
     get:
       tags:
@@ -454,7 +462,7 @@ paths:
       tags:
       - OrdersV3
       summary: Get a order
-      operationId: OrdersV3_Get
+      operationId: getV3StoresByExternalStoreIdOrdersByIdById
       parameters:
       - name: Id
         in: path
@@ -485,8 +493,212 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrderResult'
+      x-operation-id-source: normalized
+      x-operation-id-original: OrdersV3_Get
 components:
   schemas:
+    MoreFlo.Models.InterfaceModels.Address:
+      type: object
+      properties:
+        Name:
+          type: string
+        Address1:
+          type: string
+        Address2:
+          type: string
+        PostCode:
+          type: string
+        City:
+          type: string
+        Country:
+          type: string
+        Email:
+          type: string
+        Telephone1:
+          type: string
+        Telephone2:
+          type: string
+        Mobile:
+          type: string
+        Fax:
+          type: string
+    MoreFlo.Models.InterfaceModels.v3.OrdersResult:
+      description: 'Represents a paginated result containing a list of order results.
+
+        This class is used to return a collection of orders, along with pagination information, in API responses.'
+      type: object
+      properties:
+        ExtraInformation:
+          description: A list of extra information or messages related to the paginated result.
+          type: array
+          items:
+            type: string
+        list:
+          description: The list of data items for the current page.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrderResult'
+        Page:
+          format: int32
+          description: The current page number.
+          type: integer
+        Total:
+          format: int32
+          description: The total number of pages available.
+          type: integer
+        PageSize:
+          format: int32
+          description: The number of data items per page.
+          type: integer
+    MoreFlo.Models.InterfaceModels.Customer:
+      required:
+      - Name
+      type: object
+      properties:
+        CustomerNumber:
+          description: MoreFlo customer number.
+          type: string
+        Reference:
+          type: string
+        Name:
+          type: string
+        Address1:
+          type: string
+        Address2:
+          type: string
+        PostCode:
+          type: string
+        City:
+          type: string
+        Country:
+          type: string
+        IdentityNo:
+          type: string
+        ReferenceNumber:
+          format: int64
+          description: The other systems customer number or id.
+          type: integer
+        Email:
+          type: string
+        Telephone1:
+          type: string
+        Telephone2:
+          type: string
+        VatNumber:
+          type: string
+        IsExportCustomer:
+          type: boolean
+        Mobile:
+          type: string
+        Fax:
+          type: string
+        Note:
+          type: string
+        DateAdded:
+          format: date-time
+          type: string
+        DateUpdated:
+          format: date-time
+          type: string
+        ModifiedTime:
+          format: date-time
+          type: string
+        MemberGroupId:
+          format: int32
+          type: integer
+        MemberGroup:
+          type: string
+        PermitsCommercial:
+          type: boolean
+        IsCompany:
+          type: boolean
+        IsInternalCustomer:
+          type: boolean
+        IsActive:
+          type: boolean
+        Blocked:
+          description: Blocked because of an issue with Credit or something else
+          type: boolean
+        Id:
+          format: int32
+          description: Member Id
+          type: integer
+    MoreFlo.Models.InterfaceModels.v3.OrderRow:
+      description: Represents a row within an order, detailing information about a specific item.
+      type: object
+      properties:
+        ArticleNumber:
+          description: The article number of the item.
+          type: string
+        ArticleName:
+          description: The name of the item.
+          type: string
+        UnitAmountInclVatExclDiscount:
+          format: double
+          description: The unit amount of the item, including VAT but excluding any discounts.
+          type: number
+        Discount:
+          format: double
+          description: The discount applied to the item.
+          type: number
+        VatRate:
+          format: double
+          description: The VAT rate applied to the item.
+          type: number
+        Quantity:
+          format: double
+          description: The quantity of the item.
+          type: number
+        SerialNumber:
+          description: The serial number of the item.
+          type: string
+        RowSum:
+          format: double
+          description: The total sum or price of the row (quantity multiplied by unit price, after discount).
+          type: number
+        ReceiptNote:
+          description: A note or text associated with the row, typically used for text-only rows.
+          type: string
+    MoreFlo.Models.InterfaceModels.v3.OrderResult:
+      description: 'Represents the result of an operation that returns a single order.
+
+        This class encapsulates an Order object and its unique identifier, typically used in API responses for single order operations.'
+      type: object
+      properties:
+        Order:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.Order'
+          description: The Order object containing the order data.
+        Id:
+          description: The unique identifier of the order.
+          type: string
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
+    MoreFlo.Models.InterfaceModels.AttachedFile:
+      type: object
+      properties:
+        Id:
+          type: string
+        Name:
+          type: string
+        Description:
+          type: string
+        CreatedTime:
+          format: date-time
+          type: string
+        ContentType:
+          type: string
+        IsMainFile:
+          type: boolean
+        URL:
+          type: string
     MoreFlo.Models.InterfaceModels.v3.Order:
       description: 'Represents an order, encompassing details about a purchase or transaction.
 
@@ -672,34 +884,6 @@ components:
 
             For example, if OriginType is CashRegister, this value should contain the serial number of the cash register.'
           type: string
-    MoreFlo.Models.InterfaceModels.v3.OrdersResult:
-      description: 'Represents a paginated result containing a list of order results.
-
-        This class is used to return a collection of orders, along with pagination information, in API responses.'
-      type: object
-      properties:
-        ExtraInformation:
-          description: A list of extra information or messages related to the paginated result.
-          type: array
-          items:
-            type: string
-        list:
-          description: The list of data items for the current page.
-          type: array
-          items:
-            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.OrderResult'
-        Page:
-          format: int32
-          description: The current page number.
-          type: integer
-        Total:
-          format: int32
-          description: The total number of pages available.
-          type: integer
-        PageSize:
-          format: int32
-          description: The number of data items per page.
-          type: integer
     MoreFlo.Models.InterfaceModels.v3.OrderCreate:
       description: 'Represents the data required to create a new order.
 
@@ -888,180 +1072,6 @@ components:
           description: 'The origin of the order, based on the OriginType.
 
             For example, if OriginType is CashRegister, this value should contain the serial number of the cash register.'
-          type: string
-    MoreFlo.Models.InterfaceModels.AttachedFile:
-      type: object
-      properties:
-        Id:
-          type: string
-        Name:
-          type: string
-        Description:
-          type: string
-        CreatedTime:
-          format: date-time
-          type: string
-        ContentType:
-          type: string
-        IsMainFile:
-          type: boolean
-        URL:
-          type: string
-    MoreFlo.Models.InterfaceModels.v3.OrderResult:
-      description: 'Represents the result of an operation that returns a single order.
-
-        This class encapsulates an Order object and its unique identifier, typically used in API responses for single order operations.'
-      type: object
-      properties:
-        Order:
-          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.v3.Order'
-          description: The Order object containing the order data.
-        Id:
-          description: The unique identifier of the order.
-          type: string
-        Success:
-          description: Indicates whether the API operation was successful.
-          type: boolean
-        ExtraInformation:
-          description: 'A list of extra information or messages related to the API operation result.
-
-            This can include error messages, warnings, or informational notes.'
-          type: array
-          items:
-            type: string
-    MoreFlo.Models.InterfaceModels.Customer:
-      required:
-      - Name
-      type: object
-      properties:
-        CustomerNumber:
-          description: MoreFlo customer number.
-          type: string
-        Reference:
-          type: string
-        Name:
-          type: string
-        Address1:
-          type: string
-        Address2:
-          type: string
-        PostCode:
-          type: string
-        City:
-          type: string
-        Country:
-          type: string
-        IdentityNo:
-          type: string
-        ReferenceNumber:
-          format: int64
-          description: The other systems customer number or id.
-          type: integer
-        Email:
-          type: string
-        Telephone1:
-          type: string
-        Telephone2:
-          type: string
-        VatNumber:
-          type: string
-        IsExportCustomer:
-          type: boolean
-        Mobile:
-          type: string
-        Fax:
-          type: string
-        Note:
-          type: string
-        DateAdded:
-          format: date-time
-          type: string
-        DateUpdated:
-          format: date-time
-          type: string
-        ModifiedTime:
-          format: date-time
-          type: string
-        MemberGroupId:
-          format: int32
-          type: integer
-        MemberGroup:
-          type: string
-        PermitsCommercial:
-          type: boolean
-        IsCompany:
-          type: boolean
-        IsInternalCustomer:
-          type: boolean
-        IsActive:
-          type: boolean
-        Blocked:
-          description: Blocked because of an issue with Credit or something else
-          type: boolean
-        Id:
-          format: int32
-          description: Member Id
-          type: integer
-    MoreFlo.Models.InterfaceModels.Address:
-      type: object
-      properties:
-        Name:
-          type: string
-        Address1:
-          type: string
-        Address2:
-          type: string
-        PostCode:
-          type: string
-        City:
-          type: string
-        Country:
-          type: string
-        Email:
-          type: string
-        Telephone1:
-          type: string
-        Telephone2:
-          type: string
-        Mobile:
-          type: string
-        Fax:
-          type: string
-    MoreFlo.Models.InterfaceModels.v3.OrderRow:
-      description: Represents a row within an order, detailing information about a specific item.
-      type: object
-      properties:
-        ArticleNumber:
-          description: The article number of the item.
-          type: string
-        ArticleName:
-          description: The name of the item.
-          type: string
-        UnitAmountInclVatExclDiscount:
-          format: double
-          description: The unit amount of the item, including VAT but excluding any discounts.
-          type: number
-        Discount:
-          format: double
-          description: The discount applied to the item.
-          type: number
-        VatRate:
-          format: double
-          description: The VAT rate applied to the item.
-          type: number
-        Quantity:
-          format: double
-          description: The quantity of the item.
-          type: number
-        SerialNumber:
-          description: The serial number of the item.
-          type: string
-        RowSum:
-          format: double
-          description: The total sum or price of the row (quantity multiplied by unit price, after discount).
-          type: number
-        ReceiptNote:
-          description: A note or text associated with the row, typically used for text-only rows.
           type: string
   securitySchemes:
     basic:

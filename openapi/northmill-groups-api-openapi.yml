@@ -170,7 +170,7 @@ paths:
       tags:
       - Groups
       summary: Get all groups
-      operationId: Groups_Get
+      operationId: getV2StoresByExternalStoreIdGroups
       parameters:
       - name: page
         in: query
@@ -209,11 +209,13 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupsResult'
+      x-operation-id-source: normalized
+      x-operation-id-original: Groups_Get
     put:
       tags:
       - Groups
       summary: Update list of groups
-      operationId: Groups_Update
+      operationId: putV2StoresByExternalStoreIdGroups
       parameters:
       - name: externalStoreId
         in: path
@@ -267,11 +269,13 @@ paths:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Group'
         description: List of groups to update data.
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: Groups_Update
     post:
       tags:
       - Groups
       summary: Create groups. Id to update if multistore admin. List of groups
-      operationId: Groups_Create
+      operationId: postV2StoresByExternalStoreIdGroups
       parameters:
       - name: externalStoreId
         in: path
@@ -323,12 +327,14 @@ paths:
               items:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupCreate'
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: Groups_Create
   /v2/groups/{Id}:
     get:
       tags:
       - Groups
       summary: Get a specific group
-      operationId: Groups_Get
+      operationId: getV2GroupsById
       parameters:
       - name: Id
         in: path
@@ -359,6 +365,8 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupResult'
+      x-operation-id-source: normalized
+      x-operation-id-original: Groups_Get
     delete:
       tags:
       - Groups
@@ -399,7 +407,7 @@ paths:
       tags:
       - Groups
       summary: Get a specific group
-      operationId: Groups_Get
+      operationId: getV2StoresByExternalStoreIdGroupsById
       parameters:
       - name: Id
         in: path
@@ -430,11 +438,13 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupResult'
+      x-operation-id-source: normalized
+      x-operation-id-original: Groups_Get
     delete:
       tags:
       - Groups
       summary: Delete a group
-      operationId: Groups_Delete
+      operationId: deleteV2StoresByExternalStoreIdGroupsById
       parameters:
       - name: Id
         in: path
@@ -465,8 +475,87 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupResult'
+      x-operation-id-source: normalized
+      x-operation-id-original: Groups_Delete
 components:
   schemas:
+    MoreFlo.Models.InterfaceModels.Group:
+      description: Represents a group, which can be used to categorize or organize articles or other data within the system.
+      required:
+      - Id
+      type: object
+      properties:
+        Id:
+          description: The unique identifier of the group.
+          maxLength: 64
+          minLength: 0
+          type: string
+        ParentId:
+          description: The identifier of the parent group, if this group is a sub-group.
+          maxLength: 64
+          minLength: 0
+          type: string
+        Name:
+          description: The name of the group.
+          maxLength: 100
+          minLength: 0
+          type: string
+        ExternalReference:
+          description: An external reference identifier for the group, potentially used by other systems.
+          maxLength: 128
+          minLength: 0
+          type: string
+        ModifiedTime:
+          format: date-time
+          description: The time when the group was last modified.
+          type: string
+        DefaultAccountCodeId:
+          description: The identifier of the default account code associated with this group.
+          maxLength: 64
+          minLength: 0
+          type: string
+        DisplayOrder:
+          format: int32
+          description: The display order of the group, used for sorting or presentation purposes.
+          type: integer
+        ArticleGoodsType:
+          description: The default article goods type for articles within this group.
+          enum:
+          - NotSet
+          - Other
+          - Alcohol
+          - Tobacco
+          - Gambling
+          - Hazardous
+          type: string
+    MoreFlo.Models.InterfaceModels.GroupsResult:
+      description: 'Represents a paginated result containing a list of group results.
+
+        This class is used to return a collection of groups, along with pagination information, in API responses.'
+      type: object
+      properties:
+        ExtraInformation:
+          description: A list of extra information or messages related to the paginated result.
+          type: array
+          items:
+            type: string
+        list:
+          description: The list of data items for the current page.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupResult'
+        Page:
+          format: int32
+          description: The current page number.
+          type: integer
+        Total:
+          format: int32
+          description: The total number of pages available.
+          type: integer
+        PageSize:
+          format: int32
+          description: The number of data items per page.
+          type: integer
     MoreFlo.Models.InterfaceModels.GroupCreate:
       description: "Represents the data structure used to create a new group. \nThis class specifies the required information for group creation within the system."
       required:
@@ -520,34 +609,6 @@ components:
           - Gambling
           - Hazardous
           type: string
-    MoreFlo.Models.InterfaceModels.GroupsResult:
-      description: 'Represents a paginated result containing a list of group results.
-
-        This class is used to return a collection of groups, along with pagination information, in API responses.'
-      type: object
-      properties:
-        ExtraInformation:
-          description: A list of extra information or messages related to the paginated result.
-          type: array
-          items:
-            type: string
-        list:
-          description: The list of data items for the current page.
-          type: array
-          items:
-            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.GroupResult'
-        Page:
-          format: int32
-          description: The current page number.
-          type: integer
-        Total:
-          format: int32
-          description: The total number of pages available.
-          type: integer
-        PageSize:
-          format: int32
-          description: The number of data items per page.
-          type: integer
     MoreFlo.Models.InterfaceModels.GroupResult:
       description: 'Represents the result of an operation that returns a single group.
 
@@ -570,55 +631,6 @@ components:
           type: array
           items:
             type: string
-    MoreFlo.Models.InterfaceModels.Group:
-      description: Represents a group, which can be used to categorize or organize articles or other data within the system.
-      required:
-      - Id
-      type: object
-      properties:
-        Id:
-          description: The unique identifier of the group.
-          maxLength: 64
-          minLength: 0
-          type: string
-        ParentId:
-          description: The identifier of the parent group, if this group is a sub-group.
-          maxLength: 64
-          minLength: 0
-          type: string
-        Name:
-          description: The name of the group.
-          maxLength: 100
-          minLength: 0
-          type: string
-        ExternalReference:
-          description: An external reference identifier for the group, potentially used by other systems.
-          maxLength: 128
-          minLength: 0
-          type: string
-        ModifiedTime:
-          format: date-time
-          description: The time when the group was last modified.
-          type: string
-        DefaultAccountCodeId:
-          description: The identifier of the default account code associated with this group.
-          maxLength: 64
-          minLength: 0
-          type: string
-        DisplayOrder:
-          format: int32
-          description: The display order of the group, used for sorting or presentation purposes.
-          type: integer
-        ArticleGoodsType:
-          description: The default article goods type for articles within this group.
-          enum:
-          - NotSet
-          - Other
-          - Alcohol
-          - Tobacco
-          - Gambling
-          - Hazardous
-          type: string
   securitySchemes:
     basic:
       type: http

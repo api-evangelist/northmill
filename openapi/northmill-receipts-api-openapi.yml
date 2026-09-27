@@ -48,7 +48,7 @@ paths:
       tags:
       - Receipts
       summary: Get a receipt
-      operationId: Receipts_Get
+      operationId: getV2StoresByExternalStoreIdReceiptsById
       parameters:
       - name: id
         in: path
@@ -79,12 +79,14 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Receipts.ReceiptResult'
+      x-operation-id-source: normalized
+      x-operation-id-original: Receipts_Get
   /v2/receipts:
     get:
       tags:
       - Receipts
       summary: Get a list of receipts
-      operationId: Receipts_Get
+      operationId: getV2Receipts
       parameters:
       - name: page
         in: query
@@ -130,6 +132,8 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Receipts.ReceiptsResult'
+      x-operation-id-source: normalized
+      x-operation-id-original: Receipts_Get
     post:
       tags:
       - Receipts
@@ -183,7 +187,7 @@ paths:
       tags:
       - Receipts
       summary: Get a list of receipts
-      operationId: Receipts_Get
+      operationId: getV2StoresByExternalStoreIdReceipts
       parameters:
       - name: page
         in: query
@@ -229,11 +233,13 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Receipts.ReceiptsResult'
+      x-operation-id-source: normalized
+      x-operation-id-original: Receipts_Get
     post:
       tags:
       - Receipts
       summary: Create a receipt
-      operationId: Receipts_CreateReceipt
+      operationId: postV2StoresByExternalStoreIdReceipts
       parameters:
       - name: externalStoreId
         in: path
@@ -277,26 +283,10 @@ paths:
               $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Receipts.Receipt'
         description: The receipt to create in MoreFlo
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: Receipts_CreateReceipt
 components:
   schemas:
-    MoreFlo.Models.InterfaceModels.Receipts.ControlUnit:
-      description: 'Represents a tax control unit and its associated control code.
-
-        This class encapsulates information about a tax control unit, including its unique identifier and the control code it provides.'
-      required:
-      - UnitId
-      type: object
-      properties:
-        UnitId:
-          description: The unit identifier of the tax control unit.
-          maxLength: 50
-          minLength: 0
-          type: string
-        ControlCode:
-          description: The control code received from the tax control unit.
-          maxLength: 100
-          minLength: 0
-          type: string
     MoreFlo.Models.InterfaceModels.Receipts.Receipt:
       description: 'Represents a receipt, containing details about a transaction.
 
@@ -437,53 +427,6 @@ components:
           description: 'Accounting details.
 
             If this receipt should be bookkept, this section contains voucher information for creating the voucher.'
-    MoreFlo.Models.InterfaceModels.Receipts.ClientDetails:
-      description: Client details of cash register, only set by MoreFlo Cash registers.
-      required:
-      - RegisterNumber
-      type: object
-      properties:
-        ClientId:
-          description: Client ID, id of cash register.
-          maxLength: 512
-          minLength: 0
-          type: string
-        ClientSerialNumber:
-          description: Serial number, i.e. manufacturing number.
-          maxLength: 512
-          minLength: 0
-          type: string
-        RegisterNumber:
-          description: Register number
-          type: string
-    MoreFlo.Models.InterfaceModels.Receipts.ReceiptsResult:
-      description: 'Represents a paginated result containing a list of receipt results.
-
-        This class is used to return a collection of receipts, along with pagination information, in API responses.'
-      type: object
-      properties:
-        ExtraInformation:
-          description: A list of extra information or messages related to the paginated result.
-          type: array
-          items:
-            type: string
-        list:
-          description: The list of data items for the current page.
-          type: array
-          items:
-            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Receipts.ReceiptResult'
-        Page:
-          format: int32
-          description: The current page number.
-          type: integer
-        Total:
-          format: int32
-          description: The total number of pages available.
-          type: integer
-        PageSize:
-          format: int32
-          description: The number of data items per page.
-          type: integer
     MoreFlo.Models.InterfaceModels.Voucher:
       description: 'Represents a voucher, which is a document used for accounting purposes.
 
@@ -604,182 +547,32 @@ components:
           format: date-time
           description: The timestamp of when the voucher was last modified.
           type: string
-    MoreFlo.Models.InterfaceModels.Receipts.Payment:
-      description: 'Represents a payment within a transaction.
-
-        This class encapsulates information about a payment, including its name, amount, type, and transaction details.'
+    MoreFlo.Models.InterfaceModels.Receipts.ArticleDiscount:
+      description: Represents a discount applied to an article.
       required:
-      - Name
+      - DiscountType
       - Amount
-      - PaymentType
+      - Description
       type: object
       properties:
-        Name:
-          description: 'The name of the payment method, intended for display on a receipt.
-
-            This is not a technical name.'
+        DiscountType:
+          description: The type of discount.
+          enum:
+          - None
+          - Percent
+          - Amount
           type: string
         Amount:
           format: double
-          description: The amount paid.
+          description: The total amount of the discount, even if the discount is a percentage.
           type: number
-        PaymentType:
-          description: The type of payment.
-          enum:
-          - NamedPayment
-          - CashPayment
-          - BankCardPayment
-          - AppsCardPayment
-          - AppsDebitCardPayment
-          - Invoice
-          - ExternalPayment
-          - Change
-          - Swish
-          - ResursBank
-          - NorthmillBNPL
-          - NorthmillPayout
-          - Klarna
-          - Paypal
-          - Stripe
-          - SveaWebPay
-          - WooPayments
+        Description:
+          description: The name or description of the discount.
           type: string
-        TransactionId:
-          description: The transaction identifier, if the payment is integrated and generates a transaction ID.
-          maxLength: 255
-          minLength: 0
-          type: string
-        TransactionOrigin:
-          description: The technical name of a payment integration.
-          maxLength: 255
-          minLength: 0
-          type: string
-        AppsTransaction:
-          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Receipts.AppsTransaction'
-          description: Details for an AppsCardPayment, if PaymentType is set to AppsCardPayment.
-        BankCardTransaction:
-          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Receipts.BankCardTransaction'
-          description: Details for a BankCardPayment, if PaymentType is set to BankCardPayment.
-    MoreFlo.Models.InterfaceModels.Receipts.Vat:
-      description: 'Represents VAT (Value Added Tax) information within a receipt.
-
-        This class encapsulates details about a specific VAT rate applied in the transaction, including the rate, total VAT amount, and total purchase amount.'
-      required:
-      - VatRate
-      - TotalVat
-      - TotalAmount
-      type: object
-      properties:
-        VatRate:
+        Percentage:
           format: double
-          description: The VAT rate.
+          description: The percentage value of the discount, if the DiscountType is Percent.
           type: number
-        TotalVat:
-          format: double
-          description: The total VAT amount on the receipt for the given VatRate.
-          type: number
-        TotalAmount:
-          format: double
-          description: 'The total purchase amount for the given VatRate on the receipt.
-
-
-            Example:
-
-            A receipt contains one article priced 5 SEK, with 25% VAT.
-
-            In this case:
-
-            VatRate = 25.0
-
-            TotalVat = 1.0
-
-            TotalAmount = 5.0'
-          type: number
-    MoreFlo.Models.InterfaceModels.Receipts.AppsTransaction:
-      description: 'Represents a transaction initiated by an application, specifically relating to member cards.
-
-        This class encapsulates information about a transaction involving a member card, including the card number and type.'
-      type: object
-      properties:
-        MemberCardNumber:
-          description: The member card number used in the transaction.
-          maxLength: 128
-          minLength: 0
-          type: string
-        MemberCardType:
-          description: The type of member card used in the transaction.
-          type: string
-    MoreFlo.Models.InterfaceModels.Receipts.ArticleTextRow:
-      description: 'Represents a text row associated with an article.
-
-        This class encapsulates information about a single line of text related to an article, such as a description or instruction.'
-      required:
-      - RowNum
-      - Text
-      type: object
-      properties:
-        RowNum:
-          format: int32
-          description: The row number of this text row.
-          type: integer
-        Text:
-          description: The text content of the row.
-          type: string
-    MoreFlo.Models.InterfaceModels.Receipts.Merchant:
-      description: Represents merchant information, including identification, contact details, and address.
-      required:
-      - CorporateIdentityNumber
-      - Name
-      type: object
-      properties:
-        CorporateIdentityNumber:
-          description: The corporate identity number of the merchant (e.g., SSN, Organization number).
-          type: string
-        Name:
-          description: The name of the company or merchant.
-          maxLength: 128
-          minLength: 0
-          type: string
-        AddressLine1:
-          description: The first line of the merchant's address.
-          maxLength: 128
-          minLength: 0
-          type: string
-        AddressLine2:
-          description: The second line of the merchant's address (optional).
-          maxLength: 128
-          minLength: 0
-          type: string
-        ZipCode:
-          description: The postal code of the merchant's address.
-          maxLength: 128
-          minLength: 0
-          type: string
-        City:
-          description: The city of the merchant's address.
-          maxLength: 128
-          minLength: 0
-          type: string
-        Country:
-          description: The country of the merchant's address.
-          maxLength: 128
-          minLength: 0
-          type: string
-        Phone:
-          description: The merchant's landline or cell phone number.
-          maxLength: 128
-          minLength: 0
-          type: string
-        HomePage:
-          description: The merchant's home page address (URL).
-          maxLength: 128
-          minLength: 0
-          type: string
-        Email:
-          description: The merchant's email address.
-          maxLength: 128
-          minLength: 0
-          type: string
     MoreFlo.Models.InterfaceModels.Receipts.ReceiptGet:
       description: 'Represents a receipt, extending the base Receipt class with the UTC creation timestamp.
 
@@ -924,55 +717,96 @@ components:
           description: 'Accounting details.
 
             If this receipt should be bookkept, this section contains voucher information for creating the voucher.'
-    MoreFlo.Models.InterfaceModels.Receipts.ArticleDiscount:
-      description: Represents a discount applied to an article.
+    MoreFlo.Models.InterfaceModels.Receipts.ControlUnit:
+      description: 'Represents a tax control unit and its associated control code.
+
+        This class encapsulates information about a tax control unit, including its unique identifier and the control code it provides.'
       required:
-      - DiscountType
-      - Amount
-      - Description
+      - UnitId
       type: object
       properties:
-        DiscountType:
-          description: The type of discount.
-          enum:
-          - None
-          - Percent
-          - Amount
+        UnitId:
+          description: The unit identifier of the tax control unit.
+          maxLength: 50
+          minLength: 0
           type: string
-        Amount:
-          format: double
-          description: The total amount of the discount, even if the discount is a percentage.
-          type: number
-        Description:
-          description: The name or description of the discount.
+        ControlCode:
+          description: The control code received from the tax control unit.
+          maxLength: 100
+          minLength: 0
           type: string
-        Percentage:
-          format: double
-          description: The percentage value of the discount, if the DiscountType is Percent.
-          type: number
-    MoreFlo.Models.InterfaceModels.Receipts.ReceiptTextRow:
-      description: 'Represents a text row to be printed on a receipt, either in the header or footer.
+    MoreFlo.Models.InterfaceModels.Receipts.Recipient:
+      description: 'Represents a recipient of a receipt, specifying the delivery method and contact information.
 
-        This class encapsulates information about a single line of text that should appear on a receipt, including its type (header/footer), position, and content.'
-      required:
-      - RowType
-      - RowNum
+        This class encapsulates information about how a receipt should be sent to a customer, either by email or SMS.'
       type: object
       properties:
-        RowType:
-          description: 'Specifies whether the text row is part of the header or footer.
-
-            Valid values are defined by the TextRowType enum.'
+        Carrier:
+          description: Specifies the carrier used to send the receipt, either Email or SMS.
           enum:
-          - Header
-          - Footer
+          - Email
+          - SMS
           type: string
-        RowNum:
-          format: int32
-          description: The row number of this text within the header or footer, used for ordering.
-          type: integer
-        Text:
-          description: The text content of the row.
+        EmailAddress:
+          description: The email address of the recipient, if the Carrier is Email.
+          type: string
+        MobilePhone:
+          description: The mobile phone number of the recipient, if the Carrier is SMS.
+          type: string
+    MoreFlo.Models.InterfaceModels.Receipts.Merchant:
+      description: Represents merchant information, including identification, contact details, and address.
+      required:
+      - CorporateIdentityNumber
+      - Name
+      type: object
+      properties:
+        CorporateIdentityNumber:
+          description: The corporate identity number of the merchant (e.g., SSN, Organization number).
+          type: string
+        Name:
+          description: The name of the company or merchant.
+          maxLength: 128
+          minLength: 0
+          type: string
+        AddressLine1:
+          description: The first line of the merchant's address.
+          maxLength: 128
+          minLength: 0
+          type: string
+        AddressLine2:
+          description: The second line of the merchant's address (optional).
+          maxLength: 128
+          minLength: 0
+          type: string
+        ZipCode:
+          description: The postal code of the merchant's address.
+          maxLength: 128
+          minLength: 0
+          type: string
+        City:
+          description: The city of the merchant's address.
+          maxLength: 128
+          minLength: 0
+          type: string
+        Country:
+          description: The country of the merchant's address.
+          maxLength: 128
+          minLength: 0
+          type: string
+        Phone:
+          description: The merchant's landline or cell phone number.
+          maxLength: 128
+          minLength: 0
+          type: string
+        HomePage:
+          description: The merchant's home page address (URL).
+          maxLength: 128
+          minLength: 0
+          type: string
+        Email:
+          description: The merchant's email address.
+          maxLength: 128
+          minLength: 0
           type: string
     MoreFlo.Models.InterfaceModels.Receipts.BankCardTransaction:
       description: 'Represents a bank card transaction, containing details related to the payment processing.
@@ -1185,76 +1019,17 @@ components:
           maxLength: 100
           minLength: 0
           type: string
-    MoreFlo.Models.InterfaceModels.Receipts.OrderReference:
-      description: 'Represents a reference to an order within a receipt.
+    MoreFlo.Models.InterfaceModels.Receipts.Rounding:
+      description: 'Represents the rounding applied to the total amount of a receipt.
 
-        This class encapsulates information about an order reference, including its index, order number, origin, and state change.'
+        This class encapsulates information about the adjustment made to the receipt total due to rounding to a specific denomination.'
       required:
-      - Index
-      - OrderNumber
-      - Origin
-      type: object
-      properties:
-        Index:
-          format: int32
-          description: 'The unique index (0-based) of the order reference within the OrderReference list in a receipt.
-
-            Articles on the receipt may refer to an order using this index number. This is a required field.'
-          type: integer
-        OrderNumber:
-          description: The order number. This is a required field.
-          maxLength: 128
-          minLength: 0
-          type: string
-        Origin:
-          description: The type of origin or source, if the article originates from an order handout. This is a required field.
-          enum:
-          - VismaAdministration
-          - AppsOrder
-          - ServiceOrder
-          - BookingOrder
-          - TicketOrder
-          - ServeIT
-          - Fortnox
-          - ServeITRefund
-          type: string
-        OrderChangeState:
-          description: Specifies if the order state should be changed.
-          enum:
-          - Paid
-          - Cancelled
-          type: string
-    MoreFlo.Models.InterfaceModels.Receipts.ReceiptDiscount:
-      description: 'Represents a discount applied to a receipt.
-
-        This class encapsulates information about a discount that affects the overall transaction, including its type, amount, and description.'
-      required:
-      - DiscountType
       - Amount
-      - Description
       type: object
       properties:
-        DiscountType:
-          description: The type of discount.
-          enum:
-          - None
-          - Percent
-          - Amount
-          type: string
         Amount:
           format: double
-          description: 'The total amount of the receipt discount.
-
-            This value must be calculated from the percentage discount value and should represent the actual monetary reduction.
-
-            Remember that this discount must be distributed across all articles on the receipt, affecting their TotalPriceIncVat, TotalPriceExVat, and VatRate attributes.'
-          type: number
-        Description:
-          description: A descriptive text of the discount, intended for printing on the receipt.
-          type: string
-        Percentage:
-          format: double
-          description: The percentage value of this receipt discount, if applicable.
+          description: The total rounding amount applied to the receipt.
           type: number
     MoreFlo.Models.InterfaceModels.Receipts.ReceiptArticleAttribute:
       description: 'Represents an attribute associated with an article in a receipt.
@@ -1274,6 +1049,41 @@ components:
         Value:
           description: The value of the attribute.
           type: string
+    MoreFlo.Models.InterfaceModels.Receipts.Vat:
+      description: 'Represents VAT (Value Added Tax) information within a receipt.
+
+        This class encapsulates details about a specific VAT rate applied in the transaction, including the rate, total VAT amount, and total purchase amount.'
+      required:
+      - VatRate
+      - TotalVat
+      - TotalAmount
+      type: object
+      properties:
+        VatRate:
+          format: double
+          description: The VAT rate.
+          type: number
+        TotalVat:
+          format: double
+          description: The total VAT amount on the receipt for the given VatRate.
+          type: number
+        TotalAmount:
+          format: double
+          description: 'The total purchase amount for the given VatRate on the receipt.
+
+
+            Example:
+
+            A receipt contains one article priced 5 SEK, with 25% VAT.
+
+            In this case:
+
+            VatRate = 25.0
+
+            TotalVat = 1.0
+
+            TotalAmount = 5.0'
+          type: number
     MoreFlo.Models.InterfaceModels.VoucherRow:
       description: Represents a row within a voucher, detailing an individual accounting entry.
       type: object
@@ -1342,36 +1152,131 @@ components:
           - Private
           - Company
           type: string
-    MoreFlo.Models.InterfaceModels.Receipts.Rounding:
-      description: 'Represents the rounding applied to the total amount of a receipt.
-
-        This class encapsulates information about the adjustment made to the receipt total due to rounding to a specific denomination.'
+    MoreFlo.Models.InterfaceModels.Receipts.ClientDetails:
+      description: Client details of cash register, only set by MoreFlo Cash registers.
       required:
-      - Amount
+      - RegisterNumber
       type: object
       properties:
+        ClientId:
+          description: Client ID, id of cash register.
+          maxLength: 512
+          minLength: 0
+          type: string
+        ClientSerialNumber:
+          description: Serial number, i.e. manufacturing number.
+          maxLength: 512
+          minLength: 0
+          type: string
+        RegisterNumber:
+          description: Register number
+          type: string
+    MoreFlo.Models.InterfaceModels.Receipts.ReceiptDiscount:
+      description: 'Represents a discount applied to a receipt.
+
+        This class encapsulates information about a discount that affects the overall transaction, including its type, amount, and description.'
+      required:
+      - DiscountType
+      - Amount
+      - Description
+      type: object
+      properties:
+        DiscountType:
+          description: The type of discount.
+          enum:
+          - None
+          - Percent
+          - Amount
+          type: string
         Amount:
           format: double
-          description: The total rounding amount applied to the receipt.
-          type: number
-    MoreFlo.Models.InterfaceModels.Receipts.Recipient:
-      description: 'Represents a recipient of a receipt, specifying the delivery method and contact information.
+          description: 'The total amount of the receipt discount.
 
-        This class encapsulates information about how a receipt should be sent to a customer, either by email or SMS.'
+            This value must be calculated from the percentage discount value and should represent the actual monetary reduction.
+
+            Remember that this discount must be distributed across all articles on the receipt, affecting their TotalPriceIncVat, TotalPriceExVat, and VatRate attributes.'
+          type: number
+        Description:
+          description: A descriptive text of the discount, intended for printing on the receipt.
+          type: string
+        Percentage:
+          format: double
+          description: The percentage value of this receipt discount, if applicable.
+          type: number
+    MoreFlo.Models.InterfaceModels.Receipts.ReceiptTextRow:
+      description: 'Represents a text row to be printed on a receipt, either in the header or footer.
+
+        This class encapsulates information about a single line of text that should appear on a receipt, including its type (header/footer), position, and content.'
+      required:
+      - RowType
+      - RowNum
       type: object
       properties:
-        Carrier:
-          description: Specifies the carrier used to send the receipt, either Email or SMS.
+        RowType:
+          description: 'Specifies whether the text row is part of the header or footer.
+
+            Valid values are defined by the TextRowType enum.'
           enum:
-          - Email
-          - SMS
+          - Header
+          - Footer
           type: string
-        EmailAddress:
-          description: The email address of the recipient, if the Carrier is Email.
+        RowNum:
+          format: int32
+          description: The row number of this text within the header or footer, used for ordering.
+          type: integer
+        Text:
+          description: The text content of the row.
           type: string
-        MobilePhone:
-          description: The mobile phone number of the recipient, if the Carrier is SMS.
+    MoreFlo.Models.InterfaceModels.Receipts.ReceiptsResult:
+      description: 'Represents a paginated result containing a list of receipt results.
+
+        This class is used to return a collection of receipts, along with pagination information, in API responses.'
+      type: object
+      properties:
+        ExtraInformation:
+          description: A list of extra information or messages related to the paginated result.
+          type: array
+          items:
+            type: string
+        list:
+          description: The list of data items for the current page.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Receipts.ReceiptResult'
+        Page:
+          format: int32
+          description: The current page number.
+          type: integer
+        Total:
+          format: int32
+          description: The total number of pages available.
+          type: integer
+        PageSize:
+          format: int32
+          description: The number of data items per page.
+          type: integer
+    MoreFlo.Models.InterfaceModels.Receipts.ReceiptResult:
+      description: 'Represents the result of an operation that returns a receipt.
+
+        This encapsulates a ReceiptGet object and its unique identifier, typically used in API responses related to retrieving or managing receipt data.'
+      type: object
+      properties:
+        Receipt:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Receipts.ReceiptGet'
+          description: The ReceiptGet object containing the receipt data.
+        Id:
+          description: The unique identifier of the receipt.
           type: string
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
     MoreFlo.Models.InterfaceModels.Receipts.Article:
       description: Represents an article within a receipt or order, containing details about the item purchased or sold.
       required:
@@ -1462,28 +1367,131 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Receipts.ArticleTextRow'
-    MoreFlo.Models.InterfaceModels.Receipts.ReceiptResult:
-      description: 'Represents the result of an operation that returns a receipt.
+    MoreFlo.Models.InterfaceModels.Receipts.OrderReference:
+      description: 'Represents a reference to an order within a receipt.
 
-        This encapsulates a ReceiptGet object and its unique identifier, typically used in API responses related to retrieving or managing receipt data.'
+        This class encapsulates information about an order reference, including its index, order number, origin, and state change.'
+      required:
+      - Index
+      - OrderNumber
+      - Origin
       type: object
       properties:
-        Receipt:
-          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Receipts.ReceiptGet'
-          description: The ReceiptGet object containing the receipt data.
-        Id:
-          description: The unique identifier of the receipt.
-          type: string
-        Success:
-          description: Indicates whether the API operation was successful.
-          type: boolean
-        ExtraInformation:
-          description: 'A list of extra information or messages related to the API operation result.
+        Index:
+          format: int32
+          description: 'The unique index (0-based) of the order reference within the OrderReference list in a receipt.
 
-            This can include error messages, warnings, or informational notes.'
-          type: array
-          items:
-            type: string
+            Articles on the receipt may refer to an order using this index number. This is a required field.'
+          type: integer
+        OrderNumber:
+          description: The order number. This is a required field.
+          maxLength: 128
+          minLength: 0
+          type: string
+        Origin:
+          description: The type of origin or source, if the article originates from an order handout. This is a required field.
+          enum:
+          - VismaAdministration
+          - AppsOrder
+          - ServiceOrder
+          - BookingOrder
+          - TicketOrder
+          - ServeIT
+          - Fortnox
+          - ServeITRefund
+          type: string
+        OrderChangeState:
+          description: Specifies if the order state should be changed.
+          enum:
+          - Paid
+          - Cancelled
+          type: string
+    MoreFlo.Models.InterfaceModels.Receipts.AppsTransaction:
+      description: 'Represents a transaction initiated by an application, specifically relating to member cards.
+
+        This class encapsulates information about a transaction involving a member card, including the card number and type.'
+      type: object
+      properties:
+        MemberCardNumber:
+          description: The member card number used in the transaction.
+          maxLength: 128
+          minLength: 0
+          type: string
+        MemberCardType:
+          description: The type of member card used in the transaction.
+          type: string
+    MoreFlo.Models.InterfaceModels.Receipts.ArticleTextRow:
+      description: 'Represents a text row associated with an article.
+
+        This class encapsulates information about a single line of text related to an article, such as a description or instruction.'
+      required:
+      - RowNum
+      - Text
+      type: object
+      properties:
+        RowNum:
+          format: int32
+          description: The row number of this text row.
+          type: integer
+        Text:
+          description: The text content of the row.
+          type: string
+    MoreFlo.Models.InterfaceModels.Receipts.Payment:
+      description: 'Represents a payment within a transaction.
+
+        This class encapsulates information about a payment, including its name, amount, type, and transaction details.'
+      required:
+      - Name
+      - Amount
+      - PaymentType
+      type: object
+      properties:
+        Name:
+          description: 'The name of the payment method, intended for display on a receipt.
+
+            This is not a technical name.'
+          type: string
+        Amount:
+          format: double
+          description: The amount paid.
+          type: number
+        PaymentType:
+          description: The type of payment.
+          enum:
+          - NamedPayment
+          - CashPayment
+          - BankCardPayment
+          - AppsCardPayment
+          - AppsDebitCardPayment
+          - Invoice
+          - ExternalPayment
+          - Change
+          - Swish
+          - ResursBank
+          - NorthmillBNPL
+          - NorthmillPayout
+          - Klarna
+          - Paypal
+          - Stripe
+          - SveaWebPay
+          - WooPayments
+          type: string
+        TransactionId:
+          description: The transaction identifier, if the payment is integrated and generates a transaction ID.
+          maxLength: 255
+          minLength: 0
+          type: string
+        TransactionOrigin:
+          description: The technical name of a payment integration.
+          maxLength: 255
+          minLength: 0
+          type: string
+        AppsTransaction:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Receipts.AppsTransaction'
+          description: Details for an AppsCardPayment, if PaymentType is set to AppsCardPayment.
+        BankCardTransaction:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Receipts.BankCardTransaction'
+          description: Details for a BankCardPayment, if PaymentType is set to BankCardPayment.
   securitySchemes:
     basic:
       type: http

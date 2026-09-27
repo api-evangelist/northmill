@@ -172,7 +172,7 @@ paths:
       tags:
       - Locations
       summary: Get all locations
-      operationId: Locations_Get
+      operationId: getV2StoresByExternalStoreIdLocations
       parameters:
       - name: page
         in: query
@@ -211,11 +211,13 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.LocationsResult'
+      x-operation-id-source: normalized
+      x-operation-id-original: Locations_Get
     put:
       tags:
       - Locations
       summary: Update list of locations
-      operationId: Locations_Update
+      operationId: putV2StoresByExternalStoreIdLocations
       parameters:
       - name: externalStoreId
         in: path
@@ -269,11 +271,13 @@ paths:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Location'
         description: List of locations to update data.
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: Locations_Update
     post:
       tags:
       - Locations
       summary: Create locations
-      operationId: Locations_Create
+      operationId: postV2StoresByExternalStoreIdLocations
       parameters:
       - name: externalStoreId
         in: path
@@ -327,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.LocationCreate'
         description: List of articles to create.
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: Locations_Create
   /v2/locations/{Id}:
     delete:
       tags:
@@ -368,7 +374,7 @@ paths:
       tags:
       - Locations
       summary: Delete a location
-      operationId: Locations_Delete
+      operationId: deleteV2StoresByExternalStoreIdLocationsById
       parameters:
       - name: Id
         in: path
@@ -399,6 +405,8 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.LocationResult'
+      x-operation-id-source: normalized
+      x-operation-id-original: Locations_Delete
 components:
   schemas:
     MoreFlo.Models.InterfaceModels.LocationResult:
@@ -423,6 +431,34 @@ components:
           type: array
           items:
             type: string
+    MoreFlo.Models.InterfaceModels.LocationsResult:
+      description: 'Represents a paginated result containing a list of location results.
+
+        This class is used to return a collection of locations, along with pagination information, in API responses.'
+      type: object
+      properties:
+        ExtraInformation:
+          description: A list of extra information or messages related to the paginated result.
+          type: array
+          items:
+            type: string
+        list:
+          description: The list of data items for the current page.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.LocationResult'
+        Page:
+          format: int32
+          description: The current page number.
+          type: integer
+        Total:
+          format: int32
+          description: The total number of pages available.
+          type: integer
+        PageSize:
+          format: int32
+          description: The number of data items per page.
+          type: integer
     MoreFlo.Models.InterfaceModels.Location:
       description: Represents a location, such as a store, warehouse, or other physical place.
       required:
@@ -477,34 +513,6 @@ components:
           format: date-time
           description: The UTC timestamp when the location was last modified.
           type: string
-    MoreFlo.Models.InterfaceModels.LocationsResult:
-      description: 'Represents a paginated result containing a list of location results.
-
-        This class is used to return a collection of locations, along with pagination information, in API responses.'
-      type: object
-      properties:
-        ExtraInformation:
-          description: A list of extra information or messages related to the paginated result.
-          type: array
-          items:
-            type: string
-        list:
-          description: The list of data items for the current page.
-          type: array
-          items:
-            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.LocationResult'
-        Page:
-          format: int32
-          description: The current page number.
-          type: integer
-        Total:
-          format: int32
-          description: The total number of pages available.
-          type: integer
-        PageSize:
-          format: int32
-          description: The number of data items per page.
-          type: integer
   securitySchemes:
     basic:
       type: http

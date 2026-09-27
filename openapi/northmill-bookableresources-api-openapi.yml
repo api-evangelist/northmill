@@ -63,7 +63,7 @@ paths:
       tags:
       - BookableResources
       summary: Get all bookable resources
-      operationId: BookableResources_Get
+      operationId: getV2StoresByExternalStoreIdBookingsResources
       parameters:
       - name: page
         in: query
@@ -109,26 +109,10 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BookableResourcesResult'
+      x-operation-id-source: normalized
+      x-operation-id-original: BookableResources_Get
 components:
   schemas:
-    MoreFlo.Models.InterfaceModels.AttachedFile:
-      type: object
-      properties:
-        Id:
-          type: string
-        Name:
-          type: string
-        Description:
-          type: string
-        CreatedTime:
-          format: date-time
-          type: string
-        ContentType:
-          type: string
-        IsMainFile:
-          type: boolean
-        URL:
-          type: string
     MoreFlo.Models.InterfaceModels.BookableResource:
       description: Represents a resource that can be booked.
       type: object
@@ -193,6 +177,24 @@ components:
           format: date-time
           description: The time when the bookable resource was last updated.
           type: string
+    MoreFlo.Models.InterfaceModels.BookableResourceIncludeOnlyArticle:
+      description: Represents an article that is exclusively included for booking with a specific bookable resource, along with its maximum parallel booking limit.
+      type: object
+      properties:
+        ArticleNumber:
+          description: The article number of the included article.
+          type: string
+        MaxNumberOfBookingsInParallel:
+          format: int32
+          description: The maximum number of parallel bookings allowed for this article with the associated bookable resource.
+          type: integer
+    MoreFlo.Models.InterfaceModels.BookableResourceExcludedArticle:
+      description: Represents an article that is excluded from being booked with a specific bookable resource.
+      type: object
+      properties:
+        ArticleNumber:
+          description: The article number of the excluded article.
+          type: string
     MoreFlo.Models.InterfaceModels.BookableResourcesResult:
       description: Represents a paged result containing a list of BookableResourceResult objects.
       type: object
@@ -239,23 +241,23 @@ components:
           type: array
           items:
             type: string
-    MoreFlo.Models.InterfaceModels.BookableResourceIncludeOnlyArticle:
-      description: Represents an article that is exclusively included for booking with a specific bookable resource, along with its maximum parallel booking limit.
+    MoreFlo.Models.InterfaceModels.AttachedFile:
       type: object
       properties:
-        ArticleNumber:
-          description: The article number of the included article.
+        Id:
           type: string
-        MaxNumberOfBookingsInParallel:
-          format: int32
-          description: The maximum number of parallel bookings allowed for this article with the associated bookable resource.
-          type: integer
-    MoreFlo.Models.InterfaceModels.BookableResourceExcludedArticle:
-      description: Represents an article that is excluded from being booked with a specific bookable resource.
-      type: object
-      properties:
-        ArticleNumber:
-          description: The article number of the excluded article.
+        Name:
+          type: string
+        Description:
+          type: string
+        CreatedTime:
+          format: date-time
+          type: string
+        ContentType:
+          type: string
+        IsMainFile:
+          type: boolean
+        URL:
           type: string
   securitySchemes:
     basic:

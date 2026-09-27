@@ -172,7 +172,7 @@ paths:
       tags:
       - Webhooks
       summary: Get all web hooks
-      operationId: WebHooks_Get
+      operationId: getV2StoresByExternalStoreIdWebhooks
       parameters:
       - name: page
         in: query
@@ -211,11 +211,13 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHooksResult'
+      x-operation-id-source: normalized
+      x-operation-id-original: WebHooks_Get
     put:
       tags:
       - Webhooks
       summary: Update webhooks.
-      operationId: WebHooks_Update
+      operationId: putV2StoresByExternalStoreIdWebhooks
       parameters:
       - name: externalStoreId
         in: path
@@ -269,11 +271,13 @@ paths:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHook'
         description: List of webhooks to create.
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: WebHooks_Update
     post:
       tags:
       - Webhooks
       summary: Create webhooks.
-      operationId: WebHooks_Create
+      operationId: postV2StoresByExternalStoreIdWebhooks
       parameters:
       - name: externalStoreId
         in: path
@@ -327,12 +331,14 @@ paths:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHookCreate'
         description: List of webhooks to create.
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: WebHooks_Create
   /v2/webhooks/{Id}:
     get:
       tags:
       - Webhooks
       summary: Get a web hook
-      operationId: WebHooks_Get
+      operationId: getV2WebhooksById
       parameters:
       - name: Id
         in: path
@@ -363,6 +369,8 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHookResult'
+      x-operation-id-source: normalized
+      x-operation-id-original: WebHooks_Get
     delete:
       tags:
       - Webhooks
@@ -403,7 +411,7 @@ paths:
       tags:
       - Webhooks
       summary: Get a web hook
-      operationId: WebHooks_Get
+      operationId: getV2StoresByExternalStoreIdWebhooksById
       parameters:
       - name: Id
         in: path
@@ -434,11 +442,13 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHookResult'
+      x-operation-id-source: normalized
+      x-operation-id-original: WebHooks_Get
     delete:
       tags:
       - Webhooks
       summary: Delete a web hook
-      operationId: WebHooks_Delete
+      operationId: deleteV2StoresByExternalStoreIdWebhooksById
       parameters:
       - name: Id
         in: path
@@ -469,8 +479,60 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHookResult'
+      x-operation-id-source: normalized
+      x-operation-id-original: WebHooks_Delete
 components:
   schemas:
+    MoreFlo.Models.InterfaceModels.WebHookResult:
+      description: 'Represents the result of an operation that returns a single WebHook.
+
+        This class encapsulates a WebHook object and its unique identifier, typically used in API responses for single WebHook operations.'
+      type: object
+      properties:
+        WebHook:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHook'
+          description: The WebHook object containing the WebHook data.
+        Id:
+          description: The unique identifier of the WebHook.
+          type: string
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
+    MoreFlo.Models.InterfaceModels.WebHooksResult:
+      description: 'Represents a paginated result containing a list of WebHook results.
+
+        This class is used to return a collection of WebHooks, along with pagination information, in API responses.'
+      type: object
+      properties:
+        ExtraInformation:
+          description: A list of extra information or messages related to the paginated result.
+          type: array
+          items:
+            type: string
+        list:
+          description: The list of data items for the current page.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHookResult'
+        Page:
+          format: int32
+          description: The current page number.
+          type: integer
+        Total:
+          format: int32
+          description: The total number of pages available.
+          type: integer
+        PageSize:
+          format: int32
+          description: The number of data items per page.
+          type: integer
     MoreFlo.Models.InterfaceModels.WebHookCreate:
       description: 'Represents the data used to create a new WebHook.
 
@@ -552,56 +614,6 @@ components:
           format: date-time
           description: The timestamp of when the WebHook was last modified.
           type: string
-    MoreFlo.Models.InterfaceModels.WebHookResult:
-      description: 'Represents the result of an operation that returns a single WebHook.
-
-        This class encapsulates a WebHook object and its unique identifier, typically used in API responses for single WebHook operations.'
-      type: object
-      properties:
-        WebHook:
-          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHook'
-          description: The WebHook object containing the WebHook data.
-        Id:
-          description: The unique identifier of the WebHook.
-          type: string
-        Success:
-          description: Indicates whether the API operation was successful.
-          type: boolean
-        ExtraInformation:
-          description: 'A list of extra information or messages related to the API operation result.
-
-            This can include error messages, warnings, or informational notes.'
-          type: array
-          items:
-            type: string
-    MoreFlo.Models.InterfaceModels.WebHooksResult:
-      description: 'Represents a paginated result containing a list of WebHook results.
-
-        This class is used to return a collection of WebHooks, along with pagination information, in API responses.'
-      type: object
-      properties:
-        ExtraInformation:
-          description: A list of extra information or messages related to the paginated result.
-          type: array
-          items:
-            type: string
-        list:
-          description: The list of data items for the current page.
-          type: array
-          items:
-            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHookResult'
-        Page:
-          format: int32
-          description: The current page number.
-          type: integer
-        Total:
-          format: int32
-          description: The total number of pages available.
-          type: integer
-        PageSize:
-          format: int32
-          description: The number of data items per page.
-          type: integer
   securitySchemes:
     basic:
       type: http

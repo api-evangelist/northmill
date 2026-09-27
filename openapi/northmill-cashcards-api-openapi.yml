@@ -41,7 +41,7 @@ paths:
       tags:
       - CashCards
       summary: Fetech balance on cash cards
-      operationId: CashCards_Get
+      operationId: getV2StoresByExternalStoreIdCashcardsBalance
       parameters:
       - name: externalStoreId
         in: path
@@ -65,6 +65,8 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CashCardsBalanceResult'
+      x-operation-id-source: normalized
+      x-operation-id-original: CashCards_Get
 components:
   schemas:
     MoreFlo.Models.InterfaceModels.CashCardsBalanceResult:

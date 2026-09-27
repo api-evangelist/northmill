@@ -198,7 +198,7 @@ paths:
       tags:
       - Articles
       summary: Get all articles
-      operationId: Articles_Get
+      operationId: getV2StoresByExternalStoreIdArticles
       parameters:
       - name: page
         in: query
@@ -263,11 +263,13 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticlesGetResult'
+      x-operation-id-source: normalized
+      x-operation-id-original: Articles_Get
     put:
       tags:
       - Articles
       summary: Update articles
-      operationId: Articles_Update
+      operationId: putV2StoresByExternalStoreIdArticles
       parameters:
       - name: externalStoreId
         in: path
@@ -321,11 +323,13 @@ paths:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Article'
         description: List of articles to update.
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: Articles_Update
     post:
       tags:
       - Articles
       summary: Create articles
-      operationId: Articles_Create
+      operationId: postV2StoresByExternalStoreIdArticles
       parameters:
       - name: externalStoreId
         in: path
@@ -379,6 +383,8 @@ paths:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleCreate'
         description: List of articles to create.
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: Articles_Create
   /v2/articles/increasestock:
     put:
       tags:
@@ -443,7 +449,7 @@ paths:
       tags:
       - Articles
       summary: Update stock - increase stock
-      operationId: Articles_IncreaseStock
+      operationId: putV2StoresByExternalStoreIdArticlesIncreasestock
       parameters:
       - name: externalStoreId
         in: path
@@ -497,6 +503,8 @@ paths:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleQuantityInfo'
         description: List of articleQuantityInfos that is to be relatively increased with current stock value.
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: Articles_IncreaseStock
   /v2/articles/decreasestock:
     put:
       tags:
@@ -561,7 +569,7 @@ paths:
       tags:
       - Articles
       summary: Update stock - decrease stock
-      operationId: Articles_DecreaseStock
+      operationId: putV2StoresByExternalStoreIdArticlesDecreasestock
       parameters:
       - name: externalStoreId
         in: path
@@ -615,12 +623,14 @@ paths:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleQuantityInfo'
         description: List of articleQuantityInfos that is to be relatively decreased with current stock value.
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: Articles_DecreaseStock
   /v2/articles/{ArticleNumber}:
     get:
       tags:
       - Articles
       summary: Hämta en artikel - se flagga
-      operationId: Articles_Get
+      operationId: getV2ArticlesByArticleNumber
       parameters:
       - name: ArticleNumber
         in: path
@@ -651,12 +661,14 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleGetResult'
+      x-operation-id-source: normalized
+      x-operation-id-original: Articles_Get
   /v3/articles/article:
     get:
       tags:
       - Articles
       summary: Hämta en artikel - se flagga
-      operationId: Articles_Get
+      operationId: getV3ArticlesArticle
       parameters:
       - name: ArticleNumber
         in: query
@@ -687,12 +699,14 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleGetResult'
+      x-operation-id-source: normalized
+      x-operation-id-original: Articles_Get
   /v2/stores/{externalStoreId}/articles/{ArticleNumber}:
     get:
       tags:
       - Articles
       summary: Hämta en artikel - se flagga
-      operationId: Articles_Get
+      operationId: getV2StoresByExternalStoreIdArticlesByArticleNumber
       parameters:
       - name: ArticleNumber
         in: path
@@ -723,12 +737,14 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleGetResult'
+      x-operation-id-source: normalized
+      x-operation-id-original: Articles_Get
   /v3/stores/{externalStoreId}/articles/article:
     get:
       tags:
       - Articles
       summary: Hämta en artikel - se flagga
-      operationId: Articles_Get
+      operationId: getV3StoresByExternalStoreIdArticlesArticle
       parameters:
       - name: ArticleNumber
         in: query
@@ -759,28 +775,36 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleGetResult'
+      x-operation-id-source: normalized
+      x-operation-id-original: Articles_Get
 components:
   schemas:
-    MoreFlo.Models.InterfaceModels.ProductFile:
+    MoreFlo.Models.InterfaceModels.ArticlesResult:
+      description: Represents a paged result containing a list of ArticleResult objects.
       type: object
       properties:
-        Id:
-          type: string
-        Guid:
-          type: string
-        Name:
-          type: string
-        Description:
-          type: string
-        CreatedTime:
-          format: date-time
-          type: string
-        ContentType:
-          type: string
-        IsMainFile:
-          type: boolean
-        URL:
-          type: string
+        ExtraInformation:
+          description: A list of extra information or messages related to the paginated result.
+          type: array
+          items:
+            type: string
+        list:
+          description: The list of data items for the current page.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleResult'
+        Page:
+          format: int32
+          description: The current page number.
+          type: integer
+        Total:
+          format: int32
+          description: The total number of pages available.
+          type: integer
+        PageSize:
+          format: int32
+          description: The number of data items per page.
+          type: integer
     MoreFlo.Models.InterfaceModels.ArticlesGetResult:
       description: Represents a paged result containing a list of ArticleGetResult objects.
       type: object
@@ -807,58 +831,17 @@ components:
           format: int32
           description: The number of data items per page.
           type: integer
-    MoreFlo.Models.InterfaceModels.ArticleBookingSettings:
-      description: Represents the booking settings for an article.
+    xFlo.Models.Common.Models.Article.ArticleBarcode:
+      description: Article barcode
+      required:
+      - Barcode
       type: object
       properties:
-        DefaultDuration:
-          format: int32
-          description: Default duration of the event in seconds, used in MoreFlo backoffice and customer booking.
-          type: integer
-        PaddingTime:
-          format: int32
-          description: Padding time in seconds, used in customer booking.
-          type: integer
-        LeadTime:
-          format: int32
-          description: Lead time in seconds, used in customer booking.
-          type: integer
-        IntervalTime:
-          format: int32
-          description: Interval time in seconds, used in customer booking.
-          type: integer
-        SchedulingWindow:
-          format: int32
-          description: Scheduling window in seconds, used in customer booking.
-          type: integer
-        RequiresStoreConfirmation:
-          description: Indicates whether store confirmation is required before the booking is confirmed.
-          type: boolean
-        CustomerBookingEnabled:
-          description: 'Indicates whether customer booking is enabled for this service.
-
-            Defaults to true.'
-          type: boolean
-        ArticleBookableType:
-          description: Determines if the booking should be a service order booking or a booking order booking.
-          enum:
-          - Booking
-          - ServiceRepair
-          type: string
-        DetailedDescriptionHtml:
-          description: 'Detailed description of the service for use in customer booking.
-
-            Leave empty if no customer booking should be done.'
-          maxLength: 65535
+        Barcode:
+          description: Article barcode
+          maxLength: 20
           minLength: 0
           type: string
-        ClientCancellationPossible:
-          description: Determines if a cancellation option should be presented for the customer or if only the store can cancel.
-          type: boolean
-        CancellationMinimumTimeInAdvance:
-          format: int32
-          description: Minimum time in seconds required to make a cancellation, if allowed (see ClientCancellationPossible).
-          type: integer
     MoreFlo.Models.InterfaceModels.ArticleResult:
       description: Represents the result of an operation involving an Article entity.
       type: object
@@ -879,511 +862,6 @@ components:
           type: array
           items:
             type: string
-    MoreFlo.Models.InterfaceModels.ArticleGet:
-      description: Represents an article with associated product files.
-      required:
-      - ArticleNumber
-      type: object
-      properties:
-        Files:
-          description: A list of product files associated with the article.
-          type: array
-          items:
-            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ProductFile'
-        ArticleNumber:
-          description: The unique article number.
-          maxLength: 100
-          minLength: 0
-          type: string
-        Quantity:
-          format: double
-          description: The quantity of the article.
-          type: number
-        SupplierArticleNumber:
-          description: The supplier's article number.
-          type: string
-        SerialNumber:
-          description: The serial number of the article.
-          type: string
-        BrandId:
-          description: The brand identifier of the article.
-          maxLength: 64
-          minLength: 0
-          type: string
-        GroupId:
-          description: The group identifier of the article.
-          maxLength: 64
-          minLength: 0
-          type: string
-        Location:
-          description: Specifies the storage location or warehouse where the stock item is kept.
-          maxLength: 50
-          minLength: 0
-          type: string
-        ArticleName:
-          description: The name of the article.
-          maxLength: 60
-          minLength: 0
-          type: string
-        ArticleDescription:
-          description: The description or extra receipt text for the article.
-          maxLength: 60
-          minLength: 0
-          type: string
-        Unit:
-          description: The unit of measurement for the article.
-          maxLength: 30
-          minLength: 0
-          type: string
-        ArticleGoodsType:
-          description: Type of goods article, for example Tobacco
-          enum:
-          - NotSet
-          - Other
-          - Alcohol
-          - Tobacco
-          - Gambling
-          - Hazardous
-          type: string
-        Barcode:
-          description: Primary barcode for this article
-          maxLength: 20
-          minLength: 0
-          type: string
-        BarcodeAlternatives:
-          description: Alternative barcodes for this article
-          type: array
-          items:
-            $ref: '#/components/schemas/xFlo.Models.Common.Models.Article.ArticleBarcode'
-        LocationId:
-          description: The location identifier of the article.
-          maxLength: 64
-          minLength: 0
-          type: string
-        SupplierId:
-          description: The supplier identifier of the article.
-          type: string
-        ProductModelReference:
-          description: The product model reference for the article.
-          type: string
-        AccountCodeId:
-          description: The account code identifier of the article.
-          type: string
-        InputPrice:
-          format: double
-          description: The input price of the article excluding VAT.
-          type: number
-        RecommendedPrice:
-          format: double
-          description: The recommended price of the article including VAT.
-          type: number
-        RetailPrice:
-          format: double
-          description: The retail price of the article including VAT.
-          type: number
-        ArticleType:
-          description: The type of the article, see enumeration.
-          enum:
-          - Goods
-          - Service
-          - GiftCard
-          - Prepay
-          - ValueCard
-          - GoodsMarginProfit
-          - BuyGoodsMarginProfit
-          - CommissionSale
-          - CashRefundSlip
-          type: string
-        SubArticles:
-          description: Sub-articles related to this article.
-          type: string
-        IsActive:
-          description: Indicates whether the article is active or inactive.
-          type: boolean
-        UseScale:
-          description: Indicates whether the article uses a scale.
-          type: boolean
-        AskForSerial:
-          description: Indicates whether to ask for the serial number of the article.
-          type: boolean
-        Ackumulative:
-          description: Indicates whether the article is accumulative.
-          type: boolean
-        IsWebshopArticle:
-          description: Indicates whether the article is a webshop article.
-          type: boolean
-        IsStockItem:
-          description: Must be set to true in order to have a quantity set.
-          type: boolean
-        CommissionValue:
-          format: double
-          description: The commission value of the article.
-          type: number
-        ConnectedCompany:
-          description: The company the article belongs to (for multi-company setups).
-          type: string
-        BongPrinter:
-          format: int32
-          description: The bong printer associated with the article.
-          type: integer
-        BongNumberOfCopies:
-          format: int32
-          description: Number of bong (kitchen ticket) copies to print.
-          type: integer
-        BongText:
-          description: The bong text for the article.
-          type: string
-        BongType:
-          format: int32
-          description: The bong type for the article.
-          type: integer
-        BongShowDialouge:
-          description: Indicates whether to show the bong dialog.
-          type: boolean
-        IsOpenArticle:
-          description: Indicates whether the article is an open article.
-          type: boolean
-        IsBookable:
-          description: If article type is service, then the service can be bookable.
-          type: boolean
-        DisplayOrder:
-          format: int32
-          description: The display order of the article.
-          type: integer
-        ArticleBookingSettings:
-          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleBookingSettings'
-          description: If article is bookable, then settings for booking defines default time and customer booking settings
-        IsQuickButton:
-          description: Determines if article should be shown as quick button in cashier.
-          type: boolean
-        QuickButtonColor:
-          description: Color of quickbutton if no picture of article uploaded in MoreFlo
-          type: string
-        TicketType:
-          description: The ticket type of the article.
-          enum:
-          - None
-          - NonReservation
-          - ReservationRequired
-          type: string
-        ArticleInfoUpdateTime:
-          format: date-time
-          description: The time when the article information was last updated.
-          type: string
-        QuantityUpdatedTime:
-          format: date-time
-          description: The time when the quantity of the article was last updated.
-          type: string
-        RequiresPreparation:
-          description: If article type is service, indicates whether the service requires preparation.
-          type: boolean
-        MinimumPreparationTime:
-          format: int32
-          description: The minimum preparation time for the service.
-          type: integer
-        ArticleTextHtml:
-          description: HTML formatted text for the article description.
-          maxLength: 65535
-          minLength: 0
-          type: string
-        RequiresIDCard:
-          description: Indicates whether the article requires ID card verification.
-          type: boolean
-        AgeLimit:
-          format: int32
-          description: The age limit for purchasing the article.
-          type: integer
-        Weight:
-          format: double
-          description: The weight of the article.
-          type: number
-        WeightUnit:
-          description: The unit of weight for the article.
-          enum:
-          - Gram
-          - Kilo
-          type: string
-        Volume:
-          format: double
-          description: The volume of the article.
-          type: number
-        VolumeUnit:
-          description: The unit of volume for the article.
-          enum:
-          - ml
-          - cl
-          - l
-          type: string
-        ComparsionPriceUnit:
-          description: Defines if weight or volume should be used as comparison price, i.e., price per kilogram or price per liter.
-          enum:
-          - Weight
-          - Volume
-          type: string
-        OrderThresholdQuantity:
-          format: double
-          description: 'Represents the minimum quantity of stock that triggers an order for more.
-
-            This is used to maintain inventory levels and prevent stockouts.'
-          type: number
-    MoreFlo.Models.InterfaceModels.Article:
-      description: Represents an article with various properties.
-      required:
-      - ArticleNumber
-      type: object
-      properties:
-        ArticleNumber:
-          description: The unique article number.
-          maxLength: 100
-          minLength: 0
-          type: string
-        Quantity:
-          format: double
-          description: The quantity of the article.
-          type: number
-        SupplierArticleNumber:
-          description: The supplier's article number.
-          type: string
-        SerialNumber:
-          description: The serial number of the article.
-          type: string
-        BrandId:
-          description: The brand identifier of the article.
-          maxLength: 64
-          minLength: 0
-          type: string
-        GroupId:
-          description: The group identifier of the article.
-          maxLength: 64
-          minLength: 0
-          type: string
-        Location:
-          description: Specifies the storage location or warehouse where the stock item is kept.
-          maxLength: 50
-          minLength: 0
-          type: string
-        ArticleName:
-          description: The name of the article.
-          maxLength: 60
-          minLength: 0
-          type: string
-        ArticleDescription:
-          description: The description or extra receipt text for the article.
-          maxLength: 60
-          minLength: 0
-          type: string
-        Unit:
-          description: The unit of measurement for the article.
-          maxLength: 30
-          minLength: 0
-          type: string
-        ArticleGoodsType:
-          description: Type of goods article, for example Tobacco
-          enum:
-          - NotSet
-          - Other
-          - Alcohol
-          - Tobacco
-          - Gambling
-          - Hazardous
-          type: string
-        Barcode:
-          description: Primary barcode for this article
-          maxLength: 20
-          minLength: 0
-          type: string
-        BarcodeAlternatives:
-          description: Alternative barcodes for this article
-          type: array
-          items:
-            $ref: '#/components/schemas/xFlo.Models.Common.Models.Article.ArticleBarcode'
-        LocationId:
-          description: The location identifier of the article.
-          maxLength: 64
-          minLength: 0
-          type: string
-        SupplierId:
-          description: The supplier identifier of the article.
-          type: string
-        ProductModelReference:
-          description: The product model reference for the article.
-          type: string
-        AccountCodeId:
-          description: The account code identifier of the article.
-          type: string
-        InputPrice:
-          format: double
-          description: The input price of the article excluding VAT.
-          type: number
-        RecommendedPrice:
-          format: double
-          description: The recommended price of the article including VAT.
-          type: number
-        RetailPrice:
-          format: double
-          description: The retail price of the article including VAT.
-          type: number
-        ArticleType:
-          description: The type of the article, see enumeration.
-          enum:
-          - Goods
-          - Service
-          - GiftCard
-          - Prepay
-          - ValueCard
-          - GoodsMarginProfit
-          - BuyGoodsMarginProfit
-          - CommissionSale
-          - CashRefundSlip
-          type: string
-        SubArticles:
-          description: Sub-articles related to this article.
-          type: string
-        IsActive:
-          description: Indicates whether the article is active or inactive.
-          type: boolean
-        UseScale:
-          description: Indicates whether the article uses a scale.
-          type: boolean
-        AskForSerial:
-          description: Indicates whether to ask for the serial number of the article.
-          type: boolean
-        Ackumulative:
-          description: Indicates whether the article is accumulative.
-          type: boolean
-        IsWebshopArticle:
-          description: Indicates whether the article is a webshop article.
-          type: boolean
-        IsStockItem:
-          description: Must be set to true in order to have a quantity set.
-          type: boolean
-        CommissionValue:
-          format: double
-          description: The commission value of the article.
-          type: number
-        ConnectedCompany:
-          description: The company the article belongs to (for multi-company setups).
-          type: string
-        BongPrinter:
-          format: int32
-          description: The bong printer associated with the article.
-          type: integer
-        BongNumberOfCopies:
-          format: int32
-          description: Number of bong (kitchen ticket) copies to print.
-          type: integer
-        BongText:
-          description: The bong text for the article.
-          type: string
-        BongType:
-          format: int32
-          description: The bong type for the article.
-          type: integer
-        BongShowDialouge:
-          description: Indicates whether to show the bong dialog.
-          type: boolean
-        IsOpenArticle:
-          description: Indicates whether the article is an open article.
-          type: boolean
-        IsBookable:
-          description: If article type is service, then the service can be bookable.
-          type: boolean
-        DisplayOrder:
-          format: int32
-          description: The display order of the article.
-          type: integer
-        ArticleBookingSettings:
-          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleBookingSettings'
-          description: If article is bookable, then settings for booking defines default time and customer booking settings
-        IsQuickButton:
-          description: Determines if article should be shown as quick button in cashier.
-          type: boolean
-        QuickButtonColor:
-          description: Color of quickbutton if no picture of article uploaded in MoreFlo
-          type: string
-        TicketType:
-          description: The ticket type of the article.
-          enum:
-          - None
-          - NonReservation
-          - ReservationRequired
-          type: string
-        ArticleInfoUpdateTime:
-          format: date-time
-          description: The time when the article information was last updated.
-          type: string
-        QuantityUpdatedTime:
-          format: date-time
-          description: The time when the quantity of the article was last updated.
-          type: string
-        RequiresPreparation:
-          description: If article type is service, indicates whether the service requires preparation.
-          type: boolean
-        MinimumPreparationTime:
-          format: int32
-          description: The minimum preparation time for the service.
-          type: integer
-        ArticleTextHtml:
-          description: HTML formatted text for the article description.
-          maxLength: 65535
-          minLength: 0
-          type: string
-        RequiresIDCard:
-          description: Indicates whether the article requires ID card verification.
-          type: boolean
-        AgeLimit:
-          format: int32
-          description: The age limit for purchasing the article.
-          type: integer
-        Weight:
-          format: double
-          description: The weight of the article.
-          type: number
-        WeightUnit:
-          description: The unit of weight for the article.
-          enum:
-          - Gram
-          - Kilo
-          type: string
-        Volume:
-          format: double
-          description: The volume of the article.
-          type: number
-        VolumeUnit:
-          description: The unit of volume for the article.
-          enum:
-          - ml
-          - cl
-          - l
-          type: string
-        ComparsionPriceUnit:
-          description: Defines if weight or volume should be used as comparison price, i.e., price per kilogram or price per liter.
-          enum:
-          - Weight
-          - Volume
-          type: string
-        OrderThresholdQuantity:
-          format: double
-          description: 'Represents the minimum quantity of stock that triggers an order for more.
-
-            This is used to maintain inventory levels and prevent stockouts.'
-          type: number
-    MoreFlo.Models.InterfaceModels.ArticleQuantityInfo:
-      description: Represents article quantity information.
-      required:
-      - ArticleNumber
-      - Quantity
-      type: object
-      properties:
-        ArticleNumber:
-          description: The unique article number.
-          maxLength: 100
-          minLength: 0
-          type: string
-        Quantity:
-          format: double
-          description: The quantity of the article.
-          type: number
     MoreFlo.Models.InterfaceModels.ArticleCreate:
       description: Represents the data required to create a new article.
       required:
@@ -1635,6 +1113,289 @@ components:
 
             This is used to maintain inventory levels and prevent stockouts.'
           type: number
+    MoreFlo.Models.InterfaceModels.ArticleGet:
+      description: Represents an article with associated product files.
+      required:
+      - ArticleNumber
+      type: object
+      properties:
+        Files:
+          description: A list of product files associated with the article.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ProductFile'
+        ArticleNumber:
+          description: The unique article number.
+          maxLength: 100
+          minLength: 0
+          type: string
+        Quantity:
+          format: double
+          description: The quantity of the article.
+          type: number
+        SupplierArticleNumber:
+          description: The supplier's article number.
+          type: string
+        SerialNumber:
+          description: The serial number of the article.
+          type: string
+        BrandId:
+          description: The brand identifier of the article.
+          maxLength: 64
+          minLength: 0
+          type: string
+        GroupId:
+          description: The group identifier of the article.
+          maxLength: 64
+          minLength: 0
+          type: string
+        Location:
+          description: Specifies the storage location or warehouse where the stock item is kept.
+          maxLength: 50
+          minLength: 0
+          type: string
+        ArticleName:
+          description: The name of the article.
+          maxLength: 60
+          minLength: 0
+          type: string
+        ArticleDescription:
+          description: The description or extra receipt text for the article.
+          maxLength: 60
+          minLength: 0
+          type: string
+        Unit:
+          description: The unit of measurement for the article.
+          maxLength: 30
+          minLength: 0
+          type: string
+        ArticleGoodsType:
+          description: Type of goods article, for example Tobacco
+          enum:
+          - NotSet
+          - Other
+          - Alcohol
+          - Tobacco
+          - Gambling
+          - Hazardous
+          type: string
+        Barcode:
+          description: Primary barcode for this article
+          maxLength: 20
+          minLength: 0
+          type: string
+        BarcodeAlternatives:
+          description: Alternative barcodes for this article
+          type: array
+          items:
+            $ref: '#/components/schemas/xFlo.Models.Common.Models.Article.ArticleBarcode'
+        LocationId:
+          description: The location identifier of the article.
+          maxLength: 64
+          minLength: 0
+          type: string
+        SupplierId:
+          description: The supplier identifier of the article.
+          type: string
+        ProductModelReference:
+          description: The product model reference for the article.
+          type: string
+        AccountCodeId:
+          description: The account code identifier of the article.
+          type: string
+        InputPrice:
+          format: double
+          description: The input price of the article excluding VAT.
+          type: number
+        RecommendedPrice:
+          format: double
+          description: The recommended price of the article including VAT.
+          type: number
+        RetailPrice:
+          format: double
+          description: The retail price of the article including VAT.
+          type: number
+        ArticleType:
+          description: The type of the article, see enumeration.
+          enum:
+          - Goods
+          - Service
+          - GiftCard
+          - Prepay
+          - ValueCard
+          - GoodsMarginProfit
+          - BuyGoodsMarginProfit
+          - CommissionSale
+          - CashRefundSlip
+          type: string
+        SubArticles:
+          description: Sub-articles related to this article.
+          type: string
+        IsActive:
+          description: Indicates whether the article is active or inactive.
+          type: boolean
+        UseScale:
+          description: Indicates whether the article uses a scale.
+          type: boolean
+        AskForSerial:
+          description: Indicates whether to ask for the serial number of the article.
+          type: boolean
+        Ackumulative:
+          description: Indicates whether the article is accumulative.
+          type: boolean
+        IsWebshopArticle:
+          description: Indicates whether the article is a webshop article.
+          type: boolean
+        IsStockItem:
+          description: Must be set to true in order to have a quantity set.
+          type: boolean
+        CommissionValue:
+          format: double
+          description: The commission value of the article.
+          type: number
+        ConnectedCompany:
+          description: The company the article belongs to (for multi-company setups).
+          type: string
+        BongPrinter:
+          format: int32
+          description: The bong printer associated with the article.
+          type: integer
+        BongNumberOfCopies:
+          format: int32
+          description: Number of bong (kitchen ticket) copies to print.
+          type: integer
+        BongText:
+          description: The bong text for the article.
+          type: string
+        BongType:
+          format: int32
+          description: The bong type for the article.
+          type: integer
+        BongShowDialouge:
+          description: Indicates whether to show the bong dialog.
+          type: boolean
+        IsOpenArticle:
+          description: Indicates whether the article is an open article.
+          type: boolean
+        IsBookable:
+          description: If article type is service, then the service can be bookable.
+          type: boolean
+        DisplayOrder:
+          format: int32
+          description: The display order of the article.
+          type: integer
+        ArticleBookingSettings:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleBookingSettings'
+          description: If article is bookable, then settings for booking defines default time and customer booking settings
+        IsQuickButton:
+          description: Determines if article should be shown as quick button in cashier.
+          type: boolean
+        QuickButtonColor:
+          description: Color of quickbutton if no picture of article uploaded in MoreFlo
+          type: string
+        TicketType:
+          description: The ticket type of the article.
+          enum:
+          - None
+          - NonReservation
+          - ReservationRequired
+          type: string
+        ArticleInfoUpdateTime:
+          format: date-time
+          description: The time when the article information was last updated.
+          type: string
+        QuantityUpdatedTime:
+          format: date-time
+          description: The time when the quantity of the article was last updated.
+          type: string
+        RequiresPreparation:
+          description: If article type is service, indicates whether the service requires preparation.
+          type: boolean
+        MinimumPreparationTime:
+          format: int32
+          description: The minimum preparation time for the service.
+          type: integer
+        ArticleTextHtml:
+          description: HTML formatted text for the article description.
+          maxLength: 65535
+          minLength: 0
+          type: string
+        RequiresIDCard:
+          description: Indicates whether the article requires ID card verification.
+          type: boolean
+        AgeLimit:
+          format: int32
+          description: The age limit for purchasing the article.
+          type: integer
+        Weight:
+          format: double
+          description: The weight of the article.
+          type: number
+        WeightUnit:
+          description: The unit of weight for the article.
+          enum:
+          - Gram
+          - Kilo
+          type: string
+        Volume:
+          format: double
+          description: The volume of the article.
+          type: number
+        VolumeUnit:
+          description: The unit of volume for the article.
+          enum:
+          - ml
+          - cl
+          - l
+          type: string
+        ComparsionPriceUnit:
+          description: Defines if weight or volume should be used as comparison price, i.e., price per kilogram or price per liter.
+          enum:
+          - Weight
+          - Volume
+          type: string
+        OrderThresholdQuantity:
+          format: double
+          description: 'Represents the minimum quantity of stock that triggers an order for more.
+
+            This is used to maintain inventory levels and prevent stockouts.'
+          type: number
+    MoreFlo.Models.InterfaceModels.ProductFile:
+      type: object
+      properties:
+        Id:
+          type: string
+        Guid:
+          type: string
+        Name:
+          type: string
+        Description:
+          type: string
+        CreatedTime:
+          format: date-time
+          type: string
+        ContentType:
+          type: string
+        IsMainFile:
+          type: boolean
+        URL:
+          type: string
+    MoreFlo.Models.InterfaceModels.ArticleQuantityInfo:
+      description: Represents article quantity information.
+      required:
+      - ArticleNumber
+      - Quantity
+      type: object
+      properties:
+        ArticleNumber:
+          description: The unique article number.
+          maxLength: 100
+          minLength: 0
+          type: string
+        Quantity:
+          format: double
+          description: The quantity of the article.
+          type: number
     MoreFlo.Models.InterfaceModels.ArticleGetResult:
       description: Represents the result of an operation involving an ArticleGet entity.
       type: object
@@ -1655,42 +1416,299 @@ components:
           type: array
           items:
             type: string
-    xFlo.Models.Common.Models.Article.ArticleBarcode:
-      description: Article barcode
+    MoreFlo.Models.InterfaceModels.Article:
+      description: Represents an article with various properties.
       required:
-      - Barcode
+      - ArticleNumber
       type: object
       properties:
+        ArticleNumber:
+          description: The unique article number.
+          maxLength: 100
+          minLength: 0
+          type: string
+        Quantity:
+          format: double
+          description: The quantity of the article.
+          type: number
+        SupplierArticleNumber:
+          description: The supplier's article number.
+          type: string
+        SerialNumber:
+          description: The serial number of the article.
+          type: string
+        BrandId:
+          description: The brand identifier of the article.
+          maxLength: 64
+          minLength: 0
+          type: string
+        GroupId:
+          description: The group identifier of the article.
+          maxLength: 64
+          minLength: 0
+          type: string
+        Location:
+          description: Specifies the storage location or warehouse where the stock item is kept.
+          maxLength: 50
+          minLength: 0
+          type: string
+        ArticleName:
+          description: The name of the article.
+          maxLength: 60
+          minLength: 0
+          type: string
+        ArticleDescription:
+          description: The description or extra receipt text for the article.
+          maxLength: 60
+          minLength: 0
+          type: string
+        Unit:
+          description: The unit of measurement for the article.
+          maxLength: 30
+          minLength: 0
+          type: string
+        ArticleGoodsType:
+          description: Type of goods article, for example Tobacco
+          enum:
+          - NotSet
+          - Other
+          - Alcohol
+          - Tobacco
+          - Gambling
+          - Hazardous
+          type: string
         Barcode:
-          description: Article barcode
+          description: Primary barcode for this article
           maxLength: 20
           minLength: 0
           type: string
-    MoreFlo.Models.InterfaceModels.ArticlesResult:
-      description: Represents a paged result containing a list of ArticleResult objects.
+        BarcodeAlternatives:
+          description: Alternative barcodes for this article
+          type: array
+          items:
+            $ref: '#/components/schemas/xFlo.Models.Common.Models.Article.ArticleBarcode'
+        LocationId:
+          description: The location identifier of the article.
+          maxLength: 64
+          minLength: 0
+          type: string
+        SupplierId:
+          description: The supplier identifier of the article.
+          type: string
+        ProductModelReference:
+          description: The product model reference for the article.
+          type: string
+        AccountCodeId:
+          description: The account code identifier of the article.
+          type: string
+        InputPrice:
+          format: double
+          description: The input price of the article excluding VAT.
+          type: number
+        RecommendedPrice:
+          format: double
+          description: The recommended price of the article including VAT.
+          type: number
+        RetailPrice:
+          format: double
+          description: The retail price of the article including VAT.
+          type: number
+        ArticleType:
+          description: The type of the article, see enumeration.
+          enum:
+          - Goods
+          - Service
+          - GiftCard
+          - Prepay
+          - ValueCard
+          - GoodsMarginProfit
+          - BuyGoodsMarginProfit
+          - CommissionSale
+          - CashRefundSlip
+          type: string
+        SubArticles:
+          description: Sub-articles related to this article.
+          type: string
+        IsActive:
+          description: Indicates whether the article is active or inactive.
+          type: boolean
+        UseScale:
+          description: Indicates whether the article uses a scale.
+          type: boolean
+        AskForSerial:
+          description: Indicates whether to ask for the serial number of the article.
+          type: boolean
+        Ackumulative:
+          description: Indicates whether the article is accumulative.
+          type: boolean
+        IsWebshopArticle:
+          description: Indicates whether the article is a webshop article.
+          type: boolean
+        IsStockItem:
+          description: Must be set to true in order to have a quantity set.
+          type: boolean
+        CommissionValue:
+          format: double
+          description: The commission value of the article.
+          type: number
+        ConnectedCompany:
+          description: The company the article belongs to (for multi-company setups).
+          type: string
+        BongPrinter:
+          format: int32
+          description: The bong printer associated with the article.
+          type: integer
+        BongNumberOfCopies:
+          format: int32
+          description: Number of bong (kitchen ticket) copies to print.
+          type: integer
+        BongText:
+          description: The bong text for the article.
+          type: string
+        BongType:
+          format: int32
+          description: The bong type for the article.
+          type: integer
+        BongShowDialouge:
+          description: Indicates whether to show the bong dialog.
+          type: boolean
+        IsOpenArticle:
+          description: Indicates whether the article is an open article.
+          type: boolean
+        IsBookable:
+          description: If article type is service, then the service can be bookable.
+          type: boolean
+        DisplayOrder:
+          format: int32
+          description: The display order of the article.
+          type: integer
+        ArticleBookingSettings:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleBookingSettings'
+          description: If article is bookable, then settings for booking defines default time and customer booking settings
+        IsQuickButton:
+          description: Determines if article should be shown as quick button in cashier.
+          type: boolean
+        QuickButtonColor:
+          description: Color of quickbutton if no picture of article uploaded in MoreFlo
+          type: string
+        TicketType:
+          description: The ticket type of the article.
+          enum:
+          - None
+          - NonReservation
+          - ReservationRequired
+          type: string
+        ArticleInfoUpdateTime:
+          format: date-time
+          description: The time when the article information was last updated.
+          type: string
+        QuantityUpdatedTime:
+          format: date-time
+          description: The time when the quantity of the article was last updated.
+          type: string
+        RequiresPreparation:
+          description: If article type is service, indicates whether the service requires preparation.
+          type: boolean
+        MinimumPreparationTime:
+          format: int32
+          description: The minimum preparation time for the service.
+          type: integer
+        ArticleTextHtml:
+          description: HTML formatted text for the article description.
+          maxLength: 65535
+          minLength: 0
+          type: string
+        RequiresIDCard:
+          description: Indicates whether the article requires ID card verification.
+          type: boolean
+        AgeLimit:
+          format: int32
+          description: The age limit for purchasing the article.
+          type: integer
+        Weight:
+          format: double
+          description: The weight of the article.
+          type: number
+        WeightUnit:
+          description: The unit of weight for the article.
+          enum:
+          - Gram
+          - Kilo
+          type: string
+        Volume:
+          format: double
+          description: The volume of the article.
+          type: number
+        VolumeUnit:
+          description: The unit of volume for the article.
+          enum:
+          - ml
+          - cl
+          - l
+          type: string
+        ComparsionPriceUnit:
+          description: Defines if weight or volume should be used as comparison price, i.e., price per kilogram or price per liter.
+          enum:
+          - Weight
+          - Volume
+          type: string
+        OrderThresholdQuantity:
+          format: double
+          description: 'Represents the minimum quantity of stock that triggers an order for more.
+
+            This is used to maintain inventory levels and prevent stockouts.'
+          type: number
+    MoreFlo.Models.InterfaceModels.ArticleBookingSettings:
+      description: Represents the booking settings for an article.
       type: object
       properties:
-        ExtraInformation:
-          description: A list of extra information or messages related to the paginated result.
-          type: array
-          items:
-            type: string
-        list:
-          description: The list of data items for the current page.
-          type: array
-          items:
-            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleResult'
-        Page:
+        DefaultDuration:
           format: int32
-          description: The current page number.
+          description: Default duration of the event in seconds, used in MoreFlo backoffice and customer booking.
           type: integer
-        Total:
+        PaddingTime:
           format: int32
-          description: The total number of pages available.
+          description: Padding time in seconds, used in customer booking.
           type: integer
-        PageSize:
+        LeadTime:
           format: int32
-          description: The number of data items per page.
+          description: Lead time in seconds, used in customer booking.
+          type: integer
+        IntervalTime:
+          format: int32
+          description: Interval time in seconds, used in customer booking.
+          type: integer
+        SchedulingWindow:
+          format: int32
+          description: Scheduling window in seconds, used in customer booking.
+          type: integer
+        RequiresStoreConfirmation:
+          description: Indicates whether store confirmation is required before the booking is confirmed.
+          type: boolean
+        CustomerBookingEnabled:
+          description: 'Indicates whether customer booking is enabled for this service.
+
+            Defaults to true.'
+          type: boolean
+        ArticleBookableType:
+          description: Determines if the booking should be a service order booking or a booking order booking.
+          enum:
+          - Booking
+          - ServiceRepair
+          type: string
+        DetailedDescriptionHtml:
+          description: 'Detailed description of the service for use in customer booking.
+
+            Leave empty if no customer booking should be done.'
+          maxLength: 65535
+          minLength: 0
+          type: string
+        ClientCancellationPossible:
+          description: Determines if a cancellation option should be presented for the customer or if only the store can cancel.
+          type: boolean
+        CancellationMinimumTimeInAdvance:
+          format: int32
+          description: Minimum time in seconds required to make a cancellation, if allowed (see ClientCancellationPossible).
           type: integer
   securitySchemes:
     basic:

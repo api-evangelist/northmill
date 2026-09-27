@@ -204,7 +204,7 @@ paths:
       tags:
       - Vouchers
       summary: Get list of vouchers
-      operationId: Vouchers_Get
+      operationId: getV2StoresByExternalStoreIdVouchers
       parameters:
       - name: page
         in: query
@@ -275,11 +275,13 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.VouchersResult'
+      x-operation-id-source: normalized
+      x-operation-id-original: Vouchers_Get
     put:
       tags:
       - Vouchers
       summary: Update vouchers
-      operationId: Vouchers_Update
+      operationId: putV2StoresByExternalStoreIdVouchers
       parameters:
       - name: externalStoreId
         in: path
@@ -333,11 +335,13 @@ paths:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Voucher'
         description: List of vouchers to update.
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: Vouchers_Update
     post:
       tags:
       - Vouchers
       summary: Create vouchers
-      operationId: Vouchers_Create
+      operationId: postV2StoresByExternalStoreIdVouchers
       parameters:
       - name: externalStoreId
         in: path
@@ -391,12 +395,14 @@ paths:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Voucher'
         description: List of supporting vouchers to create.
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: Vouchers_Create
   /v2/vouchers/byId/{Id}:
     get:
       tags:
       - Vouchers
       summary: Get a voucher
-      operationId: Vouchers_Get
+      operationId: getV2VouchersByIdById
       parameters:
       - name: Id
         in: path
@@ -427,12 +433,14 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.VoucherResult'
+      x-operation-id-source: normalized
+      x-operation-id-original: Vouchers_Get
   /v2/stores/{externalStoreId}/vouchers/byId/{Id}:
     get:
       tags:
       - Vouchers
       summary: Get a voucher
-      operationId: Vouchers_Get
+      operationId: getV2StoresByExternalStoreIdVouchersByIdById
       parameters:
       - name: Id
         in: path
@@ -463,47 +471,10 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.VoucherResult'
+      x-operation-id-source: normalized
+      x-operation-id-original: Vouchers_Get
 components:
   schemas:
-    MoreFlo.Models.InterfaceModels.VoucherRow:
-      description: Represents a row within a voucher, detailing an individual accounting entry.
-      type: object
-      properties:
-        AccountDescription:
-          description: Description of the account, either from the accounting system or manually entered.
-          type: string
-        AccountNumber:
-          format: int32
-          description: The account number for this row.
-          type: integer
-        DebitAmount:
-          format: double
-          description: The amount debited, if any.
-          type: number
-        CreditAmount:
-          format: double
-          description: The amount credited, if any.
-          type: number
-        TransactionText:
-          description: Text from the external accounting system, if applicable (e.g., when synchronized).
-          type: string
-        Project:
-          description: A project reference associated with this row.
-          type: string
-        CostCenter:
-          description: A cost center reference associated with this row.
-          type: string
-        IsDeleted:
-          description: A flag indicating if this supporting voucher row is marked as deleted.
-          type: boolean
-        CreatedTime:
-          format: date-time
-          description: The timestamp of when this row was created.
-          type: string
-        ModifiedTime:
-          format: date-time
-          description: The timestamp of when this row was last modified.
-          type: string
     MoreFlo.Models.InterfaceModels.Voucher:
       description: 'Represents a voucher, which is a document used for accounting purposes.
 
@@ -646,34 +617,6 @@ components:
           type: array
           items:
             type: string
-    MoreFlo.Models.InterfaceModels.VouchersResult:
-      description: 'Represents a paginated result containing a list of voucher results.
-
-        This class is used to return a collection of vouchers, along with pagination information, in API responses.'
-      type: object
-      properties:
-        ExtraInformation:
-          description: A list of extra information or messages related to the paginated result.
-          type: array
-          items:
-            type: string
-        list:
-          description: The list of data items for the current page.
-          type: array
-          items:
-            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.VoucherResult'
-        Page:
-          format: int32
-          description: The current page number.
-          type: integer
-        Total:
-          format: int32
-          description: The total number of pages available.
-          type: integer
-        PageSize:
-          format: int32
-          description: The number of data items per page.
-          type: integer
     MoreFlo.Models.InterfaceModels.Address:
       type: object
       properties:
@@ -699,114 +642,44 @@ components:
           type: string
         Fax:
           type: string
-    MoreFlo.Models.InterfaceModels.Customer:
-      required:
-      - Name
+    MoreFlo.Models.InterfaceModels.VoucherRow:
+      description: Represents a row within a voucher, detailing an individual accounting entry.
       type: object
       properties:
-        CustomerNumber:
-          description: MoreFlo customer number.
+        AccountDescription:
+          description: Description of the account, either from the accounting system or manually entered.
           type: string
-        Reference:
-          type: string
-        Name:
-          type: string
-        Address1:
-          type: string
-        Address2:
-          type: string
-        PostCode:
-          type: string
-        City:
-          type: string
-        Country:
-          type: string
-        IdentityNo:
-          type: string
-        ReferenceNumber:
-          format: int64
-          description: The other systems customer number or id.
+        AccountNumber:
+          format: int32
+          description: The account number for this row.
           type: integer
-        Email:
+        DebitAmount:
+          format: double
+          description: The amount debited, if any.
+          type: number
+        CreditAmount:
+          format: double
+          description: The amount credited, if any.
+          type: number
+        TransactionText:
+          description: Text from the external accounting system, if applicable (e.g., when synchronized).
           type: string
-        Telephone1:
+        Project:
+          description: A project reference associated with this row.
           type: string
-        Telephone2:
+        CostCenter:
+          description: A cost center reference associated with this row.
           type: string
-        VatNumber:
-          type: string
-        IsExportCustomer:
+        IsDeleted:
+          description: A flag indicating if this supporting voucher row is marked as deleted.
           type: boolean
-        Mobile:
-          type: string
-        Fax:
-          type: string
-        Note:
-          type: string
-        DateAdded:
+        CreatedTime:
           format: date-time
-          type: string
-        DateUpdated:
-          format: date-time
+          description: The timestamp of when this row was created.
           type: string
         ModifiedTime:
           format: date-time
-          type: string
-        MemberGroupId:
-          format: int32
-          type: integer
-        MemberGroup:
-          type: string
-        PermitsCommercial:
-          type: boolean
-        IsCompany:
-          type: boolean
-        IsInternalCustomer:
-          type: boolean
-        IsActive:
-          type: boolean
-        Blocked:
-          description: Blocked because of an issue with Credit or something else
-          type: boolean
-        Id:
-          format: int32
-          description: Member Id
-          type: integer
-    MoreFlo.Models.InterfaceModels.OrderRow:
-      description: Represents a row within an order, detailing information about a specific item included in the order.
-      type: object
-      properties:
-        ArticleNumber:
-          description: The article number of the item.
-          type: string
-        ArticleName:
-          description: The name of the item.
-          type: string
-        UnitAmountInclVatExclDiscount:
-          format: double
-          description: The unit amount of the item, including VAT but excluding discount.
-          type: number
-        Discount:
-          format: double
-          description: The discount applied to the item.
-          type: number
-        VatRate:
-          format: double
-          description: The VAT rate applied to the item.
-          type: number
-        Quantity:
-          format: double
-          description: The quantity of the item.
-          type: number
-        SerialNumber:
-          description: The serial number of the item.
-          type: string
-        RowSum:
-          format: double
-          description: The sum of the row.
-          type: number
-        ReceiptNote:
-          description: A note or text associated with the item, typically a text row.
+          description: The timestamp of when this row was last modified.
           type: string
     MoreFlo.Models.InterfaceModels.Order:
       description: Represents an order, containing customer details, dates, references, financial information, and order rows.
@@ -957,6 +830,115 @@ components:
           format: int32
           description: The number of data items per page.
           type: integer
+    MoreFlo.Models.InterfaceModels.Customer:
+      required:
+      - Name
+      type: object
+      properties:
+        CustomerNumber:
+          description: MoreFlo customer number.
+          type: string
+        Reference:
+          type: string
+        Name:
+          type: string
+        Address1:
+          type: string
+        Address2:
+          type: string
+        PostCode:
+          type: string
+        City:
+          type: string
+        Country:
+          type: string
+        IdentityNo:
+          type: string
+        ReferenceNumber:
+          format: int64
+          description: The other systems customer number or id.
+          type: integer
+        Email:
+          type: string
+        Telephone1:
+          type: string
+        Telephone2:
+          type: string
+        VatNumber:
+          type: string
+        IsExportCustomer:
+          type: boolean
+        Mobile:
+          type: string
+        Fax:
+          type: string
+        Note:
+          type: string
+        DateAdded:
+          format: date-time
+          type: string
+        DateUpdated:
+          format: date-time
+          type: string
+        ModifiedTime:
+          format: date-time
+          type: string
+        MemberGroupId:
+          format: int32
+          type: integer
+        MemberGroup:
+          type: string
+        PermitsCommercial:
+          type: boolean
+        IsCompany:
+          type: boolean
+        IsInternalCustomer:
+          type: boolean
+        IsActive:
+          type: boolean
+        Blocked:
+          description: Blocked because of an issue with Credit or something else
+          type: boolean
+        Id:
+          format: int32
+          description: Member Id
+          type: integer
+    MoreFlo.Models.InterfaceModels.OrderRow:
+      description: Represents a row within an order, detailing information about a specific item included in the order.
+      type: object
+      properties:
+        ArticleNumber:
+          description: The article number of the item.
+          type: string
+        ArticleName:
+          description: The name of the item.
+          type: string
+        UnitAmountInclVatExclDiscount:
+          format: double
+          description: The unit amount of the item, including VAT but excluding discount.
+          type: number
+        Discount:
+          format: double
+          description: The discount applied to the item.
+          type: number
+        VatRate:
+          format: double
+          description: The VAT rate applied to the item.
+          type: number
+        Quantity:
+          format: double
+          description: The quantity of the item.
+          type: number
+        SerialNumber:
+          description: The serial number of the item.
+          type: string
+        RowSum:
+          format: double
+          description: The sum of the row.
+          type: number
+        ReceiptNote:
+          description: A note or text associated with the item, typically a text row.
+          type: string
     MoreFlo.Models.InterfaceModels.VoucherResult:
       description: 'Represents the result of an operation that returns a single voucher.
 
@@ -979,6 +961,34 @@ components:
           type: array
           items:
             type: string
+    MoreFlo.Models.InterfaceModels.VouchersResult:
+      description: 'Represents a paginated result containing a list of voucher results.
+
+        This class is used to return a collection of vouchers, along with pagination information, in API responses.'
+      type: object
+      properties:
+        ExtraInformation:
+          description: A list of extra information or messages related to the paginated result.
+          type: array
+          items:
+            type: string
+        list:
+          description: The list of data items for the current page.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.VoucherResult'
+        Page:
+          format: int32
+          description: The current page number.
+          type: integer
+        Total:
+          format: int32
+          description: The total number of pages available.
+          type: integer
+        PageSize:
+          format: int32
+          description: The number of data items per page.
+          type: integer
   securitySchemes:
     basic:
       type: http

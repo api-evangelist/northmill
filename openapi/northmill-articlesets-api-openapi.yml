@@ -179,7 +179,7 @@ paths:
       tags:
       - ArticleSets
       summary: Get all artcile sets
-      operationId: ArticleSets_Get
+      operationId: getV2StoresByExternalStoreIdArticlesets
       parameters:
       - name: page
         in: query
@@ -225,11 +225,13 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetsResult'
+      x-operation-id-source: normalized
+      x-operation-id-original: ArticleSets_Get
     put:
       tags:
       - ArticleSets
       summary: Update article sets
-      operationId: ArticleSets_Update
+      operationId: putV2StoresByExternalStoreIdArticlesets
       parameters:
       - name: externalStoreId
         in: path
@@ -283,11 +285,13 @@ paths:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSet'
         description: List of article sets to update.
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: ArticleSets_Update
     post:
       tags:
       - ArticleSets
       summary: Create article sets
-      operationId: ArticleSets_Create
+      operationId: postV2StoresByExternalStoreIdArticlesets
       parameters:
       - name: externalStoreId
         in: path
@@ -341,12 +345,14 @@ paths:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetCreate'
         description: List of article sets to create.
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: ArticleSets_Create
   /v2/articlesets/{ArticleNumber}:
     get:
       tags:
       - ArticleSets
       summary: Get an artcile set
-      operationId: ArticleSets_Get
+      operationId: getV2ArticlesetsByArticleNumber
       parameters:
       - name: ArticleNumber
         in: path
@@ -377,12 +383,14 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetResult'
+      x-operation-id-source: normalized
+      x-operation-id-original: ArticleSets_Get
   /v2/stores/{externalStoreId}/articlesets/{ArticleNumber}:
     get:
       tags:
       - ArticleSets
       summary: Get an artcile set
-      operationId: ArticleSets_Get
+      operationId: getV2StoresByExternalStoreIdArticlesetsByArticleNumber
       parameters:
       - name: ArticleNumber
         in: path
@@ -413,34 +421,30 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetResult'
+      x-operation-id-source: normalized
+      x-operation-id-original: ArticleSets_Get
 components:
   schemas:
-    MoreFlo.Models.InterfaceModels.ArticleSetsResult:
-      description: Represents a paged result containing a list of ArticleSetResult objects.
+    MoreFlo.Models.InterfaceModels.ArticleSetResult:
+      description: Represents the result of an operation involving an ArticleSet entity.
       type: object
       properties:
+        ArticleSet:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSet'
+          description: The ArticleSet entity resulting from the operation.
+        ArticleNumber:
+          description: The unique article number of the article set.
+          type: string
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
         ExtraInformation:
-          description: A list of extra information or messages related to the paginated result.
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
           type: array
           items:
             type: string
-        list:
-          description: The list of data items for the current page.
-          type: array
-          items:
-            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetResult'
-        Page:
-          format: int32
-          description: The current page number.
-          type: integer
-        Total:
-          format: int32
-          description: The total number of pages available.
-          type: integer
-        PageSize:
-          format: int32
-          description: The number of data items per page.
-          type: integer
     MoreFlo.Models.InterfaceModels.ArticleSetCreate:
       description: 'Represents the data required to create a new article set.
 
@@ -522,6 +526,32 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetPart'
+    MoreFlo.Models.InterfaceModels.ArticleSetsResult:
+      description: Represents a paged result containing a list of ArticleSetResult objects.
+      type: object
+      properties:
+        ExtraInformation:
+          description: A list of extra information or messages related to the paginated result.
+          type: array
+          items:
+            type: string
+        list:
+          description: The list of data items for the current page.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetResult'
+        Page:
+          format: int32
+          description: The current page number.
+          type: integer
+        Total:
+          format: int32
+          description: The total number of pages available.
+          type: integer
+        PageSize:
+          format: int32
+          description: The number of data items per page.
+          type: integer
     MoreFlo.Models.InterfaceModels.ArticleSetPart:
       description: Represents a part of an article set.
       required:
@@ -548,26 +578,6 @@ components:
           format: double
           description: The price per unit of the part, including VAT.
           type: number
-    MoreFlo.Models.InterfaceModels.ArticleSetResult:
-      description: Represents the result of an operation involving an ArticleSet entity.
-      type: object
-      properties:
-        ArticleSet:
-          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSet'
-          description: The ArticleSet entity resulting from the operation.
-        ArticleNumber:
-          description: The unique article number of the article set.
-          type: string
-        Success:
-          description: Indicates whether the API operation was successful.
-          type: boolean
-        ExtraInformation:
-          description: 'A list of extra information or messages related to the API operation result.
-
-            This can include error messages, warnings, or informational notes.'
-          type: array
-          items:
-            type: string
   securitySchemes:
     basic:
       type: http

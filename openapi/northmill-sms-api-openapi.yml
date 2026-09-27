@@ -61,7 +61,7 @@ paths:
       tags:
       - SMS
       summary: Send a single SMS, if format errors response will be 400, if sending was…
-      operationId: Sms_SendSms
+      operationId: postV2SmsByExternalStoreIdSingle
       parameters:
       - name: externalStoreId
         in: path
@@ -105,6 +105,8 @@ paths:
               $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SmsMessage'
         description: Sms content and receiver, receiver must be in internationalized fomat starting with '+'.
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: Sms_SendSms
 components:
   schemas:
     MoreFlo.Models.InterfaceModels.SmsMessage:

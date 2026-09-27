@@ -172,7 +172,7 @@ paths:
       tags:
       - Brands
       summary: Get all brands
-      operationId: Brands_Get
+      operationId: getV2StoresByExternalStoreIdBrands
       parameters:
       - name: page
         in: query
@@ -211,11 +211,13 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BrandsResult'
+      x-operation-id-source: normalized
+      x-operation-id-original: Brands_Get
     put:
       tags:
       - Brands
       summary: Update list of brands
-      operationId: Brands_Update
+      operationId: putV2StoresByExternalStoreIdBrands
       parameters:
       - name: externalStoreId
         in: path
@@ -269,11 +271,13 @@ paths:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Brand'
         description: List of brands to update data.
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: Brands_Update
     post:
       tags:
       - Brands
       summary: Create brands
-      operationId: Brands_Create
+      operationId: postV2StoresByExternalStoreIdBrands
       parameters:
       - name: externalStoreId
         in: path
@@ -327,6 +331,8 @@ paths:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BrandCreate'
         description: List of articles to create.
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: Brands_Create
   /v2/brands/{Id}:
     delete:
       tags:
@@ -368,7 +374,7 @@ paths:
       tags:
       - Brands
       summary: Delete a brand
-      operationId: Brands_Delete
+      operationId: deleteV2StoresByExternalStoreIdBrandsById
       parameters:
       - name: Id
         in: path
@@ -399,32 +405,36 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BrandResult'
+      x-operation-id-source: normalized
+      x-operation-id-original: Brands_Delete
 components:
   schemas:
-    MoreFlo.Models.InterfaceModels.Brand:
-      description: Represents a brand with an identifier and a name.
-      required:
-      - Id
+    MoreFlo.Models.InterfaceModels.BrandsResult:
+      description: Represents a paged result containing a list of BrandResult objects.
       type: object
       properties:
-        Id:
-          description: The unique identifier of the brand.
-          maxLength: 64
-          minLength: 0
-          type: string
-        Name:
-          description: The name of the brand.
-          maxLength: 100
-          minLength: 0
-          type: string
-        CreatedUtc:
-          format: date-time
-          description: The UTC timestamp when the brand was created.
-          type: string
-        ModifiedUtc:
-          format: date-time
-          description: The UTC timestamp when the brand was last modified.
-          type: string
+        ExtraInformation:
+          description: A list of extra information or messages related to the paginated result.
+          type: array
+          items:
+            type: string
+        list:
+          description: The list of data items for the current page.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BrandResult'
+        Page:
+          format: int32
+          description: The current page number.
+          type: integer
+        Total:
+          format: int32
+          description: The total number of pages available.
+          type: integer
+        PageSize:
+          format: int32
+          description: The number of data items per page.
+          type: integer
     MoreFlo.Models.InterfaceModels.BrandCreate:
       description: Represents the data required to create a new brand.
       required:
@@ -473,32 +483,30 @@ components:
           type: array
           items:
             type: string
-    MoreFlo.Models.InterfaceModels.BrandsResult:
-      description: Represents a paged result containing a list of BrandResult objects.
+    MoreFlo.Models.InterfaceModels.Brand:
+      description: Represents a brand with an identifier and a name.
+      required:
+      - Id
       type: object
       properties:
-        ExtraInformation:
-          description: A list of extra information or messages related to the paginated result.
-          type: array
-          items:
-            type: string
-        list:
-          description: The list of data items for the current page.
-          type: array
-          items:
-            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BrandResult'
-        Page:
-          format: int32
-          description: The current page number.
-          type: integer
-        Total:
-          format: int32
-          description: The total number of pages available.
-          type: integer
-        PageSize:
-          format: int32
-          description: The number of data items per page.
-          type: integer
+        Id:
+          description: The unique identifier of the brand.
+          maxLength: 64
+          minLength: 0
+          type: string
+        Name:
+          description: The name of the brand.
+          maxLength: 100
+          minLength: 0
+          type: string
+        CreatedUtc:
+          format: date-time
+          description: The UTC timestamp when the brand was created.
+          type: string
+        ModifiedUtc:
+          format: date-time
+          description: The UTC timestamp when the brand was last modified.
+          type: string
   securitySchemes:
     basic:
       type: http

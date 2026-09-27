@@ -70,7 +70,7 @@ paths:
       tags:
       - Sales
       summary: Get all article sale events
-      operationId: Sales_Get
+      operationId: getV2StoresByExternalStoreIdSalesArticles
       parameters:
       - name: from
         in: query
@@ -123,6 +123,8 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSaleEventsResult'
+      x-operation-id-source: normalized
+      x-operation-id-original: Sales_Get
 components:
   schemas:
     MoreFlo.Models.InterfaceModels.ArticleSaleEventsResult:

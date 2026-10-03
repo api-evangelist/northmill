@@ -127,32 +127,6 @@ paths:
       x-operation-id-original: Sales_Get
 components:
   schemas:
-    MoreFlo.Models.InterfaceModels.ArticleSaleEventsResult:
-      description: Represents a paged result containing a list of ArticleSaleEvent objects.
-      type: object
-      properties:
-        ExtraInformation:
-          description: A list of extra information or messages related to the paginated result.
-          type: array
-          items:
-            type: string
-        list:
-          description: The list of data items for the current page.
-          type: array
-          items:
-            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSaleEvent'
-        Page:
-          format: int32
-          description: The current page number.
-          type: integer
-        Total:
-          format: int32
-          description: The total number of pages available.
-          type: integer
-        PageSize:
-          format: int32
-          description: The number of data items per page.
-          type: integer
     MoreFlo.Models.InterfaceModels.ArticleSaleEvent:
       description: Represents an event where an article is sold.
       type: object
@@ -192,6 +166,32 @@ components:
           format: double
           description: The VAT rate applied to the sale.
           type: number
+    MoreFlo.Models.InterfaceModels.ArticleSaleEventsResult:
+      description: Represents a paged result containing a list of ArticleSaleEvent objects.
+      type: object
+      properties:
+        ExtraInformation:
+          description: A list of extra information or messages related to the paginated result.
+          type: array
+          items:
+            type: string
+        list:
+          description: The list of data items for the current page.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSaleEvent'
+        Page:
+          format: int32
+          description: The current page number.
+          type: integer
+        Total:
+          format: int32
+          description: The total number of pages available.
+          type: integer
+        PageSize:
+          format: int32
+          description: The number of data items per page.
+          type: integer
   securitySchemes:
     basic:
       type: http

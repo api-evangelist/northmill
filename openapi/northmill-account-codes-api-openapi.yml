@@ -483,6 +483,26 @@ paths:
       x-operation-id-original: AccountCodes_Delete
 components:
   schemas:
+    MoreFlo.Models.InterfaceModels.AccountCodeResult:
+      description: Represents the result of an operation involving an AccountCode entity.
+      type: object
+      properties:
+        AccountCode:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCode'
+          description: The AccountCode entity resulting from the operation.
+        Id:
+          description: The unique identifier of the AccountCode.
+          type: string
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
     MoreFlo.Models.InterfaceModels.AccountCode:
       description: Represents an account code with various properties.
       required:
@@ -529,52 +549,6 @@ components:
         KeepRetailPriceForTakeAway:
           description: Indicates whether the retail price should be kept for takeaway transactions.
           type: boolean
-    MoreFlo.Models.InterfaceModels.AccountCodeResult:
-      description: Represents the result of an operation involving an AccountCode entity.
-      type: object
-      properties:
-        AccountCode:
-          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCode'
-          description: The AccountCode entity resulting from the operation.
-        Id:
-          description: The unique identifier of the AccountCode.
-          type: string
-        Success:
-          description: Indicates whether the API operation was successful.
-          type: boolean
-        ExtraInformation:
-          description: 'A list of extra information or messages related to the API operation result.
-
-            This can include error messages, warnings, or informational notes.'
-          type: array
-          items:
-            type: string
-    MoreFlo.Models.InterfaceModels.AccountCodesResult:
-      description: ''
-      type: object
-      properties:
-        ExtraInformation:
-          description: A list of extra information or messages related to the paginated result.
-          type: array
-          items:
-            type: string
-        list:
-          description: The list of data items for the current page.
-          type: array
-          items:
-            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodeResult'
-        Page:
-          format: int32
-          description: The current page number.
-          type: integer
-        Total:
-          format: int32
-          description: The total number of pages available.
-          type: integer
-        PageSize:
-          format: int32
-          description: The number of data items per page.
-          type: integer
     MoreFlo.Models.InterfaceModels.AccountCodeCreate:
       description: Represents the data required to create a new account code.
       required:
@@ -628,6 +602,32 @@ components:
         KeepRetailPriceForTakeAway:
           description: Indicates whether the retail price should be kept for takeaway transactions.
           type: boolean
+    MoreFlo.Models.InterfaceModels.AccountCodesResult:
+      description: ''
+      type: object
+      properties:
+        ExtraInformation:
+          description: A list of extra information or messages related to the paginated result.
+          type: array
+          items:
+            type: string
+        list:
+          description: The list of data items for the current page.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodeResult'
+        Page:
+          format: int32
+          description: The current page number.
+          type: integer
+        Total:
+          format: int32
+          description: The total number of pages available.
+          type: integer
+        PageSize:
+          format: int32
+          description: The number of data items per page.
+          type: integer
   securitySchemes:
     basic:
       type: http

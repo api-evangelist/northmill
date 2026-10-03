@@ -99,28 +99,6 @@ paths:
       x-operation-id-original: WebHookCategories_Get
 components:
   schemas:
-    MoreFlo.Models.InterfaceModels.WebHookCategoryResult:
-      description: 'Represents the result of an operation that returns a single WebHook category.
-
-        This class encapsulates a WebHookCategory object and its unique identifier, typically used in API responses for single WebHook category operations.'
-      type: object
-      properties:
-        WebHookCategory:
-          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHookCategory'
-          description: The WebHookCategory object containing the WebHook category data.
-        Id:
-          description: The unique identifier of the WebHook category.
-          type: string
-        Success:
-          description: Indicates whether the API operation was successful.
-          type: boolean
-        ExtraInformation:
-          description: 'A list of extra information or messages related to the API operation result.
-
-            This can include error messages, warnings, or informational notes.'
-          type: array
-          items:
-            type: string
     MoreFlo.Models.InterfaceModels.WebHookCategory:
       description: Represents a WebHook category, used to group and identify different types of WebHooks.
       type: object
@@ -175,6 +153,28 @@ components:
           format: int32
           description: The number of data items per page.
           type: integer
+    MoreFlo.Models.InterfaceModels.WebHookCategoryResult:
+      description: 'Represents the result of an operation that returns a single WebHook category.
+
+        This class encapsulates a WebHookCategory object and its unique identifier, typically used in API responses for single WebHook category operations.'
+      type: object
+      properties:
+        WebHookCategory:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.WebHookCategory'
+          description: The WebHookCategory object containing the WebHook category data.
+        Id:
+          description: The unique identifier of the WebHook category.
+          type: string
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
   securitySchemes:
     basic:
       type: http

@@ -129,62 +129,39 @@ paths:
       x-operation-id-original: Settings_GetBookingSettings
 components:
   schemas:
-    MoreFlo.Models.InterfaceModels.BookingSettingsResult:
-      description: 'Represents the result of an operation that returns booking settings.
+    MoreFlo.Models.InterfaceModels.Settings:
+      description: 'Represents general application or system settings.
 
-        This class encapsulates a SubscriberBookingSetting object, typically used in API responses related to retrieving or managing booking configuration.'
+        This class encapsulates various configuration options, such as accounting integration, currency code, and company information.'
       type: object
       properties:
-        Settings:
-          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SubscriberBookingSetting'
-          description: The SubscriberBookingSetting object containing the booking settings data.
-        Success:
-          description: Indicates whether the API operation was successful.
+        AccountingIntegrationEnabled:
+          description: Indicates whether accounting integration is enabled.
           type: boolean
-        ExtraInformation:
-          description: 'A list of extra information or messages related to the API operation result.
-
-            This can include error messages, warnings, or informational notes.'
-          type: array
-          items:
-            type: string
-    MoreFlo.Models.InterfaceModels.SettingsResult:
-      description: 'Represents the result of an operation that returns application settings.
-
-        This class encapsulates a Settings object, typically used in API responses related to retrieving or managing application-wide settings.'
-      type: object
-      properties:
-        Settings:
-          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Settings'
-          description: The Settings object containing the application settings data.
-        Success:
-          description: Indicates whether the API operation was successful.
+        CurrencyCode:
+          description: The currency code used by the system.
+          type: string
+        PublicUrlOrHostPart:
+          description: The public URL or host part of the application.
+          type: string
+        CompanyName:
+          description: The name of the company.
+          type: string
+        OrganizationNumber:
+          description: The organization number of the company.
+          type: string
+        PartialRefundArticleNumber:
+          description: The article number used for partial refunds.
+          type: string
+        OrderExpireTimePartEnabled:
+          description: Indicates whether the order expiration time part is enabled.
           type: boolean
-        ExtraInformation:
-          description: 'A list of extra information or messages related to the API operation result.
-
-            This can include error messages, warnings, or informational notes.'
-          type: array
-          items:
-            type: string
-    MoreFlo.Models.InterfaceModels.AttachedFile:
-      type: object
-      properties:
-        Id:
+        ShippingArticleNumber:
+          description: The article number used for shipping costs.
           type: string
-        Name:
-          type: string
-        Description:
-          type: string
-        CreatedTime:
-          format: date-time
-          type: string
-        ContentType:
-          type: string
-        IsMainFile:
+        IsTakeAwayEnabled:
+          description: Specifies whether the takeaway functionality is enabled.
           type: boolean
-        URL:
-          type: string
     MoreFlo.Models.InterfaceModels.SubscriberBookingSetting:
       description: Represents booking settings for a subscriber, including customer booking options, visibility, appearance, content, and company information.
       type: object
@@ -269,39 +246,62 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AttachedFile'
-    MoreFlo.Models.InterfaceModels.Settings:
-      description: 'Represents general application or system settings.
+    MoreFlo.Models.InterfaceModels.BookingSettingsResult:
+      description: 'Represents the result of an operation that returns booking settings.
 
-        This class encapsulates various configuration options, such as accounting integration, currency code, and company information.'
+        This class encapsulates a SubscriberBookingSetting object, typically used in API responses related to retrieving or managing booking configuration.'
       type: object
       properties:
-        AccountingIntegrationEnabled:
-          description: Indicates whether accounting integration is enabled.
+        Settings:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SubscriberBookingSetting'
+          description: The SubscriberBookingSetting object containing the booking settings data.
+        Success:
+          description: Indicates whether the API operation was successful.
           type: boolean
-        CurrencyCode:
-          description: The currency code used by the system.
-          type: string
-        PublicUrlOrHostPart:
-          description: The public URL or host part of the application.
-          type: string
-        CompanyName:
-          description: The name of the company.
-          type: string
-        OrganizationNumber:
-          description: The organization number of the company.
-          type: string
-        PartialRefundArticleNumber:
-          description: The article number used for partial refunds.
-          type: string
-        OrderExpireTimePartEnabled:
-          description: Indicates whether the order expiration time part is enabled.
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
+    MoreFlo.Models.InterfaceModels.SettingsResult:
+      description: 'Represents the result of an operation that returns application settings.
+
+        This class encapsulates a Settings object, typically used in API responses related to retrieving or managing application-wide settings.'
+      type: object
+      properties:
+        Settings:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Settings'
+          description: The Settings object containing the application settings data.
+        Success:
+          description: Indicates whether the API operation was successful.
           type: boolean
-        ShippingArticleNumber:
-          description: The article number used for shipping costs.
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
+    MoreFlo.Models.InterfaceModels.AttachedFile:
+      type: object
+      properties:
+        Id:
           type: string
-        IsTakeAwayEnabled:
-          description: Specifies whether the takeaway functionality is enabled.
+        Name:
+          type: string
+        Description:
+          type: string
+        CreatedTime:
+          format: date-time
+          type: string
+        ContentType:
+          type: string
+        IsMainFile:
           type: boolean
+        URL:
+          type: string
   securitySchemes:
     basic:
       type: http

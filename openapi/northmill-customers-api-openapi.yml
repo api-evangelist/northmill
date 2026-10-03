@@ -481,6 +481,21 @@ paths:
       x-operation-id-original: Customers_GetNextAvailableCustomerNumber
 components:
   schemas:
+    MoreFlo.Models.InterfaceModels.CustomerContact:
+      type: object
+      properties:
+        FirstName:
+          type: string
+        LastName:
+          type: string
+        Email:
+          type: string
+        Phone:
+          type: string
+        Id:
+          format: uuid
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
     MoreFlo.Models.InterfaceModels.CustomerSearchQuery:
       type: object
       properties:
@@ -504,11 +519,13 @@ components:
           type: boolean
         OnlyExternalCustomer:
           type: boolean
-    MoreFlo.Models.InterfaceModels.CustomerUpdate:
+    MoreFlo.Models.InterfaceModels.CustomerCreate:
       required:
       - Name
       type: object
       properties:
+        UpdateOnExisting:
+          type: boolean
         Website:
           type: string
         AdditionalData:
@@ -670,39 +687,11 @@ components:
           format: int32
           description: Member Id
           type: integer
-    MoreFlo.Models.InterfaceModels.CustomersResult:
-      description: Represents a paged result containing a list of CustomerResult objects.
-      type: object
-      properties:
-        ExtraInformation:
-          description: A list of extra information or messages related to the paginated result.
-          type: array
-          items:
-            type: string
-        list:
-          description: The list of data items for the current page.
-          type: array
-          items:
-            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomerResult'
-        Page:
-          format: int32
-          description: The current page number.
-          type: integer
-        Total:
-          format: int32
-          description: The total number of pages available.
-          type: integer
-        PageSize:
-          format: int32
-          description: The number of data items per page.
-          type: integer
-    MoreFlo.Models.InterfaceModels.CustomerCreate:
+    MoreFlo.Models.InterfaceModels.CustomerUpdate:
       required:
       - Name
       type: object
       properties:
-        UpdateOnExisting:
-          type: boolean
         Website:
           type: string
         AdditionalData:
@@ -791,6 +780,32 @@ components:
           format: int32
           description: Member Id
           type: integer
+    MoreFlo.Models.InterfaceModels.CustomersResult:
+      description: Represents a paged result containing a list of CustomerResult objects.
+      type: object
+      properties:
+        ExtraInformation:
+          description: A list of extra information or messages related to the paginated result.
+          type: array
+          items:
+            type: string
+        list:
+          description: The list of data items for the current page.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomerResult'
+        Page:
+          format: int32
+          description: The current page number.
+          type: integer
+        Total:
+          format: int32
+          description: The total number of pages available.
+          type: integer
+        PageSize:
+          format: int32
+          description: The number of data items per page.
+          type: integer
     MoreFlo.Models.InterfaceModels.CustomerResult:
       description: Represents the result of an operation involving a Customer entity.
       type: object
@@ -841,21 +856,6 @@ components:
           type: string
         Fax:
           type: string
-    MoreFlo.Models.InterfaceModels.CustomerContact:
-      type: object
-      properties:
-        FirstName:
-          type: string
-        LastName:
-          type: string
-        Email:
-          type: string
-        Phone:
-          type: string
-        Id:
-          format: uuid
-          type: string
-          example: 00000000-0000-0000-0000-000000000000
   securitySchemes:
     basic:
       type: http

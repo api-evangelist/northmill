@@ -463,26 +463,6 @@ components:
           format: date-time
           description: The UTC timestamp when the brand was last modified.
           type: string
-    MoreFlo.Models.InterfaceModels.BrandResult:
-      description: Represents the result of an operation involving a Brand entity.
-      type: object
-      properties:
-        Brand:
-          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Brand'
-          description: The Brand entity resulting from the operation.
-        Id:
-          description: The unique identifier of the Brand.
-          type: string
-        Success:
-          description: Indicates whether the API operation was successful.
-          type: boolean
-        ExtraInformation:
-          description: 'A list of extra information or messages related to the API operation result.
-
-            This can include error messages, warnings, or informational notes.'
-          type: array
-          items:
-            type: string
     MoreFlo.Models.InterfaceModels.Brand:
       description: Represents a brand with an identifier and a name.
       required:
@@ -507,6 +487,26 @@ components:
           format: date-time
           description: The UTC timestamp when the brand was last modified.
           type: string
+    MoreFlo.Models.InterfaceModels.BrandResult:
+      description: Represents the result of an operation involving a Brand entity.
+      type: object
+      properties:
+        Brand:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Brand'
+          description: The Brand entity resulting from the operation.
+        Id:
+          description: The unique identifier of the Brand.
+          type: string
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
   securitySchemes:
     basic:
       type: http

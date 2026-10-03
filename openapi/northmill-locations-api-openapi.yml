@@ -409,56 +409,6 @@ paths:
       x-operation-id-original: Locations_Delete
 components:
   schemas:
-    MoreFlo.Models.InterfaceModels.LocationResult:
-      description: 'Represents the result of an operation that returns a single location.
-
-        This class encapsulates a location and its unique identifier.'
-      type: object
-      properties:
-        Location:
-          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Location'
-          description: The Location object containing the location's data.
-        Id:
-          description: The unique identifier of the location.
-          type: string
-        Success:
-          description: Indicates whether the API operation was successful.
-          type: boolean
-        ExtraInformation:
-          description: 'A list of extra information or messages related to the API operation result.
-
-            This can include error messages, warnings, or informational notes.'
-          type: array
-          items:
-            type: string
-    MoreFlo.Models.InterfaceModels.LocationsResult:
-      description: 'Represents a paginated result containing a list of location results.
-
-        This class is used to return a collection of locations, along with pagination information, in API responses.'
-      type: object
-      properties:
-        ExtraInformation:
-          description: A list of extra information or messages related to the paginated result.
-          type: array
-          items:
-            type: string
-        list:
-          description: The list of data items for the current page.
-          type: array
-          items:
-            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.LocationResult'
-        Page:
-          format: int32
-          description: The current page number.
-          type: integer
-        Total:
-          format: int32
-          description: The total number of pages available.
-          type: integer
-        PageSize:
-          format: int32
-          description: The number of data items per page.
-          type: integer
     MoreFlo.Models.InterfaceModels.Location:
       description: Represents a location, such as a store, warehouse, or other physical place.
       required:
@@ -513,6 +463,56 @@ components:
           format: date-time
           description: The UTC timestamp when the location was last modified.
           type: string
+    MoreFlo.Models.InterfaceModels.LocationsResult:
+      description: 'Represents a paginated result containing a list of location results.
+
+        This class is used to return a collection of locations, along with pagination information, in API responses.'
+      type: object
+      properties:
+        ExtraInformation:
+          description: A list of extra information or messages related to the paginated result.
+          type: array
+          items:
+            type: string
+        list:
+          description: The list of data items for the current page.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.LocationResult'
+        Page:
+          format: int32
+          description: The current page number.
+          type: integer
+        Total:
+          format: int32
+          description: The total number of pages available.
+          type: integer
+        PageSize:
+          format: int32
+          description: The number of data items per page.
+          type: integer
+    MoreFlo.Models.InterfaceModels.LocationResult:
+      description: 'Represents the result of an operation that returns a single location.
+
+        This class encapsulates a location and its unique identifier.'
+      type: object
+      properties:
+        Location:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Location'
+          description: The Location object containing the location's data.
+        Id:
+          description: The unique identifier of the location.
+          type: string
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
   securitySchemes:
     basic:
       type: http

@@ -395,17 +395,6 @@ paths:
       x-operation-id-original: Orders_Get
 components:
   schemas:
-    xFlo.Models.Common.Models.Article.ArticleBarcode:
-      description: Article barcode
-      required:
-      - Barcode
-      type: object
-      properties:
-        Barcode:
-          description: Article barcode
-          maxLength: 20
-          minLength: 0
-          type: string
     MoreFlo.Models.InterfaceModels.Address:
       type: object
       properties:
@@ -431,6 +420,146 @@ components:
           type: string
         Fax:
           type: string
+    MoreFlo.Models.InterfaceModels.OrderRow:
+      description: Represents a row within an order, detailing information about a specific item included in the order.
+      type: object
+      properties:
+        ArticleNumber:
+          description: The article number of the item.
+          type: string
+        ArticleName:
+          description: The name of the item.
+          type: string
+        UnitAmountInclVatExclDiscount:
+          format: double
+          description: The unit amount of the item, including VAT but excluding discount.
+          type: number
+        Discount:
+          format: double
+          description: The discount applied to the item.
+          type: number
+        VatRate:
+          format: double
+          description: The VAT rate applied to the item.
+          type: number
+        Quantity:
+          format: double
+          description: The quantity of the item.
+          type: number
+        SerialNumber:
+          description: The serial number of the item.
+          type: string
+        RowSum:
+          format: double
+          description: The sum of the row.
+          type: number
+        ReceiptNote:
+          description: A note or text associated with the item, typically a text row.
+          type: string
+    MoreFlo.Models.InterfaceModels.Customer:
+      required:
+      - Name
+      type: object
+      properties:
+        CustomerNumber:
+          description: MoreFlo customer number.
+          type: string
+        Reference:
+          type: string
+        Name:
+          type: string
+        Address1:
+          type: string
+        Address2:
+          type: string
+        PostCode:
+          type: string
+        City:
+          type: string
+        Country:
+          type: string
+        IdentityNo:
+          type: string
+        ReferenceNumber:
+          format: int64
+          description: The other systems customer number or id.
+          type: integer
+        Email:
+          type: string
+        Telephone1:
+          type: string
+        Telephone2:
+          type: string
+        VatNumber:
+          type: string
+        IsExportCustomer:
+          type: boolean
+        Mobile:
+          type: string
+        Fax:
+          type: string
+        Note:
+          type: string
+        DateAdded:
+          format: date-time
+          type: string
+        DateUpdated:
+          format: date-time
+          type: string
+        ModifiedTime:
+          format: date-time
+          type: string
+        MemberGroupId:
+          format: int32
+          type: integer
+        MemberGroup:
+          type: string
+        PermitsCommercial:
+          type: boolean
+        IsCompany:
+          type: boolean
+        IsInternalCustomer:
+          type: boolean
+        IsActive:
+          type: boolean
+        Blocked:
+          description: Blocked because of an issue with Credit or something else
+          type: boolean
+        Id:
+          format: int32
+          description: Member Id
+          type: integer
+    xFlo.Models.Common.Models.Article.ArticleBarcode:
+      description: Article barcode
+      required:
+      - Barcode
+      type: object
+      properties:
+        Barcode:
+          description: Article barcode
+          maxLength: 20
+          minLength: 0
+          type: string
+    MoreFlo.Models.InterfaceModels.ArticleResult:
+      description: Represents the result of an operation involving an Article entity.
+      type: object
+      properties:
+        Article:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Article'
+          description: The Article entity resulting from the operation.
+        ArticleNumber:
+          description: The unique article number.
+          type: string
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
     MoreFlo.Models.InterfaceModels.ArticleBookingSettings:
       description: Represents the booking settings for an article.
       type: object
@@ -483,135 +612,34 @@ components:
           format: int32
           description: Minimum time in seconds required to make a cancellation, if allowed (see ClientCancellationPossible).
           type: integer
-    MoreFlo.Models.InterfaceModels.OrderCreate:
-      description: 'Represents the data structure used to create a new order.
+    MoreFlo.Models.InterfaceModels.OrdersResult:
+      description: 'Represents a paginated result containing a list of order results.
 
-        This class specifies the required information for creating an order within the system.'
-      required:
-      - ExternalReference
-      - Customer
+        This class is used to return a collection of orders, along with pagination information, in API responses.'
       type: object
       properties:
-        ExternalReference:
-          description: 'The external reference or order number from another system.
-
-            This is a required field.'
-          type: string
-        UpdateOnExisting:
-          description: Indicates whether to update an existing order if one with the same number already exists.
-          type: boolean
-        Id:
-          description: The unique identifier of the order, automatically generated by the system.
-          type: string
-        Customer:
-          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Customer'
-          description: 'Information about the customer associated with the order.
-
-            Either a customer number within the system or an external customer reference. This is a required field.'
-        BillingAddress:
-          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Address'
-          description: The billing address for the order, if different from the customer's default address.
-        ShippingAddress:
-          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Address'
-          description: The shipping address for the order, if different from the customer's default address.
-        Number:
-          format: int32
-          description: The order number.
-          type: integer
-        IncomingDate:
-          format: date-time
-          description: The date when the order was received.
-          type: string
-        StartDate:
-          format: date-time
-          description: The start date for the order (e.g., for a service).
-          type: string
-        ReadyDate:
-          format: date-time
-          description: The date when the order is expected to be ready.
-          type: string
-        ExpireDate:
-          format: date-time
-          description: The date when the order expires (if applicable).
-          type: string
-        DeliveryDate:
-          format: date-time
-          description: The date when the order is scheduled for delivery.
-          type: string
-        OurReference:
-          description: The reference used by the ordering system.
-          type: string
-        YourReference:
-          description: The reference provided by the customer or the customer's system.
-          type: string
-        DeliveryTerm:
-          description: The delivery terms for the order.
-          type: string
-        YourOrderNo:
-          description: The customer's order number or other identifier.
-          type: string
-        Note:
-          description: A note or comment associated with the order.
-          type: string
-        Discount:
-          format: double
-          description: The discount applied to the order, expressed as a percentage.
-          type: number
-        TotalExclVat:
-          format: double
-          description: The total amount of the order, excluding VAT.
-          type: number
-        TotalInclVat:
-          format: double
-          description: The total amount of the order, including VAT.
-          type: number
-        TotalVat:
-          format: double
-          description: The total VAT amount for the order.
-          type: number
-        Rows:
-          description: A list of rows containing details about the items in the order.
+        ExtraInformation:
+          description: A list of extra information or messages related to the paginated result.
           type: array
           items:
-            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OrderRow'
-        State:
-          description: The current state of the order.
-          enum:
-          - Created
-          - Saved
-          - Started
-          - WaitingCustomerResp
-          - ReadyForHandOut
-          - Closed
-          - Waiting
-          - Cancelled
-          - Delivered
-          - Invoiced
-          - PayedFromCashier
-          - PayedFromExternal
-          type: string
-        PaymentOption:
-          description: The payment option selected for the order.
-          enum:
-          - NotSet
-          - Web
-          - Invoice
-          - Cashier
-          type: string
-        PaymentReference:
-          description: A reference related to the payment for the order.
-          type: string
-        PaymentOrigin:
-          description: The origin of the payment.
-          type: string
-        PaymentStatus:
-          description: The status of the payment for the order.
-          enum:
-          - NotSet
-          - NotPaid
-          - FullyPaid
-          - Refunded
-          type: string
+            type: string
+        list:
+          description: The list of data items for the current page.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OrderResult'
+        Page:
+          format: int32
+          description: The current page number.
+          type: integer
+        Total:
+          format: int32
+          description: The total number of pages available.
+          type: integer
+        PageSize:
+          format: int32
+          description: The number of data items per page.
+          type: integer
     MoreFlo.Models.InterfaceModels.Article:
       description: Represents an article with various properties.
       required:
@@ -854,6 +882,135 @@ components:
 
             This is used to maintain inventory levels and prevent stockouts.'
           type: number
+    MoreFlo.Models.InterfaceModels.OrderCreate:
+      description: 'Represents the data structure used to create a new order.
+
+        This class specifies the required information for creating an order within the system.'
+      required:
+      - ExternalReference
+      - Customer
+      type: object
+      properties:
+        ExternalReference:
+          description: 'The external reference or order number from another system.
+
+            This is a required field.'
+          type: string
+        UpdateOnExisting:
+          description: Indicates whether to update an existing order if one with the same number already exists.
+          type: boolean
+        Id:
+          description: The unique identifier of the order, automatically generated by the system.
+          type: string
+        Customer:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Customer'
+          description: 'Information about the customer associated with the order.
+
+            Either a customer number within the system or an external customer reference. This is a required field.'
+        BillingAddress:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Address'
+          description: The billing address for the order, if different from the customer's default address.
+        ShippingAddress:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Address'
+          description: The shipping address for the order, if different from the customer's default address.
+        Number:
+          format: int32
+          description: The order number.
+          type: integer
+        IncomingDate:
+          format: date-time
+          description: The date when the order was received.
+          type: string
+        StartDate:
+          format: date-time
+          description: The start date for the order (e.g., for a service).
+          type: string
+        ReadyDate:
+          format: date-time
+          description: The date when the order is expected to be ready.
+          type: string
+        ExpireDate:
+          format: date-time
+          description: The date when the order expires (if applicable).
+          type: string
+        DeliveryDate:
+          format: date-time
+          description: The date when the order is scheduled for delivery.
+          type: string
+        OurReference:
+          description: The reference used by the ordering system.
+          type: string
+        YourReference:
+          description: The reference provided by the customer or the customer's system.
+          type: string
+        DeliveryTerm:
+          description: The delivery terms for the order.
+          type: string
+        YourOrderNo:
+          description: The customer's order number or other identifier.
+          type: string
+        Note:
+          description: A note or comment associated with the order.
+          type: string
+        Discount:
+          format: double
+          description: The discount applied to the order, expressed as a percentage.
+          type: number
+        TotalExclVat:
+          format: double
+          description: The total amount of the order, excluding VAT.
+          type: number
+        TotalInclVat:
+          format: double
+          description: The total amount of the order, including VAT.
+          type: number
+        TotalVat:
+          format: double
+          description: The total VAT amount for the order.
+          type: number
+        Rows:
+          description: A list of rows containing details about the items in the order.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OrderRow'
+        State:
+          description: The current state of the order.
+          enum:
+          - Created
+          - Saved
+          - Started
+          - WaitingCustomerResp
+          - ReadyForHandOut
+          - Closed
+          - Waiting
+          - Cancelled
+          - Delivered
+          - Invoiced
+          - PayedFromCashier
+          - PayedFromExternal
+          type: string
+        PaymentOption:
+          description: The payment option selected for the order.
+          enum:
+          - NotSet
+          - Web
+          - Invoice
+          - Cashier
+          type: string
+        PaymentReference:
+          description: A reference related to the payment for the order.
+          type: string
+        PaymentOrigin:
+          description: The origin of the payment.
+          type: string
+        PaymentStatus:
+          description: The status of the payment for the order.
+          enum:
+          - NotSet
+          - NotPaid
+          - FullyPaid
+          - Refunded
+          type: string
     MoreFlo.Models.InterfaceModels.OrderResult:
       description: 'Represents the result of an operation that returns a single order.
 
@@ -996,163 +1153,6 @@ components:
           - NotPaid
           - FullyPaid
           - Refunded
-          type: string
-    MoreFlo.Models.InterfaceModels.OrdersResult:
-      description: 'Represents a paginated result containing a list of order results.
-
-        This class is used to return a collection of orders, along with pagination information, in API responses.'
-      type: object
-      properties:
-        ExtraInformation:
-          description: A list of extra information or messages related to the paginated result.
-          type: array
-          items:
-            type: string
-        list:
-          description: The list of data items for the current page.
-          type: array
-          items:
-            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.OrderResult'
-        Page:
-          format: int32
-          description: The current page number.
-          type: integer
-        Total:
-          format: int32
-          description: The total number of pages available.
-          type: integer
-        PageSize:
-          format: int32
-          description: The number of data items per page.
-          type: integer
-    MoreFlo.Models.InterfaceModels.Customer:
-      required:
-      - Name
-      type: object
-      properties:
-        CustomerNumber:
-          description: MoreFlo customer number.
-          type: string
-        Reference:
-          type: string
-        Name:
-          type: string
-        Address1:
-          type: string
-        Address2:
-          type: string
-        PostCode:
-          type: string
-        City:
-          type: string
-        Country:
-          type: string
-        IdentityNo:
-          type: string
-        ReferenceNumber:
-          format: int64
-          description: The other systems customer number or id.
-          type: integer
-        Email:
-          type: string
-        Telephone1:
-          type: string
-        Telephone2:
-          type: string
-        VatNumber:
-          type: string
-        IsExportCustomer:
-          type: boolean
-        Mobile:
-          type: string
-        Fax:
-          type: string
-        Note:
-          type: string
-        DateAdded:
-          format: date-time
-          type: string
-        DateUpdated:
-          format: date-time
-          type: string
-        ModifiedTime:
-          format: date-time
-          type: string
-        MemberGroupId:
-          format: int32
-          type: integer
-        MemberGroup:
-          type: string
-        PermitsCommercial:
-          type: boolean
-        IsCompany:
-          type: boolean
-        IsInternalCustomer:
-          type: boolean
-        IsActive:
-          type: boolean
-        Blocked:
-          description: Blocked because of an issue with Credit or something else
-          type: boolean
-        Id:
-          format: int32
-          description: Member Id
-          type: integer
-    MoreFlo.Models.InterfaceModels.ArticleResult:
-      description: Represents the result of an operation involving an Article entity.
-      type: object
-      properties:
-        Article:
-          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Article'
-          description: The Article entity resulting from the operation.
-        ArticleNumber:
-          description: The unique article number.
-          type: string
-        Success:
-          description: Indicates whether the API operation was successful.
-          type: boolean
-        ExtraInformation:
-          description: 'A list of extra information or messages related to the API operation result.
-
-            This can include error messages, warnings, or informational notes.'
-          type: array
-          items:
-            type: string
-    MoreFlo.Models.InterfaceModels.OrderRow:
-      description: Represents a row within an order, detailing information about a specific item included in the order.
-      type: object
-      properties:
-        ArticleNumber:
-          description: The article number of the item.
-          type: string
-        ArticleName:
-          description: The name of the item.
-          type: string
-        UnitAmountInclVatExclDiscount:
-          format: double
-          description: The unit amount of the item, including VAT but excluding discount.
-          type: number
-        Discount:
-          format: double
-          description: The discount applied to the item.
-          type: number
-        VatRate:
-          format: double
-          description: The VAT rate applied to the item.
-          type: number
-        Quantity:
-          format: double
-          description: The quantity of the item.
-          type: number
-        SerialNumber:
-          description: The serial number of the item.
-          type: string
-        RowSum:
-          format: double
-          description: The sum of the row.
-          type: number
-        ReceiptNote:
-          description: A note or text associated with the item, typically a text row.
           type: string
   securitySchemes:
     basic:

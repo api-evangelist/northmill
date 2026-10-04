@@ -503,52 +503,32 @@ components:
           type: array
           items:
             type: string
-    MoreFlo.Models.InterfaceModels.AccountCode:
-      description: Represents an account code with various properties.
-      required:
-      - Id
+    MoreFlo.Models.InterfaceModels.AccountCodesResult:
+      description: ''
       type: object
       properties:
-        Id:
-          description: The unique identifier of the account code.
-          maxLength: 64
-          minLength: 0
-          type: string
-        Name:
-          description: The name of the account code (unique).
-          maxLength: 100
-          minLength: 0
-          type: string
-        VatRate:
-          format: double
-          description: The VAT rate associated with the account code.
-          type: number
-        Description:
-          description: A description of the account code.
-          type: string
-        Account:
+        ExtraInformation:
+          description: A list of extra information or messages related to the paginated result.
+          type: array
+          items:
+            type: string
+        list:
+          description: The list of data items for the current page.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodeResult'
+        Page:
           format: int32
-          description: The account number associated with the account code.
+          description: The current page number.
           type: integer
-        CostCenter:
-          description: The cost center associated with the account code.
-          type: string
-        Project:
-          description: The project associated with the account code.
-          type: string
-        TakeAwayAccount:
+        Total:
           format: int32
-          description: Represents the account associated with takeaway-related transactions.
+          description: The total number of pages available.
           type: integer
-        TakeAwayVatRate:
-          format: double
-          description: 'The VAT rate applicable to takeaway accounts.
-
-            Represents the VAT rate specific to transactions involving takeaway items.'
-          type: number
-        KeepRetailPriceForTakeAway:
-          description: Indicates whether the retail price should be kept for takeaway transactions.
-          type: boolean
+        PageSize:
+          format: int32
+          description: The number of data items per page.
+          type: integer
     MoreFlo.Models.InterfaceModels.AccountCodeCreate:
       description: Represents the data required to create a new account code.
       required:
@@ -602,32 +582,52 @@ components:
         KeepRetailPriceForTakeAway:
           description: Indicates whether the retail price should be kept for takeaway transactions.
           type: boolean
-    MoreFlo.Models.InterfaceModels.AccountCodesResult:
-      description: ''
+    MoreFlo.Models.InterfaceModels.AccountCode:
+      description: Represents an account code with various properties.
+      required:
+      - Id
       type: object
       properties:
-        ExtraInformation:
-          description: A list of extra information or messages related to the paginated result.
-          type: array
-          items:
-            type: string
-        list:
-          description: The list of data items for the current page.
-          type: array
-          items:
-            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AccountCodeResult'
-        Page:
+        Id:
+          description: The unique identifier of the account code.
+          maxLength: 64
+          minLength: 0
+          type: string
+        Name:
+          description: The name of the account code (unique).
+          maxLength: 100
+          minLength: 0
+          type: string
+        VatRate:
+          format: double
+          description: The VAT rate associated with the account code.
+          type: number
+        Description:
+          description: A description of the account code.
+          type: string
+        Account:
           format: int32
-          description: The current page number.
+          description: The account number associated with the account code.
           type: integer
-        Total:
+        CostCenter:
+          description: The cost center associated with the account code.
+          type: string
+        Project:
+          description: The project associated with the account code.
+          type: string
+        TakeAwayAccount:
           format: int32
-          description: The total number of pages available.
+          description: Represents the account associated with takeaway-related transactions.
           type: integer
-        PageSize:
-          format: int32
-          description: The number of data items per page.
-          type: integer
+        TakeAwayVatRate:
+          format: double
+          description: 'The VAT rate applicable to takeaway accounts.
+
+            Represents the VAT rate specific to transactions involving takeaway items.'
+          type: number
+        KeepRetailPriceForTakeAway:
+          description: Indicates whether the retail price should be kept for takeaway transactions.
+          type: boolean
   securitySchemes:
     basic:
       type: http

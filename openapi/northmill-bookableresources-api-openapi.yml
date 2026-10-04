@@ -113,63 +113,31 @@ paths:
       x-operation-id-original: BookableResources_Get
 components:
   schemas:
-    MoreFlo.Models.InterfaceModels.BookableResourceIncludeOnlyArticle:
-      description: Represents an article that is exclusively included for booking with a specific bookable resource, along with its maximum parallel booking limit.
+    MoreFlo.Models.InterfaceModels.BookableResourceExcludedArticle:
+      description: Represents an article that is excluded from being booked with a specific bookable resource.
       type: object
       properties:
         ArticleNumber:
-          description: The article number of the included article.
+          description: The article number of the excluded article.
           type: string
-        MaxNumberOfBookingsInParallel:
-          format: int32
-          description: The maximum number of parallel bookings allowed for this article with the associated bookable resource.
-          type: integer
-    MoreFlo.Models.InterfaceModels.BookableResourcesResult:
-      description: Represents a paged result containing a list of BookableResourceResult objects.
+    MoreFlo.Models.InterfaceModels.AttachedFile:
       type: object
       properties:
-        ExtraInformation:
-          description: A list of extra information or messages related to the paginated result.
-          type: array
-          items:
-            type: string
-        list:
-          description: The list of data items for the current page.
-          type: array
-          items:
-            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BookableResourceResult'
-        Page:
-          format: int32
-          description: The current page number.
-          type: integer
-        Total:
-          format: int32
-          description: The total number of pages available.
-          type: integer
-        PageSize:
-          format: int32
-          description: The number of data items per page.
-          type: integer
-    MoreFlo.Models.InterfaceModels.BookableResourceResult:
-      description: Represents the result of an operation involving a BookableResource entity.
-      type: object
-      properties:
-        Entity:
-          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BookableResource'
-          description: The BookableResource entity resulting from the operation.
         Id:
-          description: The unique identifier of the BookableResource.
           type: string
-        Success:
-          description: Indicates whether the API operation was successful.
+        Name:
+          type: string
+        Description:
+          type: string
+        CreatedTime:
+          format: date-time
+          type: string
+        ContentType:
+          type: string
+        IsMainFile:
           type: boolean
-        ExtraInformation:
-          description: 'A list of extra information or messages related to the API operation result.
-
-            This can include error messages, warnings, or informational notes.'
-          type: array
-          items:
-            type: string
+        URL:
+          type: string
     MoreFlo.Models.InterfaceModels.BookableResource:
       description: Represents a resource that can be booked.
       type: object
@@ -234,31 +202,63 @@ components:
           format: date-time
           description: The time when the bookable resource was last updated.
           type: string
-    MoreFlo.Models.InterfaceModels.BookableResourceExcludedArticle:
-      description: Represents an article that is excluded from being booked with a specific bookable resource.
+    MoreFlo.Models.InterfaceModels.BookableResourceIncludeOnlyArticle:
+      description: Represents an article that is exclusively included for booking with a specific bookable resource, along with its maximum parallel booking limit.
       type: object
       properties:
         ArticleNumber:
-          description: The article number of the excluded article.
+          description: The article number of the included article.
           type: string
-    MoreFlo.Models.InterfaceModels.AttachedFile:
+        MaxNumberOfBookingsInParallel:
+          format: int32
+          description: The maximum number of parallel bookings allowed for this article with the associated bookable resource.
+          type: integer
+    MoreFlo.Models.InterfaceModels.BookableResourcesResult:
+      description: Represents a paged result containing a list of BookableResourceResult objects.
       type: object
       properties:
+        ExtraInformation:
+          description: A list of extra information or messages related to the paginated result.
+          type: array
+          items:
+            type: string
+        list:
+          description: The list of data items for the current page.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BookableResourceResult'
+        Page:
+          format: int32
+          description: The current page number.
+          type: integer
+        Total:
+          format: int32
+          description: The total number of pages available.
+          type: integer
+        PageSize:
+          format: int32
+          description: The number of data items per page.
+          type: integer
+    MoreFlo.Models.InterfaceModels.BookableResourceResult:
+      description: Represents the result of an operation involving a BookableResource entity.
+      type: object
+      properties:
+        Entity:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.BookableResource'
+          description: The BookableResource entity resulting from the operation.
         Id:
+          description: The unique identifier of the BookableResource.
           type: string
-        Name:
-          type: string
-        Description:
-          type: string
-        CreatedTime:
-          format: date-time
-          type: string
-        ContentType:
-          type: string
-        IsMainFile:
+        Success:
+          description: Indicates whether the API operation was successful.
           type: boolean
-        URL:
-          type: string
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
   securitySchemes:
     basic:
       type: http

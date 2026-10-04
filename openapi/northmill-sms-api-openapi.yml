@@ -109,6 +109,25 @@ paths:
       x-operation-id-original: Sms_SendSms
 components:
   schemas:
+    MoreFlo.Models.InterfaceModels.SmsSendResult:
+      description: 'Represents the result of sending an SMS message.
+
+        This class encapsulates the phone number to which the SMS was sent, along with the base result status.'
+      type: object
+      properties:
+        TelephoneNumber:
+          description: The telephone number to which the SMS message was sent.
+          type: string
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
     MoreFlo.Models.InterfaceModels.SmsMessage:
       description: 'Represents an SMS message to be sent, including the recipient''s phone number and the message content.
 
@@ -131,25 +150,6 @@ components:
           maxLength: 35000
           minLength: 0
           type: string
-    MoreFlo.Models.InterfaceModels.SmsSendResult:
-      description: 'Represents the result of sending an SMS message.
-
-        This class encapsulates the phone number to which the SMS was sent, along with the base result status.'
-      type: object
-      properties:
-        TelephoneNumber:
-          description: The telephone number to which the SMS message was sent.
-          type: string
-        Success:
-          description: Indicates whether the API operation was successful.
-          type: boolean
-        ExtraInformation:
-          description: 'A list of extra information or messages related to the API operation result.
-
-            This can include error messages, warnings, or informational notes.'
-          type: array
-          items:
-            type: string
   securitySchemes:
     basic:
       type: http

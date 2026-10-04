@@ -409,6 +409,160 @@ paths:
       x-operation-id-original: Suppliers_Delete
 components:
   schemas:
+    MoreFlo.Models.InterfaceModels.Supplier:
+      description: Represents a supplier, containing information such as identification, contact details, and financial information.
+      required:
+      - Id
+      - Name
+      type: object
+      properties:
+        Id:
+          description: The unique identifier of the supplier.
+          maxLength: 64
+          minLength: 0
+          type: string
+        Name:
+          description: The name of the supplier.
+          maxLength: 100
+          minLength: 0
+          type: string
+        SupplierNumber:
+          description: The supplier number.
+          maxLength: 16
+          minLength: 0
+          type: string
+        Address1:
+          description: The first line of the supplier's address.
+          maxLength: 128
+          minLength: 0
+          type: string
+        Address2:
+          description: The second line of the supplier's address (optional).
+          maxLength: 128
+          minLength: 0
+          type: string
+        PostalCode:
+          description: The postal code of the supplier's address.
+          maxLength: 10
+          minLength: 0
+          type: string
+        City:
+          description: The city of the supplier's address.
+          maxLength: 128
+          minLength: 0
+          type: string
+        Country:
+          description: The country of the supplier.
+          maxLength: 128
+          minLength: 0
+          type: string
+        CountryCode:
+          description: The country code of the supplier.
+          maxLength: 10
+          minLength: 0
+          type: string
+        BankgiroNumber:
+          description: The Bankgiro number of the supplier.
+          maxLength: 50
+          minLength: 0
+          pattern: ^[0-9-]*$
+          type: string
+        PlusgiroNumber:
+          description: The Plusgiro number of the supplier.
+          maxLength: 10
+          minLength: 0
+          pattern: ^[0-9-]*$
+          type: string
+        CreatedUtc:
+          format: date-time
+          description: The UTC timestamp when the supplier was created.
+          type: string
+        ModifiedUtc:
+          format: date-time
+          description: The UTC timestamp when the supplier was last modified.
+          type: string
+        Note:
+          description: A general note about the supplier.
+          maxLength: 2048
+          minLength: 0
+          type: string
+        Telephone:
+          description: The supplier's telephone number.
+          maxLength: 128
+          minLength: 0
+          type: string
+        WwwAddress:
+          description: The supplier's website address.
+          maxLength: 128
+          minLength: 0
+          type: string
+        Email:
+          description: The supplier's email address.
+          maxLength: 256
+          minLength: 0
+          type: string
+        IsActive:
+          description: Indicates whether the supplier is active.
+          type: boolean
+        ExternalSyncStatus:
+          description: The external synchronization status of the supplier.
+          enum:
+          - None
+          - ActionRequired
+          type: string
+        ExternalSyncMessage:
+          description: A message related to the external synchronization status.
+          type: string
+    MoreFlo.Models.InterfaceModels.SuppliersResult:
+      description: 'Represents a paginated result containing a list of supplier results.
+
+        This class is used to return a collection of suppliers, along with pagination information, in API responses.'
+      type: object
+      properties:
+        ExtraInformation:
+          description: A list of extra information or messages related to the paginated result.
+          type: array
+          items:
+            type: string
+        list:
+          description: The list of data items for the current page.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SupplierResult'
+        Page:
+          format: int32
+          description: The current page number.
+          type: integer
+        Total:
+          format: int32
+          description: The total number of pages available.
+          type: integer
+        PageSize:
+          format: int32
+          description: The number of data items per page.
+          type: integer
+    MoreFlo.Models.InterfaceModels.SupplierResult:
+      description: 'Represents the result of an operation that returns a single supplier.
+
+        This class encapsulates a Supplier object and its unique identifier, typically used in API responses for single supplier operations.'
+      type: object
+      properties:
+        Supplier:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Supplier'
+          description: The Supplier object containing the supplier data.
+        Id:
+          description: The unique identifier of the supplier.
+          type: string
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
     MoreFlo.Models.InterfaceModels.SupplierCreate:
       description: 'Represents the data used to create a new supplier entry.
 
@@ -523,160 +677,6 @@ components:
         ExternalSyncMessage:
           description: A message related to the external synchronization status.
           type: string
-    MoreFlo.Models.InterfaceModels.Supplier:
-      description: Represents a supplier, containing information such as identification, contact details, and financial information.
-      required:
-      - Id
-      - Name
-      type: object
-      properties:
-        Id:
-          description: The unique identifier of the supplier.
-          maxLength: 64
-          minLength: 0
-          type: string
-        Name:
-          description: The name of the supplier.
-          maxLength: 100
-          minLength: 0
-          type: string
-        SupplierNumber:
-          description: The supplier number.
-          maxLength: 16
-          minLength: 0
-          type: string
-        Address1:
-          description: The first line of the supplier's address.
-          maxLength: 128
-          minLength: 0
-          type: string
-        Address2:
-          description: The second line of the supplier's address (optional).
-          maxLength: 128
-          minLength: 0
-          type: string
-        PostalCode:
-          description: The postal code of the supplier's address.
-          maxLength: 10
-          minLength: 0
-          type: string
-        City:
-          description: The city of the supplier's address.
-          maxLength: 128
-          minLength: 0
-          type: string
-        Country:
-          description: The country of the supplier.
-          maxLength: 128
-          minLength: 0
-          type: string
-        CountryCode:
-          description: The country code of the supplier.
-          maxLength: 10
-          minLength: 0
-          type: string
-        BankgiroNumber:
-          description: The Bankgiro number of the supplier.
-          maxLength: 50
-          minLength: 0
-          pattern: ^[0-9-]*$
-          type: string
-        PlusgiroNumber:
-          description: The Plusgiro number of the supplier.
-          maxLength: 10
-          minLength: 0
-          pattern: ^[0-9-]*$
-          type: string
-        CreatedUtc:
-          format: date-time
-          description: The UTC timestamp when the supplier was created.
-          type: string
-        ModifiedUtc:
-          format: date-time
-          description: The UTC timestamp when the supplier was last modified.
-          type: string
-        Note:
-          description: A general note about the supplier.
-          maxLength: 2048
-          minLength: 0
-          type: string
-        Telephone:
-          description: The supplier's telephone number.
-          maxLength: 128
-          minLength: 0
-          type: string
-        WwwAddress:
-          description: The supplier's website address.
-          maxLength: 128
-          minLength: 0
-          type: string
-        Email:
-          description: The supplier's email address.
-          maxLength: 256
-          minLength: 0
-          type: string
-        IsActive:
-          description: Indicates whether the supplier is active.
-          type: boolean
-        ExternalSyncStatus:
-          description: The external synchronization status of the supplier.
-          enum:
-          - None
-          - ActionRequired
-          type: string
-        ExternalSyncMessage:
-          description: A message related to the external synchronization status.
-          type: string
-    MoreFlo.Models.InterfaceModels.SupplierResult:
-      description: 'Represents the result of an operation that returns a single supplier.
-
-        This class encapsulates a Supplier object and its unique identifier, typically used in API responses for single supplier operations.'
-      type: object
-      properties:
-        Supplier:
-          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Supplier'
-          description: The Supplier object containing the supplier data.
-        Id:
-          description: The unique identifier of the supplier.
-          type: string
-        Success:
-          description: Indicates whether the API operation was successful.
-          type: boolean
-        ExtraInformation:
-          description: 'A list of extra information or messages related to the API operation result.
-
-            This can include error messages, warnings, or informational notes.'
-          type: array
-          items:
-            type: string
-    MoreFlo.Models.InterfaceModels.SuppliersResult:
-      description: 'Represents a paginated result containing a list of supplier results.
-
-        This class is used to return a collection of suppliers, along with pagination information, in API responses.'
-      type: object
-      properties:
-        ExtraInformation:
-          description: A list of extra information or messages related to the paginated result.
-          type: array
-          items:
-            type: string
-        list:
-          description: The list of data items for the current page.
-          type: array
-          items:
-            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SupplierResult'
-        Page:
-          format: int32
-          description: The current page number.
-          type: integer
-        Total:
-          format: int32
-          description: The total number of pages available.
-          type: integer
-        PageSize:
-          format: int32
-          description: The number of data items per page.
-          type: integer
   securitySchemes:
     basic:
       type: http

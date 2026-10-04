@@ -129,6 +129,43 @@ paths:
       x-operation-id-original: Settings_GetBookingSettings
 components:
   schemas:
+    MoreFlo.Models.InterfaceModels.BookingSettingsResult:
+      description: 'Represents the result of an operation that returns booking settings.
+
+        This class encapsulates a SubscriberBookingSetting object, typically used in API responses related to retrieving or managing booking configuration.'
+      type: object
+      properties:
+        Settings:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SubscriberBookingSetting'
+          description: The SubscriberBookingSetting object containing the booking settings data.
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
+    MoreFlo.Models.InterfaceModels.AttachedFile:
+      type: object
+      properties:
+        Id:
+          type: string
+        Name:
+          type: string
+        Description:
+          type: string
+        CreatedTime:
+          format: date-time
+          type: string
+        ContentType:
+          type: string
+        IsMainFile:
+          type: boolean
+        URL:
+          type: string
     MoreFlo.Models.InterfaceModels.Settings:
       description: 'Represents general application or system settings.
 
@@ -246,25 +283,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.AttachedFile'
-    MoreFlo.Models.InterfaceModels.BookingSettingsResult:
-      description: 'Represents the result of an operation that returns booking settings.
-
-        This class encapsulates a SubscriberBookingSetting object, typically used in API responses related to retrieving or managing booking configuration.'
-      type: object
-      properties:
-        Settings:
-          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.SubscriberBookingSetting'
-          description: The SubscriberBookingSetting object containing the booking settings data.
-        Success:
-          description: Indicates whether the API operation was successful.
-          type: boolean
-        ExtraInformation:
-          description: 'A list of extra information or messages related to the API operation result.
-
-            This can include error messages, warnings, or informational notes.'
-          type: array
-          items:
-            type: string
     MoreFlo.Models.InterfaceModels.SettingsResult:
       description: 'Represents the result of an operation that returns application settings.
 
@@ -284,24 +302,6 @@ components:
           type: array
           items:
             type: string
-    MoreFlo.Models.InterfaceModels.AttachedFile:
-      type: object
-      properties:
-        Id:
-          type: string
-        Name:
-          type: string
-        Description:
-          type: string
-        CreatedTime:
-          format: date-time
-          type: string
-        ContentType:
-          type: string
-        IsMainFile:
-          type: boolean
-        URL:
-          type: string
   securitySchemes:
     basic:
       type: http

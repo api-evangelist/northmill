@@ -481,6 +481,32 @@ paths:
       x-operation-id-original: Customers_GetNextAvailableCustomerNumber
 components:
   schemas:
+    MoreFlo.Models.InterfaceModels.CustomersResult:
+      description: Represents a paged result containing a list of CustomerResult objects.
+      type: object
+      properties:
+        ExtraInformation:
+          description: A list of extra information or messages related to the paginated result.
+          type: array
+          items:
+            type: string
+        list:
+          description: The list of data items for the current page.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomerResult'
+        Page:
+          format: int32
+          description: The current page number.
+          type: integer
+        Total:
+          format: int32
+          description: The total number of pages available.
+          type: integer
+        PageSize:
+          format: int32
+          description: The number of data items per page.
+          type: integer
     MoreFlo.Models.InterfaceModels.CustomerContact:
       type: object
       properties:
@@ -496,56 +522,11 @@ components:
           format: uuid
           type: string
           example: 00000000-0000-0000-0000-000000000000
-    MoreFlo.Models.InterfaceModels.CustomerSearchQuery:
-      type: object
-      properties:
-        SearchPhrase:
-          type: string
-        SearchType:
-          enum:
-          - AllFields
-          - CustomerNumber
-          - Name
-          - IdentityNumber
-          - Email
-          - Mobile
-          type: string
-        PageSize:
-          format: int32
-          type: integer
-        ExactMatch:
-          type: boolean
-        OnlyInternalCustomer:
-          type: boolean
-        OnlyExternalCustomer:
-          type: boolean
-    MoreFlo.Models.InterfaceModels.CustomerCreate:
+    MoreFlo.Models.InterfaceModels.Customer:
       required:
       - Name
       type: object
       properties:
-        UpdateOnExisting:
-          type: boolean
-        Website:
-          type: string
-        AdditionalData:
-          type: string
-        Contacts:
-          type: array
-          items:
-            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomerContact'
-        Addresses:
-          type: array
-          items:
-            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomerAddress'
-        ParentId:
-          format: int32
-          type: integer
-        ResponsiblePersonnelId:
-          format: int32
-          type: integer
-        Origin:
-          type: string
         CustomerNumber:
           description: MoreFlo customer number.
           type: string
@@ -614,11 +595,53 @@ components:
           format: int32
           description: Member Id
           type: integer
-    MoreFlo.Models.InterfaceModels.Customer:
+    MoreFlo.Models.InterfaceModels.CustomerResult:
+      description: Represents the result of an operation involving a Customer entity.
+      type: object
+      properties:
+        Customer:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Customer'
+          description: The Customer entity resulting from the operation.
+        CustomerNumber:
+          description: The unique customer number.
+          type: string
+        Success:
+          description: Indicates whether the API operation was successful.
+          type: boolean
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
+          type: array
+          items:
+            type: string
+    MoreFlo.Models.InterfaceModels.CustomerCreate:
       required:
       - Name
       type: object
       properties:
+        UpdateOnExisting:
+          type: boolean
+        Website:
+          type: string
+        AdditionalData:
+          type: string
+        Contacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomerContact'
+        Addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomerAddress'
+        ParentId:
+          format: int32
+          type: integer
+        ResponsiblePersonnelId:
+          format: int32
+          type: integer
+        Origin:
+          type: string
         CustomerNumber:
           description: MoreFlo customer number.
           type: string
@@ -780,52 +803,29 @@ components:
           format: int32
           description: Member Id
           type: integer
-    MoreFlo.Models.InterfaceModels.CustomersResult:
-      description: Represents a paged result containing a list of CustomerResult objects.
+    MoreFlo.Models.InterfaceModels.CustomerSearchQuery:
       type: object
       properties:
-        ExtraInformation:
-          description: A list of extra information or messages related to the paginated result.
-          type: array
-          items:
-            type: string
-        list:
-          description: The list of data items for the current page.
-          type: array
-          items:
-            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CustomerResult'
-        Page:
-          format: int32
-          description: The current page number.
-          type: integer
-        Total:
-          format: int32
-          description: The total number of pages available.
-          type: integer
+        SearchPhrase:
+          type: string
+        SearchType:
+          enum:
+          - AllFields
+          - CustomerNumber
+          - Name
+          - IdentityNumber
+          - Email
+          - Mobile
+          type: string
         PageSize:
           format: int32
-          description: The number of data items per page.
           type: integer
-    MoreFlo.Models.InterfaceModels.CustomerResult:
-      description: Represents the result of an operation involving a Customer entity.
-      type: object
-      properties:
-        Customer:
-          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Customer'
-          description: The Customer entity resulting from the operation.
-        CustomerNumber:
-          description: The unique customer number.
-          type: string
-        Success:
-          description: Indicates whether the API operation was successful.
+        ExactMatch:
           type: boolean
-        ExtraInformation:
-          description: 'A list of extra information or messages related to the API operation result.
-
-            This can include error messages, warnings, or informational notes.'
-          type: array
-          items:
-            type: string
+        OnlyInternalCustomer:
+          type: boolean
+        OnlyExternalCustomer:
+          type: boolean
     MoreFlo.Models.InterfaceModels.CustomerAddress:
       type: object
       properties:

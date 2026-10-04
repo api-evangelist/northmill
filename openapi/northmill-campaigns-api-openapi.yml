@@ -483,87 +483,109 @@ paths:
       x-operation-id-original: Campaigns_Delete
 components:
   schemas:
-    MoreFlo.Models.InterfaceModels.Campaign:
-      description: Represents a campaign with various properties and settings.
-      required:
-      - Id
-      - MemberOnly
+    MoreFlo.Models.InterfaceModels.CampaignResult:
+      description: Represents the result of an operation involving a Campaign entity.
       type: object
       properties:
+        Campaign:
+          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Campaign'
+          description: The Campaign entity resulting from the operation.
         Id:
-          description: The unique identifier of the campaign.
-          maxLength: 64
-          minLength: 0
+          description: The unique identifier of the Campaign.
           type: string
-        Name:
-          description: The name of the campaign.
-          type: string
-        ReceiptText:
-          description: The text to be displayed on the receipt for this campaign.
-          type: string
-        Type:
-          description: The type of campaign.
-          enum:
-          - ByXgetYNumber
-          - ByXNumberGetYValueAmountDiscount
-          - ByXNumberPayYValue
-          - Percent
-          - SpecialPrice
-          - AmountWithDrawn
-          type: string
-        MemberOnly:
-          description: Indicates whether the campaign is only applicable to members.
+        Success:
+          description: Indicates whether the API operation was successful.
           type: boolean
-        MemberGroupName:
-          description: The name of the member group entitled to this campaign.
-          type: string
-        MemberNumbers:
-          description: A list of customer numbers that are entitled to this campaign, applicable if MemberOnly is true.
+        ExtraInformation:
+          description: 'A list of extra information or messages related to the API operation result.
+
+            This can include error messages, warnings, or informational notes.'
           type: array
           items:
             type: string
-        StartTime:
-          format: date-time
-          description: The start time of the campaign.
-          type: string
-        EndTime:
-          format: date-time
-          description: The end time of the campaign.
-          type: string
-        ValueX:
-          format: double
-          description: The first value used in two-value campaigns (e.g., Buy X get Y).
-          type: number
-        ValueY:
-          format: double
-          description: The second value used in two-value campaigns (e.g., Buy X get Y).
-          type: number
-        Value:
-          format: double
-          description: The single global value used in the campaign.
-          type: number
-        ValueIsGlobal:
-          description: Indicates whether the Value is the same for all campaign content. Applies to Percent, SpecialPrice, and AmountWithDrawn campaigns.
-          type: boolean
-        Priority:
-          format: int32
-          description: Defines the priority of the campaign if multiple campaigns apply to a receipt item.
-          type: integer
-        ThresholdTotal:
-          format: double
-          description: The threshold amount required on the receipt for the campaign to apply.
-          type: number
-        ThresholdTotalIncludeThis:
-          description: Indicates whether the purchase of this campaign is included in the total threshold calculation.
-          type: boolean
-        Enabled:
-          description: Indicates whether the campaign is enabled.
-          type: boolean
-        parts:
-          description: A list of campaign items (parts) that are included in the campaign.
+    MoreFlo.Models.InterfaceModels.CampaignsResult:
+      description: Represents a paged result containing a list of CampaignResult objects.
+      type: object
+      properties:
+        ExtraInformation:
+          description: A list of extra information or messages related to the paginated result.
           type: array
           items:
-            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignPart'
+            type: string
+        list:
+          description: The list of data items for the current page.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignResult'
+        Page:
+          format: int32
+          description: The current page number.
+          type: integer
+        Total:
+          format: int32
+          description: The total number of pages available.
+          type: integer
+        PageSize:
+          format: int32
+          description: The number of data items per page.
+          type: integer
+    MoreFlo.Models.InterfaceModels.ArticleSet:
+      description: Represents a set of articles, often sold together as a bundle.
+      required:
+      - ArticleNumber
+      type: object
+      properties:
+        ArticleNumber:
+          description: The unique article number for the article set.
+          type: string
+        ArticleName:
+          description: The name of the article set.
+          type: string
+        Barcode:
+          description: The barcode for the article set.
+          maxLength: 20
+          minLength: 0
+          type: string
+        Group:
+          description: The group the article set belongs to.
+          maxLength: 200
+          minLength: 0
+          type: string
+        IsActive:
+          description: Indicates whether the article set is active.
+          type: boolean
+        PricePrintOption:
+          description: The option for how the price of the article set should be printed on a receipt.
+          enum:
+          - PrintSetPrice
+          - PrintWithDiscount
+          type: string
+        articleSetParts:
+          description: A list of parts (articles) that make up the article set.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetPart'
+    MoreFlo.Models.InterfaceModels.CampaignPart:
+      description: Represents a part of a campaign, specifying the reference, type, and value associated with it.
+      required:
+      - Reference
+      - PartType
+      type: object
+      properties:
+        Reference:
+          description: The reference to the campaign part, which can be an article number or a product model.
+          type: string
+        PartType:
+          description: The type of the campaign part, indicating whether it's an article, product model, or group.
+          enum:
+          - Article
+          - ProductModel
+          - Group
+          type: string
+        Value:
+          format: double
+          description: An optional value associated with the campaign part.
+          type: number
     MoreFlo.Models.InterfaceModels.CampaignCreate:
       description: Represents the data required to create a new campaign.
       required:
@@ -656,32 +678,87 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignPart'
-    MoreFlo.Models.InterfaceModels.ArticleSetPart:
-      description: Represents a part of an article set.
+    MoreFlo.Models.InterfaceModels.Campaign:
+      description: Represents a campaign with various properties and settings.
       required:
-      - Quantity
-      - ArticleReference
-      - PartType
-      - PartPricePerUnit
+      - Id
+      - MemberOnly
       type: object
       properties:
-        Quantity:
-          format: double
-          description: The quantity of the part in the set.
-          type: number
-        ArticleReference:
-          description: The article number or product model identifier of the part.
+        Id:
+          description: The unique identifier of the campaign.
+          maxLength: 64
+          minLength: 0
           type: string
-        PartType:
-          description: The type of the part (article or product model).
+        Name:
+          description: The name of the campaign.
+          type: string
+        ReceiptText:
+          description: The text to be displayed on the receipt for this campaign.
+          type: string
+        Type:
+          description: The type of campaign.
           enum:
-          - Article
-          - ArticleProductModel
+          - ByXgetYNumber
+          - ByXNumberGetYValueAmountDiscount
+          - ByXNumberPayYValue
+          - Percent
+          - SpecialPrice
+          - AmountWithDrawn
           type: string
-        PartPricePerUnit:
+        MemberOnly:
+          description: Indicates whether the campaign is only applicable to members.
+          type: boolean
+        MemberGroupName:
+          description: The name of the member group entitled to this campaign.
+          type: string
+        MemberNumbers:
+          description: A list of customer numbers that are entitled to this campaign, applicable if MemberOnly is true.
+          type: array
+          items:
+            type: string
+        StartTime:
+          format: date-time
+          description: The start time of the campaign.
+          type: string
+        EndTime:
+          format: date-time
+          description: The end time of the campaign.
+          type: string
+        ValueX:
           format: double
-          description: The price per unit of the part, including VAT.
+          description: The first value used in two-value campaigns (e.g., Buy X get Y).
           type: number
+        ValueY:
+          format: double
+          description: The second value used in two-value campaigns (e.g., Buy X get Y).
+          type: number
+        Value:
+          format: double
+          description: The single global value used in the campaign.
+          type: number
+        ValueIsGlobal:
+          description: Indicates whether the Value is the same for all campaign content. Applies to Percent, SpecialPrice, and AmountWithDrawn campaigns.
+          type: boolean
+        Priority:
+          format: int32
+          description: Defines the priority of the campaign if multiple campaigns apply to a receipt item.
+          type: integer
+        ThresholdTotal:
+          format: double
+          description: The threshold amount required on the receipt for the campaign to apply.
+          type: number
+        ThresholdTotalIncludeThis:
+          description: Indicates whether the purchase of this campaign is included in the total threshold calculation.
+          type: boolean
+        Enabled:
+          description: Indicates whether the campaign is enabled.
+          type: boolean
+        parts:
+          description: A list of campaign items (parts) that are included in the campaign.
+          type: array
+          items:
+            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignPart'
     MoreFlo.Models.InterfaceModels.ArticleSetResult:
       description: Represents the result of an operation involving an ArticleSet entity.
       type: object
@@ -691,26 +768,6 @@ components:
           description: The ArticleSet entity resulting from the operation.
         ArticleNumber:
           description: The unique article number of the article set.
-          type: string
-        Success:
-          description: Indicates whether the API operation was successful.
-          type: boolean
-        ExtraInformation:
-          description: 'A list of extra information or messages related to the API operation result.
-
-            This can include error messages, warnings, or informational notes.'
-          type: array
-          items:
-            type: string
-    MoreFlo.Models.InterfaceModels.CampaignResult:
-      description: Represents the result of an operation involving a Campaign entity.
-      type: object
-      properties:
-        Campaign:
-          $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.Campaign'
-          description: The Campaign entity resulting from the operation.
-        Id:
-          description: The unique identifier of the Campaign.
           type: string
         Success:
           description: Indicates whether the API operation was successful.
@@ -748,89 +805,32 @@ components:
           format: int32
           description: The number of data items per page.
           type: integer
-    MoreFlo.Models.InterfaceModels.CampaignsResult:
-      description: Represents a paged result containing a list of CampaignResult objects.
-      type: object
-      properties:
-        ExtraInformation:
-          description: A list of extra information or messages related to the paginated result.
-          type: array
-          items:
-            type: string
-        list:
-          description: The list of data items for the current page.
-          type: array
-          items:
-            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.CampaignResult'
-        Page:
-          format: int32
-          description: The current page number.
-          type: integer
-        Total:
-          format: int32
-          description: The total number of pages available.
-          type: integer
-        PageSize:
-          format: int32
-          description: The number of data items per page.
-          type: integer
-    MoreFlo.Models.InterfaceModels.CampaignPart:
-      description: Represents a part of a campaign, specifying the reference, type, and value associated with it.
+    MoreFlo.Models.InterfaceModels.ArticleSetPart:
+      description: Represents a part of an article set.
       required:
-      - Reference
+      - Quantity
+      - ArticleReference
       - PartType
+      - PartPricePerUnit
       type: object
       properties:
-        Reference:
-          description: The reference to the campaign part, which can be an article number or a product model.
+        Quantity:
+          format: double
+          description: The quantity of the part in the set.
+          type: number
+        ArticleReference:
+          description: The article number or product model identifier of the part.
           type: string
         PartType:
-          description: The type of the campaign part, indicating whether it's an article, product model, or group.
+          description: The type of the part (article or product model).
           enum:
           - Article
-          - ProductModel
-          - Group
+          - ArticleProductModel
           type: string
-        Value:
+        PartPricePerUnit:
           format: double
-          description: An optional value associated with the campaign part.
+          description: The price per unit of the part, including VAT.
           type: number
-    MoreFlo.Models.InterfaceModels.ArticleSet:
-      description: Represents a set of articles, often sold together as a bundle.
-      required:
-      - ArticleNumber
-      type: object
-      properties:
-        ArticleNumber:
-          description: The unique article number for the article set.
-          type: string
-        ArticleName:
-          description: The name of the article set.
-          type: string
-        Barcode:
-          description: The barcode for the article set.
-          maxLength: 20
-          minLength: 0
-          type: string
-        Group:
-          description: The group the article set belongs to.
-          maxLength: 200
-          minLength: 0
-          type: string
-        IsActive:
-          description: Indicates whether the article set is active.
-          type: boolean
-        PricePrintOption:
-          description: The option for how the price of the article set should be printed on a receipt.
-          enum:
-          - PrintSetPrice
-          - PrintWithDiscount
-          type: string
-        articleSetParts:
-          description: A list of parts (articles) that make up the article set.
-          type: array
-          items:
-            $ref: '#/components/schemas/MoreFlo.Models.InterfaceModels.ArticleSetPart'
   securitySchemes:
     basic:
       type: http

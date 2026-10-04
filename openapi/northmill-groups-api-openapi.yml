@@ -507,6 +507,55 @@ components:
           format: int32
           description: The number of data items per page.
           type: integer
+    MoreFlo.Models.InterfaceModels.Group:
+      description: Represents a group, which can be used to categorize or organize articles or other data within the system.
+      required:
+      - Id
+      type: object
+      properties:
+        Id:
+          description: The unique identifier of the group.
+          maxLength: 64
+          minLength: 0
+          type: string
+        ParentId:
+          description: The identifier of the parent group, if this group is a sub-group.
+          maxLength: 64
+          minLength: 0
+          type: string
+        Name:
+          description: The name of the group.
+          maxLength: 100
+          minLength: 0
+          type: string
+        ExternalReference:
+          description: An external reference identifier for the group, potentially used by other systems.
+          maxLength: 128
+          minLength: 0
+          type: string
+        ModifiedTime:
+          format: date-time
+          description: The time when the group was last modified.
+          type: string
+        DefaultAccountCodeId:
+          description: The identifier of the default account code associated with this group.
+          maxLength: 64
+          minLength: 0
+          type: string
+        DisplayOrder:
+          format: int32
+          description: The display order of the group, used for sorting or presentation purposes.
+          type: integer
+        ArticleGoodsType:
+          description: The default article goods type for articles within this group.
+          enum:
+          - NotSet
+          - Other
+          - Alcohol
+          - Tobacco
+          - Gambling
+          - Hazardous
+          type: string
     MoreFlo.Models.InterfaceModels.GroupCreate:
       description: "Represents the data structure used to create a new group. \nThis class specifies the required information for group creation within the system."
       required:
@@ -582,55 +631,6 @@ components:
           type: array
           items:
             type: string
-    MoreFlo.Models.InterfaceModels.Group:
-      description: Represents a group, which can be used to categorize or organize articles or other data within the system.
-      required:
-      - Id
-      type: object
-      properties:
-        Id:
-          description: The unique identifier of the group.
-          maxLength: 64
-          minLength: 0
-          type: string
-        ParentId:
-          description: The identifier of the parent group, if this group is a sub-group.
-          maxLength: 64
-          minLength: 0
-          type: string
-        Name:
-          description: The name of the group.
-          maxLength: 100
-          minLength: 0
-          type: string
-        ExternalReference:
-          description: An external reference identifier for the group, potentially used by other systems.
-          maxLength: 128
-          minLength: 0
-          type: string
-        ModifiedTime:
-          format: date-time
-          description: The time when the group was last modified.
-          type: string
-        DefaultAccountCodeId:
-          description: The identifier of the default account code associated with this group.
-          maxLength: 64
-          minLength: 0
-          type: string
-        DisplayOrder:
-          format: int32
-          description: The display order of the group, used for sorting or presentation purposes.
-          type: integer
-        ArticleGoodsType:
-          description: The default article goods type for articles within this group.
-          enum:
-          - NotSet
-          - Other
-          - Alcohol
-          - Tobacco
-          - Gambling
-          - Hazardous
-          type: string
   securitySchemes:
     basic:
       type: http

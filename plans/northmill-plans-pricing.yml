@@ -91,3 +91,105 @@ notes:
   - >-
     Prices are Swedish-market list prices in SEK, read from the live pricing page on
     2026-08-26. They change; re-read the source before quoting.
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models: []
+  units: []
+  plans:
+  - name: Grundpaket (business account base package)
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Extra foretagskonto (additional business account)
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Foretagskort (business card)
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Likvidintyg (liquidity certificate)
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Swish Foretag
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Swish Handel
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Swish Utbetalningar
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Extra anvandare internetbanken (extra online-banking user)
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Autogiro (direct debit)
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Bankgiro inbetalningar
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Realtidsbetalning genom RIX-INST (instant payment)
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Foretagslan (business loan)
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Apple kassasystem (iOS POS)
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Windows kassasystem (Windows POS)
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: POS Flex
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Betala senare (buy now pay later)
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
